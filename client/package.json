@@ -16,7 +16,11 @@
     "styled-system": "^5.1.5"
   },
   "scripts": {
-    "eject": "react-scripts eject"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -29,10 +33,21 @@
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-html": "^6.0.0",
     "eslint-plugin-react": "^7.17.0",
     "formik": "^2.1.4",
     "prettier": "2.0.2",
     "rebass": "^4.0.7"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
