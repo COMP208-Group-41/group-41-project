@@ -15,6 +15,9 @@ $opt = array(
 );
 
 try {
+    /* A connection to the database is attempted, if unsuccessful then the
+     * PDO Exception is caught and an error page is shown (possibly try to give
+     * a more user-friendly error page) */
     $pdo = new PDO($dsn,$db_username, $db_password,$opt);
 } catch (PDOException $e) {
     exit("PDO Error: ".$e->getMessage()."<br>");
