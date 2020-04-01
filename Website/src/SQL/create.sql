@@ -70,6 +70,7 @@ CREATE TABLE User (
     UserDOB DATE NOT NULL,
     UserLocation VARCHAR(254),
     IsAdmin BOOLEAN NOT NULL,
+    IsVerified BOOLEAN DEFAULT '0' NOT NULL,
     PRIMARY KEY (UserID)
 );
 
