@@ -29,6 +29,7 @@
     <body>
         <h1>Log In</h1>
         <?php
+        // If the user just registered then their success message is shown here
             if ($registeredMsg != '') {
                 echo "$registeredMsg<br>";
             }
@@ -52,16 +53,25 @@
                     $loginstmt->execute();
                     if ($loginstmt->rowCount() == 1) {
                         /* The user is now logged in, the session variable is set
-                         * and the homepage is shown using javascript */
+                         * and the homepage is shown using javascript
+                         */
                         $_SESSION["loggedin"] = true;
                         echo '<script type="text/javascript">
                                   window.location="https://student.csc.liv.ac.uk/~sgstribe/OutOut/home.php"
                               </script>';
                     } else {
-                        echo 'Login Unsucessful!<br>';
+                        /* If the user's details are not in the system then
+                         * their login attempt is unsuccessful and the message
+                         * is shown to them
+                         */
+                        echo 'Email or Password Incorrect!<br>';
                     }
                 }
             } catch (PDOException $e) {
+                /* If a PDO Execption is thrown then it is caught here and an
+                 * error page is shown, this needs to be made more user friendly
+                 * for the final page
+                 */
                 exit("PDO Error: ".$e->getMessage()."<br>");
             }
         ?>
