@@ -39,6 +39,7 @@
                 $_SESSION["loggedin"] = true;
                 $_SESSION['UserID'] = $result;
                 header("location: home.php");
+                exit;
             } else {
                 /* If the user's details are not in the system then
                  * their login attempt is unsuccessful and the message
