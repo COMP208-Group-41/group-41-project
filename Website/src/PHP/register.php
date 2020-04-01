@@ -78,7 +78,7 @@
                                      * to be verified, the verification email is sent using
                                      * sendVerificationEmail function
                                      */
-                                    sendVerificationEmail();
+                                    sendVerificationEmail($email,$hash);
                                     $_SESSION['verified'] = false;
 
                                     header('location: login.php');
