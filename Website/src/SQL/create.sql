@@ -86,4 +86,4 @@ CREATE TABLE Carshare (
     FOREIGN KEY (GroupOwner) REFERENCES User(UserID)
 );
 
-INSERT INTO User (UserEmail,UserPass,UserDOB,IsAdmin) VALUES ('test@test.com','test','2000-02-02',false);
+INSERT INTO User (UserEmail,UserPass,UserDOB,IsAdmin) VALUES ('test@test.com','testtest1','2000-02-02',false);
