@@ -3,7 +3,7 @@
      *
      * Have implemented validation for email and password, and organised code
      * into functions for easy reading
-     * Need to check that the date of birth given isn't in the future
+     * Currently Implementing email verification
      * Samuel tribe, 01/04/2020
      */
 
@@ -73,12 +73,16 @@
                                 $passwordError = 'password must be at least 8 characters long and contain a lower case letter and a number!';
                             } else {
                                 if (createUser($email,$password,$dob,$pdo)) {
-                                    /* Session variable registered is set to true to display
-                                     * message on login page telling user their account has
-                                     * been created successfully */
-                                    $_SESSION['registered'] = true;
+                                    /* Session variable verified is set to false to display
+                                     * message on login page telling user their account needs
+                                     * to be verified, the verification email is sent using
+                                     * sendVerificationEmail function
+                                     */
+                                    sendVerificationEmail();
+                                    $_SESSION['verified'] = false;
+
                                     header('location: login.php');
-                                    die();
+                                    exit;
                                 } else {
                                     $createError = 'Error creating new account, please try again later!';
                                 }
@@ -153,13 +157,15 @@
      * successfully
      */
     function createUser($email,$password,$dob,$pdo) {
+        // Verification hash is generated here using md5 and random numbers
+        $hash = md5(rand(0,1000));
         // Create user in db
         $pdo->beginTransaction();
-        $registerStmt = $pdo->prepare("INSERT INTO User (UserEmail,UserPass,UserDOB,IsAdmin) VALUES (:UserEmail,:UserPass,:UserDOB,:IsAdmin)");
+        $registerStmt = $pdo->prepare("INSERT INTO User (UserEmail,UserPass,UserDOB,VerifyHash) VALUES (:UserEmail,:UserPass,:UserDOB,:VerifyHash)");
         $registerStmt->bindValue(':UserEmail',$email);
         $registerStmt->bindValue(':UserPass',$password);
         $registerStmt->bindValue(':UserDOB',$dob);
-        $registerStmt->bindValue(':IsAdmin', 0);
+        $registerStmt->bindValue(':VerifyHash',$hash);
         if ($registerStmt->execute()) {
             // if statement executes successfully, redirect to login page
             $pdo->commit();
@@ -169,6 +175,27 @@
             $pdo->rollBack();
             return false;
         }
+    }
+
+    /* The function sendVerificationEmail sends a verification to
+     * the email provided by the user, it contains a link to
+     * verify their account
+     */
+    function sendVerificationEmail($email,$hash) {
+        $to = $email;
+        $subject = 'OutOut | Verify your account';
+        $message = '
+
+        Thank you for registering for OutOut!
+        Please click the following link to verify your account:
+        https://student.csc.liv.ac.uk/~sgstribe/test/verify.php?email='.$email.'&hash='.$hash.'
+
+        You will be able to log in using the email: '.$email.' and the password you used in registration
+
+        ';
+
+        $headers = 'From:noreply@LiveproolOutOut.com' . "\r\n";
+        mail($to,$subject,$message,$headers);
     }
 ?>
 

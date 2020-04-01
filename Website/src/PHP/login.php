@@ -15,8 +15,12 @@
      $registeredMsg = '';
      $loginError = '';
 
-    if (isset($_SESSION['registered'])) {
-        $registeredMsg = 'Your Account has been created successfuly, please log in with your account details';
+    if (isset($_SESSION['verified']) && $_SESSION['verified'] == true) {
+        $registeredMsg = 'Your Account has been verified successfully, please log in with your account details';
+    }
+
+    if (isset($_SESSION['verified']) && $_SESSION['verified'] == false) {
+        $registeredMsg = 'Please verify your account before logging in';
     }
 
     // Config file for connecting to the database is grabbed here
@@ -41,11 +45,11 @@
                 header("location: home.php");
                 exit;
             } else {
-                /* If the user's details are not in the system then
-                 * their login attempt is unsuccessful and the message
-                 * is shown to them
+                /* If the user's details are not in the system or their account
+                 * is not verified then their login attempt is unsuccessful
+                 * and the message is shown to them
                  */
-                $loginError = 'Email or Password incorrect!';
+                $loginError = 'Email or Password incorrect, or account is not verified!';
             }
         }
     } catch (PDOException $e) {
@@ -64,13 +68,18 @@
         /* Try to find the user in the database using provided
          * username and password
          */
-        $loginstmt = $pdo->prepare("SELECT UserID FROM User WHERE UserEmail=:UserEmail AND UserPass=:UserPassword");
+        $loginstmt = $pdo->prepare("SELECT UserID,IsVerified FROM User WHERE UserEmail=:UserEmail AND UserPass=:UserPassword");
         $loginstmt->bindValue(':UserEmail',$_POST['email']);
         $loginstmt->bindValue(':UserPassword',$_POST['password']);
         $loginstmt->execute();
         if ($loginstmt->rowCount() == 1) {
             $row = $loginstmt->fetch();
-            return $row['UserID'];
+            if ($row['IsVerified'] == 1) {
+                return $row['UserID'];
+            } else {
+                return 0;
+            }
+
         } else {
             return 0;
         }
