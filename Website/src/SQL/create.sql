@@ -33,6 +33,15 @@ CREATE TABLE Venue (
     FOREIGN KEY (VenueUserID) REFERENCES VenueUser(VenueUserID)
 );
 
+CREATE TABLE VenueTag (
+    VenueTagID INT(10) NOT NULL UNIQUE AUTO_INCREMENT,
+    VenueID INT(10) NOT NULL,
+    TagID INT(10) NOT NULL,
+    PRIMARY KEY (VenueTagID),
+    FOREIGN KEY (VenueID) REFERENCES Venue(VenueID),
+    FOREIGN KEY (TagID) REFERENCES Tag(TagID)
+);
+
 CREATE TABLE Event (
     EventID INT(10) NOT NULL UNIQUE AUTO_INCREMENT,
     VenueID INT(10) NOT NULL,
@@ -45,6 +54,15 @@ CREATE TABLE Event (
     FOREIGN KEY (VenueID) REFERENCES Venue(VenueID)
 );
 
+CREATE TABLE EventTag (
+    EventTagID INT(10) NOT NULL UNIQUE AUTO_INCREMENT,
+    EventID INT(10) NOT NULL,
+    TagID INT(10) NOT NULL,
+    PRIMARY KEY (EventTagID),
+    FOREIGN KEY (EventID) REFERENCES Event(EventID),
+    FOREIGN KEY (TagID) REFERENCES Tag(TagID)
+);
+
 CREATE TABLE User (
     UserID INT(10) NOT NULL UNIQUE AUTO_INCREMENT,
     UserEmail VARCHAR(254) NOT NULL,
@@ -53,6 +71,24 @@ CREATE TABLE User (
     UserLocation VARCHAR(254),
     IsAdmin BOOLEAN NOT NULL,
     PRIMARY KEY (UserID)
+);
+
+CREATE TABLE InterestedIn (
+    InterestedID INT(10) NOT NULL UNIQUE AUTO_INCREMENT,
+    UserID INT(10) NOT NULL,
+    EventID INT(10) NOT NULL,
+    PRIMARY KEY (InterestedID),
+    FOREIGN KEY (UserID) REFERENCES User(UserID),
+    FOREIGN KEY (EventID) REFERENCES Event(EventID)
+);
+
+CREATE TABLE UserPreferences (
+    PreferenceID INT(10) NOT NULL UNIQUE AUTO_INCREMENT,
+    UserID INT(10) NOT NULL,
+    TagID INT(10) NOT NULL,
+    PRIMARY KEY (PreferenceID),
+    FOREIGN KEY (UserID) REFERENCES User(UserID),
+    FOREIGN KEY (TagID) REFERENCES Tag(TagID)
 );
 
 CREATE TABLE Review (
@@ -86,4 +122,13 @@ CREATE TABLE Carshare (
     FOREIGN KEY (GroupOwner) REFERENCES User(UserID)
 );
 
-INSERT INTO User (UserEmail,UserPass,UserDOB,IsAdmin) VALUES ('test@test.com','test','2000-02-02',false);
+CREATE TABLE GroupMembers (
+    GroupID INT(10) NOT NULL UNIQUE AUTO_INCREMENT,
+    CarshareID INT(10) NOT NULL,
+    MemberID INT(10) NOT NULL,
+    PRIMARY KEY (GroupID),
+    FOREIGN KEY (CarshareID) REFERENCES Carshare(CarshareID),
+    FOREIGN KEY (MemberID) REFERENCES User(UserID)
+);
+
+INSERT INTO User (UserEmail,UserPass,UserDOB,IsAdmin) VALUES ('test@test.com','testtest1','2000-02-02',false);
