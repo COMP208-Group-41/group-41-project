@@ -1,8 +1,10 @@
 <?php
     /* Notes on current register progress:
      *
-     * Need to implement regex checking for email and password
-     * Samuel tribe, 31/03/2020
+     * Have implemented validation for email and password, and organised code
+     * into functions for easy reading
+     * Need to check that the date of birth given isn't in the future
+     * Samuel tribe, 01/04/2020
      */
 
     // Session is started
@@ -17,9 +19,9 @@
         exit;
     }
     // Optional error reporting below commented out
-    // error_reporting( E_ALL );
-    // ini_set('display_errors', 1);
-    // ini_set('display_startup_errors', 1);
+    error_reporting( E_ALL );
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
 
     // config file imported here
     require_once "config.php";
@@ -27,7 +29,7 @@
     /* All variables needed for registration delcared here as empty string,
      * Error messages are also declared here */
     $email = $password = $confirmPassword = $dob = '';
-    $emailError = $passwordError = $accountExists = $ageError = '';
+    $emailError = $passwordError = $accountExists = $ageError = $createError = '';
 
     try {
         /* If email, password, confirm password and dob are provided using the submit
@@ -36,57 +38,51 @@
         if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirmPassword']) && isset($_POST['DOB'])) {
             // Trim email to remove whitespaces at start or end
             $email = trim($_POST['email']);
-            // Register form has been filled out and submitted, check if email already exists in db
-            $checkExistingStmt = $pdo->prepare("SELECT UserEmail FROM User WHERE UserEmail=:UserEmail");
-            $checkExistingStmt->bindValue(':UserEmail',$email);
-            $checkExistingStmt->execute();
-            if ($checkExistingStmt->rowCount() > 0) {
-                // Account already exists with email address entered!
-                $accountExists = 'An Account already exists with that email!';
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                // The email address provided is invalid!
+                $emailError = 'The email address entered is not valid!';
             } else {
-                $accountExists = '';
-                // Account does not exist with email, continue with registration
-                $dob = $_POST['DOB'];
-                // Check age is over 18
-                $dob18 = date_create($dob);
-                $currentTime = date_create("now");
-                $interval = date_diff($currentTime, $dob18);
-
-                if ($interval->format("%y") <= "18") {
-                    // The user is under 18!
-                    $ageError = 'You must be over 18 to register an account!';
+                if (checkEmailExists($email,$pdo)) {
+                    // Account already exists with email address entered!
+                    $accountExists = 'An Account already exists with that email!';
                 } else {
-                    $ageError = '';
-                    // The user is over 18, continue with registration
-                    // Check passwords match
-                    $password = $_POST['password'];
-                    $confirmPassword = $_POST['confirmPassword'];
-                    if ($password != $confirmPassword) {
-                        // Passwords do not match!
-                        $passwordError = 'Passwords do not match!';
-                    } else {
-                        $passwordError = '';
-                        // In final implementation, do validation on password here
+                    $accountExists = '';
+                    // Account does not exist with email, continue with registration
+                    $dob = $_POST['DOB'];
 
-                        // Create user in db
-                        $pdo->beginTransaction();
-                        $registerStmt = $pdo->prepare("INSERT INTO User (UserEmail,UserPass,UserDOB,IsAdmin) VALUES (:UserEmail,:UserPass,:UserDOB,:IsAdmin)");
-                        $registerStmt->bindValue(':UserEmail',$email);
-                        $registerStmt->bindValue(':UserPass',$password);
-                        $registerStmt->bindValue(':UserDOB',$dob);
-                        $registerStmt->bindValue(':IsAdmin', 0);
-                        if ($registerStmt->execute()) {
-                            // if statement executes successfully, redirect to login page
-                            $pdo->commit();
-                            /* Session variable registered is set to true to display
-                             * message on login page telling user their account has
-                             * been created successfully */
-                            $_SESSION['registered'] = true;
-                            header('location: login.php');
-                            die();
+                    if (!checkValidAge($dob)) {
+                        /* The date of birth given by the user is invalid
+                         * (either they are under 18 or the date given is in
+                         * the future)
+                         */
+                        $ageError = 'You must be over 18 to register an account!';
+                    } else {
+                        $ageError = '';
+                        // The user is over 18, continue with registration
+                        // Check passwords match
+                        $password = $_POST['password'];
+                        $confirmPassword = $_POST['confirmPassword'];
+                        if ($password != $confirmPassword) {
+                            // Passwords do not match!
+                            $passwordError = 'Passwords do not match!';
                         } else {
-                            // Error in creating account in db!
-                            $pdo->rollBack();
+                            $passwordError = '';
+                            // Validate password
+                            if (!validatePassword($password)) {
+                                // The password is not valid
+                                $passwordError = 'password must be at least 8 characters long and contain a lower case letter and a number!';
+                            } else {
+                                if (createUser($email,$password,$dob,$pdo)) {
+                                    /* Session variable registered is set to true to display
+                                     * message on login page telling user their account has
+                                     * been created successfully */
+                                    $_SESSION['registered'] = true;
+                                    header('location: login.php');
+                                    die();
+                                } else {
+                                    $createError = 'Error creating new account, please try again later!';
+                                }
+                            }
                         }
                     }
                 }
@@ -100,6 +96,80 @@
         exit("PDO Error: ".$e->getMessage()."<br>");
     }
 
+    /* The function checkEmailExists returns true if the email provided already
+     * exists in the User database table
+     */
+    function checkEmailExists($email,$pdo) {
+        // Register form has been filled out and submitted, check if email already exists in db
+        $checkExistingStmt = $pdo->prepare("SELECT UserEmail FROM User WHERE UserEmail=:UserEmail");
+        $checkExistingStmt->bindValue(':UserEmail',$email);
+        $checkExistingStmt->execute();
+        if ($checkExistingStmt->rowCount() > 0) {
+            // Email exists, return true
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /* The function checkValidAge returns false if the date of birth given by the
+     * user means they are under 18 or the date is in the future
+     */
+    function checkValidAge($dob) {
+        // First check the date isn't in the future
+
+        $dob18 = date_create($dob);
+        $currentTime = date_create("now");
+
+        if ($dob18 > $currentTime) {
+            // dob given is in the future, return true
+            return false;
+        } else {
+            $interval = date_diff($currentTime, $dob18);
+
+            if ($interval->format("%y") <= "18") {
+                // DOB provided means the user is under 18!
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    /* The function validatePassword returns true if the password provided by
+     * the user is valid according to validation rules: must be at least 8
+     * characters, must contain at least 1 lower case letter and at least one
+     * number
+     */
+    function validatePassword($password) {
+        if ((strlen($password) >= 8) && (preg_match("/[a-z]/",$password)) && (preg_match("/[0-9]/",$password))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /* The function createUser returns true if the account has been created
+     * successfully
+     */
+    function createUser($email,$password,$dob,$pdo) {
+        // Create user in db
+        $pdo->beginTransaction();
+        $registerStmt = $pdo->prepare("INSERT INTO User (UserEmail,UserPass,UserDOB,IsAdmin) VALUES (:UserEmail,:UserPass,:UserDOB,:IsAdmin)");
+        $registerStmt->bindValue(':UserEmail',$email);
+        $registerStmt->bindValue(':UserPass',$password);
+        $registerStmt->bindValue(':UserDOB',$dob);
+        $registerStmt->bindValue(':IsAdmin', 0);
+        if ($registerStmt->execute()) {
+            // if statement executes successfully, redirect to login page
+            $pdo->commit();
+            return true;
+        } else {
+            // Error in creating account in db!
+            $pdo->rollBack();
+            return false;
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -120,16 +190,36 @@
                 <input type='date' name='DOB' placeholder="select Date of Birth"></label><br>
         <input type='submit' value='Register'></form>
         <?php
+        /* If the email entered is not valid then the user is dispalayed an
+         * error message below
+         */
+        if ($emailError != '') {
+            echo "$emailError<br>";
+        }
         /* If the accountExists string is not blank then the error message is
          * displayed telling the user that an account already exists in the
-         * database with the email they provided */
+         * database with the email they provided
+         */
         if ($accountExists != '') {
             echo "$accountExists<br>";
         }
         /* If the age entered by the user is under 18 then ageError is set as an
-         * error string which is displayed below */
+         * error string which is displayed below
+         */
         if ($ageError != '') {
             echo "$ageError<br>";
+        }
+        /* If there are any errors with the password (not matching or not valid)
+         * then the error is displayed below
+         */
+        if ($passwordError != '') {
+            echo "$passwordError<br>";
+        }
+        /* If there is an error in creating the account then the error message
+         * is displayed below
+         */
+        if ($createError != '') {
+            echo "$createError<br>";
         }
         ?>
         <p>Already have an Account? <a href="login.php">Log In</a>.</p>
