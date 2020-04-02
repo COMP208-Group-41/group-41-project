@@ -1,6 +1,7 @@
 <?php
 /* Config file for database connection, all other pages use require_once at the
- * start of the file and reference this config file */
+ * start of the file and reference this config file
+ * Test for CI/CD workflow */
 $db_hostname = "studdb.csc.liv.ac.uk";
 $db_database = "sgstribe";
 $db_username = "sgstribe";
