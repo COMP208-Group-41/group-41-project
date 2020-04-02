@@ -33,17 +33,23 @@
             /* The function findUser is called and the result is assigned
              * to a variable to check if it was a valid user
              */
-            $result = findUser($email,$password,$pdo);
+            $result = findUser($email,$pdo);
             if ($result != 0) {
-                /* The user is now logged in, the session variable
-                 * logged in is set to true, and the session variable
-                 * UserID is assigned the value of the user's ID, the
-                 * user is then redirected to the home page
-                 */
-                $_SESSION["loggedin"] = true;
-                $_SESSION['UserID'] = $result;
-                header("location: home.php");
-                exit;
+                if (verifyPassword($result,$password,$pdo)) {
+                    /* The user is now logged in, the session variable
+                     * logged in is set to true, and the session variable
+                     * UserID is assigned the value of the user's ID, the
+                     * user is then redirected to the home page
+                     */
+                    $_SESSION["loggedin"] = true;
+                    $_SESSION['UserID'] = $result;
+                    header("location: home.php");
+                    exit;
+                } else {
+                    // Password doesn't match!
+                    $loginError = 'Email or Password incorrect!';
+                }
+
             } else {
                 /* If the user's details are not in the system or their account
                  * is not verified then their login attempt is unsuccessful
@@ -64,13 +70,12 @@
      * with the email and password, and returns the UserID if the user
      * exists, or 0 if they do not (no UserID can be 0)
      */
-    function findUser($email,$password,$pdo) {
+    function findUser($email,$pdo) {
         /* Try to find the user in the database using provided
          * username and password
          */
-        $loginstmt = $pdo->prepare("SELECT UserID,IsVerified FROM User WHERE UserEmail=:UserEmail AND UserPass=:UserPassword");
+        $loginstmt = $pdo->prepare("SELECT UserID,IsVerified FROM User WHERE UserEmail=:UserEmail");
         $loginstmt->bindValue(':UserEmail',$_POST['email']);
-        $loginstmt->bindValue(':UserPassword',$_POST['password']);
         $loginstmt->execute();
         if ($loginstmt->rowCount() == 1) {
             $row = $loginstmt->fetch();
@@ -82,6 +87,22 @@
 
         } else {
             return 0;
+        }
+    }
+
+    /* The verifyPassword function returns true if the user's password is correct
+     * using the password_verify function
+     */
+    function verifyPassword($UserID,$password,$pdo) {
+        $checkPasswordStmt = $pdo->prepare("SELECT UserPass FROM User WHERE UserID=:UserID");
+        $checkPasswordStmt->bindValue(':UserID',$UserID);
+        $checkPasswordStmt->execute();
+        $row = $checkPasswordStmt->fetch();
+        /* If the password is verified then return true */
+        if (password_verify($password,$row['UserPass'])) {
+            return true;
+        } else {
+            return false;
         }
     }
 ?>

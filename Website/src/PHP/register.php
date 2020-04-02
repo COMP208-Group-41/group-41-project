@@ -74,7 +74,9 @@
                                 // The password is not valid
                                 $passwordError = 'password must be at least 8 characters long and contain a lower case letter and a number!';
                             } else {
-                                if (createUser($email,$password,$dob,$pdo)) {
+                                // The password is hashed
+                                $hashedPassword = passwordHasher($password);
+                                if (createUser($email,$hashedPassword,$dob,$pdo)) {
                                     /* The verification email would be sent here but
                                      * as we do not have a working mail server this
                                      * will not work at the moment
@@ -147,6 +149,13 @@
         } else {
             return false;
         }
+    }
+
+    /* The function passwordHasher hashes the password given by the user
+     * It is in it's own function so this can be easily edited later if needed
+     */
+    function passwordHasher($password) {
+        return password_hash($password, PASSWORD_DEFAULT);
     }
 
     /* The function createUser returns true if the account has been created
