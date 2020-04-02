@@ -13,27 +13,27 @@ DROP TABLE IF EXISTS VenueUser;
 
 CREATE TABLE VenueUser (
     VenueUserID INT(10) NOT NULL UNIQUE AUTO_INCREMENT,
-    VenueUserEmail VARCHAR(254) NOT NULL,
-    VenueUserPass VARCHAR(254) NOT NULL,
-    VenueUserName VARCHAR(254) NOT NULL,
-    VenueUserExternal VARCHAR (254),
+    VenueUserEmail VARCHAR(255) NOT NULL,
+    VenueUserPass VARCHAR(255) NOT NULL,
+    VenueUserName VARCHAR(255) NOT NULL,
+    VenueUserExternal VARCHAR (255),
     PRIMARY KEY (VenueUserID)
 );
 
 CREATE TABLE Tag (
     TagID INT(10) NOT NULL UNIQUE AUTO_INCREMENT,
-    TagName VARCHAR(254) NOT NULL,
+    TagName VARCHAR(255) NOT NULL,
     PRIMARY KEY (TagID)
 );
 
 CREATE TABLE Venue (
     VenueID INT(10) NOT NULL UNIQUE AUTO_INCREMENT,
     VenueUserID INT(10) NOT NULL,
-    VenueName VARCHAR(254) NOT NULL,
-    VenueDescription VARCHAR(254) NOT NULL,
-    VenueImage VARCHAR(254),
-    VenueAddress VARCHAR(254) NOT NULL,
-    VenueTimes VARCHAR(254),
+    VenueName VARCHAR(255) NOT NULL,
+    VenueDescription VARCHAR(255) NOT NULL,
+    VenueImage VARCHAR(255),
+    VenueAddress VARCHAR(255) NOT NULL,
+    VenueTimes VARCHAR(255),
     PRIMARY KEY (VenueID),
     FOREIGN KEY (VenueUserID) REFERENCES VenueUser(VenueUserID)
 );
@@ -50,9 +50,9 @@ CREATE TABLE VenueTag (
 CREATE TABLE Event (
     EventID INT(10) NOT NULL UNIQUE AUTO_INCREMENT,
     VenueID INT(10) NOT NULL,
-    EventName VARCHAR(254) NOT NULL,
-    EventDescription VARCHAR(254) NOT NULL,
-    EventImage VARCHAR(254),
+    EventName VARCHAR(255) NOT NULL,
+    EventDescription VARCHAR(255) NOT NULL,
+    EventImage VARCHAR(255),
     EventStartTime DATETIME NOT NULL,
     EventEndTime DATETIME NOT NULL,
     PRIMARY KEY (EventID),
@@ -70,10 +70,10 @@ CREATE TABLE EventTag (
 
 CREATE TABLE User (
     UserID INT(10) NOT NULL UNIQUE AUTO_INCREMENT,
-    UserEmail VARCHAR(254) NOT NULL,
-    UserPass VARCHAR(254) NOT NULL,
+    UserEmail VARCHAR(255) NOT NULL,
+    UserPass VARCHAR(255) NOT NULL,
     UserDOB DATE NOT NULL,
-    UserLocation VARCHAR(254),
+    UserLocation VARCHAR(255),
     IsAdmin BOOLEAN NOT NULL,
     IsVerified BOOLEAN DEFAULT '1' NOT NULL,
     VerifyHash VARCHAR(32) NOT NULL,
@@ -121,8 +121,8 @@ CREATE TABLE Carshare (
     CarshareID INT(10) NOT NULL UNIQUE AUTO_INCREMENT,
     GroupOwner INT(10) NOT NULL,
     GroupSize INT(2) NOT NULL,
-    MeetingLocation VARCHAR(254) NOT NULL,
-    Destination VARCHAR(254) NOT NULL,
+    MeetingLocation VARCHAR(255) NOT NULL,
+    Destination VARCHAR(255) NOT NULL,
     MeetingTime DATETIME NOT NULL,
     Active BOOLEAN NOT NULL,
     PRIMARY KEY (CarshareID),
