@@ -138,4 +138,4 @@ CREATE TABLE GroupMembers (
     FOREIGN KEY (MemberID) REFERENCES User(UserID)
 );
 
-INSERT INTO User (UserEmail,UserPass,UserDOB,IsAdmin,VerifyHash) VALUES ('test@test.com','testtest1','2000-02-02',false,'33e75ff09dd601bbe69f351039152189');
+INSERT INTO User (UserEmail,UserPass,UserDOB,IsAdmin,VerifyHash) VALUES ('test@test.com','$2y$10$aVqNr61OO6Yy.muh4Um4seiZ2pdOr76RQH.g8a5eJilVNSLQDpxbO','2000-02-02',false,'33e75ff09dd601bbe69f351039152189');
