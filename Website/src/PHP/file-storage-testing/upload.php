@@ -4,14 +4,6 @@
      * permanent location specified here
      */
 
-    /* If the file is greater than 5MB then it won't be allowed to be uploaded,
-     * However I think the server itself has a hard-coded file size limit to
-     * uploads and I do not know what that is
-     */
-    if ($_FILES['photo']['size'] > $maxsize) {
-        die("File too large! Maximum file size 5MB");
-    }
-
     /* If the file is empty (no size) then error is shown, however the size is
      * also set to 0 if the file is too large for the uni server so the error
      * message covers both possibilities
