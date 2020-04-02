@@ -3,7 +3,9 @@
      *
      * Have implemented validation for email and password, and organised code
      * into functions for easy reading
-     * Currently Implementing email verification
+     * As email verification seems to not be possible, I will change the
+     * default value of IsVerified in the database to be 1 so all accounts
+     * are verified
      * Samuel tribe, 01/04/2020
      */
 
@@ -19,9 +21,9 @@
         exit;
     }
     // Optional error reporting below commented out
-    // error_reporting( E_ALL );
-    // ini_set('display_errors', 1);
-    // ini_set('display_startup_errors', 1);
+    error_reporting( E_ALL );
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
 
     // config file imported here
     require_once "config.php";
@@ -73,13 +75,13 @@
                                 $passwordError = 'password must be at least 8 characters long and contain a lower case letter and a number!';
                             } else {
                                 if (createUser($email,$password,$dob,$pdo)) {
-                                    /* Session variable verified is set to false to display
-                                     * message on login page telling user their account needs
-                                     * to be verified, the verification email is sent using
-                                     * sendVerificationEmail function
+                                    /* The verification email would be sent here but
+                                     * as we do not have a working mail server this
+                                     * will not work at the moment
                                      */
-                                    sendVerificationEmail($email,$hash);
-                                    $_SESSION['verified'] = false;
+                                    // sendVerificationEmail($email,$hash);
+                                    // Verification not working so set verified to true
+                                    $_SESSION['verified'] = true;
 
                                     header('location: login.php');
                                     exit;
