@@ -76,6 +76,7 @@ CREATE TABLE User (
     UserLocation VARCHAR(254),
     IsAdmin BOOLEAN NOT NULL,
     IsVerified BOOLEAN DEFAULT '1' NOT NULL,
+    VerifyHash VARCHAR(32) NOT NULL
     PRIMARY KEY (UserID)
 );
 
@@ -137,4 +138,4 @@ CREATE TABLE GroupMembers (
     FOREIGN KEY (MemberID) REFERENCES User(UserID)
 );
 
-INSERT INTO User (UserEmail,UserPass,UserDOB,IsAdmin) VALUES ('test@test.com','testtest1','2000-02-02',false);
+INSERT INTO User (UserEmail,UserPass,UserDOB,IsAdmin,VerifyHash) VALUES ('test@test.com','testtest1','2000-02-02',false,'33e75ff09dd601bbe69f351039152189');
