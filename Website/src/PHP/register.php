@@ -124,21 +124,15 @@
     function checkValidAge($dob) {
         // First check the date isn't in the future
 
-        $dob18 = date_create($dob);
-        $currentTime = date_create("now");
+        $bday = new DateTime($dob);
+        $bday->add(new DateInterval("P18Y"));
 
-        if ($dob18 > $currentTime) {
-            // dob given is in the future, return true
+        if ($bday > new DateTime("now")) {
+            // user is under 18
             return false;
         } else {
-            $interval = date_diff($currentTime, $dob18);
-
-            if ($interval->format("%y") <= "18") {
-                // DOB provided means the user is under 18!
-                return false;
-            } else {
-                return true;
-            }
+            // user is over 18
+            return true;
         }
     }
 
