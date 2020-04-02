@@ -5,7 +5,7 @@
     } else {
         $filename = $_FILES['photo']['name'];
         echo "Stored in: " . $_FILES["photo"]["tmp_name"];
-        if (move_uploaded_file($_FILES['photo']['tmp_name'],"/home/sgstribe/private_upload/".$filename)) {
+        if (move_uploaded_file($_FILES['photo']['tmp_name'],"/home/sgstribe/private_upload/profile.jpg")) {
             echo "success";
         } else {
             echo "error";
