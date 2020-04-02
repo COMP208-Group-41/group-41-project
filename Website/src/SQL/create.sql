@@ -76,7 +76,7 @@ CREATE TABLE User (
     UserLocation VARCHAR(254),
     IsAdmin BOOLEAN NOT NULL,
     IsVerified BOOLEAN DEFAULT '1' NOT NULL,
-    VerifyHash VARCHAR(32) NOT NULL
+    VerifyHash VARCHAR(32) NOT NULL,
     PRIMARY KEY (UserID)
 );
 
