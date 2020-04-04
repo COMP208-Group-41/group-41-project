@@ -5,6 +5,7 @@
     --button-highlight: #ccc;
     --text: #2E2E2E;
 }
+
 body {
     margin: 0;
     background: url("../../Assets/background2.jpg") no-repeat center center fixed;
@@ -29,17 +30,10 @@ body {
     border-radius: 10px;
 }
 
-.header {
-
-    background-color: var(--header-gray);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
 .outout-wrapper {
     text-align: center;
     padding: 20px;
 }
-
 
 label {
     color: var(--text);
@@ -56,16 +50,11 @@ input  {
     color: var(--text);
 }
 
-input:focus {
-    outline: none;
-}
-
 .login-button {
     margin: 0;
     box-sizing: border-box;
     border: 2px solid var(--button-border);
     border-radius: 4px 0px 0px 4px;
-    border-left-width: 2px;
     font-size: 16px;
     background-color: var(--header-gray);
     padding: 6px;
@@ -73,6 +62,11 @@ input:focus {
     width: 50%;
     text-align: center;
     text-decoration: none;
+}
+
+.login-button:focus {
+    outline: none;
+    background-color: var(--button-highlight);
 }
 
 .login-button:hover {
@@ -101,6 +95,7 @@ input:focus {
 
 .register-button:focus {
     outline: none;
+    background-color: var(--button-highlight);
 }
 
 .register-button:hover {

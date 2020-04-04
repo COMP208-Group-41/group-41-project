@@ -108,24 +108,33 @@
 ?>
 <!DOCTYPE html>
 <html lang='en-GB'>
-    <head>
-        <title>OutOut - Log In</title>
-    </head>
-    <body>
-        <h1>Log In</h1>
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/login-register.css">
+</head>
+<body>
         <?php
             // If the user just registered then their success message is shown here
             if ($registeredMsg != '') {
                 echo "$registeredMsg<br>";
             }
         ?>
-        <form name='LoginForm' method='post'>
-            <label>Email:
-                <input type='text' name='email'></label><br>
-            <label>Password:
-                <input type='password' name='password'></label><br>
-        <input type='submit' value='Login'></form>
-        <p>Don't have an account? <a href="register.php">Create an Account</a>.</p>
+        <div class="wrapper">
+            <div class="outout-wrapper">
+                <img src="../../Assets/outout.svg" alt="OutOut">
+            </div>
+            <div class="form">
+                <form name='LoginForm' method='post'>
+                    <div class="login-field">
+                        <input type='text' name='email' placeholder="Email..">
+                        <input type='password' name='password' placeholder="Password..">
+                    </div>
+                    <div style="display: flex">
+                        <input type='submit' value='Login' class="login-button">
+                        <a class="register-button" href="register.php">Register</a>
+                    </div>
+                </form>
+            </div>
+        </div>
         <?php
             // If the details are incorrect then error message is shown
             if ($loginError != '') {
