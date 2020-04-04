@@ -54,30 +54,38 @@ input  {
     background-color: var(--header-gray);
     padding: 12px 20px 12px 10px;
     color: var(--text);
-    opacity: 1;
-}
-
-input[type=submit] {
-    width: 50%;
-    padding: 6px;
-    margin: 0;
-    border-radius: 4px 0px 0px 4px;
 }
 
 input:focus {
     outline: none;
 }
 
-input[type=submit]:hover {
+.login-button {
+    margin: 0;
+    box-sizing: border-box;
+    border: 2px solid var(--button-border);
+    border-radius: 4px 0px 0px 4px;
+    border-left-width: 2px;
+    font-size: 16px;
+    background-color: var(--header-gray);
+    padding: 6px;
+    color: var(--text);
+    width: 50%;
+    text-align: center;
+    text-decoration: none;
+}
+
+.login-button:hover {
      background-color: var(--button-highlight);
      cursor: grab;
  }
 
-input[type=submit]:active {
+.login-button:active {
     background-color: #c0c0c0;
 }
 
 .register-button {
+    margin: 0;
     box-sizing: border-box;
     border: 2px solid var(--button-border);
     border-radius: 0px 4px 4px 0px;
@@ -103,7 +111,7 @@ input[type=submit]:active {
     background-color: #c0c0c0;
 }
 
-.login-form {
+.form {
     display: inline-block;
     flex-direction: column;
     text-align: right;
