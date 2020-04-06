@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang='en-GB'>
+<head>
+   <link rel="stylesheet" type="text/css" href="../css/events-edit.css">
+</head>
+<body>
+<div class="wrapper">
+    <div class="event-form">
+        <form name='EventForm' method='post'>
+            <div class="event-details">
+                <h1>Event Details</h1><br>
+                <label>Event Name:
+                    <input type='text' name='eventName'></label><br>
+                <label>Event Description:
+                    <input type='text' name='eventDescription'></label><br>
+                <label>Event Image</label>
+                    <input type='file' name='eventImage'></label><br>
+                <div class="datetimepickers">
+                    <div class="datetimepickers-start">
+                        Starts<br>
+                        <input type='datetime-local' name='timeFrom'></label><br>
+                    </div>
+                    <div class="datetimepickers-end">
+                        Ends<br>
+                        <input type='datetime-local' name='timeTo'></label><br>
+                    </div>
+                </div>
+
+                <input type='submit' value='Create'>
+            </div>
+
+<!--            <div style="display: flex">-->
+<!--                <a href="login.php" class="login-button">Log In</a>-->
+<!--                <input type='submit' value='Register' class="register-button">-->
+<!--            </div>-->
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
