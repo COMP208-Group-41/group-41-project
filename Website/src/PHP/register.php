@@ -206,21 +206,29 @@
 
 <!DOCTYPE html>
 <html lang='en-GB'>
-    <head>
-        <title>OutOut - Register</title>
-    </head>
-    <body>
-        <h1>OutOut - Register</h1>
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/login-register.css">
+</head>
+<body>
+<div class="wrapper">
+    <div class="outout-wrapper">
+        <img src="../../Assets/outout.svg" alt="OutOut">
+    </div>
+    <div class="form">
         <form name='RegisterForm' method='post'>
-            <label>Email:
-                <input type='text' name='email'></label><br>
-            <label>Password:
-                <input type='password' name='password'></label><br>
-            <label>Confirm Password:
-                <input type='password' name='confirmPassword'></label><br>
-            <label>Date of Birth:
-                <input type='date' name='DOB' placeholder="select Date of Birth"></label><br>
-        <input type='submit' value='Register'></form>
+            <div class="login-field">
+                <input type='text' name='email' placeholder="Email">
+                <input type='password' name='password' placeholder="Password">
+                <input type='password' name='confirmPassword' placeholder="Confirm Password">
+                <input type='date' name='DOB' placeholder="Select Date of Birth">
+            </div>
+            <div style="display: flex">
+                <a href="login.php" class="login-button">Log In</a>
+                <input type='submit' value='Register' class="register-button">
+            </div>
+        </form>
+    </div>
+</div>
         <?php
         /* If the email entered is not valid then the user is dispalayed an
          * error message below
@@ -254,7 +262,5 @@
             echo "$createError<br>";
         }
         ?>
-        <p>Already have an Account? <a href="login.php">Log In</a>.</p>
-
     </body>
 </html>
