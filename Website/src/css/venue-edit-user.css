@@ -1,0 +1,43 @@
+:root {
+    --header-gray: #e9e9e9;
+    --body-gray: #F7F7F7;
+    --button-border: #3B3B3B;
+    --button-highlight: #ccc;
+    --text: #2E2E2E;
+    --button-click: #C0C0C0;
+}
+
+input  {
+    margin: 0px 0px 20px;
+    box-sizing: border-box;
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: var(--header-gray);
+    padding: 12px 20px 12px 10px;
+    color: var(--text);
+}
+
+input:focus {
+    outline: none;
+}
+
+input[type=submit]:hover {
+    background: var(--button-highlight);
+}
+
+input[type=submit]:active {
+    background: var(--button-click);
+}
+.edit-fields {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.wrapper {
+    display: inline-block;
+    background: rgba(32, 32, 32, 0.95);
+    padding: 16px;
+    border-radius: 10px;
+}
