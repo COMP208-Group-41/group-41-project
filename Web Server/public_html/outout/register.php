@@ -1,4 +1,7 @@
 <?php
+
+    /* HAD TO CHANGE PATH FOR ASSETS FOR WEB SEVER */
+
     /* Notes on current register progress:
      *
      * Have implemented validation for email and password, and organised code

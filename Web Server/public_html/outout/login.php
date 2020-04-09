@@ -1,4 +1,7 @@
 <?php
+
+    /* HAD TO CHANGE PATH FOR ASSETS FOR WEB SEVER */
+
     // Starting session
     session_start();
     // If the user is already logged in then they are redirected to the homepage
