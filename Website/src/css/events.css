@@ -1,0 +1,60 @@
+body {
+    font-family: "K2D", sans-serif;
+}
+
+input {
+    font-family: "K2D", sans-serif;
+}
+
+.input-file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.input-file + label{
+    font-size: 1.25em;
+    font-weight: 500;
+    color: white;
+    background-color: darkslategrey;
+    display: inline-block;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    margin: 10px;
+    width: 200px;
+    height: 30px;
+    text-align: center;
+}
+
+.input-file:focus,
+.input-file + label:hover {
+    background-color: slategrey;
+}
+
+.input-file + label {
+    cursor: pointer; /* "hand" cursor */
+}
+
+.image-preview {
+    width: 300px;
+    min-height: 100px;
+    border: 2px solid #dddddd;
+    margin-top: 15px;
+
+    /* Default text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #cccccc;
+}
+
+.image-preview__image {
+    display: none;
+    width: 100%;
+}
+
