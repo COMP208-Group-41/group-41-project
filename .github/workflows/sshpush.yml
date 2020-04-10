@@ -18,11 +18,20 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       
-    - name: upload files
+    - name: upload php to /test
       uses: garygrossgarten/github-action-scp@release
       with:
         local: Website/src/PHP
         remote: public_html/test
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+      
+    - name: upload css
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: Website/src/css
+        remote: public_html/css
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
