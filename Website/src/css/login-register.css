@@ -121,7 +121,7 @@ input  {
 }
 
 .error {
-    margin-top: 20px;
+    margin-top: 8px;
     background: rgba(32, 32, 32, 0.95);
     border-radius: 10px;
     border-color: #e74948;

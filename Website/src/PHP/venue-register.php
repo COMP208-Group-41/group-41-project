@@ -155,31 +155,31 @@
  * error message below
  */
 if ($emailError != '') {
-    echo "$emailError<br>";
+    echo "<div class='error'>$emailError</div>";
 }
 /* If the accountExists string is not blank then the error message is
  * displayed telling the user that an account already exists in the
  * database with the email they provided
  */
 if ($accountExists != '') {
-    echo "$accountExists<br>";
+    echo "<div class='error'>$accountExists</div>";
 }
 
 /* If there are any errors with the password (not matching or not valid)
  * then the error is displayed below
  */
 if ($passwordError != '') {
-    echo "$passwordError<br>";
+    echo "<div class='error'>$passwordError</div>";
 }
 
 if ($nameError != '') {
-    echo "$nameError<br>";
+    echo "<div class='error'>$nameError</div>";
 }
 /* If there is an error in creating the account then the error message
  * is displayed below
  */
 if ($createError != '') {
-    echo "$createError<br>";
+    echo "<div class='error'>$createError</div>";
 }
 ?>
 
