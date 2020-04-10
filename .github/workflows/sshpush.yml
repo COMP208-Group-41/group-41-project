@@ -16,7 +16,7 @@ jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/chcekout@v2
+    - uses: actions/checkout@v2
       
     - name: upload files
       uses: garygrossgarten/github-action-scp@release
