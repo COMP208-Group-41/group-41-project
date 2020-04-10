@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='en-GB'>
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/login-register.css">
+</head>
+<body>
+<div class="wrapper">
+    <div class="outout-wrapper">
+        <img src="../Assets/outout.svg" alt="OutOut">
+    </div>
+    <div class="form">
+        <form name='RegisterForm' method='post'>
+            <div class="login-field">
+                <input type='text' name='email' placeholder="Email">
+                <input type='password' name='password' placeholder="Password">
+                <input type='password' name='confirmPassword' placeholder="Confirm Password">
+                <input type='text' name='DOB' id="dateOfBirth" placeholder="Select Date of Birth">
+                <script>
+                    var dtt = document.getElementById('dateOfBirth')
+                    dtt.onfocus = function (event) {
+                        this.type = 'date';
+                        this.focus();
+                    }
+                </script>
+            </div>
+            <div style="display: flex">
+                <a href="login.php" class="login-button">Log In</a>
+                <input type='submit' value='Register' class="register-button">
+            </div>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>
