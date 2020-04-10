@@ -16,20 +16,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       
-    - name: upload php to /test
+    - name: upload everything to /public_html
       uses: garygrossgarten/github-action-scp@release
       with:
-        local: Website/src/PHP
-        remote: public_html/outout
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-      
-    - name: upload css
-      uses: garygrossgarten/github-action-scp@release
-      with:
-        local: Website/src/css
-        remote: public_html/css
+        local: Web Server/public_html
+        remote: public_html/
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
