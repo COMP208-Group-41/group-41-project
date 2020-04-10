@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <head>
-
+<title>OutOut - Event Creation</title>
 </head>
 <body>
 <form name='EventCreation' method='post'>
     <div>
-        <input type='text' name='name' placeholder="Event Name">
-        <input type='text' name='description' placeholder="Description">
+        <input type='text' name='name' placeholder="Event Name"><br>
+        <input type='text' name='description' placeholder="Event Description"> <br>
         <input type='text' id="startTime" name='startTime' placeholder="Start time">
-        <input type='text' id="endTime" name='endTime' placeholder="End time">
+        <input type='text' id="endTime" name='endTime' placeholder="End time"><br>
+        Event Image:
+        <input type='file' id="eventImage" name='eventImage'><br>
+        <input type='text' id="ticketSite" name='ticketSite' placeholder="Ticket Sale Link"><Br>
         <input type='text' name="tags" placeholder="Tags: Indie, Pop, etc">
         <script>
             var dtt = document.getElementById('startTime');
@@ -31,9 +34,9 @@
             };
         </script>
     </div>
-    <div style="display: flex">
+    <div style= "display: flex">
         <input type='submit' value='Create'>
-        <a>Cancel</a>
+        <a href="FILL IN THIS"> Cancel </a>
     </div>
 </form>
 </body>
