@@ -75,8 +75,6 @@ CREATE TABLE User (
     UserDOB DATE NOT NULL,
     UserLocation VARCHAR(255),
     IsAdmin BOOLEAN DEFAULT '0' NOT NULL,
-    IsVerified BOOLEAN DEFAULT '1' NOT NULL,
-    VerifyHash VARCHAR(32) NOT NULL,
     PRIMARY KEY (UserID)
 );
 
@@ -138,4 +136,5 @@ CREATE TABLE GroupMembers (
     FOREIGN KEY (MemberID) REFERENCES User(UserID)
 );
 
-INSERT INTO User (UserEmail,UserPass,UserDOB,IsAdmin,VerifyHash) VALUES ('test@test.com','$2y$10$aVqNr61OO6Yy.muh4Um4seiZ2pdOr76RQH.g8a5eJilVNSLQDpxbO','2000-02-02',false,'33e75ff09dd601bbe69f351039152189');
+INSERT INTO User (UserEmail,UserPass,UserDOB,IsAdmin) VALUES ('test@test.com','$2y$10$aVqNr61OO6Yy.muh4Um4seiZ2pdOr76RQH.g8a5eJilVNSLQDpxbO','2000-02-02',false);
+INSERT INTO VenueUser (VenueUserEmail,VenueUserPass,VenueUserName) VALUES ('venuetest@test.com','$2y$10$aVqNr61OO6Yy.muh4Um4seiZ2pdOr76RQH.g8a5eJilVNSLQDpxbO', 'Test Company Name');
