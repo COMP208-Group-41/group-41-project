@@ -34,7 +34,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
       
-    - name: checking files have been uploaded
+    - name: setting permissions
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
@@ -42,7 +42,9 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         script: |
           cd public_html/test
+          chmod u+rw-xog-rwx *.php
           ls -l
-          cd public_html/css
+          cd ..
+          cd css
           ls -l
 
