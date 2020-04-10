@@ -38,6 +38,7 @@
                             if (!validateName($name)) {
                                 $nameError = 'Name of Company cannot be more than 255 characters!';
                             } else {
+                                $name = $_POST['nameOfCompany'];
                                 if (createUser($email,$hashedPassword,$name,$pdo)) {
                                     /* The verification email would be sent here but
                                      * as we do not have a working mail server this
@@ -59,7 +60,7 @@
             }
         }
     } catch (PDOException $e) {
-        $pdo.rollBack();
+        $pdo->rollBack();
         exit("PDO Error: ".$e->getMessage()."<br>");
     }
 
