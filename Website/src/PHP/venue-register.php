@@ -79,6 +79,22 @@
         }
     }
 
+    /* The function checkEmailExists returns true if the email provided already
+     * exists in the VenueUser database table
+     */
+    function checkEmailExists($email,$pdo) {
+        // Register form has been filled out and submitted, check if email already exists in db
+        $checkExistingStmt = $pdo->prepare("SELECT VenueUserEmail FROM VenueUser WHERE VenueUserEmail=:VenueUserEmail");
+        $checkExistingStmt->bindValue(':VenueUserEmail',$email);
+        $checkExistingStmt->execute();
+        if ($checkExistingStmt->rowCount() > 0) {
+            // Email exists, return true
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     function passwordHasher($password) {
         return password_hash($password, PASSWORD_DEFAULT);
     }
