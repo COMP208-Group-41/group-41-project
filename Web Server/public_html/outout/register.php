@@ -1,7 +1,4 @@
 <?php
-
-    /* HAD TO CHANGE PATH FOR ASSETS FOR WEB SEVER */
-
     /* Notes on current register progress:
      *
      * Have implemented validation for email and password, and organised code
@@ -85,8 +82,6 @@
                                      * will not work at the moment
                                      */
                                     // sendVerificationEmail($email,$hash);
-                                    // Verification not working so set verified to true
-                                    $_SESSION['verified'] = true;
 
                                     header('location: login.php');
                                     exit;
@@ -166,14 +161,14 @@
      */
     function createUser($email,$password,$dob,$pdo) {
         // Verification hash is generated here using md5 and random numbers
-        $hash = md5(rand(0,1000));
+
         // Create user in db
         $pdo->beginTransaction();
-        $registerStmt = $pdo->prepare("INSERT INTO User (UserEmail,UserPass,UserDOB,VerifyHash) VALUES (:UserEmail,:UserPass,:UserDOB,:VerifyHash)");
+        $registerStmt = $pdo->prepare("INSERT INTO User (UserEmail,UserPass,UserDOB) VALUES (:UserEmail,:UserPass,:UserDOB)");
         $registerStmt->bindValue(':UserEmail',$email);
         $registerStmt->bindValue(':UserPass',$password);
         $registerStmt->bindValue(':UserDOB',$dob);
-        $registerStmt->bindValue(':VerifyHash',$hash);
+
         if ($registerStmt->execute()) {
             // if statement executes successfully, redirect to login page
             $pdo->commit();
@@ -189,49 +184,49 @@
      * the email provided by the user, it contains a link to
      * verify their account
      */
-    function sendVerificationEmail($email,$hash) {
-        $to = $email;
-        $subject = 'OutOut | Verify your account';
-        $message = '
-
-        Thank you for registering for OutOut!
-        Please click the following link to verify your account:
-        https://student.csc.liv.ac.uk/~sgstribe/test/verify.php?email='.$email.'&hash='.$hash.'
-
-        You will be able to log in using the email: '.$email.' and the password you used in registration
-
-        ';
-
-        $headers = 'From:noreply@LiveproolOutOut.com' . "\r\n";
-        mail($to,$subject,$message,$headers);
-    }
+    // function sendVerificationEmail($email,$hash) {
+    //     $to = $email;
+    //     $subject = 'OutOut | Verify your account';
+    //     $message = '
+    //
+    //     Thank you for registering for OutOut!
+    //     Please click the following link to verify your account:
+    //     https://student.csc.liv.ac.uk/~sgstribe/test/verify.php?email='.$email.'&hash='.$hash.'
+    //
+    //     You will be able to log in using the email: '.$email.' and the password you used in registration
+    //
+    //     ';
+    //
+    //     $headers = 'From:noreply@LiveproolOutOut.com' . "\r\n";
+    //     mail($to,$subject,$message,$headers);
+    // }
 ?>
 
 <!DOCTYPE html>
 <html lang='en-GB'>
-    <head>
-        <link rel="stylesheet" type="text/css" href="../css/login-register.css">
-        <title>OutOut - Register</title>
-    </head>
-    <body>
-        <div class="wrapper">
-            <div class="outout-wrapper">
-                <img src="../Assets/outout.svg" alt="OutOut">
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/login-register.css">
+</head>
+<body>
+<div class="wrapper">
+    <div class="outout-wrapper">
+        <img src="../Assets/outout.svg" alt="OutOut">
+    </div>
+    <div class="form">
+        <form name='RegisterForm' method='post'>
+            <div class="login-field">
+                <input type='text' name='email' placeholder="Email">
+                <input type='password' name='password' placeholder="Password">
+                <input type='password' name='confirmPassword' placeholder="Confirm Password">
+                <input type='date' name='DOB' placeholder="Select Date of Birth">
             </div>
-            <div class="form">
-                <form name='RegisterForm' method='post'>
-                    <div class="login-field">
-                        <input type='text' name='email' placeholder="Email">
-                        <input type='password' name='password' placeholder="Password">
-                        <input type='password' name='confirmPassword' placeholder="Confirm Password">
-                        <input type='date' name='DOB' placeholder="Select Date of Birth">
-                    </div>
-                    <div style="display: flex">
-                        <a href="login.php" class="login-button">Log In</a>
-                        <input type='submit' value='Register' class="register-button">
-                    </div>
-                </form>
+            <div style="display: flex">
+                <a href="login.php" class="login-button">Log In</a>
+                <input type='submit' value='Register' class="register-button">
             </div>
+        </form>
+    </div>
+</div>
         <?php
         /* If the email entered is not valid then the user is dispalayed an
          * error message below
@@ -265,6 +260,5 @@
             echo "$createError<br>";
         }
         ?>
-        </div>
     </body>
 </html>
