@@ -46,4 +46,6 @@ jobs:
         script: |
           cd public_html/test
           ls -l
+          cd public_html/css
+          ls -l
 
