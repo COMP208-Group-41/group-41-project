@@ -120,5 +120,11 @@
         </form>
     </div>
 </div>
+<?php
+    // If the details are incorrect then error message is shown
+    if ($loginError != '') {
+        echo "$loginError<br>";
+    }
+?>
 </body>
 </html>
