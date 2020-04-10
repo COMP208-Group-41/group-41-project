@@ -1,0 +1,123 @@
+:root {
+    --header-gray: #e9e9e9;
+    --body-gray: #F7F7F7;
+    --button-border: #3B3B3B;
+    --button-highlight: #ccc;
+    --text: #2E2E2E;
+}
+
+/* HAD TO CHANGE PATH FOR ASSETS FOR WEB SEVER */
+
+body {
+    margin: 0;
+    background: url("../Assets/background2.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+    font-family: "K2D", sans-serif;
+    color: var(--text);
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    display: inline-block;
+    background: rgba(32, 32, 32, 0.95);
+    padding: 16px;
+    border-radius: 10px;
+}
+
+.outout-wrapper {
+    text-align: center;
+    padding: 20px;
+}
+
+label {
+    color: var(--text);
+}
+
+input  {
+    margin: 0px 0px 20px;
+    box-sizing: border-box;
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: var(--header-gray);
+    padding: 12px 20px 12px 10px;
+    color: var(--text);
+}
+
+.login-button {
+    margin: 0;
+    box-sizing: border-box;
+    border: 2px solid var(--button-border);
+    border-radius: 4px 0px 0px 4px;
+    font-size: 16px;
+    background-color: var(--header-gray);
+    padding: 6px;
+    color: var(--text);
+    width: 50%;
+    text-align: center;
+    text-decoration: none;
+}
+
+.login-button:focus {
+    outline: none;
+    background-color: var(--button-highlight);
+}
+
+.login-button:hover {
+     background-color: var(--button-highlight);
+     cursor: grab;
+ }
+
+.login-button:active {
+    background-color: #c0c0c0;
+}
+
+.register-button {
+    margin: 0;
+    box-sizing: border-box;
+    border: 2px solid var(--button-border);
+    border-radius: 0px 4px 4px 0px;
+    border-left-width: 0;
+    font-size: 16px;
+    background-color: var(--header-gray);
+    padding: 6px;
+    color: var(--text);
+    width: 50%;
+    text-align: center;
+    text-decoration: none;
+}
+
+.register-button:focus {
+    outline: none;
+    background-color: var(--button-highlight);
+}
+
+.register-button:hover {
+    background-color: var(--button-highlight);
+}
+
+.register-button:active {
+    background-color: #c0c0c0;
+}
+
+.form {
+    display: inline-block;
+    flex-direction: column;
+    text-align: right;
+    width: 400px;
+    margin-top: 20px;
+}
+
+.login-field {
+    display: flex;
+    flex-direction: column;
+
+}
