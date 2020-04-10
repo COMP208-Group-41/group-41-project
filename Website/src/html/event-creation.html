@@ -7,9 +7,29 @@
     <div>
         <input type='text' name='name' placeholder="Event Name">
         <input type='text' name='description' placeholder="Description">
-        <input type='datetime-local' name='startTime' placeholder="Start time">
-        <input type='datetime-local' name='endTime' placeholder="End time">
+        <input type='text' id="startTime" name='startTime' placeholder="Start time">
+        <input type='text' id="endTime" name='endTime' placeholder="End time">
         <input type='text' name="tags" placeholder="Tags: Indie, Pop, etc">
+        <script>
+            var dtt = document.getElementById('startTime');
+            dtt.onfocus = function (event) {
+                this.type = 'datetime-local';
+                this.focus();
+            };
+            dtt.onblur = function (event) {
+                this.type = 'text';
+                this.blur();
+            };
+            var ett = document.getElementById('endTime');
+            ett.onfocus = function (event) {
+                this.type = 'datetime-local';
+                this.focus();
+            };
+            ett.onblur = function (event) {
+                this.type = 'text';
+                this.blur();
+            };
+        </script>
     </div>
     <div style="display: flex">
         <input type='submit' value='Create'>

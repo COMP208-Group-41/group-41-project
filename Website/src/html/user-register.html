@@ -21,6 +21,10 @@
                         this.type = 'date';
                         this.focus();
                     }
+                    dtt.onblur = function (event) {
+                        this.type = 'text';
+                        this.blur();
+                    };
                 </script>
             </div>
             <div style="display: flex">
