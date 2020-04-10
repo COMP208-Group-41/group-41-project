@@ -82,8 +82,6 @@
                                      * will not work at the moment
                                      */
                                     // sendVerificationEmail($email,$hash);
-                                    // Verification not working so set verified to true
-                                    $_SESSION['verified'] = true;
 
                                     header('location: login.php');
                                     exit;
@@ -163,14 +161,14 @@
      */
     function createUser($email,$password,$dob,$pdo) {
         // Verification hash is generated here using md5 and random numbers
-        $hash = md5(rand(0,1000));
+
         // Create user in db
         $pdo->beginTransaction();
-        $registerStmt = $pdo->prepare("INSERT INTO User (UserEmail,UserPass,UserDOB,VerifyHash) VALUES (:UserEmail,:UserPass,:UserDOB,:VerifyHash)");
+        $registerStmt = $pdo->prepare("INSERT INTO User (UserEmail,UserPass,UserDOB) VALUES (:UserEmail,:UserPass,:UserDOB)");
         $registerStmt->bindValue(':UserEmail',$email);
         $registerStmt->bindValue(':UserPass',$password);
         $registerStmt->bindValue(':UserDOB',$dob);
-        $registerStmt->bindValue(':VerifyHash',$hash);
+
         if ($registerStmt->execute()) {
             // if statement executes successfully, redirect to login page
             $pdo->commit();
@@ -186,22 +184,22 @@
      * the email provided by the user, it contains a link to
      * verify their account
      */
-    function sendVerificationEmail($email,$hash) {
-        $to = $email;
-        $subject = 'OutOut | Verify your account';
-        $message = '
-
-        Thank you for registering for OutOut!
-        Please click the following link to verify your account:
-        https://student.csc.liv.ac.uk/~sgstribe/test/verify.php?email='.$email.'&hash='.$hash.'
-
-        You will be able to log in using the email: '.$email.' and the password you used in registration
-
-        ';
-
-        $headers = 'From:noreply@LiveproolOutOut.com' . "\r\n";
-        mail($to,$subject,$message,$headers);
-    }
+    // function sendVerificationEmail($email,$hash) {
+    //     $to = $email;
+    //     $subject = 'OutOut | Verify your account';
+    //     $message = '
+    //
+    //     Thank you for registering for OutOut!
+    //     Please click the following link to verify your account:
+    //     https://student.csc.liv.ac.uk/~sgstribe/test/verify.php?email='.$email.'&hash='.$hash.'
+    //
+    //     You will be able to log in using the email: '.$email.' and the password you used in registration
+    //
+    //     ';
+    //
+    //     $headers = 'From:noreply@LiveproolOutOut.com' . "\r\n";
+    //     mail($to,$subject,$message,$headers);
+    // }
 ?>
 
 <!DOCTYPE html>
