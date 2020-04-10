@@ -42,7 +42,14 @@
                     $loginError = 'Email or Password incorrect!';
                 }
             }
+        } else {
+            /* If the user's details are not in the system or their account
+             * is not verified then their login attempt is unsuccessful
+             * and the message is shown to them
+             */
+            $loginError = 'Email or Password incorrect!';
         }
+
     } catch (PDOException $e) {
         /* If a PDO Execption is thrown then it is caught here and an
          * error page is shown, this needs to be made more user friendly
@@ -116,7 +123,7 @@
 <?php
     // If the details are incorrect then error message is shown
     if ($loginError != '') {
-        echo "<div class='error'>$loginError</div>";
+        echo "<div class='error'>$loginError</div>>";
     }
 ?>
 </body>
