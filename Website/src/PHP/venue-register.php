@@ -58,6 +58,8 @@
                 }
             }
         }
+    } catch (PDOException $e) {
+        exit("PDO Error: ".$e->getMessage()."<br>");
     }
 
     function validatePassword($password) {
