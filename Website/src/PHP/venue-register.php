@@ -128,7 +128,7 @@
                 <input type="text" name='nameOfCompany' placeholder="Name of Company">
             </div>
             <div style="display: flex">
-                <a href="login.php" class="login-button">Log In</a>
+                <a href="venue-login.php" class="login-button">Log In</a>
                 <input type='submit' value='Register' class="register-button">
             </div>
         </form>
