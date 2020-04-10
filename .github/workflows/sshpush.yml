@@ -42,7 +42,7 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         script: |
           cd public_html/test
-          chmod u+rw-xog-rwx *.php
+          chmod 600 *.php
           ls -l
           cd ..
           cd css
