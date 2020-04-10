@@ -34,11 +34,10 @@
                             $passwordError = 'password must be at least 8 characters long and contain a lower case letter and a number!';
                         } else {
                             $hashedPassword = passwordHasher($password);
-
+                            $name = $_POST['nameOfCompany'];
                             if (!validateName($name)) {
                                 $nameError = 'Name of Company cannot be more than 255 characters!';
                             } else {
-                                $name = $_POST['nameOfCompany'];
                                 if (createUser($email,$hashedPassword,$name,$pdo)) {
                                     /* The verification email would be sent here but
                                      * as we do not have a working mail server this
