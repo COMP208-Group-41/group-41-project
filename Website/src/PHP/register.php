@@ -212,7 +212,7 @@
 <body>
 <div class="wrapper">
     <div class="outout-wrapper">
-        <img src="../../Assets/outout.svg" alt="OutOut">
+        <img src="../Assets/outout.svg" alt="OutOut">
     </div>
     <div class="form">
         <form name='RegisterForm' method='post'>
