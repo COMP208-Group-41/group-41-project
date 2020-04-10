@@ -16,16 +16,16 @@ jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/chcekout@v2
+    - uses: actions/chcekout@v2
       
-      - name: upload files
-        uses: garygrossgarten/github-action-scp@release
-        with:
-          local: Website/src/PHP
-          remote: public_html/test
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+    - name: upload files
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: Website/src/PHP
+        remote: public_html/test
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
   
   check:
     # The type of runner that the job will run on
