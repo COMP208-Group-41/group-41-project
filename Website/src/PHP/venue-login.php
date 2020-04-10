@@ -42,12 +42,13 @@
                     $loginError = 'Email or Password incorrect!';
                 }
             }
-        } else {
-            /* If the user's details are not in the system or their account
-             * is not verified then their login attempt is unsuccessful
-             * and the message is shown to them
-             */
-            $loginError = 'Email or Password incorrect!';
+            else {
+                /* If the user's details are not in the system or their account
+                 * is not verified then their login attempt is unsuccessful
+                 * and the message is shown to them
+                 */
+                $loginError = 'Email or Password incorrect!';
+            }
         }
 
     } catch (PDOException $e) {

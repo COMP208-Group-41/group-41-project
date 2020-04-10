@@ -41,7 +41,6 @@
                     // Password doesn't match!
                     $loginError = 'Email or Password incorrect!';
                 }
-
             } else {
                 /* If the user's details are not in the system or their account
                  * is not verified then their login attempt is unsuccessful
