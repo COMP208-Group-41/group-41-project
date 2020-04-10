@@ -15,15 +15,6 @@
      $registeredMsg = '';
      $loginError = '';
 
-    /* verified venue user code. Not currently implmented in the DB
-    if (isset($_SESSION['verified']) && $_SESSION['verified'] == true) {
-        $registeredMsg = 'Your Account has been verified successfully, please log in with your account details';
-    }
-
-    if (isset($_SESSION['verified']) && $_SESSION['verified'] == false) {
-        $registeredMsg = 'Please verify your account before logging in';
-    }
-    */
     // Config file for connecting to the database is grabbed here
     require_once "config.php";
 
@@ -75,17 +66,12 @@
         /* Try to find the venue user in the database using provided
          * email and password
          */
-        $loginstmt = $pdo->prepare("SELECT VenueUserID,IsVerified FROM VenueUser WHERE VenueUserEmail=:VenueUserEmail");
+        $loginstmt = $pdo->prepare("SELECT VenueUserID FROM VenueUser WHERE VenueUserEmail=:VenueUserEmail");
         $loginstmt->bindValue(':VenueUserEmail',$_POST['email']);
         $loginstmt->execute();
         if ($loginstmt->rowCount() == 1) {
             $row = $loginstmt->fetch();
-            if ($row['IsVerified'] == 1) {
-                return $row['VenueUserID'];
-            } else {
-                return 0;
-            }
-
+            return $row['VenueUserID'];
         } else {
             return 0;
         }
