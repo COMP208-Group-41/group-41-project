@@ -137,4 +137,4 @@ CREATE TABLE GroupMembers (
 );
 
 INSERT INTO User (UserEmail,UserPass,UserDOB,IsAdmin) VALUES ('test@test.com','$2y$10$aVqNr61OO6Yy.muh4Um4seiZ2pdOr76RQH.g8a5eJilVNSLQDpxbO','2000-02-02',false);
-INSERT INTO VenueUser (VenueUserEmail,VenueUserPass) VALUES ('venuetest@test.com','$2y$10$aVqNr61OO6Yy.muh4Um4seiZ2pdOr76RQH.g8a5eJilVNSLQDpxbO');
+INSERT INTO VenueUser (VenueUserEmail,VenueUserPass,VenueUserName) VALUES ('venuetest@test.com','$2y$10$aVqNr61OO6Yy.muh4Um4seiZ2pdOr76RQH.g8a5eJilVNSLQDpxbO', 'Test Company Name');
