@@ -18,7 +18,14 @@
                 <input type='password' name='password' placeholder="Password">
                 <input type='password' name='confirmPassword' placeholder="Confirm Password">
                 <input type="text" name='address' placeholder="Address">
-                <input type="datetime-local" name='openingTimes' placeholder="Opening times">
+                <input type="text" id="openingTime" name='openingTimes' placeholder="Opening times">
+                <script>
+                    var dtt = document.getElementById('openingTime')
+                    dtt.onfocus = function (event) {
+                        this.type = 'datetime-local';
+                        this.focus();
+                    }
+                </script>
                 <input type="text" name="tags" placeholder="Tags: e.g. Pop, Indie">
             </div>
             <div style="display: flex">
@@ -27,7 +34,6 @@
             </div>
         </form>
     </div>
-
 </div>
 </body>
 </html>
