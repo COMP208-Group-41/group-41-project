@@ -15,14 +15,6 @@
      $registeredMsg = '';
      $loginError = '';
 
-    if (isset($_SESSION['verified']) && $_SESSION['verified'] == true) {
-        $registeredMsg = 'Your Account has been verified successfully, please log in with your account details';
-    }
-
-    if (isset($_SESSION['verified']) && $_SESSION['verified'] == false) {
-        $registeredMsg = 'Please verify your account before logging in';
-    }
-
     // Config file for connecting to the database is grabbed here
     require_once "config.php";
 
@@ -74,17 +66,12 @@
         /* Try to find the user in the database using provided
          * username and password
          */
-        $loginstmt = $pdo->prepare("SELECT UserID,IsVerified FROM User WHERE UserEmail=:UserEmail");
+        $loginstmt = $pdo->prepare("SELECT UserID FROM User WHERE UserEmail=:UserEmail");
         $loginstmt->bindValue(':UserEmail',$_POST['email']);
         $loginstmt->execute();
         if ($loginstmt->rowCount() == 1) {
             $row = $loginstmt->fetch();
-            if ($row['IsVerified'] == 1) {
-                return $row['UserID'];
-            } else {
-                return 0;
-            }
-
+            return $row['userID'];
         } else {
             return 0;
         }
