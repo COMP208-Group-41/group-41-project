@@ -59,6 +59,7 @@
             }
         }
     } catch (PDOException $e) {
+        $pdo.rollBack();
         exit("PDO Error: ".$e->getMessage()."<br>");
     }
 
