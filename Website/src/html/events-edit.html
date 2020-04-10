@@ -1,41 +1,42 @@
 <!DOCTYPE html>
-<html lang='en-GB'>
 <head>
-   <link rel="stylesheet" type="text/css" href="../css/events-edit.css">
+    <title>OutOut - Edit Event Details</title>
 </head>
 <body>
-<div class="wrapper">
-    <div class="event-form">
-        <form name='EventForm' method='post'>
-            <div class="event-details">
-                <h1>Event Details</h1><br>
-                <label>Event Name:
-                    <input type='text' name='eventName'></label><br>
-                <label>Event Description:
-                    <input type='text' name='eventDescription'></label><br>
-                <label>Event Image</label>
-                    <input type='file' name='eventImage'></label><br>
-                <div class="datetimepickers">
-                    <div class="datetimepickers-start">
-                        Starts<br>
-                        <input type='datetime-local' name='timeFrom'></label><br>
-                    </div>
-                    <div class="datetimepickers-end">
-                        Ends<br>
-                        <input type='datetime-local' name='timeTo'></label><br>
-                    </div>
-                </div>
-
-                <input type='submit' value='Create'>
-            </div>
-
-<!--            <div style="display: flex">-->
-<!--                <a href="login.php" class="login-button">Log In</a>-->
-<!--                <input type='submit' value='Register' class="register-button">-->
-<!--            </div>-->
-        </form>
+<form name='EventEdit' method='post'>
+    <div>
+        <input type='text' name='name' placeholder="Event Name"><br>
+        <input type='text' name='description' placeholder="Event Description"> <br>
+        <input type='text' id="startTime" name='startTime' placeholder="Start time">
+        <input type='text' id="endTime" name='endTime' placeholder="End time"><br>
+        Upload a new Event Image:
+        <input type='file' id="eventImage" name='eventImage'><br>
+        <input type='text' id="ticketSite" name='ticketSite' placeholder="Ticket Sale Link"><Br>
+        <input type='text' name="tags" placeholder="Tags: Indie, Pop, etc">
+        <script>
+            var dtt = document.getElementById('startTime');
+            dtt.onfocus = function (event) {
+                this.type = 'datetime-local';
+                this.focus();
+            };
+            dtt.onblur = function (event) {
+                this.type = 'text';
+                this.blur();
+            };
+            var ett = document.getElementById('endTime');
+            ett.onfocus = function (event) {
+                this.type = 'datetime-local';
+                this.focus();
+            };
+            ett.onblur = function (event) {
+                this.type = 'text';
+                this.blur();
+            };
+        </script>
     </div>
-</div>
-
+    <div style= "display: flex">
+        <input type='submit' value='Create'>
+        <a href="link going back to homepage/dashboard"> Cancel </a>
+    </div>
+</form>
 </body>
-</html>
