@@ -119,3 +119,15 @@ input  {
     flex-direction: column;
 
 }
+
+.error {
+    margin-top: 20px;
+    background: rgba(32, 32, 32, 0.95);
+    border-radius: 10px;
+    border-color: #e74948;
+    border-width: 2px;
+    border-style: solid;
+    padding: 16px;
+    color: var(--header-gray);
+    width: 400px;
+}
