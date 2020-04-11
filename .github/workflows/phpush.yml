@@ -16,16 +16,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - uses: franzdiebold@github-env-vars-action@v1.0.0
-    - name: get branch name
-      run: |
-        echo "Branch name: $GITHUB_REF_NAME"
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
     
     - name: upload php to /test
       uses: garygrossgarten/github-action-scp@release
       with:
         local: Website/src/PHP
-        remote: public_html/test/$GITHUB_REF_NAME
+        remote: public_html/test/${{ steps.extract_branch.outputs.branch }}
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
@@ -46,7 +46,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         script: |
-          cd public_html/test/$GITHUB_REF_NAME
+          cd public_html/test/${{ steps.extract_branch.outputs.branch }}
           chmod 600 *.php
           ls -l
           cd ..
