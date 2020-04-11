@@ -17,9 +17,19 @@
     // The config file is imported here for any database connections required later
     require_once "config.php";
 
-    function getVenueUserInfo($VenueUserID, $pdo) {
-        $infoStmt = $pdo->prepare("SELECT Venue")
+    /* The user has clicked the Save button, submit  */
+    if (!empty($_POST) && isset($_POST['submit'])) {
+
     }
+
+    function getVenueUserInfo($VenueUserID, $pdo) {
+        $infoStmt = $pdo->prepare("SELECT VenueUserEmail,VenueUserName,VenueUserExternal FROM VenueUser WHERE VenueUserID=:VenueUserID");
+        $infoStmt->bindValue(":VenueUserID",$VenueUserID);
+        $infoStmt->execute();
+        return $infoStmt->fetch();
+    }
+
+
 
 
 ?>
@@ -49,7 +59,6 @@
             <input type='text' name='accountName' placeholder="New Account Name">
             <input type='text' name='externalLink' placeholder="Venue Website Link">
             <input type='submit' value='Save'>
-            <input type='submit' value='Delete Account'>
         </div>
     </form>
 </div>
