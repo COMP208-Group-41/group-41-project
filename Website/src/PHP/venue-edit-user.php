@@ -17,6 +17,11 @@
     // The config file is imported here for any database connections required later
     require_once "config.php";
 
+    function getVenueUserInfo($VenueUserID, $pdo) {
+        $infoStmt = $pdo->prepare("SELECT Venue")
+    }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -30,6 +35,13 @@
     <img src="../Assets/outout.svg" alt="OutOut">
     <form name='EditVenueUserDetails' method='post' style="margin-top: 10px">
         <div class="edit-fields">
+            <?php
+                /* Need to echo these input fields after getting the existing
+                 * info from the database
+                 */
+
+
+            ?>
             <input type='text' name='email' placeholder="Email">
             <input type='password' name='password' placeholder="Current Password">
             <input type='password' name='newPassword' placeholder="New Password">
