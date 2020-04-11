@@ -1,4 +1,10 @@
 <?php
+
+    /* Ensure that the php code does not pull the existing info from the
+     * database before submitting new values if the user has clicked the submit
+     * button!!!
+     */
+
     // Session is started
     session_start();
 
@@ -19,6 +25,7 @@
 
     /* The user has clicked the Save button, submit  */
     if (!empty($_POST) && isset($_POST['submit'])) {
+
 
     }
 
@@ -47,9 +54,9 @@
         <div class="edit-fields">
             <?php
                 /* Need to echo these input fields after getting the existing
-                 * info from the database
+                 * info from the database, if the field
                  */
-
+                 echo "<input type='text' name='email' placeholder='Email'>"
 
             ?>
             <input type='text' name='email' placeholder="Email">
