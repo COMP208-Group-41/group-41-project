@@ -28,7 +28,10 @@
 
     /* The user has clicked the Save button, submit  */
     if (!empty($_POST) && isset($_POST['submit'])) {
-
+        if (!empty($_POST['password']) && !empty($_POST['newPassword']) && !empty($_POST['confirmNewPassword'])) {
+            // The user is changing thier password, do all checks for password
+            
+        }
     } else {
         $result = getVenueUserInfo($venueUserID,$pdo);
         $name = $result['VenueUserName'];
