@@ -56,13 +56,13 @@
     <img src="../Assets/outout.svg" alt="OutOut">
     <form name='EditVenueUserDetails' method='post' style="margin-top: 10px">
         <div class="edit-fields">
-            <input type='text' name='email' placeholder="Email" value="<?php echo $email; ?>">
-            <input type='password' name='password' placeholder="Current Password">
-            <input type='password' name='newPassword' placeholder="New Password">
-            <input type='password' name='confirmNewPassword' placeholder="Confirm New Password">
-            <input type='text' name='companyName' placeholder="Change Company Name" value="<?php echo $name; ?>">
-            <input type='text' name='externalLink' placeholder="Venue Website Link" value="<?php echo $external; ?>">
-            <input type='submit' value='Save'>
+            <input type='text' name='email' placeholder="Email" value="<?php echo $email; ?>"><br>
+            <input type='password' name='password' placeholder="Current Password"><br>
+            <input type='password' name='newPassword' placeholder="New Password"><br>
+            <input type='password' name='confirmNewPassword' placeholder="Confirm New Password"><br>
+            <input type='text' name='companyName' placeholder="Change Company Name" value="<?php echo $name; ?>"><br>
+            <input type='text' name='externalLink' placeholder="Venue Website Link" value="<?php echo $external; ?>"><br>
+            <input type='submit' value='Save'><br>
         </div>
     </form>
 </div>
