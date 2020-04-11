@@ -12,6 +12,10 @@
      * successfully
      */
 
+     error_reporting( E_ALL );
+     ini_set('display_errors', 1);
+     ini_set('display_startup_errors', 1);
+
      $registeredMsg = '';
      $loginError = '';
 
@@ -26,7 +30,7 @@
              * to a variable to check if it was a valid user
              */
             $VenueUserID = findVenueUser($email,$pdo);
-            if ($result != 0) {
+            if ($VenueUserID != 0) {
                 if (verifyPassword($VenueUserID,$password,$pdo)) {
                     /* The venue user is now logged in, the session variable
                      * logged in is set to true, and the session variable
@@ -41,8 +45,7 @@
                     // Password doesn't match!
                     $loginError = 'Email or Password incorrect!';
                 }
-            }
-            else {
+            } else {
                 /* If the user's details are not in the system or their account
                  * is not verified then their login attempt is unsuccessful
                  * and the message is shown to them
