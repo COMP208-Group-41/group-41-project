@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang='en-GB'>
+<head>
+    <title>OutOut - Edit Venue Details</title>
+    <link rel="stylesheet" type="text/css" href="../css/venue-edit-details.css">
+</head>
+<body>
+<div class="wrapper">
+    <img src="../../Assets/outout.svg" alt="OutOut">
+    <form name='EditVenueDetails' method='post' style="margin-top: 10px">
+        <div class="edit-fields">
+            <input type='text' name='email' placeholder="Email">
+            <input type='password' name='password' placeholder="Current Password">
+            <input type='text' name='venueName' placeholder="New Venue Name">
+            <input type='text' name='externalLink' placeholder="Venue Website Link">
+            <input type='time' name="timeMonday" id="timeMonday">
+            <input type='time' name="timeTuesday" id="timeTuesday">
+            <input type='time' name="timeWednesday" id="timeWednesday">
+            <input type='time' name="timeThursday" id="timeThursday">
+            <input type='time' name="timeFriday" id="timeFriday">
+            <input type='time' name="timeSaturday" id="timeSaturday">
+            <input type='time' name="timeSunday" id="timeSunday">
+            <input type='text' name='venueLocation' placeholder="Venue Address">
+            <input type='text' name='venueDescription' placeholder="Venue Description">
+            <input type='file' id="venueImage" name='venueImage' class='input-file' accept="image/*">
+            <label for="venueImage">Add Venue Image</label><br>
+            <input type="text" name="tags" placeholder="Tags - Separate each tag with a comma">
+            <input type='submit' value='Save'>
+            <input type='submit' value='Delete Venue'>
+        </div>
+    </form>
+</div>
+</body>
+</html>
