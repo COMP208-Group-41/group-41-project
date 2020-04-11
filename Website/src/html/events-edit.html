@@ -6,12 +6,12 @@
 <body>
 <form name='EventForm' method='post'>
     <div>
-<!--    TO DO: NEED TO FILL INPUT FIELDS WITH DATA SUBMITTED PRIOR TO DATABASE -->
+<!--    TODO: NEED TO FILL INPUT FIELDS WITH DATA SUBMITTED PRIOR TO DATABASE -->
         <input type='text' name='name' placeholder="Event Name" required><br>
         <input type='text' name='description' placeholder="Event Description" required> <br>
         <input type='text' id="startTime" name='startTime' placeholder="Start time" required>
         <input type='text' id="endTime" name='endTime' placeholder="End time" required><br>
-
+<!--    TODO: RESTRICT SIZE OF PICTURE THAT CAN BE UPLOADED -->
         Event Image: <br>
         <input type='file' id="eventImage" name='eventImage' class='input-file' accept="image/*">
         <label for="eventImage">Upload Image</label>
@@ -67,6 +67,7 @@
     </div>
     <div style= "display: flex">
         <input type='submit' value='Update'>
+<!--        TODO: FILL IN HREF ONCLICK OF CANCEL-->
         <input type="button" onclick="location.href='BACK TO DASHBOARD OR HOMEPAGE';" value="Cancel" />
     </div>
 </form>
