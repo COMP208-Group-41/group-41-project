@@ -35,7 +35,7 @@
                      */
                     $_SESSION["loggedin"] = true;
                     $_SESSION['VenueUserID'] = $VenueUserID;
-                    header("location: home.php");
+                    header("location: venue-edit-user.php");
                     exit;
                 } else {
                     // Password doesn't match!
