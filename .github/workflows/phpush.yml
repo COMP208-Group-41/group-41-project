@@ -15,7 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    
     - uses: franzdiebold@github-env-vars-action@v1.0.0
+    - name: get branch name
+      run: |
+        echo "Branch name: $GITHUB_REF_NAME"
     
     - name: upload php to /test
       uses: garygrossgarten/github-action-scp@release
