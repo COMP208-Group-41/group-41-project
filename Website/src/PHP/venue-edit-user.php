@@ -23,21 +23,25 @@
     // The config file is imported here for any database connections required later
     require_once "config.php";
 
+    $venueUserID = $_SESSION["VenueUserID"];
+    $name = $email = $external = "";
+
     /* The user has clicked the Save button, submit  */
     if (!empty($_POST) && isset($_POST['submit'])) {
 
-
+    } else {
+        $result = getVenueUserInfo($venueUserID,$pdo);
+        $name = $result['VenueUserName'];
+        $email = $result['VenueUserEmail'];
+        $external = $result['VenueUserExternal'];
     }
 
-    function getVenueUserInfo($VenueUserID, $pdo) {
+    function getVenueUserInfo($venueUserID, $pdo) {
         $infoStmt = $pdo->prepare("SELECT VenueUserEmail,VenueUserName,VenueUserExternal FROM VenueUser WHERE VenueUserID=:VenueUserID");
-        $infoStmt->bindValue(":VenueUserID",$VenueUserID);
+        $infoStmt->bindValue(":VenueUserID",$venueUserID);
         $infoStmt->execute();
         return $infoStmt->fetch();
     }
-
-
-
 
 ?>
 
@@ -52,19 +56,12 @@
     <img src="../Assets/outout.svg" alt="OutOut">
     <form name='EditVenueUserDetails' method='post' style="margin-top: 10px">
         <div class="edit-fields">
-            <?php
-                /* Need to echo these input fields after getting the existing
-                 * info from the database, if the field
-                 */
-                 echo "<input type='text' name='email' placeholder='Email'>"
-
-            ?>
-            <input type='text' name='email' placeholder="Email">
+            <input type='text' name='email' placeholder="Email" value="<?php echo $email; ?>">
             <input type='password' name='password' placeholder="Current Password">
             <input type='password' name='newPassword' placeholder="New Password">
             <input type='password' name='confirmNewPassword' placeholder="Confirm New Password">
-            <input type='text' name='accountName' placeholder="New Account Name">
-            <input type='text' name='externalLink' placeholder="Venue Website Link">
+            <input type='text' name='companyName' placeholder="Change Company Name" value="<?php echo $name; ?>">
+            <input type='text' name='externalLink' placeholder="Venue Website Link" value="<?php echo $external; ?>">
             <input type='submit' value='Save'>
         </div>
     </form>
