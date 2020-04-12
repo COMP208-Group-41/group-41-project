@@ -36,8 +36,6 @@
     $name = $email = $external = $newName = $newPassword = $password = "";
     $errorMessage = "";
 
-    $_SESSION['testing'] = "";
-
     $result = getVenueUserInfo($venueUserID,$pdo);
     $name = $result['VenueUserName'];
     $email = $result['VenueUserEmail'];
@@ -133,9 +131,7 @@
      */
     function emailCheck($venueUserID,$email,$pdo,&$errorMessage) {
         if (isset($_POST['email']) && !empty($_POST['email']) && (trim($_POST['email']) != $email)) {
-
             $newEmail = trim($_POST['email']);
-            $_SESSION['testing'] = "old: $email new: $newEmail";
             if (filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
                 // Valid email
                 if (!checkVenueEmailExists($newEmail,$pdo)) {
@@ -355,9 +351,8 @@
 </div>
 <?php
     if ($errorMessage != "") {
-         echo "<div class='error'>$errorMessage</div><br>";
+         echo "<div class='error'>$errorMessage</div>";
     }
-    echo $_SESSION['testing'];
 ?>
 </body>
 </html>
