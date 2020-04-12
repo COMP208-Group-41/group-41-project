@@ -36,6 +36,8 @@
     $name = $email = $external = $newName = $newPassword = $password = "";
     $errorMessage = "";
 
+    $_TESTING = "";
+
     /* The user has clicked the Save button, form submitted, check password is
      * correct, then save changes
      */
@@ -126,7 +128,9 @@
      */
     function emailCheck($venueUserID,$email,$pdo,&$errorMessage) {
         if (isset($_POST['email']) && !empty($_POST['email']) && (trim($_POST['email']) != $email)) {
+
             $newEmail = trim($_POST['email']);
+            $_TESTING = "old: $email new: $newEmail";
             if (filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
                 // Valid email
                 if (!checkVenueEmailExists($newEmail,$pdo)) {
@@ -346,8 +350,9 @@
 </div>
 <?php
     if ($errorMessage != "") {
-         echo "<div class='error'>$errorMessage</div>";
+         echo "<div class='error'>$errorMessage</div><br>";
     }
+    echo $_TESTING;
 ?>
 </body>
 </html>
