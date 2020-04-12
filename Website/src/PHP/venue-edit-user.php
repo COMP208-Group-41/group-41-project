@@ -38,6 +38,11 @@
 
     $_SESSION['testing'] = "";
 
+    $result = getVenueUserInfo($venueUserID,$pdo);
+    $name = $result['VenueUserName'];
+    $email = $result['VenueUserEmail'];
+    $external = $result['VenueUserExternal'];
+
     /* The user has clicked the Save button, form submitted, check password is
      * correct, then save changes
      */
@@ -62,11 +67,6 @@
                  */
                  $errorMessage = "You must enter your password to make any changes!";
             }
-        } else {
-            $result = getVenueUserInfo($venueUserID,$pdo);
-            $name = $result['VenueUserName'];
-            $email = $result['VenueUserEmail'];
-            $external = $result['VenueUserExternal'];
         }
     } catch (PDOException $e) {
         $pdo->rollBack();
