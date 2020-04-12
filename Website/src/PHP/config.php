@@ -70,5 +70,21 @@ function validateVenueName($name) {
     }
 }
 
+    /* The verifyVenuePassword function returns true if the venue user's
+     * password is correct using the password_verify function
+     */
+    function verifyVenuePassword($VenueUserID,$password,$pdo) {
+        $checkPasswordStmt = $pdo->prepare("SELECT VenueUserPass FROM VenueUser WHERE VenueUserID=:VenueUserID");
+        $checkPasswordStmt->bindValue(':VenueUserID',$VenueUserID);
+        $checkPasswordStmt->execute();
+        $row = $checkPasswordStmt->fetch();
+        /* If the password is verified then return true */
+        if (password_verify($password,$row['VenueUserPass'])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 ?>
