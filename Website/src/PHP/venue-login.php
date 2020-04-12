@@ -3,7 +3,7 @@
     session_start();
     // If the venue user is already logged in then they are redirected to the homepage
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
-        header("location: venueuser-dashboard.php");
+        header("location: venue-edit-user.php");
         exit;
     }
 
