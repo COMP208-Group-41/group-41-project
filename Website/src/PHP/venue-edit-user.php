@@ -42,7 +42,7 @@
                 $password = $_POST['password'];
                 if (verifyVenuePassword($venueUserID,$password,$pdo)) {
                     // If the password given is correct then check other fields
-                    performChecks($venueUserID,$email,$name,$pdo,$errorMessage);
+                    performChecks($venueUserID,$email,$name,$external,$pdo,$errorMessage);
                 } else {
                     // Password was not correct, show error message
                     $errorMessage = "Password incorrect!";
@@ -76,7 +76,8 @@
      * transactions are comitted, otherwise they are rolled back and the
      * appropriate error message is shown
      */
-    function performChecks($venueUserID,$email,$name,$pdo,&$errorMessage) {
+    function performChecks($venueUserID,$email,$name,$external,$pdo,&$errorMessage) {
+        $pdo->beginTransaction();
         if (!emailCheck($venueUserID,$email,$pdo,$errorMessage)) {
             // email check did not execute correctly, return false
             $pdo->rollBack();
@@ -90,6 +91,21 @@
 
         if (!nameCheck($venueUserID,$name,$pdo,$errorMessage)) {
             $pdo->rollBack();
+            return false;
+        }
+
+        if (!externalCheck($venueUserID,$external,$pdo,$errorMessage)) {
+            $pdo->rollBack();
+            return false;
+        }
+
+        // If all checks are complete then try to commit Transactions
+        if ($pdo->commit()) {
+            // All changes committed successfully, return true
+            return true;
+        } else {
+            // Error in commits!
+            $errorMessage = "Error in committing changes!";
             return false;
         }
     }
@@ -236,6 +252,9 @@
         }
     }
 
+    /* The name is updated in the database, if successful then true is
+     * returned, otherwise false is returned
+     */
     function changeName($newName,$venueUserID,$pdo) {
         $changeNameStmt = $pdo->prepare("UPDATE VenueUser SET VenueUserName=:VenueUserName WHERE VenueUserID=:VenueUserID");
         $changeNameStmt->bindValue(":VenueUserName",$newName);
@@ -244,6 +263,47 @@
          * otherwise return false
          */
         if ($changeNameStmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /* Check if the external link has been changed, if so then validate and
+     * update in database, if all successful then return true, otherwise return
+     * false and show error message
+     */
+    function externalCheck($venueUserID,$external,$pdo,&$errorMessage) {
+        if (isset($_POST['external']) && !empty(trim($_POST['external'])) && trim($_POST['external']) != $external) {
+            $newExternal = trim($_POST['external']);
+            if (!filter_var($newExternal, FILTER_VALIDATE_URL)) {
+                // The URL given is not valid!
+                $errorMessage = "The URL given is not valid!";
+                return false;
+            }
+
+            if (changeExternal($newExternal,$venueUserID,$pdo)) {
+                return true;
+            } else {
+                $errorMessage = "Error in trying to update external URL!";
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    /* The external link is updated in the database, if successful then true is
+     * returned, otherwise false is returned
+     */
+    function changeExternal($newExternal,$venueUserID,$pdo) {
+        $changeEmxternalStmt = $pdo->prepare("UPDATE VenueUser SET VenueUserExternal=:VenueUserExternal WHERE VenueUserID=:VenueUserID");
+        $changeEmxternalStmt->bindValue(":VenueUserExternal",$newExternal);
+        $changeEmxternalStmt->bindValue(":VenueUserID",$venueUserID);
+        /* Try to update record, if it updates correctly then return true,
+         * otherwise return false
+         */
+        if ($changeEmxternalStmt->execute()) {
             return true;
         } else {
             return false;
@@ -267,12 +327,17 @@
             <input type='password' name='newPassword' placeholder="New Password"><br>
             <input type='password' name='confirmNewPassword' placeholder="Confirm New Password"><br>
             <input type='text' name='companyName' placeholder="Change Company Name" value="<?php echo $name; ?>"><br>
-            <input type='text' name='externalLink' placeholder="Venue Website Link" value="<?php echo $external; ?>"><br>
+            <input type='text' name='external' placeholder="Venue Website Link" value="<?php echo $external; ?>"><br>
             <input type='password' name='password' placeholder="Current Password"><br>
             <!-- require password for any change! -->
             <input type='submit' value='Save'><br>
         </div>
     </form>
 </div>
+<?php
+    if ($errorMessage != "") {
+         echo "<div class='error'>".$errorMessage."<br>";
+    }
+?>
 </body>
 </html>
