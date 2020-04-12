@@ -25,12 +25,23 @@
 
     $venueUserID = $_SESSION["VenueUserID"];
     $name = $email = $external = "";
+    $passwordError = $emailError = $nameError = $linkError = "";
 
     /* The user has clicked the Save button, submit  */
     if (!empty($_POST) && isset($_POST['submit'])) {
         if (!empty($_POST['password']) && !empty($_POST['newPassword']) && !empty($_POST['confirmNewPassword'])) {
             // The user is changing thier password, do all checks for password
             // First check if the original password is correct
+            $password = $_POST['password'];
+            if (verifyVenuePassword($venueUserID,$password,$pdo)) {
+                /* If the password given is correct then check if both of the
+                 * new passwords are valid and match
+                 */
+
+            } else {
+                // Password was not correct, show error message
+                $passwordError = "Password incorrect!";
+            }
         }
     } else {
         $result = getVenueUserInfo($venueUserID,$pdo);
@@ -46,9 +57,6 @@
         return $infoStmt->fetch();
     }
 
-    function 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -63,11 +71,12 @@
     <form name='EditVenueUserDetails' method='post' style="margin-top: 10px">
         <div class="edit-fields">
             <input type='text' name='email' placeholder="Email" value="<?php echo $email; ?>"><br>
-            <input type='password' name='password' placeholder="Current Password"><br>
             <input type='password' name='newPassword' placeholder="New Password"><br>
             <input type='password' name='confirmNewPassword' placeholder="Confirm New Password"><br>
             <input type='text' name='companyName' placeholder="Change Company Name" value="<?php echo $name; ?>"><br>
             <input type='text' name='externalLink' placeholder="Venue Website Link" value="<?php echo $external; ?>"><br>
+            <input type='password' name='password' placeholder="Current Password"><br>
+            <!-- require password for any change! -->
             <input type='submit' value='Save'><br>
         </div>
     </form>
