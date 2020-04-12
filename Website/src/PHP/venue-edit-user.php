@@ -30,7 +30,7 @@
 
     $venueUserID = $_SESSION["VenueUserID"];
     $name = $email = $external = $newName = $newPassword = $password = "";
-    $passwordError = $emailError = $nameError = $linkError = "";
+    $errorMessage = "";
 
     /* The user has clicked the Save button, form submitted, check password is
      * correct, then save changes
@@ -42,16 +42,16 @@
                 $password = $_POST['password'];
                 if (verifyVenuePassword($venueUserID,$password,$pdo)) {
                     // If the password given is correct then check other fields
-                    performChecks($venueUserID,$email,$pdo,$emailError,$passwordError);
+                    performChecks($venueUserID,$email,$name,$pdo,$errorMessage);
                 } else {
                     // Password was not correct, show error message
-                    $passwordError = "Password incorrect!";
+                    $errorMessage = "Password incorrect!";
                 }
             } else {
                 /* The password field is empty, show error message and don't save
                  * any changes!
                  */
-                 $passwordError = "You must enter your password to make any changes!";
+                 $errorMessage = "You must enter your password to make any changes!";
             }
         } else {
             $result = getVenueUserInfo($venueUserID,$pdo);
@@ -71,25 +71,34 @@
         return $infoStmt->fetch();
     }
 
-    function performChecks($venueUserID,$email,$pdo,&$emailError,&$passwordError) {
-        if (!emailCheck($venueUserID,$email,$pdo,$emailError)) {
+    /* perform checks for every field that can be edited, if changes are being
+     * made then checks are performed and if updates are successful then the
+     * transactions are comitted, otherwise they are rolled back and the
+     * appropriate error message is shown
+     */
+    function performChecks($venueUserID,$email,$name,$pdo,&$errorMessage) {
+        if (!emailCheck($venueUserID,$email,$pdo,$errorMessage)) {
             // email check did not execute correctly, return false
             $pdo->rollBack();
             return false;
         }
 
-        if (!newPasswordCheck($venueUserID,$pdo,$passwordError)) {
+        if (!newPasswordCheck($venueUserID,$pdo,$errorMessage)) {
             $pdo->rollBack();
             return false;
         }
 
+        if (!nameCheck($venueUserID,$name,$pdo,$errorMessage)) {
+            $pdo->rollBack();
+            return false;
+        }
     }
 
-    function emailCheck($venueUserID,$email,$pdo,&$emailError) {
-        /* Check email, if the email stays the same then no error
-         * should be shown, but if it is different then need to
-         * ensure it is not the same as another account's email
-         */
+    /* Check email, if the email stays the same then no error
+     * should be shown, but if it is different then need to
+     * ensure it is not the same as another account's email
+     */
+    function emailCheck($venueUserID,$email,$pdo,&$errorMessage) {
         if (isset($_POST['email']) && !empty($_POST['email']) && (trim($_POST['email']) != $email)) {
             $newEmail = trim($_POST['email']);
             if (filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
@@ -98,7 +107,7 @@
                     // Email does not exist for another account
                     if (!changeEmail($newEmail,$venueUserID,$pdo)) {
                         // Update unsuccessful!
-                        $emailError = "Error trying to update your email!";
+                        $errorMessage = "Error trying to update your email!";
                         return false;
                     } else {
                         // Update successful
@@ -106,12 +115,12 @@
                     }
                 } else {
                     // Email already exists for another account!
-                    $emailError = "Email is already linked to another account!";
+                    $errorMessage = "Email is already linked to another account!";
                     return false;
                 }
             } else {
                 // Invalid email
-                $emailError = "That email is not valid!";
+                $errorMessage = "That email is not valid!";
                 return false;
             }
 
@@ -119,7 +128,9 @@
             return true;
         }
     }
-
+    /* The email is updated in the database, if successful then true is
+     * returned, otherwise false is returned
+     */
     function changeEmail($newEmail,$venueUserID,$pdo) {
         $changeEmailStmt = $pdo->prepare("UPDATE VenueUser SET VenueUserEmail=:VenueUserEmail WHERE VenueUserID=:VenueUserID");
         $changeEmailStmt->bindValue(":VenueUserEmail",$newEmail);
@@ -139,13 +150,13 @@
      * then return false, otherwise perform all validation checks and update
      * password if all is valid, returning true if update occurs successfully
      */
-    function newPasswordCheck($venueUserID,$pdo,&$passwordError) {
+    function newPasswordCheck($venueUserID,$pdo,&$errorMessage) {
         if (isset($_POST['newPassword']) && !empty($_POST['newPassword'])) {
             $newPassword = $_POST['newPassword'];
             $confirmNewPassword = $_POST['confirmNewPassword'];
             if ($newPassword != $confirmNewPassword) {
                 // New passwords don't match!
-                $passwordError = "New passwords do not match!";
+                $errorMessage = "New passwords do not match!";
                 return false;
             }
             /* If the new password given matches the existing password then
@@ -153,14 +164,14 @@
              */
             if (verifyVenuePassword($venueUserID,$newPassword,$pdo)) {
                 // Password is the same! return false
-                $passwordError = "Please use a new password!";
+                $errorMessage = "Please use a new password!";
                 return false;
             }
 
             // the passwords match, now validate password
             if (!validatePassword($newPassword)) {
                 // Password not valid!
-                $passwordError = "New password is not valid!";
+                $errorMessage = "New password is not valid!";
                 return false;
             }
 
@@ -170,7 +181,7 @@
                 // If password updated successfully then return true
                 return true;
             } else {
-                $passwordError = "Error trying to update your password!";
+                $errorMessage = "Error trying to update your password!";
                 return false;
             }
 
@@ -181,6 +192,9 @@
 
     }
 
+    /* The password is updated in the database, if successful then true is
+     * returned, otherwise false is returned
+     */
     function changePassword($hashedPassword,$venueUserID,$pdo) {
         $changePasswordStmt = $pdo->prepare("UPDATE VenueUser SET VenueUserPass=:VenueUserPass WHERE VenueUserID=:VenueUserID");
         $changePasswordStmt->bindValue(":VenueUserPass",$hashedPassword);
@@ -189,6 +203,47 @@
          * otherwise return false
          */
         if ($changePasswordStmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /* Check if the name has been changed in the input field, if it has then
+     * validate it and then update in the database
+     */
+    function nameCheck($venueUserID,$name,$pdo,&$errorMessage) {
+        if (isset($_POST['companyName']) && !empty($_POST['companyName']) && trim($_POST['companyName']) != $name) {
+            $newName = trim($_POST['companyName']);
+
+            // If the new name given is not valid then return false
+            if (!validateVenueName($newName)) {
+                $errorMessage = "Name of company cannot be more than 255 characters!";
+                return false;
+            }
+
+            // Try to update name
+            if (changeName($newName,$venueUserID,$pdo)) {
+                // Update successful
+                return true;
+            } else {
+                $errorMessage = "Error trying to update company name!";
+                return false;
+            }
+
+        } else {
+            return true;
+        }
+    }
+
+    function changeName($newName,$venueUserID,$pdo) {
+        $changeNameStmt = $pdo->prepare("UPDATE VenueUser SET VenueUserName=:VenueUserName WHERE VenueUserID=:VenueUserID");
+        $changeNameStmt->bindValue(":VenueUserName",$newName);
+        $changeNameStmt->bindValue(":VenueUserID",$venueUserID);
+        /* Try to update record, if it updates correctly then return true,
+         * otherwise return false
+         */
+        if ($changeNameStmt->execute()) {
             return true;
         } else {
             return false;

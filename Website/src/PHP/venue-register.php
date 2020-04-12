@@ -34,7 +34,7 @@
                             $passwordError = 'password must be at least 8 characters long and contain a lower case letter and a number!';
                         } else {
                             $hashedPassword = passwordHasher($password);
-                            $name = $_POST['nameOfCompany'];
+                            $name = trim($_POST['nameOfCompany']);
                             if (!validateVenueName($name)) {
                                 $nameError = 'Name of Company cannot be more than 255 characters!';
                             } else {
