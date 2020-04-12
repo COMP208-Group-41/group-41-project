@@ -320,7 +320,7 @@
 <html lang='en-GB'>
 <head>
     <title>OutOut - Edit Venue User Account</title>
-    <link rel="stylesheet" type="text/css" href="../css/venue-edit-user.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../css/venue-edit-user.css"> -->
 </head>
 <body>
 <div class="wrapper">
