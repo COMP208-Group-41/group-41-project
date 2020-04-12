@@ -43,39 +43,32 @@ function validatePassword($password) {
     }
 }
 
-/* The function findVenueUser checks if the account exists in the database
- * with the email and password, and returns the VenueUserID if the venue user
- * exists, or 0 if they do not (no UserID can be 0)
+/* The function checkVenueEmailExists returns true if the email provided already
+ * exists in the VenueUser database table
  */
-function findVenueUser($email,$pdo) {
-    /* Try to find the venue user in the database using provided
-     * email and password
-     */
-    $loginstmt = $pdo->prepare("SELECT VenueUserID FROM VenueUser WHERE VenueUserEmail=:VenueUserEmail");
-    $loginstmt->bindValue(':VenueUserEmail',$_POST['email']);
-    $loginstmt->execute();
-    if ($loginstmt->rowCount() == 1) {
-        $row = $loginstmt->fetch();
-        return $row['VenueUserID'];
-    } else {
-        return 0;
-    }
-}
-
-/* The verifyVenuePassword function returns true if the venue user's password is correct
- * using the password_verify function
- */
-function verifyVenuePassword($VenueUserID,$password,$pdo) {
-    $checkPasswordStmt = $pdo->prepare("SELECT VenueUserPass FROM VenueUser WHERE VenueUserID=:VenueUserID");
-    $checkPasswordStmt->bindValue(':VenueUserID',$VenueUserID);
-    $checkPasswordStmt->execute();
-    $row = $checkPasswordStmt->fetch();
-    /* If the password is verified then return true */
-    if (password_verify($password,$row['VenueUserPass'])) {
+function checkVenueEmailExists($email,$pdo) {
+    // Register form has been filled out and submitted, check if email already exists in db
+    $checkExistingStmt = $pdo->prepare("SELECT VenueUserEmail FROM VenueUser WHERE VenueUserEmail=:VenueUserEmail");
+    $checkExistingStmt->bindValue(':VenueUserEmail',$email);
+    $checkExistingStmt->execute();
+    if ($checkExistingStmt->rowCount() > 0) {
+        // Email exists, return true
         return true;
     } else {
         return false;
     }
 }
+
+/* validateVenueName returns true if the name given does not exceed 255
+ * characters and returns false if it does
+ */
+function validateVenueName($name) {
+    if (strlen($name) <= 255) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 ?>

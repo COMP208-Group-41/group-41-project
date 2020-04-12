@@ -27,21 +27,25 @@
     $name = $email = $external = "";
     $passwordError = $emailError = $nameError = $linkError = "";
 
-    /* The user has clicked the Save button, submit  */
+    /* The user has clicked the Save button, form submitted, check password is
+     * correct, then save changes
+     */
     if (!empty($_POST) && isset($_POST['submit'])) {
-        if (!empty($_POST['password']) && !empty($_POST['newPassword']) && !empty($_POST['confirmNewPassword'])) {
-            // The user is changing thier password, do all checks for password
+        if (isset($_POST['password']) && !empty($_POST['password'])) {
             // First check if the original password is correct
             $password = $_POST['password'];
             if (verifyVenuePassword($venueUserID,$password,$pdo)) {
-                /* If the password given is correct then check if both of the
-                 * new passwords are valid and match
-                 */
-
+                // If the password given is correct then check other fields
+                
             } else {
                 // Password was not correct, show error message
                 $passwordError = "Password incorrect!";
             }
+        } else {
+            /* The password field is empty, show error message and don't save
+             * any changes!
+             */
+             $passwordError = "You must enter your password to make any changes!";
         }
     } else {
         $result = getVenueUserInfo($venueUserID,$pdo);

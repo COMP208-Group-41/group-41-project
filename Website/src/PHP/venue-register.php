@@ -22,7 +22,7 @@
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $emailError = "The email address is not valid!";
             }  else {
-                if (checkEmailExists($email,$pdo)) {
+                if (checkVenueEmailExists($email,$pdo)) {
                     $accountExists = 'An Account already exists with that email!';
                 } else {
                     $password = $_POST['password'];
@@ -35,7 +35,7 @@
                         } else {
                             $hashedPassword = passwordHasher($password);
                             $name = $_POST['nameOfCompany'];
-                            if (!validateName($name)) {
+                            if (!validateVenueName($name)) {
                                 $nameError = 'Name of Company cannot be more than 255 characters!';
                             } else {
                                 if (createUser($email,$hashedPassword,$name,$pdo)) {
@@ -61,30 +61,6 @@
     } catch (PDOException $e) {
         $pdo->rollBack();
         exit("PDO Error: ".$e->getMessage()."<br>");
-    }
-
-    function validateName($name) {
-        if (strlen($name) <= 255) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /* The function checkEmailExists returns true if the email provided already
-     * exists in the VenueUser database table
-     */
-    function checkEmailExists($email,$pdo) {
-        // Register form has been filled out and submitted, check if email already exists in db
-        $checkExistingStmt = $pdo->prepare("SELECT VenueUserEmail FROM VenueUser WHERE VenueUserEmail=:VenueUserEmail");
-        $checkExistingStmt->bindValue(':VenueUserEmail',$email);
-        $checkExistingStmt->execute();
-        if ($checkExistingStmt->rowCount() > 0) {
-            // Email exists, return true
-            return true;
-        } else {
-            return false;
-        }
     }
 
     function createUser($email,$password,$name,$pdo) {
