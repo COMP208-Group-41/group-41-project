@@ -46,7 +46,13 @@
                 $password = $_POST['password'];
                 if (verifyVenuePassword($venueUserID,$password,$pdo)) {
                     // If the password given is correct then check other fields
-                    performChecks($venueUserID,$email,$name,$external,$pdo,$errorMessage);
+                    if (performChecks($venueUserID,$email,$name,$external,$pdo,$errorMessage)) {
+                        // Changes done successfully, show confirmation message
+                        $errorMessage = "Changes saved successfully!";
+                    } else {
+                        // Changes not done successfully, show error message
+                        $errorMessage = "Error in saving details!";
+                    }
                 } else {
                     // Password was not correct, show error message
                     $errorMessage = "Password incorrect!";
@@ -105,7 +111,10 @@
 
         // If all checks are complete then try to commit Transactions
         if ($pdo->commit()) {
-            // All changes committed successfully, return true
+            /* All changes committed successfully, reset error message and
+             * return true
+             */
+            $errorMessage = "";
             return true;
         } else {
             // Error in commits!
