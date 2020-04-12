@@ -49,9 +49,6 @@
                     if (performChecks($venueUserID,$email,$name,$external,$pdo,$errorMessage)) {
                         // Changes done successfully, show confirmation message
                         $errorMessage = "Changes saved successfully!";
-                    } else {
-                        // Changes not done successfully, show error message
-                        $errorMessage = "Error in saving details!";
                     }
                 } else {
                     // Password was not correct, show error message
@@ -349,7 +346,7 @@
 </div>
 <?php
     if ($errorMessage != "") {
-         echo $errorMessage;
+         echo "<div class='error'>$errorMessage</div>";
     }
 ?>
 </body>
