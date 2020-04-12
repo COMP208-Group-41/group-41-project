@@ -63,14 +63,6 @@
         exit("PDO Error: ".$e->getMessage()."<br>");
     }
 
-    function validatePassword($password) {
-        if ((strlen($password) >= 8) && (preg_match("/[a-z]/",$password)) && (preg_match("/[0-9]/",$password))) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     function validateName($name) {
         if (strlen($name) <= 255) {
             return true;
@@ -93,10 +85,6 @@
         } else {
             return false;
         }
-    }
-
-    function passwordHasher($password) {
-        return password_hash($password, PASSWORD_DEFAULT);
     }
 
     function createUser($email,$password,$name,$pdo) {

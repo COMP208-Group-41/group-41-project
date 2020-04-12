@@ -136,26 +136,6 @@
         }
     }
 
-    /* The function validatePassword returns true if the password provided by
-     * the user is valid according to validation rules: must be at least 8
-     * characters, must contain at least 1 lower case letter and at least one
-     * number
-     */
-    function validatePassword($password) {
-        if ((strlen($password) >= 8) && (preg_match("/[a-z]/",$password)) && (preg_match("/[0-9]/",$password))) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /* The function passwordHasher hashes the password given by the user
-     * It is in it's own function so this can be easily edited later if needed
-     */
-    function passwordHasher($password) {
-        return password_hash($password, PASSWORD_DEFAULT);
-    }
-
     /* The function createUser returns true if the account has been created
      * successfully
      */
