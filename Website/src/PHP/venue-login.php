@@ -31,7 +31,7 @@
              */
             $VenueUserID = findVenueUser($email,$pdo);
             if ($VenueUserID != 0) {
-                if (verifyPassword($VenueUserID,$password,$pdo)) {
+                if (verifyVenuePassword($VenueUserID,$password,$pdo)) {
                     /* The venue user is now logged in, the session variable
                      * logged in is set to true, and the session variable
                      * VenueUserID is assigned the value of the venue user's ID, the
@@ -62,29 +62,10 @@
         exit("PDO Error: ".$e->getMessage()."<br>");
     }
 
-    /* The function findVenueUser checks if the account exists in the database
-     * with the email and password, and returns the VenueUserID if the venue user
-     * exists, or 0 if they do not (no UserID can be 0)
-     */
-    function findVenueUser($email,$pdo) {
-        /* Try to find the venue user in the database using provided
-         * email and password
-         */
-        $loginstmt = $pdo->prepare("SELECT VenueUserID FROM VenueUser WHERE VenueUserEmail=:VenueUserEmail");
-        $loginstmt->bindValue(':VenueUserEmail',$_POST['email']);
-        $loginstmt->execute();
-        if ($loginstmt->rowCount() == 1) {
-            $row = $loginstmt->fetch();
-            return $row['VenueUserID'];
-        } else {
-            return 0;
-        }
-    }
-
-    /* The verifyPassword function returns true if the venue user's password is correct
+    /* The verifyVenuePassword function returns true if the venue user's password is correct
      * using the password_verify function
      */
-    function verifyPassword($VenueUserID,$password,$pdo) {
+    function verifyVenuePassword($VenueUserID,$password,$pdo) {
         $checkPasswordStmt = $pdo->prepare("SELECT VenueUserPass FROM VenueUser WHERE VenueUserID=:VenueUserID");
         $checkPasswordStmt->bindValue(':VenueUserID',$VenueUserID);
         $checkPasswordStmt->execute();

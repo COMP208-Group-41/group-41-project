@@ -30,7 +30,7 @@
     if (!empty($_POST) && isset($_POST['submit'])) {
         if (!empty($_POST['password']) && !empty($_POST['newPassword']) && !empty($_POST['confirmNewPassword'])) {
             // The user is changing thier password, do all checks for password
-            
+            // First check if the original password is correct
         }
     } else {
         $result = getVenueUserInfo($venueUserID,$pdo);
@@ -45,6 +45,9 @@
         $infoStmt->execute();
         return $infoStmt->fetch();
     }
+
+    function 
+
 
 ?>
 
