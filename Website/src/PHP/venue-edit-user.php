@@ -56,6 +56,11 @@
                     if (performChecks($venueUserID,$email,$name,$external,$pdo,$errorMessage)) {
                         // Changes done successfully, show confirmation message
                         $errorMessage = "Changes saved successfully!";
+                        // Refresh details
+                        $result = getVenueUserInfo($venueUserID,$pdo);
+                        $name = $result['VenueUserName'];
+                        $email = $result['VenueUserEmail'];
+                        $external = $result['VenueUserExternal'];
                     }
                 } else {
                     // Password was not correct, show error message
