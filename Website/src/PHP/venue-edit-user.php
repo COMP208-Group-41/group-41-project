@@ -343,7 +343,7 @@
             <input type='text' name='external' placeholder="Venue Website Link" value="<?php echo $external; ?>"><br>
             <input type='password' name='password' placeholder="Current Password"><br>
             <!-- require password for any change! -->
-            <input type='submit' value='Save'><br>
+            <input type='submit' name='submit' value='Save'><br>
         </div>
     </form>
 </div>
