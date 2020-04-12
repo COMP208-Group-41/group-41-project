@@ -36,7 +36,7 @@
     $name = $email = $external = $newName = $newPassword = $password = "";
     $errorMessage = "";
 
-    $_TESTING = "";
+    $_SESSION['testing'] = "";
 
     /* The user has clicked the Save button, form submitted, check password is
      * correct, then save changes
@@ -130,7 +130,7 @@
         if (isset($_POST['email']) && !empty($_POST['email']) && (trim($_POST['email']) != $email)) {
 
             $newEmail = trim($_POST['email']);
-            $_TESTING = "old: $email new: $newEmail";
+            $_SESSION['testing'] = "old: $email new: $newEmail";
             if (filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
                 // Valid email
                 if (!checkVenueEmailExists($newEmail,$pdo)) {
@@ -352,7 +352,7 @@
     if ($errorMessage != "") {
          echo "<div class='error'>$errorMessage</div><br>";
     }
-    echo $_TESTING;
+    echo $_SESSION['testing'];
 ?>
 </body>
 </html>
