@@ -25,6 +25,10 @@
         exit;
     }
 
+    error_reporting( E_ALL );
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+
     // The config file is imported here for any database connections required later
     require_once "config.php";
 
@@ -336,7 +340,7 @@
 </div>
 <?php
     if ($errorMessage != "") {
-         echo "<div class='error'>".$errorMessage."<br>";
+         echo $errorMessage;
     }
 ?>
 </body>
