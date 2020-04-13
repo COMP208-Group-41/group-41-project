@@ -82,7 +82,7 @@
                                      * will not work at the moment
                                      */
                                     // sendVerificationEmail($email,$hash);
-
+                                    $_SESSION['verified'] = true;
                                     header('location: login.php');
                                     exit;
                                 } else {
