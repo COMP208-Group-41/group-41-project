@@ -113,6 +113,10 @@
     if ($loginError != '') {
         echo "<div class='error'>$loginError</div>";
     }
+    if (isset($_SESSION['verified']) && $_SESSON['verified']) {
+        echo "<div class='success'>Account created successfully, please log in</div>";
+        unset($_SESSION['verified']);
+    }
 ?>
 </body>
 </html>
