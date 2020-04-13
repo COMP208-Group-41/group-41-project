@@ -1,0 +1,137 @@
+.bar-image {
+    position: absolute;
+    width: 1456px;
+    height: 1024px;
+    left: 0px;
+    top: 0px;
+
+    background: url("../Assets/landing_empty_bar.jpg");
+    mix-blend-mode: lighten;
+}
+
+/* sarthak-navjivan-iTZOPe7BpTM-unsplash 1 */
+
+.nightclub-image {
+    position: absolute;
+    width: 642px;
+    height: 816px;
+    left: 407px;
+    top: 0px;
+
+    background: url("../Assets/landing_nightclub.jpg");
+    mix-blend-mode: normal;
+}
+
+
+/* not got an account? register for free here */
+.ask-register-wrapper {
+
+    position: absolute;
+    width: 503px;
+    height: 26px;
+    left: 476px;
+    top: 575px;
+
+    font-family: K2D;
+    font-style: italic;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 26px;
+    /* identical to box height */
+
+    text-align: center;
+    letter-spacing: 0.15em;
+
+    color: #FFFFFF;
+}
+
+
+
+/* outout 1 */
+
+.logo-wrapper {
+    position: absolute;
+    width: 399px;
+    height: 142px;
+    left: 534px;
+    top: 149px;
+}
+
+
+
+/* Rectangle 8 */
+
+.login-box {
+    position: absolute;
+    width: 175px;
+    height: 74px;
+    left: 638px;
+    top: 432px;
+}
+
+
+
+/* FIND YOUR NIGHT OUT */
+
+.tagline-wrapper {
+    position: absolute;
+    width: 491px;
+    height: 47px;
+    left: 488px;
+    top: 317px;
+
+    font-family: K2D;
+    font-style: italic;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 47px;
+    /* identical to box height */
+
+    letter-spacing: 0.15em;
+
+    color: #202020;
+}
+
+/* LOGIN */
+
+.login-text {
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+
+    font-family: K2D;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 39px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.3em;
+
+    color: #000000;
+}
+.copyright-wrapper {
+    /* OutOut Nights ©2020 */
+
+
+    position: absolute;
+    width: 299px;
+    height: 25px;
+    left: 578px;
+    top: 899px;
+
+    font-family: Averia Sans Libre;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 25px;
+    /* identical to box height */
+
+    text-align: center;
+    letter-spacing: 0.3em;
+
+    color: #000000;
+}
