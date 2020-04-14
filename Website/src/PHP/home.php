@@ -17,13 +17,3 @@
     require_once "config.php";
 
 ?>
-<!DOCTYPE html>
-<html lang='en-GB'>
-    <head>
-        <title>OutOut - Home</title>
-    </head>
-    <body>
-        <h1>OutOut - Home</h1>
-        <a href="logout.php" class="btn btn-danger">Logout of Account</a>
-    </body>
-</html>
