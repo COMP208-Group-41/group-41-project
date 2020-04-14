@@ -22,7 +22,7 @@
     $venueUserID = $_SESSION["VenueUserID"];
     $errorMessage = "";
 
-    $_SESSION['tags'] = getTags();
+    $_SESSION['tags'] = getTags($pdo);
 
     try {
         if (!empty($_POST) && isset($_POST['submit'])) {
@@ -32,7 +32,6 @@
              if (checkInputs($venueUserID,$errorMessage,$pdo)) {
                  $errorMessage = "Venue Created Successfully!";
              }
-
         }
 
     } catch (PDOException $e) {
