@@ -2,6 +2,15 @@
 
 /* Need to edit this to not INSERT but to UPDATE VALUES!!! */
 
+// TODO: When retrieving existing tags, need to get all the VenueTagIDs for all
+// Of the tags of this venue. Then when updating tags, delete all existing tags
+// for the venue, then add in all new ones, this ensures that the venue will
+// never have more than 5 tags
+
+// TODO: Also need to adapt the rest of this code for editing/updating rather
+// than creating/inserting
+
+
     session_start();
 
     $_SESSION["loggedin"] = true;
@@ -59,7 +68,7 @@
     function checkInputs($venueUserID,$venueID,&$errorMessage,$pdo) {
 
         if (!(isset($_POST['password']) && !empty($_POST['password']))) {
-            $errorMessage = "Please enter your password to add a venue";
+            $errorMessage = "Please enter your password to edit the venue";
             return false;
         }
 
@@ -82,7 +91,7 @@
 
         // Check times text
         if (!(isset($_POST['times']) && !empty(trim($_POST['times'])))) {
-            $errorMessage = $_POST['times'];
+            $errorMessage = "Please enter information about your opening and closing times!";
             return false;
         } else {
             $times = trim($_POST['times']);
@@ -116,7 +125,6 @@
                 return false;
             }
         }
-
 
         // Need to do tags
         $tags = checkTags($errorMessage);
@@ -176,6 +184,9 @@
         }
     }
 
+    /* CheckTags returns an array of the user-selected tags if they are entered
+     * Correctly. If they are not then false is returned
+     */
     function checkTags(&$errorMessage) {
         if (!(isset($_POST['tag1']) && $_POST['tag1'] != 'None')) {
             // First tag not selected
