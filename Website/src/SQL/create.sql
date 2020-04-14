@@ -30,9 +30,9 @@ CREATE TABLE Venue (
     VenueID INT(10) NOT NULL UNIQUE AUTO_INCREMENT,
     VenueUserID INT(10) NOT NULL,
     VenueName VARCHAR(255) NOT NULL,
-    VenueDescription VARCHAR(255) NOT NULL,
+    VenueDescription VARCHAR(1000) NOT NULL,
     VenueAddress VARCHAR(255) NOT NULL,
-    VenueTimes VARCHAR(255),
+    VenueTimes VARCHAR(300),
     PRIMARY KEY (VenueID),
     FOREIGN KEY (VenueUserID) REFERENCES VenueUser(VenueUserID)
 );
