@@ -89,7 +89,9 @@
         }
 
         // Make the image optional
-
+        /* Will need to upload image after Venue is created so we have
+         * the VenueID for folder creation
+         */
 
 
 
@@ -208,6 +210,58 @@
             }
         }
     }
+
+    function checkImage($venueUserID,&$errorMessage) {
+        if ($_FILES['venueImage']['size'] == 0) {
+            $errorMessage = "No file selected or the selected file is too large!";
+            return false;
+        }
+
+        if ($_FILES['venueImage']['error'] != 0) {
+            $errorMessage = "Error in file upload";
+            return false;
+        }
+
+        if ($_FILES['venueImage']['type'] != "image/jpeg") {
+            $errorMessage = "File must be a jpeg!";
+            return false;
+        }
+
+        return true;
+    }
+
+    function uploadImage($venueUserID,$venueName,$pdo) {
+        $getVenueIDStmt = $pdo->prepare("SELECT VenueID FROM Venue WHERE VenueUserID=:VenueUserID AND VenueName=:VenueName");
+        $getVenueIDStmt->bindValue(":VenueUserID",$venueUserID);
+        $getVenueIDStmt->bindValue(":VenueName",$venueName);
+        $getVenueIDStmt->execute();
+        $row = $getVenueIDStmt->fetch();
+        $venueID = $row['VenueID'];
+        if (createVenueFolder($venueUserID,$venueID)) {
+            // Folder created successfully, upload image
+            $directory = "/home/sgstribe/private_upload/$venueUserID/$venueID/";
+            if (move_uploaded_file($_FILES['venueImage']['tmp_name'],"/home/sgstribe/private_upload/venue.jpg")) {
+                return true;
+            } else {
+                // Error in file upload!
+                return false;
+            }
+        } else {
+            // Folder not created successfully, error!
+            return false;
+        }
+    }
+
+    function createVenueFolder($venueUserID,$venueID) {
+        $path = "/home/sgstribe/private_upload/$venueUserID/$venueID";
+        if (mkdir($path,0755)) {
+            // Folder created successfully
+            return true;
+        } else {
+            // Error in folder creation!
+            return false;
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -262,7 +316,7 @@
             <input type='text' name='venueLocation' placeholder="Venue Address"><br>
             <textarea id='description' name ='description' form='CreateVenue' placeholder="Venue Description"></textarea><br>
 
-            <input type='file' id="venueImage" name='venueImage' class='input-file' accept="image/*">
+            <input type='file' id="venueImage" name='venueImage' class='input-file' accept=".jpg">
             <label for="venueImage">Add Venue Image</label><br>
             <select name='tag1' id='tag1'>
                 <!-- Include php code here to populate tag drop down -->

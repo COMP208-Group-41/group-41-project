@@ -92,11 +92,11 @@
     }
 
     function createVenueUserFolder($email,$pass,$pdo) {
-        $getVenueIDStmt = $pdo->prepare("SELECT VenueUserID FROM VenueUser WHERE VenueUserEmail=:VenueUserEmail AND VenueUserPass=:VenueUserPass");
-        $getVenueIDStmt->bindValue(':VenueUserEmail',$email);
-        $getVenueIDStmt->bindValue(':VenueUserPass',$pass);
-        $getVenueIDStmt->execute();
-        $row = $getVenueIDStmt->fetch();
+        $getVenueUserIDStmt = $pdo->prepare("SELECT VenueUserID FROM VenueUser WHERE VenueUserEmail=:VenueUserEmail AND VenueUserPass=:VenueUserPass");
+        $getVenueUserIDStmt->bindValue(':VenueUserEmail',$email);
+        $getVenueUserIDStmt->bindValue(':VenueUserPass',$pass);
+        $getVenueUserIDStmt->execute();
+        $row = $getVenueUserIDStmt->fetch();
         $venueUserID = $row['VenueUserID'];
 
         $path = "/home/sgstribe/private_upload/$venueUserID";
