@@ -260,7 +260,8 @@
     }
 
     function getTags($pdo) {
-        return $pdo->query("SELECT * FROM Tag");
+        $tags = $pdo->query("SELECT * FROM Tag");
+        return $tags;
     }
 
     function echoTags($tags) {
