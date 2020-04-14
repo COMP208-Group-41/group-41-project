@@ -122,18 +122,15 @@
                 return false;
             } else {
                 // Try inserting tags
-                $pdo->beginTransaction();
                 foreach ($tags as $tag) {
                     if (!insertTags($tag,$venueID,$pdo)) {
                         $errorMessage = "Error in inserting tags!";
-                        $pdo->rollBack();
                         return false;
                     }
                 }
             }
         }
         // Everything completed successfully! return true
-        $pdo->commit();
         return true;
     }
 
@@ -294,12 +291,15 @@
     }
 
     function insertTags($tag,$venueID,$pdo) {
+        $pdo->beginTransaction();
         $insertTagsStmt = $pdo->prepare("INSERT INTO VenueTag (VenueID,TagID) VALUES (:VenueID,:TagID)");
         $insertTagsStmt->bindValue(":VenueID",$venueID);
         $insertTagsStmt->bindValue(":TagID",$tag);
         if ($insertTagsStmt->execute()) {
+            $pdo->commit();
             return true;
         } else {
+            $pdo->rollBack();
             return false;
         }
     }
