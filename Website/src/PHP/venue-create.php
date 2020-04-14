@@ -216,7 +216,7 @@
     function getVenueID($venueUserID,$name,$address,$pdo) {
         $getVenueIDStmt = $pdo->prepare("SELECT VenueID FROM Venue WHERE VenueUserID=:VenueUserID AND VenueName=:VenueName AND VenueAddress=:VenueAddress");
         $getVenueIDStmt->bindValue(":VenueUserID",$venueUserID);
-        $getVenueIDStmt->bindValue(":VenueName",$venueName);
+        $getVenueIDStmt->bindValue(":VenueName",$name);
         $getVenueIDStmt->bindValue(":VenueAddress",$address);
         $getVenueIDStmt->execute();
         $row = $getVenueIDStmt->fetch();
