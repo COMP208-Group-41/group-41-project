@@ -43,12 +43,20 @@
                                      * as we do not have a working mail server this
                                      * will not work at the moment
                                      */
-                                    // sendVerificationEmail($email,$hash);
-                                    // Verification not working so set verified to true
-                                    $_SESSION['verified'] = true;
 
-                                    header('location: venue-login.php');
-                                    exit;
+                                     // CREATE FOLDER IN PRIVATE_UPLOAD FOR IMAGES
+                                     if (!createVenueUserFolder($email,$hashedPassword,$pdo)) {
+                                         // ERROR!
+                                         $createError = "Error creating user folder!";
+                                     } else {
+                                         // sendVerificationEmail($email,$hash);
+                                         // Verification not working so set verified to true
+                                         $_SESSION['verified'] = true;
+
+                                         header('location: venue-login.php');
+                                         exit;
+                                     }
+
                                 } else {
                                     $createError = 'Error creating new account, please try again later!';
                                 }
@@ -79,6 +87,24 @@
         } else {
             // Error in creating account in db!
             $pdo->rollBack();
+            return false;
+        }
+    }
+
+    function createVenueUserFolder($email,$pass,$pdo) {
+        $getVenueIDStmt = $pdo->prepare("SELECT VenueUserID FROM VenueUser WHERE VenueUserEmail=:VenueUserEmail AND VenueUserPass=:VenueUserPass");
+        $getVenueIDStmt->bindValue(':VenueUserEmail',$email);
+        $getVenueIDStmt->bindValue(':VenueUserPass',$pass);
+        $getVenueIDStmt->execute();
+        $row = $getVenueIDStmt->fetch();
+        $venueUserID = $row['VenueUserID'];
+
+        $path = '/home/sgstribe/private_upload/' + $venueUserID;
+        if (mkdir($path,0755)) {
+            // Folder created successfully
+            return true;
+        } else {
+            // Error in folder creation!
             return false;
         }
     }
