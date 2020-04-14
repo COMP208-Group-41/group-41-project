@@ -31,7 +31,6 @@ CREATE TABLE Venue (
     VenueUserID INT(10) NOT NULL,
     VenueName VARCHAR(255) NOT NULL,
     VenueDescription VARCHAR(255) NOT NULL,
-    VenueImage VARCHAR(255),
     VenueAddress VARCHAR(255) NOT NULL,
     VenueTimes VARCHAR(255),
     PRIMARY KEY (VenueID),
@@ -138,3 +137,12 @@ CREATE TABLE GroupMembers (
 
 INSERT INTO User (UserEmail,UserPass,UserDOB,IsAdmin) VALUES ('test@test.com','$2y$10$aVqNr61OO6Yy.muh4Um4seiZ2pdOr76RQH.g8a5eJilVNSLQDpxbO','2000-02-02',false);
 INSERT INTO VenueUser (VenueUserEmail,VenueUserPass,VenueUserName) VALUES ('venuetest@test.com','$2y$10$aVqNr61OO6Yy.muh4Um4seiZ2pdOr76RQH.g8a5eJilVNSLQDpxbO', 'Test Company Name');
+INSERT INTO Tag (TagName) VALUES ('Bar');
+INSERT INTO Tag (TagName) VALUES ('Club');
+INSERT INTO Tag (TagName) VALUES ('EDM');
+INSERT INTO Tag (TagName) VALUES ('Pop');
+INSERT INTO Tag (TagName) VALUES ('Budget');
+INSERT INTO Tag (TagName) VALUES ('Premium');
+INSERT INTO Tag (TagName) VALUES ('Rock');
+INSERT INTO Tag (TagName) VALUES ('Disabled-access');
+INSERT INTO Tag (TagName) VALUES ('Cocktails');
