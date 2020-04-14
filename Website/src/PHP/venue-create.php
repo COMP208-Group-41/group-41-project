@@ -47,7 +47,8 @@
                   * to the edit venue page to fill in additional details
                   */
                  $_SESSION['VenueCreated'] = true;
-                 header("location: venue-edit-details.php");
+                 $venueID = $_SESSION['venueID'];
+                 header("location: venue-edit-details.php?venueID=$venueID");
                  exit;
              }
         }
@@ -138,6 +139,14 @@
             $pdo-rollBack();
             return false;
         }
+        // Get venueID and assign to session variable for generating php get link
+        $_SESSION['venueID'] = getVenueID($venueUserID,$name,$address,$pdo);
+        // Create the Venue folder for the Venue User
+        if (!createVenueFolder($venueUserID,$_SESSION['venueID'])) {
+            $errorMessage = "Error in creating your folder on the web server!";
+            $pdo-rollBack();
+            return false;
+        }
         $pdo->commit();
         // Everything completed successfully! return true
         return true;
@@ -193,6 +202,26 @@
         }
     }
 
+    function createVenueFolder($venueUserID,$venueID) {
+        $path = "/home/sgstribe/private_upload/Venue/$venueUserID/$venueID";
+        if (mkdir($path,0755)) {
+            // Folder created successfully
+            return true;
+        } else {
+            // Error in folder creation!
+            return false;
+        }
+    }
+
+    function getVenueID($venueUserID,$name,$address,$pdo) {
+        $getVenueIDStmt = $pdo->prepare("SELECT VenueID FROM Venue WHERE VenueUserID=:VenueUserID AND VenueName=:VenueName AND VenueAddress=:VenueAddress");
+        $getVenueIDStmt->bindValue(":VenueUserID",$venueUserID);
+        $getVenueIDStmt->bindValue(":VenueName",$venueName);
+        $getVenueIDStmt->bindValue(":VenueAddress",$address);
+        $getVenueIDStmt->execute();
+        $row = $getVenueIDStmt->fetch();
+        return $row['VenueID'];
+    }
 ?>
 
 <!DOCTYPE html>

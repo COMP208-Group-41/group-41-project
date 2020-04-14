@@ -27,13 +27,28 @@
     $venueUserID = $_SESSION["VenueUserID"];
     $errorMessage = "";
 
+    // Handle the GET variable for venueID to display the correct venue
+    $venueID = $_GET['venueID'];
+    // Now check that the user accessing this venue is allowed to
+    if (!checkVenueUserAllowed($venueID,$venueUserID,$pdo)) {
+        // User is not allowed to edit!
+        header("location: venue-home.php");
+    }
+
+    // First get all existing values and populate fields
+    $result = getVenueInfo($venueID,$pdo);
+    $name = $result['VenueName'];
+    $description = $result['VenueDescription'];
+    $address = $result['VenueAddress'];
+    $times = $result['VenueTimes'];
+
     try {
         if (!empty($_POST) && isset($_POST['submit'])) {
             /* User has submitted the creation form, check that the password is
              * correct, if so then continue with creation
              */
-             if (checkInputs($venueUserID,$errorMessage,$pdo)) {
-                 $errorMessage = "Venue Created Successfully!";
+             if (checkInputs($venueUserID,$venueID,$errorMessage,$pdo)) {
+                 $errorMessage = "Venue Edited Successfully!";
              }
         }
 
@@ -41,7 +56,7 @@
         exit("PDO Error: ".$e->getMessage()."<br>");
     }
 
-    function checkInputs($venueUserID,&$errorMessage,$pdo) {
+    function checkInputs($venueUserID,$venueID,&$errorMessage,$pdo) {
 
         if (!(isset($_POST['password']) && !empty($_POST['password']))) {
             $errorMessage = "Please enter your password to add a venue";
@@ -116,7 +131,7 @@
 
         $pdo->beginTransaction();
 
-        if (!createVenue($venueUserID,$name,$description,$address,$times,$pdo,$errorMessage)) {
+        if (!updateVenue($venueUserID,$name,$description,$address,$times,$pdo,$errorMessage)) {
             $errorMessage = "Error in inserting new venue!";
             $pdo-rollBack();
             return false;
@@ -232,40 +247,12 @@
         return true;
     }
 
-    function getVenueID($venueUserID,$name,$address,$pdo) {
-        $getVenueIDStmt = $pdo->prepare("SELECT VenueID FROM Venue WHERE VenueUserID=:VenueUserID AND VenueName=:VenueName AND VenueAddress=:VenueAddress");
-        $getVenueIDStmt->bindValue(":VenueUserID",$venueUserID);
-        $getVenueIDStmt->bindValue(":VenueName",$venueName);
-        $getVenueIDStmt->bindValue(":VenueAddress",$address);
-        $getVenueIDStmt->execute();
-        $row = $getVenueIDStmt->fetch();
-        return $row['VenueID'];
-    }
-
     function uploadImage($venueUserID,$venueID,$pdo) {
-
-        if (createVenueFolder($venueUserID,$venueID)) {
-            // Folder created successfully, upload image
-            $directory = "/home/sgstribe/private_upload/$venueUserID/$venueID/venue.jpg";
-            if (move_uploaded_file($_FILES['venueImage']['tmp_name'],$directory)) {
-                return true;
-            } else {
-                // Error in file upload!
-                return false;
-            }
-        } else {
-            // Folder not created successfully, error!
-            return false;
-        }
-    }
-
-    function createVenueFolder($venueUserID,$venueID) {
-        $path = "/home/sgstribe/private_upload/$venueUserID/$venueID";
-        if (mkdir($path,0755)) {
-            // Folder created successfully
+        $directory = "/home/sgstribe/private_upload/Venue/$venueUserID/$venueID/venue.jpg";
+        if (move_uploaded_file($_FILES['venueImage']['tmp_name'],$directory)) {
             return true;
         } else {
-            // Error in folder creation!
+            // Error in file upload!
             return false;
         }
     }
@@ -278,7 +265,7 @@
     }
 
 
-    function createVenue($venueUserID,$name,$description,$address,$times,$pdo) {
+    function updateVenue($venueUserID,$name,$description,$address,$times,$pdo) {
         $createVenueStmt = $pdo->prepare("INSERT INTO Venue (VenueUserID,VenueName,VenueDescription,VenueAddress,VenueTimes) VALUES (:VenueUserID,:VenueName,:VenueDescription,:VenueAddress,:VenueTimes)");
         $createVenueStmt->bindValue(":VenueUserID",$venueUserID);
         $createVenueStmt->bindValue(":VenueName",$name);
@@ -307,6 +294,26 @@
             return false;
         }
     }
+
+    function checkVenueUserAllowed($venueID,$venueUserID,$pdo) {
+        $venueUserIDStmt = $pdo->prepare("SELECT VenueUserID FROM Venue WHERE VenueID=:VenueID");
+        $venueUserIDStmt->bindValue(":VenueID",$venueID);
+        $venueUserIDStmt->execute();
+        $row = $venueUserIDStmt->fetch();
+        if ($row['VenueUserID'] != $venueUserID) {
+            // User is not allowed to edit this!
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function getVenueInfo($venueID,$pdo) {
+        $getVenueStmt = $pdo->prepare("SELECT VenueName,VenueDescription,VenueAddress,VenueTimes FROM Venue WHERE VenueID=:VenueID");
+        $getVenueStmt->bindValue(":VenueID",$venueID);
+        $getVenueStmt->execute();
+        return $getVenueStmt->fetch();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -321,12 +328,13 @@
     <form id='CreateVenue' name='CreateVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
         <div class="edit-fields">
 
-            <input type='text' name='venueName' placeholder="Venue Name"><br>
+            <input type='text' name='venueName' placeholder="Venue Name" value="<?php echo $name; ?>"><br>
 
-            <textarea id='times' name='times' form='CreateVenue' placeholder="Venue Opening and Closing Times"></textarea><br>
+            <textarea id='times' name='times' form='CreateVenue' placeholder="Venue Opening and Closing Times" value="<?php echo $times; ?>"></textarea><br>
 
-            <input type='text' name='venueLocation' placeholder="Venue Address"><br>
-            <textarea id='description' name ='description' form='CreateVenue' placeholder="Venue Description"></textarea><br>
+            <input type='text' name='venueLocation' placeholder="Venue Address" value="<?php echo $address; ?>"><br>
+
+            <textarea id='description' name ='description' form='CreateVenue' placeholder="Venue Description" value="<?php echo $description; ?>"></textarea><br>
 
             <input type='file' id="venueImage" name='venueImage' class='input-file' accept=".jpg">
             <label for="venueImage">Add Venue Image</label><br>
