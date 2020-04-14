@@ -332,7 +332,7 @@
 
             <textarea id='times' name='times' form='CreateVenue' placeholder="Venue Opening and Closing Times"><?php echo $times; ?></textarea><br>
 
-            <input type='text' name='venueLocation' placeholder="Venue Address" value="<?php echo $address; ?>"><br>
+            <textarea id='venueLocation' name='venueLocation' form='CreateVenue' placeholder="Venue Address and Location details, no more than 255 characters"><?php echo $address; ?></textarea><br>
 
             <textarea id='description' name ='description' form='CreateVenue' placeholder="Venue Description"><?php echo $description; ?></textarea><br>
 
