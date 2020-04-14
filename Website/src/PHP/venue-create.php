@@ -23,6 +23,7 @@
     $errorMessage = "";
 
     try {
+        $_SESSION['tags'] = getTags($pdo);
         if (!empty($_POST) && isset($_POST['submit'])) {
             /* User has submitted the creation form, check that the password is
              * correct, if so then continue with creation
@@ -30,11 +31,9 @@
              if (checkInputs($venueUserID,$errorMessage,$pdo)) {
                  $errorMessage = "Venue Created Successfully!";
              }
-
         }
 
     } catch (PDOException $e) {
-        $pdo->rollBack();
         exit("PDO Error: ".$e->getMessage()."<br>");
     }
 
@@ -122,18 +121,15 @@
                 return false;
             } else {
                 // Try inserting tags
-                $pdo->beginTransaction();
                 foreach ($tags as $tag) {
                     if (!insertTags($tag,$venueID,$pdo)) {
                         $errorMessage = "Error in inserting tags!";
-                        $pdo->rollBack();
                         return false;
                     }
                 }
             }
         }
         // Everything completed successfully! return true
-        $pdo->commit();
         return true;
     }
 
@@ -263,18 +259,17 @@
         }
     }
 
-    function getTags($first) {
-        require "config.php";
-        $getTagStmt = $pdo->query("SELECT * FROM Tag");
-        if ($first) {
-            echo "<option value='None'>Select a Tag</option>";
-        } else {
-            echo "<optional value='Optional'>No Tag</option>";
-        }
-        foreach ($moduleStmt as $row) {
-            echo "<option value='",$row['TagID'],"'>",$row['TagName'],"</option>";
+    function getTags($pdo) {
+        $tags = $pdo->query("SELECT * FROM Tag");
+        return $tags;
+    }
+
+    function echoTags($tags) {
+        foreach ($tags as $row) {
+            echo "<option value='".$row['TagID']."'>".$row['TagName']."</option>";
         }
     }
+
 
     function createVenue($venueUserID,$name,$description,$address,$times,$pdo) {
         $pdo->beginTransaction();
@@ -296,12 +291,15 @@
     }
 
     function insertTags($tag,$venueID,$pdo) {
+        $pdo->beginTransaction();
         $insertTagsStmt = $pdo->prepare("INSERT INTO VenueTag (VenueID,TagID) VALUES (:VenueID,:TagID)");
         $insertTagsStmt->bindValue(":VenueID",$venueID);
         $insertTagsStmt->bindValue(":TagID",$tag);
         if ($insertTagsStmt->execute()) {
+            $pdo->commit();
             return true;
         } else {
+            $pdo->rollBack();
             return false;
         }
     }
@@ -330,19 +328,24 @@
             <label for="venueImage">Add Venue Image</label><br>
             <label for='tag1'>Add Tags for your venue, the first is required, the rest are optional</label><br>
             <select name='tag1' id='tag1'>
-                <?php getTags(true); ?>
+                <option value='None'>Select a Tag</option>
+                <?php echoTags($_SESSION['tags']); ?>
             </select>
             <select name='tag2' id='tag2'>
-                <?php getTags(false); ?>
+                <option value='None'>Select a Tag</option>
+                <?php echoTags($_SESSION['tags']); ?>
             </select>
             <select name='tag3' id='tag3'>
-                <?php getTags(false); ?>
+                <option value='Optional'>No Tag</option>
+                <?php echoTags($_SESSION['tags']); ?>
             </select>
             <select name='tag4' id='tag4'>
-                <?php getTags(false); ?>
+                <option value='None'>No Tag</option>
+                <?php echoTags($_SESSION['tags']); ?>
             </select>
             <select name='tag5' id='tag5'>
-                <?php getTags(false); ?>
+                <option value='None'>No Tag</option>
+                <?php echoTags($_SESSION['tags']); ?>
             </select><br>
             <input type='password' name='password' placeholder="Current Password"><br>
 
