@@ -27,6 +27,9 @@
             /* User has submitted the creation form, check that the password is
              * correct, if so then continue with creation
              */
+             if (checkInputs($venueUserID,$errorMessage,$pdo)) {
+                 $errorMessage = "Venue Created Successfully!";
+             }
 
         }
 
@@ -48,20 +51,28 @@
             return false;
         }
 
-        if (!(isset($_POST['venueName']) ** !empty(trim($_POST['venueName'])))) {
+        if (!(isset($_POST['venueName']) && !empty(trim($_POST['venueName'])))) {
             $errorMessage = "Please enter a name for the venue!";
             return false;
         } else {
             $name = trim($_POST['venueName']);
-            // Password is entered correctly, check other fields
             if (!validateVenueName($name)) {
                 $errorMessage = "The name cannot be more than 255 characters!";
                 return false;
             }
         }
 
-
-
+        // Check times text
+        if (!(isset($_POST['times']) && !empty(trim($_POST['times'])))) {
+            $errorMessage = "Please enter information about your opening and closing times!";
+            return false;
+        } else {
+            $times = trim($_POST['times']);
+            if (!validateTimes($times)) {
+                $errorMessage = "The information about times cannot be more than 500 characters!";
+                return false;
+            }
+        }
 
         // Check address
 
@@ -90,21 +101,40 @@
 
 
         // Need to do tags
-
-
-        // Make the image optional
-        /* Will need to upload image after Venue is created so we have
-         * the VenueID for folder creation
-         */
-
-
-        $pdo->beginTransaction();
-        // Check times
-        if (!checkTimes($pdo)) {
-            $pdo->rollBack();
-            $errorMessage = "Ensure that you have entered times correctly!";
+        $tags = checkTags($errorMessage);
+        if ($tags === false) {
             return false;
         }
+
+        // Check images, if valid then try to add everything to database
+        if (!checkImage($venueUserID,$errorMessage)) {
+            return false;
+        }
+
+        if (!createVenue($venueUserID,$name,$description,$address,$times,$pdo,$errorMessage)) {
+            $errorMessage = "Error in inserting new venue!";
+            return false;
+        } else {
+            // Try uploading image
+            $venueID = getVenueID($venueUserID,$name,$address);
+            if (!uploadImage($venueUserID,$venueID,$pdo)) {
+                $errorMessage = "Error in uploading image!"
+                return false;
+            } else {
+                // Try inserting tags
+                $pdo->beginTransaction();
+                foreach ($tags as $tag) {
+                    if (!insertTags($tag,$venueID,$pdo)) {
+                        $errorMessage = "Error in inserting tags!";
+                        $pdo->rollBack();
+                        return false;
+                    }
+                }
+            }
+        }
+        // Everything completed successfully! return true
+        $pdo->commit();
+        return true;
     }
 
     /* If the description is longer than 1000 characters then it is not valid */
@@ -114,6 +144,66 @@
         } else {
             return false;
         }
+    }
+
+    function validateTimes($times) {
+        if (strlen($times) <= 500) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function checkTags(&$errorMessage) {
+        if (!(isset($_POST['tag1']) && $_POST['tag1'] != 'None')) {
+            // First tag not selected
+            $errorMessage = "You must select the first Tag!";
+            return false;
+        } else {
+            $tags[0] = $_POST['tag1'];
+        }
+
+        if (isset($_POST['tag2']) && $_POST['tag2'] != 'Optional') {
+            if (in_array($_POST['tag2'],$tags)) {
+                // Cannot have 2 of the same tag!
+                $errorMessage = "You cannot have more than one of each tag!";
+                return false;
+            } else {
+                $tags[1] = $_POST['tag2'];
+            }
+        }
+
+        if (isset($_POST['tag3']) && $_POST['tag3'] != 'Optional') {
+            if (in_array($_POST['tag3'],$tags)) {
+                // Cannot have 2 of the same tag!
+                $errorMessage = "You cannot have more than one of each tag!";
+                return false;
+            } else {
+                $tags[2] = $_POST['tag3'];
+            }
+        }
+
+        if (isset($_POST['tag4']) && $_POST['tag4'] != 'Optional') {
+            if (in_array($_POST['tag4'],$tags)) {
+                // Cannot have 2 of the same tag!
+                $errorMessage = "You cannot have more than one of each tag!";
+                return false;
+            } else {
+                $tags[3] = $_POST['tag4'];
+            }
+        }
+
+        if (isset($_POST['tag5']) && $_POST['tag5'] != 'Optional') {
+            if (in_array($_POST['tag5'],$tags)) {
+                // Cannot have 2 of the same tag!
+                $errorMessage = "You cannot have more than one of each tag!";
+                return false;
+            } else {
+                $tags[4] = $_POST['tag5'];
+            }
+        }
+
+        return $tags;
     }
 
     function checkImage($venueUserID,&$errorMessage) {
@@ -135,17 +225,22 @@
         return true;
     }
 
-    function uploadImage($venueUserID,$venueName,$pdo) {
-        $getVenueIDStmt = $pdo->prepare("SELECT VenueID FROM Venue WHERE VenueUserID=:VenueUserID AND VenueName=:VenueName");
+    function getVenueID($venueUserID,$name,$address) {
+        $getVenueIDStmt = $pdo->prepare("SELECT VenueID FROM Venue WHERE VenueUserID=:VenueUserID AND VenueName=:VenueName AND VenueAddress=:VenueAddress");
         $getVenueIDStmt->bindValue(":VenueUserID",$venueUserID);
         $getVenueIDStmt->bindValue(":VenueName",$venueName);
+        $getVenueIDStmt->bindValue(":VenueAddress",$address);
         $getVenueIDStmt->execute();
         $row = $getVenueIDStmt->fetch();
-        $venueID = $row['VenueID'];
+        return $row['VenueID'];
+    }
+
+    function uploadImage($venueUserID,$venueID,$pdo) {
+
         if (createVenueFolder($venueUserID,$venueID)) {
             // Folder created successfully, upload image
-            $directory = "/home/sgstribe/private_upload/$venueUserID/$venueID/";
-            if (move_uploaded_file($_FILES['venueImage']['tmp_name'],"/home/sgstribe/private_upload/venue.jpg")) {
+            $directory = "/home/sgstribe/private_upload/$venueUserID/$venueID/venue.jpg";
+            if (move_uploaded_file($_FILES['venueImage']['tmp_name'],$directory)) {
                 return true;
             } else {
                 // Error in file upload!
@@ -168,11 +263,46 @@
         }
     }
 
-    function getTags() {
+    function getTags($first) {
         require "config.php";
         $getTagStmt = $pdo->query("SELECT * FROM Tag");
+        if ($first) {
+            echo "<option value='None'>Select a Tag</option>";
+        } else {
+            echo "<optional value='Optional'>No Tag</option>";
+        }
         foreach ($moduleStmt as $row) {
             echo "<option value='",$row['TagID'],"'>",$row['TagName'],"</option>";
+        }
+    }
+
+    function createVenue($venueUserID,$name,$description,$address,$times,$pdo) {
+        $pdo->beginTransaction();
+        $createVenueStmt = $pdo->prepare("INSERT INTO Venue (VenueUserID,VenueName,VenueDescription,VenueAddress,VenueTimes) VALUES (:VenueUserID,:VenueName,:VenueDescription,:VenueAddress,:VenueTimes)");
+        $createVenueStmt->bindValue(":VenueUserID",$venueUserID);
+        $createVenueStmt->bindValue(":VenueName",$name);
+        $createVenueStmt->bindValue(":VenueDescription",$description);
+        $createVenueStmt->bindValue(":VenueAddress",$address);
+        $createVenueStmt->bindValue(":VenueTimes",$times);
+        if (!$createVenueStmt->execute()) {
+            // Error in insertion
+            $pdo->rollBack();
+            return false;
+        } else {
+            // Values inserted correctly
+            $pdo->commit();
+            return true;
+        }
+    }
+
+    function insertTags($tag,$venueID,$pdo) {
+        $insertTagsStmt = $pdo->prepare("INSERT INTO VenueTag (VenueID,TagID) VALUES (:VenueID,:TagID)");
+        $insertTagsStmt->bindValue(":VenueID",$venueID);
+        $insertTagsStmt->bindValue(":TagID",$tag);
+        if ($insertTagsStmt->execute()) {
+            return true;
+        } else {
+            return false;
         }
     }
 ?>
@@ -198,20 +328,21 @@
 
             <input type='file' id="venueImage" name='venueImage' class='input-file' accept=".jpg">
             <label for="venueImage">Add Venue Image</label><br>
+            <label for='tag1'>Add Tags for your venue, the first is required, the rest are optional</label><br>
             <select name='tag1' id='tag1'>
-                <?php getTags(); ?>
+                <?php getTags(true); ?>
             </select>
             <select name='tag2' id='tag2'>
-                <?php getTags(); ?>
+                <?php getTags(false); ?>
             </select>
             <select name='tag3' id='tag3'>
-                <?php getTags(); ?>
+                <?php getTags(false); ?>
             </select>
             <select name='tag4' id='tag4'>
-                <?php getTags(); ?>
+                <?php getTags(false); ?>
             </select>
             <select name='tag5' id='tag5'>
-                <?php getTags(); ?>
+                <?php getTags(false); ?>
             </select><br>
             <input type='password' name='password' placeholder="Current Password"><br>
 
@@ -219,5 +350,10 @@
         </div>
     </form>
 </div>
+<?php
+    if ($errorMessage != "") {
+        echo "<div class='error'>$errorMessage</div>";
+    }
+?>
 </body>
 </html>
