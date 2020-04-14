@@ -14,24 +14,58 @@
     <img src="../Assets/outout.svg" alt="OutOut">
     <form name='EditVenueDetails' method='post' style="margin-top: 10px">
         <div class="edit-fields">
-            <input type='text' name='email' placeholder="Email">
-            <input type='password' name='password' placeholder="Current Password">
-            <input type='text' name='venueName' placeholder="New Venue Name">
-            <input type='text' name='externalLink' placeholder="Venue Website Link">
-            <input type='time' name="timeMonday" id="timeMonday">
-            <input type='time' name="timeTuesday" id="timeTuesday">
-            <input type='time' name="timeWednesday" id="timeWednesday">
-            <input type='time' name="timeThursday" id="timeThursday">
-            <input type='time' name="timeFriday" id="timeFriday">
-            <input type='time' name="timeSaturday" id="timeSaturday">
-            <input type='time' name="timeSunday" id="timeSunday">
-            <input type='text' name='venueLocation' placeholder="Venue Address">
-            <input type='text' name='venueDescription' placeholder="Venue Description">
+            <input type='text' name='email' placeholder="Email"><br>
+
+            <input type='text' name='venueName' placeholder="New Venue Name"><br>
+
+            <input type='checkbox' id='mondayCheck' name='mondayCheck' value='monday'>
+            <label for='mondayCheck'>Monday: </label>
+            <input type='time' name="timeStartMonday" id="timeStartMonday">
+            <input type='time' name="timeEndMonday" id="timeEndMonday"><br>
+
+            <input type='checkbox' id='tuesdayCheck' name='tuesdayCheck' value='tuesday'>
+            <label for='tuesdayCheck'>Tuesday: </label>
+            <input type='time' name="timeStartTuesday" id="timeStartTuesday">
+            <input type='time' name="timeEndTuesday" id="timeEndTuesday"><br>
+
+            <input type='checkbox' id='wednesdayCheck' name='wednesdayCheck' value='wednesday'>
+            <label for='wednesdayCheck'>Wednesday: </label>
+            <input type='time' name="timeStartWednesday" id="timeStartWednesday">
+            <input type='time' name="timeEndWednesday" id="timeEndWednesday"><br>
+
+            <input type='checkbox' id='thursdayCheck' name='thursdayCheck' value='thursday'>
+            <label for='thursdayCheck'>Thursday: </label>
+            <input type='time' name='timeStartThursday' id='timeStartThursday'>
+            <input type='time' name='timeEndThursday' id='timeEndThursday'><br>
+
+            <input type='checkbox' id='fridayCheck' name='fridayCheck' value='friday'>
+            <label for='fridayCheck'>Friday: </label>
+            <input type='time' name='timeStartFriday' id='timeStartFriday'>
+            <input type='time' name='timeEndFriday' id='timeEndFriday'><br>
+
+            <input type='checkbox' id='saturdayCheck' name='saturdayCheck' value='saturday'>
+            <label for='saturdayCheck'>Saturday: </label>
+            <input type='time' name='timeStartSaturday' id='timeStartSaturday'>
+            <input type='time' name='timeEndSaturday' id='timeEndSaturday'><br>
+
+            <input type='checkbox' id='sundayCheck' name='sundayCheck' value='sunday'>
+            <label for='sundayCheck'>Sunday: </label>
+            <input type='time' name='timeStartSunday' id='timeStartSunday'>
+            <input type='time' name='timeEndSunday' id='timeEndSunday'><br>
+
+            <input type='text' name='venueLocation' placeholder="Venue Address"><br>
+            <textarea id='description' name ='description' placeholder="Venue Description">
+
+
+            </textarea><br>
+
             <input type='file' id="venueImage" name='venueImage' class='input-file' accept="image/*">
             <label for="venueImage">Add Venue Image</label><br>
-            <input type="text" name="tags" placeholder="Tags - Separate each tag with a comma">
+            <input type="text" name="tags" placeholder="Tags - Separate each tag with a comma"><br>
+
+            <input type='password' name='password' placeholder="Current Password"><br>
+
             <input type='submit' value='Save'>
-            <input type='submit' value='Delete Venue'>
         </div>
     </form>
 </div>
