@@ -116,104 +116,6 @@
         }
     }
 
-    function checkTimes($pdo) {
-        if (isset($_POST['mondayCheck'])) {
-            // Monday checkbox is checked, check times
-            if (isset($_POST['timeStartMonday']) && !empty($_POST['timeStartMonday']) && isset($_POST['timeEndMonday']) && !empty($_POST['timeEndMonday'])) {
-                /* Don't bother checking times, venue could close early hours of
-                 * the next day so just specify closing times for the day that
-                 * it opens
-                 */
-
-                 // Insert Monday times into table
-            } else {
-                // Times have not been entered properly, show error
-                return false;
-            }
-        }
-
-        if (isset($_POST['tuesdayCheck'])) {
-            if (isset($_POST['timeStartTuesday']) && !empty($_POST['timeStartTuesday']) && isset($_POST['timeEndTuesday']) && !empty($_POST['timeEndTuesday'])) {
-                /* Don't bother checking times, venue could close early hours of
-                 * the next day so just specify closing times for the day that
-                 * it opens
-                 */
-
-                 // Insert Tuesday times into table
-            } else {
-                // Times have not been entered properly, show error
-                return false;
-            }
-        }
-
-        if (isset($_POST['wednesdayCheck'])) {
-            if (isset($_POST['timeStartWednesday']) && !empty($_POST['timeStartWednesday']) && isset($_POST['timeEndWednesday']) && !empty($_POST['timeEndWednesday'])) {
-                /* Don't bother checking times, venue could close early hours of
-                 * the next day so just specify closing times for the day that
-                 * it opens
-                 */
-
-                 // Insert Monday times into table
-            } else {
-                // Times have not been entered properly, show error
-                return false;
-            }
-        }
-
-        if (isset($_POST['thursdayCheck'])) {
-            if (isset($_POST['timeStartThursday']) && !empty($_POST['timeStartThursday']) && isset($_POST['timeEndThursday']) && !empty($_POST['timeEndThursday'])) {
-                /* Don't bother checking times, venue could close early hours of
-                 * the next day so just specify closing times for the day that
-                 * it opens
-                 */
-
-                 // Insert Monday times into table
-            } else {
-                // Times have not been entered properly, show error
-                return false;
-            }
-        }
-        if (isset($_POST['fridayCheck'])) {
-            if (isset($_POST['timeStartFriday']) && !empty($_POST['timeStartFriday']) && isset($_POST['timeEndFriday']) && !empty($_POST['timeEndFriday'])) {
-                /* Don't bother checking times, venue could close early hours of
-                 * the next day so just specify closing times for the day that
-                 * it opens
-                 */
-
-                 // Insert Monday times into table
-            } else {
-                // Times have not been entered properly, show error
-                return false;
-            }
-        }
-        if (isset($_POST['saturdayCheck'])) {
-            if (isset($_POST['timeStartSaturday']) && !empty($_POST['timeStartSaturday']) && isset($_POST['timeEndSaturday']) && !empty($_POST['timeEndSaturday'])) {
-                /* Don't bother checking times, venue could close early hours of
-                 * the next day so just specify closing times for the day that
-                 * it opens
-                 */
-
-                 // Insert Monday times into table
-            } else {
-                // Times have not been entered properly, show error
-                return false;
-            }
-        }
-        if (isset($_POST['sundayCheck'])) {
-            if (isset($_POST['timeStartSunday']) && !empty($_POST['timeStartSunday']) && isset($_POST['timeEndSunday']) && !empty($_POST['timeEndSunday'])) {
-                /* Don't bother checking times, venue could close early hours of
-                 * the next day so just specify closing times for the day that
-                 * it opens
-                 */
-
-                 // Insert Monday times into table
-            } else {
-                // Times have not been entered properly, show error
-                return false;
-            }
-        }
-    }
-
     function checkImage($venueUserID,&$errorMessage) {
         if ($_FILES['venueImage']['size'] == 0) {
             $errorMessage = "No file selected or the selected file is too large!";
@@ -289,40 +191,7 @@
 
             <input type='text' name='venueName' placeholder="Venue Name"><br>
 
-            <input type='checkbox' id='mondayCheck' name='mondayCheck' value='monday'>
-            <label for='mondayCheck'>Monday: </label>
-            <input type='time' name="timeStartMonday" id="timeStartMonday">
-            <input type='time' name="timeEndMonday" id="timeEndMonday"><br>
-
-            <input type='checkbox' id='tuesdayCheck' name='tuesdayCheck' value='tuesday'>
-            <label for='tuesdayCheck'>Tuesday: </label>
-            <input type='time' name="timeStartTuesday" id="timeStartTuesday">
-            <input type='time' name="timeEndTuesday" id="timeEndTuesday"><br>
-
-            <input type='checkbox' id='wednesdayCheck' name='wednesdayCheck' value='wednesday'>
-            <label for='wednesdayCheck'>Wednesday: </label>
-            <input type='time' name="timeStartWednesday" id="timeStartWednesday">
-            <input type='time' name="timeEndWednesday" id="timeEndWednesday"><br>
-
-            <input type='checkbox' id='thursdayCheck' name='thursdayCheck' value='thursday'>
-            <label for='thursdayCheck'>Thursday: </label>
-            <input type='time' name='timeStartThursday' id='timeStartThursday'>
-            <input type='time' name='timeEndThursday' id='timeEndThursday'><br>
-
-            <input type='checkbox' id='fridayCheck' name='fridayCheck' value='friday'>
-            <label for='fridayCheck'>Friday: </label>
-            <input type='time' name='timeStartFriday' id='timeStartFriday'>
-            <input type='time' name='timeEndFriday' id='timeEndFriday'><br>
-
-            <input type='checkbox' id='saturdayCheck' name='saturdayCheck' value='saturday'>
-            <label for='saturdayCheck'>Saturday: </label>
-            <input type='time' name='timeStartSaturday' id='timeStartSaturday'>
-            <input type='time' name='timeEndSaturday' id='timeEndSaturday'><br>
-
-            <input type='checkbox' id='sundayCheck' name='sundayCheck' value='sunday'>
-            <label for='sundayCheck'>Sunday: </label>
-            <input type='time' name='timeStartSunday' id='timeStartSunday'>
-            <input type='time' name='timeEndSunday' id='timeEndSunday'><br>
+            <textarea id='times' name='times' form='CreateVenue' placeholder="Venue Opening and Closing Times"></textarea><br>
 
             <input type='text' name='venueLocation' placeholder="Venue Address"><br>
             <textarea id='description' name ='description' form='CreateVenue' placeholder="Venue Description"></textarea><br>
