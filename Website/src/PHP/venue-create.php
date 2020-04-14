@@ -263,14 +263,9 @@
         }
     }
 
-    function getTags($first) {
-        require "config.php";
+    function getTags() {
+        require_once "config.php";
         $getTagStmt = $pdo->query("SELECT * FROM Tag");
-        if ($first) {
-            echo "<option value='None'>Select a Tag</option>";
-        } else {
-            echo "<optional value='Optional'>No Tag</option>";
-        }
         foreach ($moduleStmt as $row) {
             echo "<option value='",$row['TagID'],"'>",$row['TagName'],"</option>";
         }
@@ -330,19 +325,24 @@
             <label for="venueImage">Add Venue Image</label><br>
             <label for='tag1'>Add Tags for your venue, the first is required, the rest are optional</label><br>
             <select name='tag1' id='tag1'>
-                <?php getTags(true); ?>
+                <option value='None'>Select a Tag</option>
+                <?php getTags(); ?>
             </select>
             <select name='tag2' id='tag2'>
-                <?php getTags(false); ?>
+                <option value='None'>Select a Tag</option>
+                <?php getTags(); ?>
             </select>
             <select name='tag3' id='tag3'>
-                <?php getTags(false); ?>
+                <option value='Optional'>No Tag</option>
+                <?php getTags(); ?>
             </select>
             <select name='tag4' id='tag4'>
-                <?php getTags(false); ?>
+                <option value='None'>No Tag</option>
+                <?php getTags(); ?>
             </select>
             <select name='tag5' id='tag5'>
-                <?php getTags(false); ?>
+                <option value='None'>No Tag</option>
+                <?php getTags(); ?>
             </select><br>
             <input type='password' name='password' placeholder="Current Password"><br>
 
