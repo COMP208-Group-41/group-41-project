@@ -330,11 +330,11 @@
 
             <input type='text' name='venueName' placeholder="Venue Name" value="<?php echo $name; ?>"><br>
 
-            <textarea id='times' name='times' form='CreateVenue' placeholder="Venue Opening and Closing Times" value="<?php echo $times; ?>"></textarea><br>
+            <textarea id='times' name='times' form='CreateVenue' placeholder="Venue Opening and Closing Times"><?php echo $times; ?></textarea><br>
 
             <input type='text' name='venueLocation' placeholder="Venue Address" value="<?php echo $address; ?>"><br>
 
-            <textarea id='description' name ='description' form='CreateVenue' placeholder="Venue Description" value="<?php echo $description; ?>"></textarea><br>
+            <textarea id='description' name ='description' form='CreateVenue' placeholder="Venue Description"><?php echo $description; ?></textarea><br>
 
             <input type='file' id="venueImage" name='venueImage' class='input-file' accept=".jpg">
             <label for="venueImage">Add Venue Image</label><br>
