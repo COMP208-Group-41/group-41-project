@@ -6,17 +6,17 @@
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
-    <title>OutOut - Edit Venue Details</title>
+    <title>OutOut - Add A Venue</title>
     <link rel="stylesheet" type="text/css" href="../css/venue-edit-details.css">
 </head>
 <body>
 <div class="wrapper">
     <img src="../Assets/outout.svg" alt="OutOut">
-    <form name='EditVenueDetails' method='post' style="margin-top: 10px">
+    <form name='CreateVenue' method='post' style="margin-top: 10px">
         <div class="edit-fields">
             <input type='text' name='email' placeholder="Email"><br>
 
-            <input type='text' name='venueName' placeholder="New Venue Name"><br>
+            <input type='text' name='venueName' placeholder="Venue Name"><br>
 
             <input type='checkbox' id='mondayCheck' name='mondayCheck' value='monday'>
             <label for='mondayCheck'>Monday: </label>
@@ -58,11 +58,24 @@
 
             <input type='file' id="venueImage" name='venueImage' class='input-file' accept="image/*">
             <label for="venueImage">Add Venue Image</label><br>
-            <input type="text" name="tags" placeholder="Tags - Separate each tag with a comma"><br>
-
+            <select name='tag1' id='tag1'>
+                <!-- Include php code here to populate tag drop down -->
+            </select>
+            <select name='tag2' id='tag2'>
+                <!-- Include php code here to populate tag drop down -->
+            </select>
+            <select name='tag3' id='tag3'>
+                <!-- Include php code here to populate tag drop down -->
+            </select>
+            <select name='tag4' id='tag4'>
+                <!-- Include php code here to populate tag drop down -->
+            </select>
+            <select name='tag5' id='tag5'>
+                <!-- Include php code here to populate tag drop down -->
+            </select><br>
             <input type='password' name='password' placeholder="Current Password"><br>
 
-            <input type='submit' value='Save'>
+            <input type='submit' value='Add Venue'>
         </div>
     </form>
 </div>
