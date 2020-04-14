@@ -259,7 +259,7 @@
     }
 
     function echoTags($pdo) {
-        $tags = $pdo->query("SELECT * FROM Tag");
+        $tags = $pdo->query("SELECT * FROM Tag ORDER BY TagName");
         foreach ($tags as $row) {
             echo "<option value='".$row['TagID']."'>".$row['TagName']."</option>";
         }
