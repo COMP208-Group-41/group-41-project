@@ -118,7 +118,7 @@
             // Try uploading image
             $venueID = getVenueID($venueUserID,$name,$address);
             if (!uploadImage($venueUserID,$venueID,$pdo)) {
-                $errorMessage = "Error in uploading image!"
+                $errorMessage = "Error in uploading image!";
                 return false;
             } else {
                 // Try inserting tags
