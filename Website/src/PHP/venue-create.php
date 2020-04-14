@@ -88,11 +88,14 @@
             }
         }
 
+
+        // Need to do tags
+
+
         // Make the image optional
         /* Will need to upload image after Venue is created so we have
          * the VenueID for folder creation
          */
-
 
 
         $pdo->beginTransaction();
@@ -262,6 +265,13 @@
             return false;
         }
     }
+
+    function getTags($pdo) {
+        $getTagStmt = $pdo->query("SELECT * FROM Tag");
+        foreach ($moduleStmt as $row) {
+            echo "<option value='",$row['TagID'],"'>",$row['TagName'],"</option>";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -319,19 +329,19 @@
             <input type='file' id="venueImage" name='venueImage' class='input-file' accept=".jpg">
             <label for="venueImage">Add Venue Image</label><br>
             <select name='tag1' id='tag1'>
-                <!-- Include php code here to populate tag drop down -->
+                <?php getTags(); ?>
             </select>
             <select name='tag2' id='tag2'>
-                <!-- Include php code here to populate tag drop down -->
+                <?php getTags(); ?>
             </select>
             <select name='tag3' id='tag3'>
-                <!-- Include php code here to populate tag drop down -->
+                <?php getTags(); ?>
             </select>
             <select name='tag4' id='tag4'>
-                <!-- Include php code here to populate tag drop down -->
+                <?php getTags(); ?>
             </select>
             <select name='tag5' id='tag5'>
-                <!-- Include php code here to populate tag drop down -->
+                <?php getTags(); ?>
             </select><br>
             <input type='password' name='password' placeholder="Current Password"><br>
 
