@@ -330,7 +330,7 @@
             <label for='tag1'>Add Tags for your venue, the first is required, the rest are optional</label><br>
             <select name='tag1' id='tag1'>
                 <option value='None'>Select a Tag</option>
-                <?php echoTags(); ?>
+                <?php echoTags($_SESSION['tags']); ?>
             </select>
             <select name='tag2' id='tag2'>
                 <option value='None'>Select a Tag</option>
