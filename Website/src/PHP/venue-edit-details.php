@@ -319,7 +319,7 @@
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
-    <title>OutOut - Add A Venue</title>
+    <title><?php echo $name; ?></title>
     <link rel="stylesheet" type="text/css" href="../css/venue-edit-details.css">
 </head>
 <body>
@@ -335,6 +335,8 @@
             <textarea id='venueLocation' name='venueLocation' form='CreateVenue' placeholder="Venue Address and Location details, no more than 255 characters"><?php echo $address; ?></textarea><br>
 
             <textarea id='description' name ='description' form='CreateVenue' placeholder="Venue Description"><?php echo $description; ?></textarea><br>
+
+            <h2>Additional Information</h2>
 
             <input type='file' id="venueImage" name='venueImage' class='input-file' accept=".jpg">
             <label for="venueImage">Add Venue Image</label><br>
