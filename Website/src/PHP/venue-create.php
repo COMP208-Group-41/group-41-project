@@ -22,9 +22,8 @@
     $venueUserID = $_SESSION["VenueUserID"];
     $errorMessage = "";
 
-    $_SESSION['tags'] = getTags($pdo);
-
     try {
+        $_SESSION['tags'] = getTags($pdo);
         if (!empty($_POST) && isset($_POST['submit'])) {
             /* User has submitted the creation form, check that the password is
              * correct, if so then continue with creation
