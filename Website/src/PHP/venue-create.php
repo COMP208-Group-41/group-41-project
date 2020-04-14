@@ -266,7 +266,8 @@
         }
     }
 
-    function getTags($pdo) {
+    function getTags() {
+        require "config.php";
         $getTagStmt = $pdo->query("SELECT * FROM Tag");
         foreach ($moduleStmt as $row) {
             echo "<option value='",$row['TagID'],"'>",$row['TagName'],"</option>";
