@@ -35,7 +35,6 @@
         }
 
     } catch (PDOException $e) {
-        $pdo->rollBack();
         exit("PDO Error: ".$e->getMessage()."<br>");
     }
 
@@ -334,19 +333,19 @@
             </select>
             <select name='tag2' id='tag2'>
                 <option value='None'>Select a Tag</option>
-                <?php echoTags($_SESION['tags']); ?>
+                <?php echoTags($_SESSION['tags']); ?>
             </select>
             <select name='tag3' id='tag3'>
                 <option value='Optional'>No Tag</option>
-                <?php echoTags($_SESION['tags']); ?>
+                <?php echoTags($_SESSION['tags']); ?>
             </select>
             <select name='tag4' id='tag4'>
                 <option value='None'>No Tag</option>
-                <?php echoTags($_SESION['tags']); ?>
+                <?php echoTags($_SESSION['tags']); ?>
             </select>
             <select name='tag5' id='tag5'>
                 <option value='None'>No Tag</option>
-                <?php echoTags($_SESION['tags']); ?>
+                <?php echoTags($_SESSION['tags']); ?>
             </select><br>
             <input type='password' name='password' placeholder="Current Password"><br>
 
