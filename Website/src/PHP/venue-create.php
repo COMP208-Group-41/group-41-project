@@ -22,6 +22,8 @@
     $venueUserID = $_SESSION["VenueUserID"];
     $errorMessage = "";
 
+    $_SESSION['tags'] = getTags();
+
     try {
         if (!empty($_POST) && isset($_POST['submit'])) {
             /* User has submitted the creation form, check that the password is
@@ -263,13 +265,16 @@
         }
     }
 
-    function getTags() {
-        require_once "config.php";
-        $getTagStmt = $pdo->query("SELECT * FROM Tag");
-        foreach ($moduleStmt as $row) {
+    function getTags($pdo) {
+        return $pdo->query("SELECT * FROM Tag");
+    }
+
+    function echoTags($tags) {
+        foreach ($tags as $row) {
             echo "<option value='".$row['TagID']."'>".$row['TagName']."</option>";
         }
     }
+
 
     function createVenue($venueUserID,$name,$description,$address,$times,$pdo) {
         $pdo->beginTransaction();
@@ -326,23 +331,23 @@
             <label for='tag1'>Add Tags for your venue, the first is required, the rest are optional</label><br>
             <select name='tag1' id='tag1'>
                 <option value='None'>Select a Tag</option>
-                <?php getTags(); ?>
+                <?php echoTags(); ?>
             </select>
             <select name='tag2' id='tag2'>
                 <option value='None'>Select a Tag</option>
-                <?php getTags(); ?>
+                <?php echoTags($_SESION['tags']); ?>
             </select>
             <select name='tag3' id='tag3'>
                 <option value='Optional'>No Tag</option>
-                <?php getTags(); ?>
+                <?php echoTags($_SESION['tags']); ?>
             </select>
             <select name='tag4' id='tag4'>
                 <option value='None'>No Tag</option>
-                <?php getTags(); ?>
+                <?php echoTags($_SESION['tags']); ?>
             </select>
             <select name='tag5' id='tag5'>
                 <option value='None'>No Tag</option>
-                <?php getTags(); ?>
+                <?php echoTags($_SESION['tags']); ?>
             </select><br>
             <input type='password' name='password' placeholder="Current Password"><br>
 
