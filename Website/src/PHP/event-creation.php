@@ -127,7 +127,7 @@
             // Check times given
             if (isset($_POST['startTime']) && !empty($_POST['startTime'])) {
                 $phpStartDateTime = new DateTime($_POST['startTime']);
-                if (new DateTime("now") > $startTime) {
+                if (new DateTime("now") > $phpStartDateTime) {
                     $errorMessage = "Event cannot be in the past!";
                     return false;
                 }
@@ -140,11 +140,11 @@
 
             if (isset($_POST['endTime']) && !empty($_POST['endTime'])) {
                 $phpEndDateTime = new DateTime($_POST['endTime']);
-                if (new DateTime("now") > $endTime) {
+                if (new DateTime("now") > $phpEndDateTime) {
                     $errorMessage = "Event cannot be in the past!";
                     return false;
                 }
-                if ($startTime > $endTime) {
+                if ($phpStartDateTime > $phpEndDateTime) {
                     $errorMessage = "end time cannot be before start time!";
                     return false;
                 }
