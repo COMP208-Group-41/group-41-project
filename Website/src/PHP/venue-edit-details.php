@@ -61,6 +61,15 @@
              */
              if (checkInputs($venueUserID,$venueID,$errorMessage,$pdo)) {
                  $errorMessage = "Venue Edited Successfully!";
+                 // Refresh details!
+
+                 $result = getVenueInfo($venueID,$pdo);
+                 $name = $result['VenueName'];
+                 $description = $result['VenueDescription'];
+                 $address = $result['VenueAddress'];
+                 $times = $result['VenueTimes'];
+
+                 $currentTagIDs = getTagID($venueID,$pdo);
              }
         }
 
