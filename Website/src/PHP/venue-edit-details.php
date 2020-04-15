@@ -2,9 +2,6 @@
 
     session_start();
 
-    $_SESSION["loggedin"] = true;
-    $_SESSION["VenueUserID"] = 2;
-
     if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         header("location: venue-login.php");
         exit;
