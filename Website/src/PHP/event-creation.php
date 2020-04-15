@@ -1,5 +1,10 @@
 <?php
 
+    /* As with venue-creation, won't have tag entry in this page, or image
+     * upload
+     */
+
+
     session_start();
 
     // Testing purposes
@@ -76,16 +81,6 @@
         <input type='text' id="startTime" name='startTime' placeholder="Start time" required>
         <input type='text' id="endTime" name='endTime' placeholder="End time" required><br>
 
-        Event Image: <br>
-        <input type='file' id="eventImage" name='eventImage' class='input-file' accept="image/*">
-        <label for="eventImage">Upload Image</label>
-        <div class="image-preview" id="imagePreview">
-            <img src="" alt="Image Preview" class="image-preview__image">
-            <span class="image-preview__default-text">Image Preview</span>
-        </div>
-
-        <input type='text' id="ticketSite" name='ticketSite' placeholder="Ticket Sale Link"><Br>
-        <input type='text' name="tags" placeholder="Tags: Indie, Pop, etc">
         <script>
             var dtt = document.getElementById('startTime');
             dtt.onfocus = function (event) {
@@ -105,28 +100,6 @@
                 this.type = 'text';
                 this.blur();
             };
-
-            // For Image Preview
-            const inpFile = document.getElementById("eventImage");
-            const previewContainer = document.getElementById("imagePreview");
-            const previewImage = previewContainer.querySelector(".image-preview__image");
-            const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
-
-            inpFile.addEventListener("change", function() {
-                const file = this.files[0];
-                if (file) {
-                    const reader = new FileReader();
-
-                    previewDefaultText.style.display = "none";
-                    previewImage.style.display = "block";
-
-                    reader.addEventListener("load", function() {
-                        previewImage.setAttribute("src", this.result);
-                    });
-
-                    reader.readAsDataURL(file);
-                }
-            });
         </script>
     </div>
     <div style= "display: flex">
