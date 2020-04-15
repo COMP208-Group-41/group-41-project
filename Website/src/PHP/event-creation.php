@@ -184,8 +184,8 @@
         $createEventStmt->bindValue(":VenueID",$venueID);
         $createEventStmt->bindValue(":EventName",$name);
         $createEventStmt->bindValue(":EventDescription",$description);
-        $createEventStmt->bindValue(":startTime",$startTime);
-        $createEventStmt->bindValue(":endTime",$endTime);
+        $createEventStmt->bindValue(":EventStartTime",$startTime);
+        $createEventStmt->bindValue(":EventEndTime",$endTime);
         if ($createEventStmt->execute()) {
             return true;
         } else {
