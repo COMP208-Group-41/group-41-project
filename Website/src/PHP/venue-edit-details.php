@@ -213,6 +213,7 @@
      */
     function checkTags(&$errorMessage) {
         unset($tags);
+        $tags = [];
         if ((isset($_POST['tag1']) && $_POST['tag1'] != 'Optional')) {
             $tags[0] = $_POST['tag1'];
         }
