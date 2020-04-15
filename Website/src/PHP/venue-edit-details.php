@@ -278,7 +278,7 @@
         if (sizeof($tagIDs > 0)) {
             foreach ($tagIDs as $tagID) {
                 $getTagNameStmt = $pdo->prepare("SELECT TagName FROM Tag WHERE TagID=:TagID");
-                $getTagNameStmt->bindValue(":TagID",$tagID);
+                $getTagNameStmt->bindValue(":TagID",$tagID['TagID']);
                 $getTagNameStmt->execute();
                 $tag = $getTagNameStmt->fetch();
                 echo $tag['TagName'].", ";
@@ -293,7 +293,7 @@
         $getVenueTagsStmt = $pdo->prepare("SELECT TagID FROM VenueTag WHERE VenueID=:VenueID");
         $getVenueTagsStmt->bindValue(":VenueID",$venueID);
         $getVenueTagsStmt->execute();
-        return $getVenueTagsStmt->fetchAll(PDO::FETCH_COLUMN,0);
+        return $getVenueTagsStmt->fetchAll();
     }
 
     function echoTags($pdo) {
