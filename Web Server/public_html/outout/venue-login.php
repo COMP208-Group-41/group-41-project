@@ -3,7 +3,7 @@
     session_start();
     // If the venue user is already logged in then they are redirected to the homepage
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
-        header("location: venueuser-dashboard.php");
+        header("location: venue-edit-user.php");
         exit;
     }
 
@@ -11,6 +11,10 @@
      * page, show them a message saying that their account has been created
      * successfully
      */
+
+     error_reporting( E_ALL );
+     ini_set('display_errors', 1);
+     ini_set('display_startup_errors', 1);
 
      $registeredMsg = '';
      $loginError = '';
@@ -26,8 +30,8 @@
              * to a variable to check if it was a valid user
              */
             $VenueUserID = findVenueUser($email,$pdo);
-            if ($result != 0) {
-                if (verifyPassword($VenueUserID,$password,$pdo)) {
+            if ($VenueUserID != 0) {
+                if (verifyVenuePassword($VenueUserID,$password,$pdo)) {
                     /* The venue user is now logged in, the session variable
                      * logged in is set to true, and the session variable
                      * VenueUserID is assigned the value of the venue user's ID, the
@@ -35,21 +39,21 @@
                      */
                     $_SESSION["loggedin"] = true;
                     $_SESSION['VenueUserID'] = $VenueUserID;
-                    header("location: home.php");
+                    header("location: venue-edit-user.php");
                     exit;
                 } else {
                     // Password doesn't match!
                     $loginError = 'Email or Password incorrect!';
                 }
-
             } else {
                 /* If the user's details are not in the system or their account
                  * is not verified then their login attempt is unsuccessful
                  * and the message is shown to them
                  */
-                $loginError = 'Email or Password incorrect, or account is not verified!';
+                $loginError = 'Email or Password incorrect!';
             }
         }
+
     } catch (PDOException $e) {
         /* If a PDO Execption is thrown then it is caught here and an
          * error page is shown, this needs to be made more user friendly
@@ -74,22 +78,6 @@
             return $row['VenueUserID'];
         } else {
             return 0;
-        }
-    }
-
-    /* The verifyPassword function returns true if the venue user's password is correct
-     * using the password_verify function
-     */
-    function verifyPassword($VenueUserID,$password,$pdo) {
-        $checkPasswordStmt = $pdo->prepare("SELECT VenueUserPass FROM VenueUser WHERE VenueUserID=:VenueUserID");
-        $checkPasswordStmt->bindValue(':VenueUserID',$VenueUserID);
-        $checkPasswordStmt->execute();
-        $row = $checkPasswordStmt->fetch();
-        /* If the password is verified then return true */
-        if (password_verify($password,$row['VenueUserPass'])) {
-            return true;
-        } else {
-            return false;
         }
     }
 ?>
@@ -123,7 +111,11 @@
 <?php
     // If the details are incorrect then error message is shown
     if ($loginError != '') {
-        echo "$loginError<br>";
+        echo "<div class='error'>$loginError</div>";
+    }
+    if (isset($_SESSION['verified']) && $_SESSION['verified']) {
+        echo "<div class='success'>Account created successfully, please log in</div>";
+        unset($_SESSION['verified']);
     }
 ?>
 </body>

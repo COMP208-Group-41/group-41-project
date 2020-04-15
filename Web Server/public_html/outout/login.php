@@ -41,13 +41,12 @@
                     // Password doesn't match!
                     $loginError = 'Email or Password incorrect!';
                 }
-
             } else {
                 /* If the user's details are not in the system or their account
                  * is not verified then their login attempt is unsuccessful
                  * and the message is shown to them
                  */
-                $loginError = 'Email or Password incorrect, or account is not verified!';
+                $loginError = 'Email or Password incorrect!';
             }
         }
     } catch (PDOException $e) {
@@ -67,11 +66,11 @@
          * username and password
          */
         $loginstmt = $pdo->prepare("SELECT UserID FROM User WHERE UserEmail=:UserEmail");
-        $loginstmt->bindValue(':UserEmail',$_POST['email']);
+        $loginstmt->bindValue(":UserEmail",$email);
         $loginstmt->execute();
         if ($loginstmt->rowCount() == 1) {
             $row = $loginstmt->fetch();
-            return $row['userID'];
+            return $row['UserID'];
         } else {
             return 0;
         }
@@ -125,7 +124,12 @@
         <?php
             // If the details are incorrect then error message is shown
             if ($loginError != '') {
-                echo "$loginError<br>";
+                echo "<div class='error'>$loginError</div>";
+            }
+
+            if (isset($_SESSION['verified']) && $_SESSION['verified']) {
+                echo "<div class='success'>Account created successfully, please log in</div>";
+                unset($_SESSION['verified']);
             }
         ?>
     </body>

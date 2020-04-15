@@ -82,7 +82,7 @@
                                      * will not work at the moment
                                      */
                                     // sendVerificationEmail($email,$hash);
-
+                                    $_SESSION['verified'] = true;
                                     header('location: login.php');
                                     exit;
                                 } else {
@@ -134,26 +134,6 @@
             // user is over 18
             return true;
         }
-    }
-
-    /* The function validatePassword returns true if the password provided by
-     * the user is valid according to validation rules: must be at least 8
-     * characters, must contain at least 1 lower case letter and at least one
-     * number
-     */
-    function validatePassword($password) {
-        if ((strlen($password) >= 8) && (preg_match("/[a-z]/",$password)) && (preg_match("/[0-9]/",$password))) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /* The function passwordHasher hashes the password given by the user
-     * It is in it's own function so this can be easily edited later if needed
-     */
-    function passwordHasher($password) {
-        return password_hash($password, PASSWORD_DEFAULT);
     }
 
     /* The function createUser returns true if the account has been created
@@ -232,32 +212,32 @@
          * error message below
          */
         if ($emailError != '') {
-            echo "$emailError<br>";
+            echo "<div class='error'>$emailError</div>";
         }
         /* If the accountExists string is not blank then the error message is
          * displayed telling the user that an account already exists in the
          * database with the email they provided
          */
         if ($accountExists != '') {
-            echo "$accountExists<br>";
+            echo "<div class='error'>$accountExists</div>";
         }
         /* If the age entered by the user is under 18 then ageError is set as an
          * error string which is displayed below
          */
         if ($ageError != '') {
-            echo "$ageError<br>";
+            echo "<div class='error'>$ageError</div>";
         }
         /* If there are any errors with the password (not matching or not valid)
          * then the error is displayed below
          */
         if ($passwordError != '') {
-            echo "$passwordError<br>";
+            echo "<div class='error'>$passwordError</div>";
         }
         /* If there is an error in creating the account then the error message
          * is displayed below
          */
         if ($createError != '') {
-            echo "$createError<br>";
+            echo "<div class='error'>$createError</div>";
         }
         ?>
     </body>
