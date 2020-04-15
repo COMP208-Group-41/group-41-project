@@ -12,16 +12,16 @@
     $_SESSION['venueUserID'] = 2;
     $_SESSION['loggedin'] = true;
 
-    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-        header("location: venue-login.php");
-        exit;
-        /* If the user is logged in but they are not a venue user then they are
-         * redirected to home page
-         */
-    } else if (!isset($_SESSION["VenueUserID"])) {
-        header("location: home.php");
-        exit;
-    }
+    // if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    //     header("location: venue-login.php");
+    //     exit;
+    //     /* If the user is logged in but they are not a venue user then they are
+    //      * redirected to home page
+    //      */
+    // } else if (!isset($_SESSION["VenueUserID"])) {
+    //     header("location: home.php");
+    //     exit;
+    // }
 
     error_reporting( E_ALL );
     ini_set('display_errors', 1);
