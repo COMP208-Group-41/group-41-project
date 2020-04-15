@@ -147,9 +147,12 @@
         }
 
         // Check images, if valid then try to add everything to database
-        if (!checkImage($venueUserID,$errorMessage)) {
-            return false;
+        if (!empty($_FILES['venueImage']['name'])) {
+            if (!checkImage($venueUserID,$errorMessage)) {
+                return false;
+            }
         }
+
 
         $pdo->beginTransaction();
 
@@ -175,11 +178,14 @@
             }
         }
         // Try uploading image
-        if (!uploadImage($venueUserID,$venueID,$pdo)) {
-            $errorMessage = "Error in uploading image!";
-            $pdo->rollBack();
-            return false;
+        if (!empty($_FILES['venueImage']['name'])) {
+            if (!uploadImage($venueUserID,$venueID,$pdo)) {
+                $errorMessage = "Error in uploading image!";
+                $pdo->rollBack();
+                return false;
+            }
         }
+
         // Everything completed successfully! return true
         $pdo->commit();
         return true;
