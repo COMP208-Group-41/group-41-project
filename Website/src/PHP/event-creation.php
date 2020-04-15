@@ -252,6 +252,7 @@
         <input type='text' name='eventName' placeholder="Event Name" required><br>
 
         <textarea id='description' name ='description' form='EventCreation' placeholder="Event Description, max 1000 characters" required></textarea><br>
+        <p>Date and Time must be in the format: dd-mm-yyyy hh:mm (24 hour time)</p><br>
         <label for='startTime'>Event Start Time:</label>
         <input type='datetime-local' id="startTime" name='startTime' placeholder="Start time" required><br>
         <label for='endTime'>Event End Time:</label>
