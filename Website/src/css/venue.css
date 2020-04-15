@@ -3,7 +3,7 @@
     --body-background: #202020;
     --body-highlight: #2E2E2E;
     --body: #D6D6D6;
-    --body-gray: #F7F7F7;
+    --body-gray: #C4C4C4;
     --button-border: #3B3B3B;
     --button-highlight: #ccc;
     --text: #2E2E2E;
@@ -11,7 +11,7 @@
 }
 
 body {
-    background: var(--body-background);
+    background: var(--body-gray);
     font-family: "K2D", serif;
     text-align: center;
 }
@@ -37,10 +37,10 @@ input:focus {
     border: 2px solid var(--button-border);
     border-radius: 4px 0px 0px 4px;
     font-size: 16px;
-    background-color: var(--body-gray);
+    background-color: var(--header-background);
     padding: 6px;
-    color: var(--text);
-    width: 50%;
+    color: var(--body);
+    width: 30%;
     text-align: center;
     text-decoration: none;
 }
@@ -51,35 +51,42 @@ input:focus {
 }
 
 .button:hover {
-    background-color: var(--button-highlight);
+    background-color: var(--body-background);
     cursor: pointer;
 }
 
 .button:active {
-    background-color: #c0c0c0;
+    background-color: var(--gold)
 }
 
 .wrapper {
-    background: var(--header-background);
-    display: inline-block;
+    background: var(--body);
+    display: block;
     padding: 20px;
     margin: 20px;
-    width: 50%;
-    border: var(--body-highlight) solid 1px;
+    border-radius: 10px;
 }
 
 .edit-fields {
     display: flex;
     flex-direction: column;
     flex: 1;
-    width: 100%;
+    width: 75%;
 }
 
 .title {
-    color: var(--body);
+    color: var(--body-background);
     font-family: "K2D", sans-serif;
+    text-align: left;
+    margin-top: 0;
 }
 
 .menu-image:hover {
     cursor: pointer;
+}
+
+.label {
+    color: var(--text);
+    font-size: 14px;
+    margin-bottom: 4px;
 }
