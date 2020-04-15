@@ -7,3 +7,5 @@ TODO: Communicate with Dan about progress with the css and navbar implementation
 
 If you have any issues then I might be able to help before 1pm but maybe not, I definitely will not be available from 2pm until 6pm.
 Best of luck, apologies in advance for my PHP code in event-creation
+
+pages can be accessed at https://student.csc.liv.ac.uk/~sgstribe/test/php/events/event-creation for the create page (I am manually setting the $_SESSION variables so you don't need to log in first)
