@@ -53,6 +53,34 @@
     function checkInputs($venueUserID,&$errorMessage,$pdo) {
 
         // Firstly check the user's password
+        if (!(isset($_POST['password']) && !empty($_POST['password']))) {
+            $errorMessage = "Please enter your password to add an event";
+            return false;
+        }
+
+        $password = $_POST['password'];
+        if (!verifyVenuePassword($venueUserID,$password,$pdo)) {
+            /* If the password is incorrect then they are not allowed to create
+             * a new event, an error message is shown
+             */
+            $errorMessage = "Password Incorrect!";
+            return false;
+        }
+
+        // Check name input
+        if (!(isset($_POST['eventName']) && !empty(trim($_POST['eventName'])))) {
+            $errorMessage = "Please enter a name for the event!";
+            return false;
+        }
+
+        $name = trim($_POST['venueName']);
+        // Use same validation as venue name as they have the same constraints!
+        if (!validateVenueName($name)) {
+            $errorMessage = "The name cannot be more than 255 characters!";
+            return false;
+        }
+
+
     }
 
 
@@ -92,8 +120,10 @@
             <option value='None'>Select Venue</option>
             <?php echoVenues($venues); ?>
         </select><br>
-        <input type='text' name='name' placeholder="Event Name" required><br>
-        <input type='text' name='description' placeholder="Event Description" required> <br>
+        <input type='text' name='eventName' placeholder="Event Name" required><br>
+
+        <textarea id='description' name ='description' form='EventCreation' placeholder="Event Description, max 1000 characters" required></textarea><br>
+        
         <input type='text' id="startTime" name='startTime' placeholder="Start time" required>
         <input type='text' id="endTime" name='endTime' placeholder="End time" required><br>
 
