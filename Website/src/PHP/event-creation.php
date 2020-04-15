@@ -4,6 +4,7 @@
      * upload
      */
 
+     /* This page will not work on safari or firefox, add checks */
 
     session_start();
 
@@ -30,6 +31,18 @@
 
     $venueUserID = $_SESSION['VenueUserID'];
     $errorMessage = "";
+    $unsupportedBrowser = "";
+
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+    /* If the user is using firefox or safari then a message needs to be shown
+     * informing the user that the event creation form may not work correctly
+     */
+    if (preg_match('/Firefox/i',$user_agent) || preg_match('/Safari/i',$user_agent)) {
+        $unsupportedBrowser = "The browser you are using is not fully supported for this page! You may have issues with the date and time entry, if so we suggest using chrome, edge or Opera";
+    } else {
+        $unsupportedBrowser = "";
+    }
 
     try {
         $venues = getVenues($venueUserID,$pdo);
@@ -80,10 +93,52 @@
             return false;
         }
 
+        // Check times given
+        if (isset($_POST['startTime']) && !empty($_POST['startTime'])) {
+            $startTime = new DateTime($_POST['startTime']);
+            if (new DateTime("now") > $startTime) {
+                $errorMessage = "Event cannot be in the past!";
+                return false;
+            }
+        } else {
+            $errorMessage = "You must give a start time!";
+            return false;
+        }
+
+        if (isset($_POST['endTime']) && !empty($_POST['endTime'])) {
+            $endTime = new DateTime($_POST['endTime']);
+            if (new DateTime("now") > $endTime) {
+                $errorMessage = "Event cannot be in the past!";
+                return false;
+            }
+            if ($startTime > $endTime) {
+                $errorMessage = "end time cannot be before start time!";
+                return false;
+            }
+        } else {
+            $errorMessage = "You must give an end time!";
+            return false;
+        }
+
+        /* Start time and end time are both valid, now ensure they are in the
+         * correct format for inserting into the database
+         */
 
     }
 
-
+    function createEvent($venueID,$name,$description,$startTime,$endTime,$pdo) {
+        $createEventStmt = $pdo->prepare("INSERT INTO Event (VenueID,EventName,EventDescription,EventStartTime,EventEndTime) VALUES (:VenueID,:EventName,:EventDescription,:EventStartTime,:EventEndTime)");
+        $createEventStmt->bindValue(":VenueID",$venueID);
+        $createEventStmt->bindValue(":EventName",$name);
+        $createEventStmt->bindValue(":EventDescription",$description);
+        $createEventStmt->bindValue(":startTime",$startTime);
+        $createEventStmt->bindValue(":endTime",$endTime);
+        if ($createEventStmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     function getVenues($venueUserID,$pdo) {
         $getVenuesStmt = $pdo->prepare("SELECT VenueID,VenueName FROM Venue WHERE VenueUserID=:VenueUserID");
@@ -139,6 +194,9 @@
 <?php
     if ($errorMessage != "") {
         echo "<div class='error'>$errorMessage</div>";
+    }
+    if ($unsupportedBrowser != "") {
+        echo "<div class='browser-error'>$unsupportedBrowser</div>";
     }
  ?>
 </body>
