@@ -334,8 +334,27 @@
     <!-- <link rel="stylesheet" type="text/css" href="../css/venue-edit-user.css"> -->
 </head>
 <body>
+<div class="banner" >
+    <img src="../Assets/menu-icon.svg" alt="Menu" width="40" onclick="openNav()">
+    <img src="../Assets/outout.svg" alt="OutOut" width="150">
+    <img src="../Assets/profile.svg" alt="Profile" width="60">
+</div>
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">Dashboard</a>
+    <a href="#">Venues</a>
+    <a href="#">Account</a>
+    <a href="#">Contact</a>
+</div>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
 <div class="wrapper">
-    <img src="../Assets/outout.svg" alt="OutOut">
     <form name='EditVenueUserDetails' method='post' style="margin-top: 10px">
         <div class="edit-fields">
             <input type='text' name='email' placeholder="Email" value="<?php echo $email; ?>"><br>
