@@ -51,6 +51,9 @@
     $address = $result['VenueAddress'];
     $times = $result['VenueTimes'];
 
+    // Current tags for this event are pulled here
+    $currentTagIDs = getTagID($venueID,$pdo);
+
     try {
         if (!empty($_POST) && isset($_POST['submit'])) {
             /* User has submitted the creation form, check that the password is
@@ -268,13 +271,37 @@
         }
     }
 
+    /* Get the existing tag Names from the Tag table, this relies on the
+     * getTagID function being called at the top of the code
+     */
+    function getTags($tagIDs,$pdo) {
+        if (sizeof($tagIDs > 0)) {
+            foreach ($tagIDs as $tagID) {
+                $getTagNameStmt = $pdo->prepare("SELECT TagName FROM Tag WHERE TagID=:TagID");
+                $getTagNameStmt->bindValue(":TagID",$tagID);
+                $getTagNameStmt->execute();
+                $tag = $getTagNameStmt->fetch();
+                echo $tag['TagName'].", ";
+            }
+        } else {
+            echo "No Tags for this Venue";
+        }
+
+    }
+
+    function getTagID($venueID,$pdo) {
+        $getVenueTagsStmt = $pdo->prepare("SELECT TagID FROM VenueTag WHERE VenueID=:VenueID");
+        $getVenueTagsStmt->bindValue(":VenueID",$venueID);
+        $getVenueTagsStmt->execute();
+        return $getVenueTagsStmt->fetchAll(PDO::FETCH_COLUMN,0);
+    }
+
     function echoTags($pdo) {
         $tags = $pdo->query("SELECT * FROM Tag ORDER BY TagName");
         foreach ($tags as $row) {
             echo "<option value='".$row['TagID']."'>".$row['TagName']."</option>";
         }
     }
-
 
     function updateVenue($venueUserID,$name,$description,$address,$times,$pdo) {
         $createVenueStmt = $pdo->prepare("INSERT INTO Venue (VenueUserID,VenueName,VenueDescription,VenueAddress,VenueTimes) VALUES (:VenueUserID,:VenueName,:VenueDescription,:VenueAddress,:VenueTimes)");
@@ -351,7 +378,8 @@
 
             <input type='file' id="venueImage" name='venueImage' class='input-file' accept=".jpg">
             <label for="venueImage">Add Venue Image</label><br>
-            <label for='tag1'>Add Tags for your venue, the first is required, the rest are optional</label><br>
+            <p>Current Tags: <?php getTags($currentTagIDs,$pdo); ?></p><br>
+            <label for='tag1'>Add Tags for your venue, the first is required, the rest are optional. Any changes made below will overwrite any existing Tags, If you want to keep the existing Tags then leave the tag fields below empty</label><br>
             <select name='tag1' id='tag1'>
                 <option value='None'>Select a Tag</option>
                 <?php echoTags($pdo); ?>
