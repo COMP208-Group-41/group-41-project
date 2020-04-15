@@ -275,7 +275,7 @@
      * getTagID function being called at the top of the code
      */
     function getTags($tagIDs,$pdo) {
-        if (sizeof($tagIDs > 0)) {
+        if (sizeof($tagIDs) > 0) {
             foreach ($tagIDs as $tagID) {
                 $getTagNameStmt = $pdo->prepare("SELECT TagName FROM Tag WHERE TagID=:TagID");
                 $getTagNameStmt->bindValue(":TagID",$tagID['TagID']);
