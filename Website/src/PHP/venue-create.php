@@ -132,7 +132,7 @@
 
         if (!createVenue($venueUserID,$name,$description,$address,$times,$pdo,$errorMessage)) {
             $errorMessage = "Error in inserting new venue!";
-            $pdo-rollBack();
+            $pdo->rollBack();
             return false;
         }
         // Get venueID and assign to session variable for generating php get link
@@ -140,7 +140,7 @@
         // Create the Venue folder for the Venue User
         if (!createVenueFolder($venueUserID,$_SESSION['venueID'])) {
             $errorMessage = "Error in creating your folder on the web server!";
-            $pdo-rollBack();
+            $pdo->rollBack();
             return false;
         }
         $pdo->commit();
