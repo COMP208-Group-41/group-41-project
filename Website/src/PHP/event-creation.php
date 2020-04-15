@@ -31,15 +31,30 @@
     $venueUserID = $_SESSION['VenueUserID'];
     $errorMessage = "";
 
-    $venues = getVenues($venueUserID,$pdo);
-    if ($venues === false) {
-        /* The user has no Venues to add an event for, show error message,
-         * ideally on the page they are redirected to (their home page)
-         */
-         $_SESSION['message'] = "You do not have any Venues to add an event to!";
-         header("location: venue-user-dashboard.php");
-         exit;
+    try {
+        $venues = getVenues($venueUserID,$pdo);
+        if ($venues === false) {
+            /* The user has no Venues to add an event for, show error message,
+             * ideally on the page they are redirected to (their home page)
+             */
+             $_SESSION['message'] = "You do not have any Venues to add an event to!";
+             header("location: venue-user-dashboard.php");
+             exit;
+        }
+
+
+
+
+    } catch (PDOException $e) {
+        // Any PDO errors are shown here
+        exit("PDO Error: ".$e->getMessage()."<br>");
     }
+
+    function checkInputs($venueUserID,&$errorMessage,$pdo) {
+
+        // Firstly check the user's password
+    }
+
 
 
     function getVenues($venueUserID,$pdo) {
@@ -64,6 +79,7 @@
 ?>
 
 <!DOCTYPE html>
+<html lang='en-GB'>
 <head>
 <title>OutOut - Event Creation</title>
     <link rel="stylesheet" type="text/css" href="../css/events.css">
@@ -80,6 +96,8 @@
         <input type='text' name='description' placeholder="Event Description" required> <br>
         <input type='text' id="startTime" name='startTime' placeholder="Start time" required>
         <input type='text' id="endTime" name='endTime' placeholder="End time" required><br>
+
+        <input type='password' name='password' autocomplete="off" placeholder="Current Password"><br>
 
         <script>
             var dtt = document.getElementById('startTime');
@@ -107,4 +125,10 @@
         <input type="button" onclick="location.href='BACK TO DASHBOARD OR HOMEPAGE';" value="Cancel" />
     </div>
 </form>
+<?php
+    if ($errorMessage != "") {
+        echo "<div class='error'>$errorMessage</div>";
+    }
+ ?>
 </body>
+</html>
