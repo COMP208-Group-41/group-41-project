@@ -158,16 +158,20 @@
             $pdo-rollBack();
             return false;
         }
-        if (!deleteTags($venueID,$pdo)) {
-            $errorMessage = "Error in deleting existing tags!";
-            $pdo-rollBack();
-            return false;
-        }
-        foreach ($tags as $tag) {
-            if (!insertTags($tag,$venueID,$pdo)) {
-                $errorMessage = "Error in inserting tags!";
-                $pdo->rollBack();
+
+        // If all tags are set to no tags then don't delete existing!
+        if (!sizeof($tags) == 0) {
+            if (!deleteTags($venueID,$pdo)) {
+                $errorMessage = "Error in deleting existing tags!";
+                $pdo-rollBack();
                 return false;
+            }
+            foreach ($tags as $tag) {
+                if (!insertTags($tag,$venueID,$pdo)) {
+                    $errorMessage = "Error in inserting tags!";
+                    $pdo->rollBack();
+                    return false;
+                }
             }
         }
         // Try uploading image
