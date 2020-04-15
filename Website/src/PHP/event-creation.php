@@ -169,7 +169,7 @@
         }
         $_SESSION['eventID'] = getEventID($venueID,$name,$description,$pdo);
         // Create Event Folder
-        if (!createEventFolder($venueUserID,$venueID,$_SESSION['eventID'];)) {
+        if (!createEventFolder($venueUserID,$venueID,$_SESSION['eventID'])) {
             $errorMessage = "Error in creating event folder!";
             $pdo->rollBack();
             return false;
