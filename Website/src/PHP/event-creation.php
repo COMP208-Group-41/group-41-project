@@ -123,32 +123,13 @@
         <input type='text' name='eventName' placeholder="Event Name" required><br>
 
         <textarea id='description' name ='description' form='EventCreation' placeholder="Event Description, max 1000 characters" required></textarea><br>
-        
-        <input type='text' id="startTime" name='startTime' placeholder="Start time" required>
-        <input type='text' id="endTime" name='endTime' placeholder="End time" required><br>
+        <label for='startTime'>Event Start Time:</label>
+        <input type='datetime-local' id="startTime" name='startTime' placeholder="Start time" required><br>
+        <label for='endTime'>Event End Time:</label>
+        <input type='datetime-local' id="endTime" name='endTime' placeholder="End time" required><br>
 
         <input type='password' name='password' autocomplete="off" placeholder="Current Password"><br>
 
-        <script>
-            var dtt = document.getElementById('startTime');
-            dtt.onfocus = function (event) {
-                this.type = 'datetime-local';
-                this.focus();
-            };
-            dtt.onblur = function (event) {
-                this.type = 'text';
-                this.blur();
-            };
-            var ett = document.getElementById('endTime');
-            ett.onfocus = function (event) {
-                this.type = 'datetime-local';
-                this.focus();
-            };
-            ett.onblur = function (event) {
-                this.type = 'text';
-                this.blur();
-            };
-        </script>
     </div>
     <div style= "display: flex">
         <input type='submit' value='Create'>
