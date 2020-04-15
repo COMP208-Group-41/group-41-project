@@ -86,5 +86,14 @@ function validateVenueName($name) {
         }
     }
 
+    /* If the description is longer than 1000 bytes then it is not valid */
+    function validateDescription($description) {
+        if (strlen($description) <= 1000) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 ?>

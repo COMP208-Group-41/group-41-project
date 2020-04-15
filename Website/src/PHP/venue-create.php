@@ -148,15 +148,6 @@
         return true;
     }
 
-    /* If the description is longer than 1000 bytes then it is not valid */
-    function validateDescription($description) {
-        if (strlen($description) <= 1000) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     /* If the time info is longer than 300 bytes then it is not valid */
     function validateTimes($times) {
         if (strlen($times) <= 300) {
