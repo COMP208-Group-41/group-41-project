@@ -22,7 +22,7 @@
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $emailError = "The email address is not valid!";
             }  else {
-                if (checkEmailExists($email,$pdo)) {
+                if (checkVenueEmailExists($email,$pdo)) {
                     $accountExists = 'An Account already exists with that email!';
                 } else {
                     $password = $_POST['password'];
@@ -34,8 +34,8 @@
                             $passwordError = 'password must be at least 8 characters long and contain a lower case letter and a number!';
                         } else {
                             $hashedPassword = passwordHasher($password);
-                            $name = $_POST['nameOfCompany'];
-                            if (!validateName($name)) {
+                            $name = trim($_POST['nameOfCompany']);
+                            if (!validateVenueName($name)) {
                                 $nameError = 'Name of Company cannot be more than 255 characters!';
                             } else {
                                 if (createUser($email,$hashedPassword,$name,$pdo)) {
@@ -43,12 +43,20 @@
                                      * as we do not have a working mail server this
                                      * will not work at the moment
                                      */
-                                    // sendVerificationEmail($email,$hash);
-                                    // Verification not working so set verified to true
-                                    $_SESSION['verified'] = true;
 
-                                    header('location: venue-login.php');
-                                    exit;
+                                     // CREATE FOLDER IN PRIVATE_UPLOAD FOR IMAGES
+                                     if (!createVenueUserFolder($email,$hashedPassword,$pdo)) {
+                                         // ERROR!
+                                         $createError = "Error creating user folder!";
+                                     } else {
+                                         // sendVerificationEmail($email,$hash);
+                                         // Verification not working so set verified to true
+                                         $_SESSION['verified'] = true;
+
+                                         header('location: venue-login.php');
+                                         exit;
+                                     }
+
                                 } else {
                                     $createError = 'Error creating new account, please try again later!';
                                 }
@@ -61,42 +69,6 @@
     } catch (PDOException $e) {
         $pdo->rollBack();
         exit("PDO Error: ".$e->getMessage()."<br>");
-    }
-
-    function validatePassword($password) {
-        if ((strlen($password) >= 8) && (preg_match("/[a-z]/",$password)) && (preg_match("/[0-9]/",$password))) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    function validateName($name) {
-        if (strlen($name) <= 255) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /* The function checkEmailExists returns true if the email provided already
-     * exists in the VenueUser database table
-     */
-    function checkEmailExists($email,$pdo) {
-        // Register form has been filled out and submitted, check if email already exists in db
-        $checkExistingStmt = $pdo->prepare("SELECT VenueUserEmail FROM VenueUser WHERE VenueUserEmail=:VenueUserEmail");
-        $checkExistingStmt->bindValue(':VenueUserEmail',$email);
-        $checkExistingStmt->execute();
-        if ($checkExistingStmt->rowCount() > 0) {
-            // Email exists, return true
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    function passwordHasher($password) {
-        return password_hash($password, PASSWORD_DEFAULT);
     }
 
     function createUser($email,$password,$name,$pdo) {
@@ -115,6 +87,24 @@
         } else {
             // Error in creating account in db!
             $pdo->rollBack();
+            return false;
+        }
+    }
+
+    function createVenueUserFolder($email,$pass,$pdo) {
+        $getVenueUserIDStmt = $pdo->prepare("SELECT VenueUserID FROM VenueUser WHERE VenueUserEmail=:VenueUserEmail AND VenueUserPass=:VenueUserPass");
+        $getVenueUserIDStmt->bindValue(':VenueUserEmail',$email);
+        $getVenueUserIDStmt->bindValue(':VenueUserPass',$pass);
+        $getVenueUserIDStmt->execute();
+        $row = $getVenueUserIDStmt->fetch();
+        $venueUserID = $row['VenueUserID'];
+
+        $path = "/home/sgstribe/private_upload/Venue/$venueUserID";
+        if (mkdir($path,0755)) {
+            // Folder created successfully
+            return true;
+        } else {
+            // Error in folder creation!
             return false;
         }
     }

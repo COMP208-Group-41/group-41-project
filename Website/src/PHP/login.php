@@ -66,11 +66,11 @@
          * username and password
          */
         $loginstmt = $pdo->prepare("SELECT UserID FROM User WHERE UserEmail=:UserEmail");
-        $loginstmt->bindValue(':UserEmail',$_POST['email']);
+        $loginstmt->bindValue(":UserEmail",$email);
         $loginstmt->execute();
         if ($loginstmt->rowCount() == 1) {
             $row = $loginstmt->fetch();
-            return $row['userID'];
+            return $row['UserID'];
         } else {
             return 0;
         }
@@ -125,6 +125,11 @@
             // If the details are incorrect then error message is shown
             if ($loginError != '') {
                 echo "<div class='error'>$loginError</div>";
+            }
+
+            if (isset($_SESSION['verified']) && $_SESSION['verified']) {
+                echo "<div class='success'>Account created successfully, please log in</div>";
+                unset($_SESSION['verified']);
             }
         ?>
     </body>
