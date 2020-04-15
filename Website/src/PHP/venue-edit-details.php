@@ -117,6 +117,13 @@
             }
         }
 
+        //Check existing venues
+        if (checkExistingVenue($name,$address,$venueID,$pdo)) {
+            // A venue already exists with the same name and address!
+            $errorMessage = "A venue already exists with the same name and address!";
+            return false;
+        }
+
         // Check Description
         if (!(isset($_POST['description']) && !empty(trim($_POST['description'])))) {
             $errorMessage = "Please enter a description for the venue!";
@@ -130,6 +137,10 @@
         }
 
         // Need to do tags
+        /* Unsetting the tags array so the values are definitely
+         * up to date
+         */
+        unset($tags);
         $tags = checkTags($errorMessage);
         if ($tags === false) {
             return false;
@@ -142,31 +153,31 @@
 
         $pdo->beginTransaction();
 
-        if (!updateVenue($venueUserID,$name,$description,$address,$times,$pdo,$errorMessage)) {
+        if (!updateVenue($venueUserID,$venueID,$name,$description,$address,$times,$pdo,$errorMessage)) {
             $errorMessage = "Error in inserting new venue!";
             $pdo-rollBack();
             return false;
-        } else {
-
-            foreach ($tags as $tag) {
-                if (!insertTags($tag,$venueID,$pdo)) {
-                    $errorMessage = "Error in inserting tags!";
-                    $pdo->rollBack();
-                    return false;
-                }
-            }
-
-            // Try uploading image
-            $venueID = getVenueID($venueUserID,$name,$address,$pdo);
-            if (!uploadImage($venueUserID,$venueID,$pdo)) {
-                $errorMessage = "Error in uploading image!";
+        }
+        if (!deleteTags($venueID,$pdo)) {
+            $errorMessage = "Error in deleting existing tags!";
+            $pdo-rollBack();
+            return false;
+        }
+        foreach ($tags as $tag) {
+            if (!insertTags($tag,$venueID,$pdo)) {
+                $errorMessage = "Error in inserting tags!";
+                $pdo->rollBack();
                 return false;
-            } else {
-                // Try inserting tags
-
             }
         }
+        // Try uploading image
+        if (!uploadImage($venueUserID,$venueID,$pdo)) {
+            $errorMessage = "Error in uploading image!";
+            $pdo->rollBack();
+            return false;
+        }
         // Everything completed successfully! return true
+        $pdo->commit();
         return true;
     }
 
@@ -191,11 +202,8 @@
      * Correctly. If they are not then false is returned
      */
     function checkTags(&$errorMessage) {
-        if (!(isset($_POST['tag1']) && $_POST['tag1'] != 'None')) {
-            // First tag not selected
-            $errorMessage = "You must select the first Tag!";
-            return false;
-        } else {
+        unset($tags);
+        if (!(isset($_POST['tag1']) && $_POST['tag1'] != 'Optional')) {
             $tags[0] = $_POST['tag1'];
         }
 
@@ -262,7 +270,12 @@
     }
 
     function uploadImage($venueUserID,$venueID,$pdo) {
+        // Remove any existing file first
         $directory = "/home/sgstribe/private_upload/Venue/$venueUserID/$venueID/venue.jpg";
+        if (file_exists($directory)) {
+            chmod($directory,0755);
+            unlink($directory);
+        }
         if (move_uploaded_file($_FILES['venueImage']['tmp_name'],$directory)) {
             return true;
         } else {
@@ -303,19 +316,47 @@
         }
     }
 
-    function updateVenue($venueUserID,$name,$description,$address,$times,$pdo) {
-        $createVenueStmt = $pdo->prepare("INSERT INTO Venue (VenueUserID,VenueName,VenueDescription,VenueAddress,VenueTimes) VALUES (:VenueUserID,:VenueName,:VenueDescription,:VenueAddress,:VenueTimes)");
-        $createVenueStmt->bindValue(":VenueUserID",$venueUserID);
-        $createVenueStmt->bindValue(":VenueName",$name);
-        $createVenueStmt->bindValue(":VenueDescription",$description);
-        $createVenueStmt->bindValue(":VenueAddress",$address);
-        $createVenueStmt->bindValue(":VenueTimes",$times);
-        if (!$createVenueStmt->execute()) {
-            // Error in insertion
+    function checkExistingVenue($name,$address,$venueID,$pdo) {
+        $checkExistingStmt = $pdo->prepare("SELECT VenueID FROM Venue WHERE VenueName=:VenueName AND VenueAddress=:VenueAddress AND VenueID<>:VenueID");
+        $checkExistingStmt->bindValue(":VenueName",$name);
+        $checkExistingStmt->bindValue(":VenueAddress",$address);
+        $checkExistingStmt->bindValue(":VenueID",$venueID);
+        $checkExistingStmt->execute();
+        if ($checkExistingStmt->rowCount() > 0) {
+            // A venue exists with the same name and address!
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function updateVenue($venueUserID,$venueID,$name,$description,$address,$times,$pdo) {
+        $updateVenueStmt = $pdo->prepare("UPDATE Venue SET VenueUserID=:VenueUserID, VenueName=:VenueName, VenueDescription=:VenueDescription, VenueAddress=:VenueAddress, VenueTimes=:VenueTimes WHERE VenueID=:VenueID");
+        $updateVenueStmt->bindValue(":VenueUserID",$venueUserID);
+        $updateVenueStmt->bindValue(":VenueName",$name);
+        $updateVenueStmt->bindValue(":VenueDescription",$description);
+        $updateVenueStmt->bindValue(":VenueAddress",$address);
+        $updateVenueStmt->bindValue(":VenueTimes",$times);
+        $updateVenueStmt->bindValue(":VenueID",$venueID);
+        if (!$updateVenueStmt->execute()) {
+            // Error in update
             return false;
         } else {
-            // Values inserted correctly
+            // Values updated correctly
             return true;
+        }
+    }
+
+    // When inserting new tags, the existing ones are deleted
+    function deleteTags($venueID,$pdo) {
+        $deleteTagsStmt = $pdo->prepare("DELETE FROM VenueTag WHERE VenueID=:VenueID");
+        $deleteTagsStmt->bindValue(":VenueID",$venueID);
+        if ($deleteTagsStmt->execute()) {
+            // Tags deleted successfully!
+            return true;
+        } else {
+            // Tags not deleted successfully!
+            return false;
         }
     }
 
@@ -379,9 +420,9 @@
             <input type='file' id="venueImage" name='venueImage' class='input-file' accept=".jpg">
             <label for="venueImage">Add Venue Image</label><br>
             <p>Current Tags: <?php getTags($currentTagIDs,$pdo); ?></p>
-            <label for='tag1'>Add Tags for your venue, the first is required, the rest are optional. Any changes made below will overwrite any existing Tags, If you want to keep the existing Tags then leave the tag fields below empty</label><br>
+            <label for='tag1'>Add Tags for your venue, these are optional but are used to recommend your venue to users. Any changes made below will overwrite any existing Tags, If you want to keep the existing Tags then leave the tag fields below empty</label><br>
             <select name='tag1' id='tag1'>
-                <option value='None'>Select a Tag</option>
+                <option value='Optional'>No Tag</option>
                 <?php echoTags($pdo); ?>
             </select>
             <select name='tag2' id='tag2'>
