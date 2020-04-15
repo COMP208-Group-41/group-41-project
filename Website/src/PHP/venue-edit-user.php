@@ -358,29 +358,30 @@
         document.getElementById("mySidenav").style.width = "0";
     }
 </script>
-
-<div class="wrapper">
-    <h1 class="title">Account Settings</h1>
-    <form name='EditVenueUserDetails' method='post' style="margin-top: 10px">
-        <div class="edit-fields">
-            <label>Email:</label>
-            <input type='text' name='email' value="<?php echo $email; ?>">
-            <label>Password:</label>
-            <input type='password' name='newPassword'>
-            <label>Confirm password:</label>
-            <input type='password' name='confirmNewPassword'>
-            <label>Company name:</label>
-            <input type='text' name='companyName' value="<?php echo $name; ?>">
-            <label>Website link:</label>
-            <input type='text' name='external' value="<?php echo $external; ?>">
-            <div class="seperator">
-                <label>Enter current password to allow changes:</label>
-                <input type='password' name='password'>
+<div class="background">
+    <div class="wrapper">
+        <h1 class="title">Account Settings</h1>
+        <form name='EditVenueUserDetails' method='post' style="margin-top: 10px">
+            <div class="edit-fields">
+                <label>Email:</label>
+                <input type='text' name='email' value="<?php echo $email; ?>">
+                <label>Password:</label>
+                <input type='password' name='newPassword'>
+                <label>Confirm password:</label>
+                <input type='password' name='confirmNewPassword'>
+                <label>Company name:</label>
+                <input type='text' name='companyName' value="<?php echo $name; ?>">
+                <label>Website link:</label>
+                <input type='text' name='external' value="<?php echo $external; ?>">
+                <div class="seperator">
+                    <label>Enter current password to allow changes:</label>
+                    <input type='password' name='password'>
+                </div>
+                <!-- require password for any change! -->
+                <input type='submit' name='submit' value='Save' class="button">
             </div>
-            <!-- require password for any change! -->
-            <input type='submit' name='submit' value='Save' class="button">
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 <?php
     if ($errorMessage != "") {

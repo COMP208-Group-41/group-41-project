@@ -1,5 +1,5 @@
 :root {
-    --header-background: #272727;
+    --header-background: linear-gradient(90deg, #272727 0%, #202020 100%);;
     --body-background: #202020;
     --body-highlight: #2E2E2E;
     --body: #D6D6D6;
@@ -7,12 +7,22 @@
     --button-border: #3B3B3B;
     --button-highlight: #ccc;
     --text: #2E2E2E;
-    --gold: #BE9100
+    --gold: #BE9100;
+    --dark-gold: #AF8200;
+    --gradient: linear-gradient(270deg, rgba(7, 41, 29, 0.92) 0%, rgba(6, 27, 41, 0.92) 100%);
 }
 body {
-    background: var(--body-gray);
+    background: var(--gradient);
     font-family: "K2D", serif;
     text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.background {
+    display: flex;
+    justify-content: center;
+    flex: 1;
 }
 
 input  {
@@ -34,9 +44,9 @@ input:focus {
     margin: 0;
     box-sizing: border-box;
     border: 2px solid var(--button-border);
-    border-radius: 4px 0px 0px 4px;
+    border-radius: 4px;
     font-size: 16px;
-    background-color: var(--header-background);
+    background-color: var(--body-background);
     padding: 6px;
     color: var(--body);
     width: 30%;
@@ -50,7 +60,7 @@ input:focus {
 }
 
 .button:hover {
-    background-color: var(--body-background);
+    background-color: var(--dark-gold);
     cursor: pointer;
 }
 
@@ -64,13 +74,14 @@ input:focus {
     padding: 20px;
     margin: 20px;
     border-radius: 10px;
+    width: 100%;
+    max-width: 500px;
 }
 
 .edit-fields {
     display: flex;
     flex-direction: column;
     flex: 1;
-    width: 75%;
 }
 
 .title {
