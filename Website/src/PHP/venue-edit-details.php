@@ -1,16 +1,5 @@
 <?php
 
-/* Need to edit this to not INSERT but to UPDATE VALUES!!! */
-
-// TODO: When retrieving existing tags, need to get all the VenueTagIDs for all
-// Of the tags of this venue. Then when updating tags, delete all existing tags
-// for the venue, then add in all new ones, this ensures that the venue will
-// never have more than 5 tags
-
-// TODO: Also need to adapt the rest of this code for editing/updating rather
-// than creating/inserting
-
-
     session_start();
 
     $_SESSION["loggedin"] = true;
