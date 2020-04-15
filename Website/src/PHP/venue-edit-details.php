@@ -438,7 +438,7 @@
             <h2>Additional Information</h2>
 
             <input type='file' id="venueImage" name='venueImage' class='input-file' accept=".jpg">
-            <label for="venueImage">Add Venue Image</label><br>
+            <label for="venueImage">Add Venue Image (must be .jpg and cannot be bigger than 2MB)</label><br>
             <p>Current Tags: <?php getTags($currentTagIDs,$pdo); ?></p>
             <label for='tag1'>Add Tags for your venue, these are optional but are used to recommend your venue to users. Any changes made below will overwrite any existing Tags, If you want to keep the existing Tags then leave the tag fields below empty</label><br>
             <select name='tag1' id='tag1'>
