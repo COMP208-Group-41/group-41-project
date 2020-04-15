@@ -186,15 +186,6 @@
         return true;
     }
 
-    /* If the description is longer than 1000 characters then it is not valid */
-    function validateDescription($description) {
-        if (strlen($description) <= 1000) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     function validateTimes($times) {
         if (strlen($times) <= 500) {
             return true;
