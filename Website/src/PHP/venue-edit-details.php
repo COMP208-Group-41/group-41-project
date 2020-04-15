@@ -378,7 +378,7 @@
 
             <input type='file' id="venueImage" name='venueImage' class='input-file' accept=".jpg">
             <label for="venueImage">Add Venue Image</label><br>
-            <p>Current Tags: <?php getTags($currentTagIDs,$pdo); ?></p><br>
+            <p>Current Tags: <?php getTags($currentTagIDs,$pdo); ?></p>
             <label for='tag1'>Add Tags for your venue, the first is required, the rest are optional. Any changes made below will overwrite any existing Tags, If you want to keep the existing Tags then leave the tag fields below empty</label><br>
             <select name='tag1' id='tag1'>
                 <option value='None'>Select a Tag</option>
