@@ -74,6 +74,7 @@
     }
 
     function checkInputs($venueUserID,&$errorMessage,$pdo) {
+        $name = $description = $
 
         // Firstly check the user's password
         if (!(isset($_POST['password']) && !empty($_POST['password']))) {
@@ -104,7 +105,7 @@
             return false;
         }
 
-        $name = trim($_POST['venueName']);
+        $name = trim($_POST['eventName']);
         // Use same validation as venue name as they have the same constraints!
         if (!validateVenueName($name)) {
             $errorMessage = "The name cannot be more than 255 characters!";
