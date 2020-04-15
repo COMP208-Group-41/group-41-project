@@ -426,13 +426,13 @@
     <img src="../Assets/outout.svg" alt="OutOut">
     <form id='CreateVenue' name='CreateVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
         <div class="edit-fields">
-
-            <input type='text' name='venueName' placeholder="Venue Name" value="<?php echo $name; ?>"><br>
-
+            <label for='venueName'>Venue Name:</label>
+            <input type='text' id='venueName' name='venueName' placeholder="Venue Name" value="<?php echo $name; ?>"><br>
+            <label for='times'>Time Information:</label>
             <textarea id='times' name='times' form='CreateVenue' placeholder="Venue Opening and Closing Times"><?php echo $times; ?></textarea><br>
-
+            <label for='venueLocation'>Location Information:</label>
             <textarea id='venueLocation' name='venueLocation' form='CreateVenue' placeholder="Venue Address and Location details, no more than 255 characters"><?php echo $address; ?></textarea><br>
-
+            <label for='description'>Venue Description:</label>
             <textarea id='description' name ='description' form='CreateVenue' placeholder="Venue Description"><?php echo $description; ?></textarea><br>
 
             <h2>Additional Information</h2>
