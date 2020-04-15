@@ -9,7 +9,6 @@
     --text: #2E2E2E;
     --gold: #BE9100
 }
-
 body {
     background: var(--body-gray);
     font-family: "K2D", serif;
@@ -85,8 +84,22 @@ input:focus {
     cursor: pointer;
 }
 
-.label {
+label {
+    text-align: left;
     color: var(--text);
     font-size: 14px;
     margin-bottom: 4px;
+    font-family: "K2D", sans-serif;
+}
+
+hr {
+    background: #3B3B3B;
+}
+
+.seperator {
+    display: flex;
+    flex-direction: column;
+    border-top: var(--body-gray) solid 2px;
+    padding-top: 20px;
+    margin-top: 10px;
 }
