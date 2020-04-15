@@ -31,18 +31,18 @@
 
     $venueUserID = $_SESSION['VenueUserID'];
     $errorMessage = "";
-    $unsupportedBrowser = "";
+    // $unsupportedBrowser = "";
 
-    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+    // $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
     /* If the user is using firefox or safari then a message needs to be shown
      * informing the user that the event creation form may not work correctly
      */
-    if (preg_match('/Firefox/i',$user_agent) || preg_match('/Safari/i',$user_agent)) {
-        $unsupportedBrowser = "The browser you are using is not fully supported for this page! You may have issues with the date and time entry, if so we suggest using chrome, edge or Opera";
-    } else {
-        $unsupportedBrowser = "";
-    }
+    // if (preg_match('/Firefox/i',$user_agent) || preg_match('/Safari/i',$user_agent)) {
+    //     $unsupportedBrowser = "The browser you are using is not fully supported for this page! You may have issues with the date and time entry, if so we suggest using chrome, edge or Opera";
+    // } else {
+    //     $unsupportedBrowser = "";
+    // }
 
     try {
         $venues = getVenues($venueUserID,$pdo);
@@ -270,9 +270,9 @@
     if ($errorMessage != "") {
         echo "<div class='error'>$errorMessage</div>";
     }
-    if ($unsupportedBrowser != "") {
-        echo "<div class='browser-error'>$unsupportedBrowser</div>";
-    }
+    // if ($unsupportedBrowser != "") {
+    //     echo "<div class='browser-error'>$unsupportedBrowser</div>";
+    // }
  ?>
 </body>
 </html>
