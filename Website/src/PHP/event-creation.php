@@ -55,7 +55,17 @@
              exit;
         }
 
-
+        if (checkInputs($venueUserID,$errorMessage,$pdo)) {
+            /* If everything is valid and the event has been added to the
+             * db then EventCreated session variable is set to true (to
+             * show message on the next page) and the user is redirected
+             * to the edit event page to fill in additional details
+             */
+            $_SESSION['EventCreated'] = true;
+            $eventID = $_SESSION['eventID'];
+            header("location: events-edit.php?eventID=$eventID");
+            exit;
+        }
 
 
     } catch (PDOException $e) {
@@ -80,6 +90,14 @@
             return false;
         }
 
+        // Check which venue has been selected
+        if (!(isset($_POST['venue'])) && $_POST['venue'] != 'None') {
+            // No Venue selected!
+            $errorMessage = "Please select a venue!";
+            return false;
+        }
+        $venueID = $_POST['venue'];
+
         // Check name input
         if (!(isset($_POST['eventName']) && !empty(trim($_POST['eventName'])))) {
             $errorMessage = "Please enter a name for the event!";
@@ -93,37 +111,72 @@
             return false;
         }
 
-        // Check times given
-        if (isset($_POST['startTime']) && !empty($_POST['startTime'])) {
-            $startTime = new DateTime($_POST['startTime']);
-            if (new DateTime("now") > $startTime) {
-                $errorMessage = "Event cannot be in the past!";
-                return false;
-            }
-        } else {
-            $errorMessage = "You must give a start time!";
+        // Check description
+        if (!(isset($_POST['description']) && !empty(trim($_POST['description'])))) {
+            // Description empty!
+            $errorMessage = "Please enter a description for the event!";
+            return false;
+        }
+        $description = trim($_POST['description']);
+        if (!validateDescription($description)) {
+            $errorMessage = "The description cannot be longer than 1000 characters!";
             return false;
         }
 
-        if (isset($_POST['endTime']) && !empty($_POST['endTime'])) {
-            $endTime = new DateTime($_POST['endTime']);
-            if (new DateTime("now") > $endTime) {
-                $errorMessage = "Event cannot be in the past!";
+        try {
+            // Check times given
+            if (isset($_POST['startTime']) && !empty($_POST['startTime'])) {
+                $phpStartDateTime = new DateTime($_POST['startTime']);
+                if (new DateTime("now") > $startTime) {
+                    $errorMessage = "Event cannot be in the past!";
+                    return false;
+                }
+            } else {
+                $errorMessage = "You must give a start time!";
                 return false;
             }
-            if ($startTime > $endTime) {
-                $errorMessage = "end time cannot be before start time!";
+            $startTimestamp = strtotime($_POST['startTime']);
+            $mysqlStartDateTime = date("Y-m-d H:i:s",$startTimestamp);
+
+            if (isset($_POST['endTime']) && !empty($_POST['endTime'])) {
+                $phpEndDateTime = new DateTime($_POST['endTime']);
+                if (new DateTime("now") > $endTime) {
+                    $errorMessage = "Event cannot be in the past!";
+                    return false;
+                }
+                if ($startTime > $endTime) {
+                    $errorMessage = "end time cannot be before start time!";
+                    return false;
+                }
+            } else {
+                $errorMessage = "You must give an end time!";
                 return false;
             }
-        } else {
-            $errorMessage = "You must give an end time!";
+
+            $endTimestamp = strtotime($_POST['endTime']);
+            $mysqlEndDateTime = date("Y-m-d H:i:s",$endTimestamp);
+        } catch (Exception $timeException) {
+            $errorMessage = "Date and Time in the wrong format! Format (24 hour time) must be: dd-mm-yyyy hh:mm";
             return false;
         }
 
-        /* Start time and end time are both valid, now ensure they are in the
-         * correct format for inserting into the database
-         */
-
+        // Everything is valid, try inserting user into database
+        $pdo->beginTransaction();
+        if (!createEvent($venueID,$name,$description,$mysqlStartDateTime,$mysqlEndDateTime,$pdo)) {
+            $errorMessage = "Error in inserting event into database!";
+            $pdo->rollBack();
+            return false;
+        }
+        $_SESSION['eventID']; = getEventID($venueID,$name,$description,$pdo);
+        // Create Event Folder
+        if (!createEventFolder($venueUserID,$venueID,$_SESSION['eventID'];)) {
+            $errorMessage = "Error in creating event folder!";
+            $pdo->rollBack();
+            return false;
+        }
+        $pdo->commit();
+        // Everything completed successfully, return true!
+        return true;
     }
 
     function createEvent($venueID,$name,$description,$startTime,$endTime,$pdo) {
@@ -138,6 +191,27 @@
         } else {
             return false;
         }
+    }
+
+    function createEventFolder($venueUserID,$venueID,$eventID) {
+        $path = "/home/sgstribe/private_upload/Venue/$venueUserID/$venueID/$eventID";
+        if (mkdir($path,0755)) {
+            // Folder created successfully
+            return true;
+        } else {
+            // Error in folder creation!
+            return false;
+        }
+    }
+
+    function getEventID($venueID,$eventName,$description,$pdo) {
+        $getEventIDStmt = $pdo->prepare("SELECT EventID FROM Event WHERE VenueID=:VenueID AND EventName=:EventName AND EventDescription=:EventDescription");
+        $getEventIDStmt->bindValue(":VenueID",$venueID);
+        $getEventIDStmt->bindValue(":EventName",$eventName);
+        $getEventIDStmt->bindValue(":EventDescription",$description);
+        $getEventIDStmt->execute();
+        $row = $getEventIDStmt->fetch();
+        return $row['EventID'];
     }
 
     function getVenues($venueUserID,$pdo) {
@@ -183,11 +257,11 @@
         <label for='endTime'>Event End Time:</label>
         <input type='datetime-local' id="endTime" name='endTime' placeholder="End time" required><br>
 
-        <input type='password' name='password' autocomplete="off" placeholder="Current Password"><br>
+        <input type='password' name='password' autocomplete="off" placeholder="Current Password" required><br>
 
     </div>
     <div style= "display: flex">
-        <input type='submit' value='Create'>
+        <input type='submit' name='submit' value='Create'>
         <input type="button" onclick="location.href='BACK TO DASHBOARD OR HOMEPAGE';" value="Cancel" />
     </div>
 </form>
