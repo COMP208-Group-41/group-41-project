@@ -68,7 +68,7 @@
     <div>
         <label for='venue'>Select a Venue to create an event for:</label>
         <select name='venue' id='venue'>
-            <option value='None'>Select a venue to add an event to</option>
+            <option value='None'>Select Venue</option>
             <?php echoVenues($venues); ?>
         </select><br>
         <input type='text' name='name' placeholder="Event Name" required><br>
