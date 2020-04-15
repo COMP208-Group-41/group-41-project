@@ -242,7 +242,7 @@
     <link rel="stylesheet" type="text/css" href="../css/events.css">
 </head>
 <body>
-<form name='EventCreation' method='post'>
+<form id='EventCreation' name='EventCreation' method='post'>
     <div>
         <label for='venue'>Select a Venue to create an event for:</label>
         <select name='venue' id='venue'>
