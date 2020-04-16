@@ -120,7 +120,23 @@ function validate255($name) {
         } else {
             return $results;
         }
+    }
 
+    function eventToVenueUser($eventID,$pdo) {
+        $getVenuesStmt = $pdo->prepare("SELECT VenueID FROM Event WHERE EventID=:EventID");
+        $getVenuesStmt->bindValue(":EventID",$eventID);
+        $getVenuesStmt->execute();
+        $result = $getVenuesStmt->fetch();
+        $getVenuesUserStmt = $pdo->prepare("SELECT VenueUserID FROM Venue WHERE VenueID=:VenueID");
+        $getVenuesUserStmt->bindValue(":VenueID",$result['VenueID']);
+        $getVenuesUserStmt->execute();
+        $result = $getVenuesStmt->fetch();
+        if (sizeof($results) == 0) {
+            // Error
+            return false;
+        } else {
+            return $result;
+        }
     }
 
     function echoVenues($venues) {
