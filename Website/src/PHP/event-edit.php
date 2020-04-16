@@ -352,9 +352,9 @@
 <!--    TODO: Revert input types to datetime-local -->
 
         <label for='endTime'>Event Start Time:</label>
-        <input type='text' id="startTime" name='startTime' placeholder="Start time" value="<?php echo $startTime; ?>" required><br>
+        <input type='datetime-local' id="startTime" name='startTime' placeholder="Start time" value="<?php echo $startTime; ?>" required><br>
         <label for='endTime'>Event End Time:</label>
-        <input type='text' id="endTime" name='endTime' placeholder="End time" value="<?php echo $endTime; ?>" required><br>
+        <input type='datetime-local' id="endTime" name='endTime' placeholder="End time" value="<?php echo $endTime; ?>" required><br>
 <!--    TODO: RESTRICT SIZE OF PICTURE THAT CAN BE UPLOADED -->
         Event Image: <br>
         <input type='file' id="eventImage" name='eventImage' class='input-file' accept=".jpg">
