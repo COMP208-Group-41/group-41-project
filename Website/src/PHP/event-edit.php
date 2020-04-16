@@ -344,22 +344,22 @@
 <form name='EventForm' method='post' enctype="multipart/form-data">
     <div>
         <input type='text' name='name' placeholder="Event Name"  value="<?php echo $name; ?>" required><br>
-        <input type='text' name='description' placeholder="Event Description" value="<?php echo $description; ?>" required> <br>
+        <label for='description'>Event Description:</label>
+        <textarea id='description' name ='description' form='EventForm' placeholder="Event Description, max 1000 characters" required><?php echo $description; ?></textarea><br>
+
         <p>Date and Time must be in the format: dd-mm-yyyy hh:mm (24 hour time)</p><br>
+
+<!--    TODO: Revert input types to datetime-local -->
+
         <label for='endTime'>Event Start Time:</label>
-        <input type='datetime-local' id="startTime" name='startTime' placeholder="Start time" value="<?php echo $startTime; ?>" required><br>
+        <input type='text' id="startTime" name='startTime' placeholder="Start time" value="<?php echo $startTime; ?>" required><br>
         <label for='endTime'>Event End Time:</label>
-        <input type='datetime-local' id="endTime" name='endTime' placeholder="End time" value="<?php echo $endTime; ?>" required><br>
+        <input type='text' id="endTime" name='endTime' placeholder="End time" value="<?php echo $endTime; ?>" required><br>
 <!--    TODO: RESTRICT SIZE OF PICTURE THAT CAN BE UPLOADED -->
         Event Image: <br>
         <input type='file' id="eventImage" name='eventImage' class='input-file' accept=".jpg">
         <label for="eventImage">Upload Image</label>
-        <div class="image-preview" id="imagePreview">
-            <img src="" alt="Image Preview" class="image-preview__image">
-            <span class="image-preview__default-text">Image Preview</span>
-        </div>
 
-        <input type='text' id="ticketSite" name='ticketSite' placeholder="Ticket Sale Link"><Br>
         <!-- TAG INPUT -->
         <p>Current Tags: <?php getTags($currentTagIDs,$pdo); ?></p>
         <label for='tag1'>Add Tags for your event, these are optional but are used to recommend your event to users. Any changes made below will overwrite any existing Tags, If you want to keep the existing Tags then leave the tag fields below empty</label><br>

@@ -231,7 +231,7 @@
             <?php echoVenues($venues); ?>
         </select><br>
         <input type='text' name='eventName' placeholder="Event Name" required><br>
-
+        <label for='description'>Event Description:</label>
         <textarea id='description' name ='description' form='EventCreation' placeholder="Event Description, max 1000 characters" required></textarea><br>
         <p>Date and Time must be in the format: dd-mm-yyyy hh:mm (24 hour time)</p><br>
         <label for='startTime'>Event Start Time:</label>
