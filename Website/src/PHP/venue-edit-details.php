@@ -28,6 +28,7 @@
     if (!checkVenueUserAllowed($venueID,$venueUserID,$pdo)) {
         // User is not allowed to edit!
         header("location: venue-home.php");
+        exit;
     }
 
     // First get all existing values and populate fields
