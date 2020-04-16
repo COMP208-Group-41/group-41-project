@@ -141,14 +141,13 @@
         if ($tags === false) {
             return false;
         }
-        /* STUB NEEDS IMPLEMNENTATION
+
         // Check images, if valid then try to add everything to database
         if (!empty($_FILES[][])) {
             if (!checkImage()) {
                 return false;
             }
         }
-        */
 
         $pdo->beginTransaction();
 

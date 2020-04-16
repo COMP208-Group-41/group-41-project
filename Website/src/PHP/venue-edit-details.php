@@ -144,7 +144,7 @@
 
         // Check images, if valid then try to add everything to database
         if (!empty($_FILES['venueImage']['name'])) {
-            if (!checkImage($venueUserID,$errorMessage)) {
+            if (!checkImage($errorMessage)) {
                 return false;
             }
         }
@@ -248,24 +248,6 @@
         return $tags;
     }
 
-    function checkImage($venueUserID,&$errorMessage) {
-        if ($_FILES['venueImage']['size'] == 0) {
-            $errorMessage = "No file selected or the selected file is too large!";
-            return false;
-        }
-
-        if ($_FILES['venueImage']['error'] != 0) {
-            $errorMessage = "Error in file upload";
-            return false;
-        }
-
-        if ($_FILES['venueImage']['type'] != "image/jpeg") {
-            $errorMessage = "File must be a jpeg!";
-            return false;
-        }
-
-        return true;
-    }
 
     function uploadImage($venueUserID,$venueID,$pdo) {
         // Remove any existing file first
