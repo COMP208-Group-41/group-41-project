@@ -1,5 +1,8 @@
 <?php
 
+    // TODO: Implement function to convert mysql datetime to html datetime-local
+    // TODO: Implement try catch for datetime-local input checking
+
     session_start();
 
     $_SESSION["VenueUserID"] = 2;
