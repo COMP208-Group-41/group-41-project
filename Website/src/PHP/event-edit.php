@@ -17,7 +17,6 @@
     }
 
     $venueUserID = $_SESSION["VenueUserID"];
-    $venueID = $_GET['VenueID'];
     $eventID = $_GET['EventID'];
     $errorMessage = "";
 
@@ -72,7 +71,6 @@
 
     // Current tags for this event are pulled here
     $currentTagIDs = getEventTagID($eventID,$pdo);
-
 
     try {
         if (!empty($_POST) && isset($_POST['submit'])) {
@@ -361,19 +359,19 @@
         <label for='venue'>Select a Venue</label>
         <select name='venue' id='venue'>
             <option value='None'>Select Venue</option>
-            <?php echoVenues($venues); ?>
+            <?php // echoVenues($venues); ?>
         </select><br>
         <label for='Event'>Select a Event to edit:</label>
         <select name='event' id='event'>
             <option value='None'>Select Event</option>
-            <?php echoEvents($events); ?>
+            <?php // echoEvents($events); ?>
         </select><br>
       -->
         <input type='text' name='name' placeholder="Event Name"  value="<?php echo $name; ?>" required><br>
         <input type='text' name='description' placeholder="Event Description" value="<?php echo $description; ?>" required> <br>
         <p>Date and Time must be in the format: dd-mm-yyyy hh:mm (24 hour time)</p><br>
         <label for='endTime'>Event Start Time:</label>
-        <input type='datetime-local' id="startTime" name='startTime' placeholder="Start time" value="<?php echo $startTime; ?>" required>
+        <input type='datetime-local' id="startTime" name='startTime' placeholder="Start time" value="<?php echo $startTime; ?>" required><br>
         <label for='endTime'>Event End Time:</label>
         <input type='datetime-local' id="endTime" name='endTime' placeholder="End time" value="<?php echo $endTime; ?>" required><br>
 <!--    TODO: RESTRICT SIZE OF PICTURE THAT CAN BE UPLOADED -->
@@ -409,48 +407,6 @@
             <option value='Optional'>No Tag</option>
             <?php echoTags($pdo); ?>
         </select><br>
-        <script>
-            var dtt = document.getElementById('startTime');
-            dtt.onfocus = function (event) {
-                this.type = 'datetime-local';
-                this.focus();
-            };
-            dtt.onblur = function (event) {
-                this.type = 'text';
-                this.blur();
-            };
-            var ett = document.getElementById('endTime');
-            ett.onfocus = function (event) {
-                this.type = 'datetime-local';
-                this.focus();
-            };
-            ett.onblur = function (event) {
-                this.type = 'text';
-                this.blur();
-            };
-
-            // For Image Preview
-            const inpFile = document.getElementById("eventImage");
-            const previewContainer = document.getElementById("imagePreview");
-            const previewImage = previewContainer.querySelector(".image-preview__image");
-            const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
-
-            inpFile.addEventListener("change", function() {
-                const file = this.files[0];
-                if (file) {
-                    const reader = new FileReader();
-
-                    previewDefaultText.style.display = "none";
-                    previewImage.style.display = "block";
-
-                    reader.addEventListener("load", function() {
-                        previewImage.setAttribute("src", this.result);
-                    });
-
-                    reader.readAsDataURL(file);
-                }
-            });
-        </script>
     </div>
     <div style= "display: flex">
         <input type='password' name='password' autocomplete="off" placeholder="Current Password" required><br>
