@@ -107,7 +107,7 @@
             return false;
         } else {
             $address = trim($_POST['venueLocation']);
-            if (!validateVenueName($address)) {
+            if (!validate255($address)) {
                 $errorMessage = "The address cannot be more than 255 characters!";
                 return false;
             }
