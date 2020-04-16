@@ -120,7 +120,6 @@
                   $errorMessage = "end time cannot be before start time!";
                   return false;
               }
-          }
         }
 
         // Check Description
