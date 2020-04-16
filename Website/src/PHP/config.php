@@ -131,7 +131,7 @@ function validate255($name) {
         $getVenuesUserStmt->bindValue(":VenueID",$result['VenueID']);
         $getVenuesUserStmt->execute();
         $result = $getVenuesStmt->fetch();
-        if (sizeof($results) == 0) {
+        if (sizeof($result) == 0) {
             // Error
             return false;
         } else {
@@ -168,6 +168,24 @@ function validate255($name) {
         }
 
         return true;
+    }
+
+    /* Get the existing tag Names from the Tag table, this relies on the
+     * getTagID function being called at the top of the code
+     */
+    function getTags($tagIDs,$pdo) {
+        if (sizeof($tagIDs) > 0) {
+            foreach ($tagIDs as $tagID) {
+                $getTagNameStmt = $pdo->prepare("SELECT TagName FROM Tag WHERE TagID=:TagID");
+                $getTagNameStmt->bindValue(":TagID",$tagID['TagID']);
+                $getTagNameStmt->execute();
+                $tag = $getTagNameStmt->fetch();
+                echo $tag['TagName'].", ";
+            }
+        } else {
+            echo "No Tags for this Venue";
+        }
+
     }
 
 

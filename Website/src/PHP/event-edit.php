@@ -288,7 +288,7 @@
         $EventTags = $pdo->prepare("SELECT TagID FROM EventTag WHERE EventID=:EventID");
         $EventTags->bindValue(":EventID",$eventID);
         $EventTags->execute();
-        return $getVenueTagsStmt->fetchAll();
+        return $EventTags->fetchAll();
     }
 
     // When inserting new tags, the existing ones are deleted
