@@ -214,25 +214,6 @@
         return $row['EventID'];
     }
 
-    function getVenues($venueUserID,$pdo) {
-        $getVenuesStmt = $pdo->prepare("SELECT VenueID,VenueName FROM Venue WHERE VenueUserID=:VenueUserID");
-        $getVenuesStmt->bindValue(":VenueUserID",$venueUserID);
-        $getVenuesStmt->execute();
-        $results = $getVenuesStmt->fetchAll();
-        if (sizeof($results) == 0) {
-            // Venue User has no venues, show error message!
-            return false;
-        } else {
-            return $results;
-        }
-
-    }
-
-    function echoVenues($venues) {
-        foreach ($venues as $row) {
-            echo "<option value=".$row['VenueID'].">".$row['VenueName']."</option>";
-        }
-    }
 ?>
 
 <!DOCTYPE html>
