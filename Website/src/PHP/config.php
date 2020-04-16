@@ -95,5 +95,45 @@ function validateVenueName($name) {
         }
     }
 
+    function getVenues($venueUserID,$pdo) {
+        $getVenuesStmt = $pdo->prepare("SELECT VenueID,VenueName FROM Venue WHERE VenueUserID=:VenueUserID");
+        $getVenuesStmt->bindValue(":VenueUserID",$venueUserID);
+        $getVenuesStmt->execute();
+        $results = $getVenuesStmt->fetchAll();
+        if (sizeof($results) == 0) {
+            // Venue User has no venues, show error message!
+            return false;
+        } else {
+            return $results;
+        }
+
+    }
+
+    function getEvents($venueID,$pdo) {
+        $getVenuesStmt = $pdo->prepare("SELECT EventID,EventName FROM Event WHERE VenueID=:VenueID");
+        $getVenuesStmt->bindValue(":VenueID",$venueID);
+        $getVenuesStmt->execute();
+        $results = $getVenuesStmt->fetchAll();
+        if (sizeof($results) == 0) {
+            // Venue has no events, show error message!
+            return false;
+        } else {
+            return $results;
+        }
+
+    }
+
+    function echoVenues($venues) {
+        foreach ($venues as $row) {
+            echo "<option value=".$row['VenueID'].">".$row['VenueName']."</option>";
+        }
+    }
+
+    function echoEvents($events) {
+        foreach ($events as $row) {
+            echo "<option value=".$row['EventID'].">".$row['EventName']."</option>";
+        }
+    }
+
 
 ?>
