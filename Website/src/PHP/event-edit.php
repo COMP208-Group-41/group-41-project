@@ -112,7 +112,7 @@
             return false;
         } else {
             $name = trim($_POST['eventName']);
-            if (!validateVenueName($name)) { // This function can be reused for events. Name may need changing (config.php)
+            if (!validate255($name)) { // This function can be reused for events. Name may need changing (config.php)
                 $errorMessage = "The name cannot be more than 255 characters!";
                 return false;
             }
