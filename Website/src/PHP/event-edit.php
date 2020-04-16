@@ -2,6 +2,9 @@
 
     session_start();
 
+    $_SESSION['VenueUserID'] = 2;
+    $_SESSION['loggedin'] = true;
+
     if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         header("location: venue-login.php");
         exit;
@@ -24,12 +27,13 @@
 
     require_once "config.php";
 
+    /*
     try {
         $venues = getVenues($venueUserID,$pdo);
         if ($venues === false) {
             /* The user has no Venues then they also have no existing events!
              * ideally on the page they are redirected to (their home page)
-             */
+             *//*
              $_SESSION['message'] = "You do not have any Venues!";
              header("location: venue-user-dashboard.php");
              exit;
@@ -48,7 +52,7 @@
         if ($events === false) {
             /* The user has no existing events at any venue
              * ideally on the page they are redirected to (their home page)
-             */
+             *//*
              $_SESSION['message'] = "You do not have any events to edit";
              header("location: venue-user-dashboard.php");
              exit;
@@ -56,7 +60,7 @@
     } catch (PDOException $e) {
         // Any PDO errors are shown here
         exit("PDO Error: ".$e->getMessage()."<br>");
-    }
+    }*/
 
     // Retrive existing values and populate fields
     $result = getEventInfo($eventID,$pdo);
@@ -353,6 +357,7 @@
 <body>
 <form name='EventForm' method='post'>
     <div>
+        <!--
         <label for='venue'>Select a Venue</label>
         <select name='venue' id='venue'>
             <option value='None'>Select Venue</option>
@@ -363,6 +368,7 @@
             <option value='None'>Select Event</option>
             <?php echoEvents($events); ?>
         </select><br>
+      -->
         <input type='text' name='name' placeholder="Event Name"  value="<?php echo $name; ?>" required><br>
         <input type='text' name='description' placeholder="Event Description" value="<?php echo $description; ?>" required> <br>
         <p>Date and Time must be in the format: dd-mm-yyyy hh:mm (24 hour time)</p><br>
