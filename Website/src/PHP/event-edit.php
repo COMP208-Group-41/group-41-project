@@ -14,15 +14,49 @@
     }
 
     $venueUserID = $_SESSION["VenueUserID"];
+    $venueID = $_GET['VenueID'];
+    $eventID = $_GET['EventID'];
     $errorMessage = "";
-
-    $eventID = $_GET['eventID'];
 
     error_reporting( E_ALL );
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
 
     require_once "config.php";
+
+    try {
+        $venues = getVenues($venueUserID,$pdo);
+        if ($venues === false) {
+            /* The user has no Venues then they also have no existing events!
+             * ideally on the page they are redirected to (their home page)
+             */
+             $_SESSION['message'] = "You do not have any Venues!";
+             header("location: venue-user-dashboard.php");
+             exit;
+        }
+    } catch (PDOException $e) {
+        // Any PDO errors are shown here
+        exit("PDO Error: ".$e->getMessage()."<br>");
+    }
+
+    try {
+        $events = array();
+        foreach($venues as $key => $value){
+          $venueEvents = getEvents($venueID,$pdo);
+          $events= array_merge($events, $venueEvents);
+        }
+        if ($events === false) {
+            /* The user has no existing events at any venue
+             * ideally on the page they are redirected to (their home page)
+             */
+             $_SESSION['message'] = "You do not have any events to edit";
+             header("location: venue-user-dashboard.php");
+             exit;
+        }
+    } catch (PDOException $e) {
+        // Any PDO errors are shown here
+        exit("PDO Error: ".$e->getMessage()."<br>");
+    }
 
     // Retrive existing values and populate fields
     $result = getEventInfo($eventID,$pdo);
@@ -34,6 +68,7 @@
 
     // Current tags for this event are pulled here
     $currentTagIDs = getEventTagID($eventID,$pdo);
+
 
     try {
         if (!empty($_POST) && isset($_POST['submit'])) {
@@ -65,6 +100,13 @@
             return false;
         }
 
+        //Check existing venues
+        if (checkExistingEvent($name,$startTime,$endTime,$venueID,$pdo)) {
+            // A event already exists with the same name and start times at the same venue!
+            $errorMessage = "An event already exists at this venue with the same name and time!";
+            return false;
+        }
+
         if (!(isset($_POST['eventName']) && !empty(trim($_POST['eventName'])))) {
             $errorMessage = "Please enter a name for the event!";
             return false;
@@ -76,26 +118,33 @@
             }
         }
 
-        // Check opening times (VALIDATION NOT IMPLEMENTED YET)
+        // Check opening times
         if (!(isset($_POST['startTime']) && !empty(trim($_POST['startTime'])))) {
             $errorMessage = "Please enter information about when your event starts!";
             return false;
         } else {
-            /*if (!validateTimes($times)) {
-                $errorMessage = "The information about times cannot be more than 500 characters!";
-                return false;
-            }*/
+            // Check start time given
+            if (isset($_POST['startTime']) && !empty($_POST['startTime'])) {
+                $phpStartDateTime = new DateTime($_POST['startTime']);
+                if (new DateTime("now") > $phpStartDateTime) {
+                    $errorMessage = "Event cannot be in the past!";
+                    return false;
+                }
+            }
         }
 
-        // Check closeing times (VALIDATION NOT IMPLEMENTED YET)
+
+        // Check closeing times
         if (!(isset($_POST['endTime']) && !empty(trim($_POST['endTime'])))) {
             $errorMessage = "Please enter information about when your event ends!";
             return false;
         } else {
-            /*if (!validateTimes($times)) {
-                $errorMessage = "The information about times cannot be more than 500 characters!";
-                return false;
-            }*/
+              $phpEndDateTime = new DateTime($_POST['endTime']);
+              if ($phpStartDateTime > $phpEndDateTime) {
+                  $errorMessage = "end time cannot be before start time!";
+                  return false;
+              }
+          }
         }
 
         // Check Description
@@ -168,8 +217,8 @@
         $updateEventStmt = $pdo->prepare("UPDATE Event SET  EventName=:EventName, EventDescription=:EventDescription, EventStartTime=:EventStartTime EventEndTime=:EventEndTime WHERE EventID=:EventID");
         $updateEventStmt->bindValue(":EventName",$name);
         $updateEventStmt->bindValue(":EventDescription",$description);
-        $updateEventStmt->bindValue(":VenueTimes",$startTime);
-        $updateEventStmt->bindValue(":VenueTimes",$endTime);
+        $updateEventStmt->bindValue(":EventStartTime",$startTime);
+        $updateEventStmt->bindValue(":EventEndTime",$endTime);
         $updateEventStmt->bindValue(":EventID",$eventID);
         if (!$updateEventStmt->execute()) {
             // Error in update
@@ -177,6 +226,21 @@
         } else {
             // Values updated correctly
             return true;
+        }
+    }
+
+    function checkExistingEvent($name,$startTime,$endTime,$venueID,$pdo) {
+        $checkExistingStmt = $pdo->prepare("SELECT EventID FROM Event WHERE EventName=:EventName AND (EventStartTime=:EventStartTime OR EventEndTime=:EventEndTime) AND VenueID=:VenueID");
+        $checkExistingStmt->bindValue(":EventName",$name);
+        $checkExistingStmt->bindValue(":EventStartTime",$startTime);
+        $checkExistingStmt->bindValue(":EventEndTime",$endTime);
+        $checkExistingStmt->bindValue(":VenueID",$venueID);
+        $checkExistingStmt->execute();
+        if ($checkExistingStmt->rowCount() > 0) {
+            // A event exists with the same name and time and at the same venue!
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -289,11 +353,23 @@
 <body>
 <form name='EventForm' method='post'>
     <div>
-<!--    TODO: NEED TO FILL INPUT FIELDS WITH DATA SUBMITTED PRIOR TO DATABASE -->
+        <label for='venue'>Select a Venue</label>
+        <select name='venue' id='venue'>
+            <option value='None'>Select Venue</option>
+            <?php echoVenues($venues); ?>
+        </select><br>
+        <label for='Event'>Select a Event to edit:</label>
+        <select name='event' id='event'>
+            <option value='None'>Select Event</option>
+            <?php echoEvents($events); ?>
+        </select><br>
         <input type='text' name='name' placeholder="Event Name"  value="<?php echo $name; ?>" required><br>
         <input type='text' name='description' placeholder="Event Description" value="<?php echo $description; ?>" required> <br>
-        <input type='text' id="startTime" name='startTime' placeholder="Start time" value="<?php echo $startTime; ?>" required>
-        <input type='text' id="endTime" name='endTime' placeholder="End time" value="<?php echo $endTime; ?>" required><br>
+        <p>Date and Time must be in the format: dd-mm-yyyy hh:mm (24 hour time)</p><br>
+        <label for='endTime'>Event Start Time:</label>
+        <input type='datetime-local' id="startTime" name='startTime' placeholder="Start time" value="<?php echo $startTime; ?>" required>
+        <label for='endTime'>Event End Time:</label>
+        <input type='datetime-local' id="endTime" name='endTime' placeholder="End time" value="<?php echo $endTime; ?>" required><br>
 <!--    TODO: RESTRICT SIZE OF PICTURE THAT CAN BE UPLOADED -->
         Event Image: <br>
         <input type='file' id="eventImage" name='eventImage' class='input-file' accept="image/*">
