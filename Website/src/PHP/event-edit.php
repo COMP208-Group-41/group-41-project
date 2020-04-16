@@ -2,7 +2,7 @@
 
     session_start();
 
-    $_SESSION['VenueUserID'] = 2;
+    $_SESSION["VenueUserID"] = 2;
     $_SESSION['loggedin'] = true;
 
     if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
@@ -16,15 +16,15 @@
         exit;
     }
 
-    $venueUserID = $_SESSION["VenueUserID"];
-    $eventID = $_GET['EventID'];
-    $errorMessage = "";
-
     error_reporting( E_ALL );
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
 
     require_once "config.php";
+
+    $venueUserID = $_SESSION["VenueUserID"];
+    $eventID = $_GET['EventID'];
+    $errorMessage = "";
 
     $eventToVenueUser = eventToVenueUser($eventID, $pdo);
     if($eventToVenueUser === false){
