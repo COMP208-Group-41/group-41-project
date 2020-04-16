@@ -49,7 +49,7 @@
     try {
         if (!empty($_POST) && isset($_POST['submit'])) {
 
-             if (checkInputs($venueUserID,$eventID,$errorMessage,$pdo)) {
+             if (checkInputs($venueUserID,$eventID,$venueID,$errorMessage,$pdo)) {
                  $errorMessage = "Event Edited Successfully!";
                  // Refresh details!
 
@@ -68,7 +68,7 @@
     }
 
 
-    function checkInputs($venueUserID,$EventID,&$errorMessage,$pdo) {
+    function checkInputs($venueUserID,$EventID,$venueID,&$errorMessage,$pdo) {
 
         // Firstly check the user's password
         if (!(isset($_POST['password']) && !empty($_POST['password']))) {
@@ -143,8 +143,9 @@
         }
 
         // Check images, if valid then try to add everything to database
-        if (!empty($_FILES[][])) {
-            if (!checkImage()) {
+
+        if (!empty($_FILES['eventImage']['name'])) {
+            if (!checkImage($errorMessage)) {
                 return false;
             }
         }
@@ -172,19 +173,34 @@
                 }
             }
         }
-        /* STUB NEEDS IMPLEMNENTATION
+
         // Try uploading image
-        if (!empty($_FILES[][])) {
-            if (!uploadImage()) {
+        if (!empty($_FILES['eventImage']['name'])) {
+            if (!uploadEventImage($venueUserID,$venueID,$EventID,$pdo)) {
                 $errorMessage = "Error in uploading image!";
                 $pdo->rollBack();
                 return false;
             }
-        }*/
+        }
 
         // Everything completed successfully! return true
         $pdo->commit();
         return true;
+    }
+
+    function uploadEventImage($venueUserID,$venueID,$eventID,$pdo) {
+        // Remove any existing file first
+        $directory = "/home/sgstribe/private_upload/Venue/$venueUserID/$venueID/$eventID/event.jpg";
+        if (file_exists($directory)) {
+            chmod($directory,0755);
+            unlink($directory);
+        }
+        if (move_uploaded_file($_FILES['eventImage']['tmp_name'],$directory)) {
+            return true;
+        } else {
+            // Error in file upload!
+            return false;
+        }
     }
 
 
@@ -326,7 +342,7 @@
     <link rel="stylesheet" type="text/css" href="../css/events.css">
 </head>
 <body>
-<form name='EventForm' method='post'>
+<form name='EventForm' method='post' enctype="multipart/form-data">
     <div>
         <input type='text' name='name' placeholder="Event Name"  value="<?php echo $name; ?>" required><br>
         <input type='text' name='description' placeholder="Event Description" value="<?php echo $description; ?>" required> <br>
@@ -337,7 +353,7 @@
         <input type='datetime-local' id="endTime" name='endTime' placeholder="End time" value="<?php echo $endTime; ?>" required><br>
 <!--    TODO: RESTRICT SIZE OF PICTURE THAT CAN BE UPLOADED -->
         Event Image: <br>
-        <input type='file' id="eventImage" name='eventImage' class='input-file' accept="image/*">
+        <input type='file' id="eventImage" name='eventImage' class='input-file' accept=".jpg">
         <label for="eventImage">Upload Image</label>
         <div class="image-preview" id="imagePreview">
             <img src="" alt="Image Preview" class="image-preview__image">
@@ -371,7 +387,7 @@
     </div>
     <div style= "display: flex">
         <input type='password' name='password' autocomplete="off" placeholder="Current Password" required><br>
-        <input type='submit' value='Update'>
+        <input type='submit' id='submit' value='Update'>
 <!--        TODO: FILL IN HREF ONCLICK OF CANCEL-->
         <input type="button" onclick="location.href='BACK TO DASHBOARD OR HOMEPAGE';" value="Cancel" />
     </div>
