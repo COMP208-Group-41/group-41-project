@@ -48,7 +48,7 @@
 
 
 
-    function checkInputs(&$errorMessage,$pdo){
+    function checkInputs($userID,$eventID,$venueID,&$errorMessage,$pdo){
         $reviewDate = new DateTime("now");
 
         // Check review text
