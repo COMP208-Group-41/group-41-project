@@ -43,7 +43,7 @@
         }
     } catch (PDOException $e) {
         // Any PDO errors are shown here
-        //exit("PDO Error: ".$e->getMessage()."<br>");
+        exit("PDO Error: ".$e->getMessage()."<br>");
     }
 
 
