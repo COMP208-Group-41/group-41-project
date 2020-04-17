@@ -59,7 +59,7 @@ function checkVenueEmailExists($email,$pdo) {
     }
 }
 
-/* validateVenueName returns true if the name given does not exceed 255
+/* validate255 returns true if the name given does not exceed 255
  * characters and returns false if it does
  */
 function validate255($name) {
