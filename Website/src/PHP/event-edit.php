@@ -97,32 +97,41 @@
             }
         }
 
-        // Check opening times
-        if (!(isset($_POST['startTime']) && !empty(trim($_POST['startTime'])))) {
-            $errorMessage = "Please enter information about when your event starts!";
-            return false;
-        } else {
-            // Check start time given
+        try {
+            // Check times given
             if (isset($_POST['startTime']) && !empty($_POST['startTime'])) {
                 $phpStartDateTime = new DateTime($_POST['startTime']);
                 if (new DateTime("now") > $phpStartDateTime) {
                     $errorMessage = "Event cannot be in the past!";
                     return false;
                 }
+            } else {
+                $errorMessage = "You must give a start time!";
+                return false;
             }
-        }
+            $startTimestamp = strtotime($_POST['startTime']);
+            $mysqlStartDateTime = date("Y-m-d H:i:s",$startTimestamp);
 
+            if (isset($_POST['endTime']) && !empty($_POST['endTime'])) {
+                $phpEndDateTime = new DateTime($_POST['endTime']);
+                if (new DateTime("now") > $phpEndDateTime) {
+                    $errorMessage = "Event cannot be in the past!";
+                    return false;
+                }
+                if ($phpStartDateTime > $phpEndDateTime) {
+                    $errorMessage = "end time cannot be before start time!";
+                    return false;
+                }
+            } else {
+                $errorMessage = "You must give an end time!";
+                return false;
+            }
 
-        // Check closeing times
-        if (!(isset($_POST['endTime']) && !empty(trim($_POST['endTime'])))) {
-            $errorMessage = "Please enter information about when your event ends!";
+            $endTimestamp = strtotime($_POST['endTime']);
+            $mysqlEndDateTime = date("Y-m-d H:i:s",$endTimestamp);
+        } catch (Exception $timeException) {
+            $errorMessage = "Date and Time in the wrong format! Format (24 hour time) must be: dd-mm-yyyy hh:mm";
             return false;
-        } else {
-              $phpEndDateTime = new DateTime($_POST['endTime']);
-              if ($phpStartDateTime > $phpEndDateTime) {
-                  $errorMessage = "end time cannot be before start time!";
-                  return false;
-              }
         }
 
         // Check Description
@@ -154,7 +163,7 @@
 
         $pdo->beginTransaction();
 
-        if (!updateEvent($eventID,$name,$description,$startTime,$endTime,$pdo)) {
+        if (!updateEvent($eventID,$name,$description,$mysqlStartTime,$mysqlEndTime,$pdo)) {
             $errorMessage = "Error in editing event!";
             $pdo-rollBack();
             return false;
