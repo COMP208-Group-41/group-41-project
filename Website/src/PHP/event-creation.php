@@ -217,41 +217,65 @@
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
-<title>OutOut - Event Creation</title>
+    <title>OutOut - Edit Venue User Account</title>
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/venue.css">
     <link rel="stylesheet" type="text/css" href="../css/events.css">
 </head>
 <body>
-<form id='EventCreation' name='EventCreation' method='post'>
-    <div>
-        <label for='venue'>Select a Venue to create an event for:</label>
-        <select name='venue' id='venue'>
-            <option value='None'>Select Venue</option>
-            <?php echoVenues($venues); ?>
-        </select><br>
-        <input type='text' name='eventName' placeholder="Event Name" required><br>
-        <label for='description'>Event Description:</label>
-        <textarea id='description' name ='description' form='EventCreation' placeholder="Event Description, max 1000 characters" required></textarea><br>
-        <p>Date and Time must be in the format: dd-mm-yyyy hh:mm (24 hour time)</p><br>
-        <label for='startTime'>Event Start Time:</label>
-        <input type='datetime-local' id="startTime" name='startTime' placeholder="Start time" required><br>
-        <label for='endTime'>Event End Time:</label>
-        <input type='datetime-local' id="endTime" name='endTime' placeholder="End time" required><br>
-
-        <input type='password' name='password' autocomplete="off" placeholder="Current Password" required><br>
-
+<div class="banner">
+    <img src="../Assets/menu-icon.svg" alt="Menu" width="25" onclick="openNav()" class="menu-image">
+    <img src="../Assets/outout.svg" alt="OutOut" width="120">
+    <img src="../Assets/profile.svg" alt="Profile" width="40">
+</div>
+<div id="mySidenav" class="sidenav">
+    <div class="sidebar-content">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Dashboard</a>
+        <a href="#">Venues</a>
+        <a href="#">Account</a>
+        <a href="#">Contact</a>
     </div>
-    <div style= "display: flex">
-        <input type='submit' name='submit' value='Create'>
-        <input type="button" onclick="location.href='BACK TO DASHBOARD OR HOMEPAGE';" value="Cancel" />
-    </div>
-</form>
-<?php
-    if ($errorMessage != "") {
-        echo "<div class='error'>$errorMessage</div>";
+</div>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "200px";
     }
-    // if ($unsupportedBrowser != "") {
-    //     echo "<div class='browser-error'>$unsupportedBrowser</div>";
-    // }
- ?>
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+<div class="wrapper">
+    <div class="container">
+        <h1 class="title">Create an event</h1>
+        <form id='EventCreation' name='EventCreation' method='post'>
+            <div class="edit-fields">
+                <select name='venue' id='venue' style="margin-bottom: 16px">
+                    <option value='None'>Select Venue</option>
+                    <?php echoVenues($venues); ?>
+                </select>
+                <label>Name of event:</label>
+                <input type='text' name='name' placeholder="Bongos Bingo" required>
+                <label>Description:</label>
+                <textarea id='description' name ='description' form='EventCreation' placeholder="Event Description, max 1000 characters" required></textarea><br>
+                <label for='startTime'>Start Time:</label>
+                <input type='datetime-local' id="startTime" name='startTime' placeholder="Start time" required><br>
+                <label for='endTime'>End Time:</label>
+                <input type='datetime-local' id="endTime" name='endTime' placeholder="End time" required><br>
+            </div>
+            <div style= "display: flex;">
+                <input type='submit' value='Create' class="button" style="width: 100%">
+            </div>
+        </form>
+    </div>
+</div>
+<?php
+if ($errorMessage != "") {
+    echo "<div class='error'>$errorMessage
+</div>
+";
+}
+?>
 </body>
 </html>
