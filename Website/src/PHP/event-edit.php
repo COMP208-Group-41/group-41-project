@@ -157,7 +157,7 @@
         }
 
         //Check existing venues
-        if (checkExistingEvent($name,$mysqlStartTime,$mysqlEndTime,$venueID,$pdo)) {
+        if (checkExistingEvent($name,$mysqlStartDateTime,$mysqlEndDateTime,$venueID,$pdo)) {
             // A event already exists with the same name and start times at the same venue!
             $errorMessage = "An event already exists at this venue with the same name and time!";
             return false;
@@ -165,7 +165,7 @@
 
         $pdo->beginTransaction();
 
-        if (!updateEvent($eventID,$name,$description,$mysqlStartTime,$mysqlEndTime,$pdo)) {
+        if (!updateEvent($eventID,$name,$description,$mysqlStartDateTime,$mysqlEndDateTime,$pdo)) {
             $errorMessage = "Error in editing event!";
             $pdo-rollBack();
             return false;
