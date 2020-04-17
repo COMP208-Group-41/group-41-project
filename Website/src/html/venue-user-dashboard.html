@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang='en-GB'>
+<head>
+    <title>OutOut - Venue Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="../css/venue-user-dashboard.css">
+</head>
+<body>
+<h1>Venues</h1>
+<button class="create-edit-venue">Create/Edit Venue</button>
+<table align="center" border="1px" style="width:600px; line-height:40px;">
+    <t>
+        <th>Venue</th>
+        <th>Upcoming Events</th>
+        <td>
+            <div class="dropdown">
+                <button onclick="dropdown()" class="editbtn">Edit</button>
+                <div id="venueOptions" class="dropdown-content">
+                    <a href="#venue-page">View Venue</a>
+                    <a href="#edit-venue">Edit/Delete Venue</a>
+                </div>
+            </div>
+        </td>
+    </t>
+</table>
+<script>function dropdown() {
+    document.getElementById("venueOptions").classList.toggle("show");
+}
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function (event) {
+    if (!event.target.matches('.editbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
+</script>
+</body>
+</html>
+
+
