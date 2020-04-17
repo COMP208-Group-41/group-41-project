@@ -344,64 +344,130 @@
 ?>
 
 <!DOCTYPE html>
+<html lang='en-GB'>
 <head>
-    <title>OutOut - Edit Event Details</title>
+    <title>OutOut - Edit Venue User Account</title>
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/venue.css">
     <link rel="stylesheet" type="text/css" href="../css/events.css">
 </head>
 <body>
-<form id='EventForm' name='EventForm' method='post' enctype="multipart/form-data">
-    <div>
-        <input type='text' name='name' placeholder="Event Name"  value="<?php echo $name; ?>" required><br>
-        <label for='description'>Event Description:</label>
-        <textarea id='description' name ='description' form='EventForm' placeholder="Event Description, max 1000 characters" required><?php echo $description; ?></textarea><br>
-
-        <p>Date and Time must be in the format: dd-mm-yyyy hh:mm (24 hour time)</p><br>
-
-<!--    TODO: Revert input types to datetime-local -->
-
-        <label for='endTime'>Event Start Time:</label>
-        <input type='datetime-local' id="startTime" name='startTime' placeholder="Start time" value="<?php echo $startTime; ?>" required><br>
-        <label for='endTime'>Event End Time:</label>
-        <input type='datetime-local' id="endTime" name='endTime' placeholder="End time" value="<?php echo $endTime; ?>" required><br>
-<!--    TODO: RESTRICT SIZE OF PICTURE THAT CAN BE UPLOADED -->
-        Event Image: <br>
-        <input type='file' id="Image" name='Image' class='input-file' accept=".jpg">
-        <label for="Image">Upload Image</label>
-
-        <!-- TAG INPUT -->
-        <p>Current Tags: <?php getTags($currentTagIDs,$pdo); ?></p>
-        <label for='tag1'>Add Tags for your event, these are optional but are used to recommend your event to users. Any changes made below will overwrite any existing Tags, If you want to keep the existing Tags then leave the tag fields below empty</label><br>
-        <select name='tag1' id='tag1'>
-            <option value='Optional'>No Tag</option>
-            <?php echoTags($pdo); ?>
-        </select>
-        <select name='tag2' id='tag2'>
-            <option value='Optional'>No Tag</option>
-            <?php echoTags($pdo); ?>
-        </select>
-        <select name='tag3' id='tag3'>
-            <option value='Optional'>No Tag</option>
-            <?php echoTags($pdo); ?>
-        </select>
-        <select name='tag4' id='tag4'>
-            <option value='Optional'>No Tag</option>
-            <?php echoTags($pdo); ?>
-        </select>
-        <select name='tag5' id='tag5'>
-            <option value='Optional'>No Tag</option>
-            <?php echoTags($pdo); ?>
-        </select><br>
+<div class="banner">
+    <img src="../Assets/menu-icon.svg" alt="Menu" width="25" onclick="openNav()" class="menu-image">
+    <img src="../Assets/outout.svg" alt="OutOut" width="120">
+    <img src="../Assets/profile.svg" alt="Profile" width="40">
+</div>
+<div id="mySidenav" class="sidenav">
+    <div class="sidebar-content">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Dashboard</a>
+        <a href="#">Venues</a>
+        <a href="#">Account</a>
+        <a href="#">Contact</a>
     </div>
-    <div style= "display: flex">
-        <input type='password' name='password' autocomplete="off" placeholder="Current Password" required><br>
-        <input type='submit' name='submit' value='Update'>
-<!--        TODO: FILL IN HREF ONCLICK OF CANCEL-->
-        <input type="button" onclick="location.href='BACK TO DASHBOARD OR HOMEPAGE';" value="Cancel" />
+</div>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "200px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+<div class="wrapper">
+    <div class="container">
+        <form id='EventForm' name='EventForm' method='post' enctype="multipart/form-data">
+            <div class="edit-fields">
+                <input type='text' name='name' placeholder="Event Name" value="<?php echo $name; ?>" required>
+                <label for='description'>Event Description:</label>
+                <textarea id='description' name='description' form='EventForm'
+                          placeholder="Event Description, max 1000 characters"
+                          required><?php echo $description; ?></textarea>
+                <!--    TODO: Revert input types to datetime-local -->
+                <label for='endTime'>Event Start Time:</label>
+                <input type='datetime-local' id="startTime" name='startTime' placeholder="Start time"
+                       value="<?php echo $startTime; ?>" required>
+                <label for='endTime'>Event End Time:</label>
+                <input type='datetime-local' id="endTime" name='endTime' placeholder="End time"
+                       value="<?php echo $endTime; ?>" required>
+                <!--    TODO: RESTRICT SIZE OF PICTURE THAT CAN BE UPLOADED -->
+                <input type='file' id="eventImage" name='eventImage' accept="image/*" class="input-file">
+                <label for="eventImage">Upload Image</label>
+                <div style="display: flex; justify-content: center">
+                    <div class="image-preview" id="imagePreview">
+                        <img src="" alt="Image Preview" class="image-preview__image">
+                        <span class="image-preview__default-text">Image Preview</span>
+                    </div>
+                </div>
+
+                <!-- TAG INPUT -->
+                <!-- Script here, if no tags present dont display any of the tag stuff -->
+                <label style="text-align: center; margin-top: 16px;"><b>Current Tags:</b></label>
+                <div style="display: flex; justify-content: center; ">
+                    <div class="tag-container" style="text-align: center">
+                        <?php getTags($currentTagIDs,$pdo); ?>
+                    </div>
+                </div>
+                <label>Add some tags that best describe your event - this will overwrite old tags</label>
+                <select name='tag1' id='tag1'>
+                    <option value='Optional'>No Tag</option>
+                    <?php echoTags($pdo); ?>
+                </select>
+                <select name='tag2' id='tag2'>
+                    <option value='Optional'>No Tag</option>
+                    <?php echoTags($pdo); ?>
+                </select>
+                <select name='tag3' id='tag3'>
+                    <option value='Optional'>No Tag</option>
+                    <?php echoTags($pdo); ?>
+                </select>
+                <select name='tag4' id='tag4'>
+                    <option value='Optional'>No Tag</option>
+                    <?php echoTags($pdo); ?>
+                </select>
+                <select name='tag5' id='tag5'>
+                    <option value='Optional'>No Tag</option>
+                    <?php echoTags($pdo); ?>
+                </select><br>
+            </div>
+            <div class="seperator">
+                <label>Enter current password to allow changes:</label>
+                <input type='password' name='password' required>
+                <input type='submit' name='submit' value='Update' class="button" style="width: 100%">
+
+                <script>
+                    // For Image Preview
+                    const inpFile = document.getElementById("eventImage");
+                    const previewContainer = document.getElementById("imagePreview");
+                    const previewImage = previewContainer.querySelector(".image-preview__image");
+                    const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
+
+                    inpFile.addEventListener("change", function () {
+                        const file = this.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+
+                            previewDefaultText.style.display = "none";
+                            previewImage.style.display = "block";
+
+                            reader.addEventListener("load", function () {
+                                previewImage.setAttribute("src", this.result);
+                            });
+
+                            reader.readAsDataURL(file);
+                        }
+                    });
+                </script>
+        </form>
     </div>
-    <?php
-        if ($errorMessage != "") {
-            echo "<div class='error'>$errorMessage</div>";
-        }
-     ?>
-</form>
+</div>
+<?php
+if ($errorMessage != "") {
+    echo "<div class='error'>$errorMessage
+</div>
+";
+}
+?>
 </body>
+</html>
