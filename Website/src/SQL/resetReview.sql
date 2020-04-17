@@ -10,7 +10,7 @@ CREATE TABLE Review (
     -- Communicate with everyone about character limit on the text input to specify this value here
     ReviewText NVARCHAR(1000),
     ReviewPrice INT NOT NULL,
-    ReviewQuality INT NOT NULL,
+    ReviewAtmosphere INT NOT NULL,
     ReviewSafety INT NOT NULL,
     ReviewQueue INT NOT NULL,
     PRIMARY KEY (ReviewID),
