@@ -25,8 +25,8 @@ body {
     flex: 1;
 }
 
-input  {
-    margin: 0px 0px 20px;
+input {
+    margin: 0px 0px 16px;
     box-sizing: border-box;
     border: 2px solid var(--button-border);
     border-radius: 4px;
@@ -37,7 +37,7 @@ input  {
 }
 
 textarea {
-    margin: 0px 0px 20px;
+    margin: 0px 0px 16px;
     box-sizing: border-box;
     border: 2px solid var(--button-border);
     border-radius: 4px;
@@ -48,6 +48,22 @@ textarea {
     resize: vertical;
     min-height: 65px;
     max-height: 150px;
+}
+
+select {
+    margin: 4px 0px;
+    box-sizing: border-box;
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: var(--body-gray);
+    padding: 12px 20px 12px 10px;
+    color: var(--text);
+}
+
+select option {
+    font-size: 16px;
+    padding: 4px;
 }
 
 input:focus {
@@ -127,4 +143,17 @@ hr {
     border-top: var(--body-gray) solid 2px;
     padding-top: 20px;
     margin-top: 8px;
+}
+
+
+.tag-container {
+    text-align: center;
+    margin-bottom: 16px;
+    width: 30%;
+    border: var(--button-border) solid 2px;
+    border-radius: 4px;
+    font-family: "K2D", sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.5;
 }
