@@ -31,11 +31,11 @@
     $errorMessage = "";
 
     // Gets which event or venue the review is for
-    if (isset($_GET['EventID')){
+    if (isset($_GET['EventID'])){
         $eventID = $_GET['EventID'];
         $getVenueID = eventIDToVenueID($eventID, $pdo);
         $venueID = $getVenueID['VenueID'];
-    } elseif (isset($_GET['VenueID')){
+    } elseif (isset($_GET['VenueID'])){
         $venueID = $_GET['VenueID'];
         $eventID = false;
     } else {
@@ -151,38 +151,38 @@
     <form name='ReviewVenue' method='post'>
       <div>
           <textarea name='Review' id='Review' placeholder="Write your review here..." rows="4" cols="50"></textarea><br>
-          Price <br>
+          <label for='RatingPrice'>Price:</label>
           <select name="RatingPrice" id="RatingPrice" required>
               <option value="5">5</option>
               <option value="4">4</option>
               <option value="3">3</option>
               <option value="2">2</option>
               <option value="1">1</option>
-          </select>
-          Atmosphere <br>
+          </select><br>
+          <label for='RatingAtmosphere'>Atmosphere:</label>
           <select name="RatingAtmosphere" id="RatingAtmosphere" required>
               <option value="5">5</option>
               <option value="4">4</option>
               <option value="3">3</option>
               <option value="2">2</option>
               <option value="1">1</option>
-          </select>
-          Safety <br>
+          </select><br>
+          <label for='RatingSafety'>Safety:</label>
           <select name="RatingSafety" id="RatingSafety" required>
               <option value="5">5</option>
               <option value="4">4</option>
               <option value="3">3</option>
               <option value="2">2</option>
               <option value="1">1</option>
-          </select>
-          Queue Times <br>
+          </select><br>
+          <label for='RatingQueue'>Queue Times:</label>
           <select name="RatingQueue" id="RatingQueue" required>
               <option value="5">5</option>
               <option value="4">4</option>
               <option value="3">3</option>
               <option value="2">2</option>
               <option value="1">1</option>
-          </select>
+          </select><br>
       </div>
 
       <div style= "display: flex">
