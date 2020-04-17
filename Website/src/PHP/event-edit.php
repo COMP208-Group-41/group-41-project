@@ -64,8 +64,6 @@
 
                  $currentTagIDs = getEventTagID($venueID,$pdo);
              }
-        } else {
-            $errorMessage = "No submit!";
         }
 
     } catch (PDOException $e) {
