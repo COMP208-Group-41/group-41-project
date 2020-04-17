@@ -120,7 +120,6 @@
         $createReviewStmt->bindValue(":ReviewSafety",$reviewSafety);
         $createReviewStmt->bindValue(":ReviewAtmosphere",$reviewAtmosphere);
         $createReviewStmt->bindValue(":ReviewQueue",$reviewQueue);
-        echo "$eventID $venueID $userID $reviewDate $reviewText $reviewPrice $reviewSafety $reviewAtmosphere $reviewQueue";
         if ($createReviewStmt->execute()) {
             return true;
         } else {
