@@ -97,7 +97,7 @@ CREATE TABLE UserPreferences (
 CREATE TABLE Review (
     ReviewID INT(10) NOT NULL UNIQUE AUTO_INCREMENT,
     VenueID INT(10) NOT NULL,
-    EventID INT(10),
+    EventID INT(10) NULL,
     UserID INT(10) NOT NULL,
     ReviewDate DATE NOT NULL,
     -- Currently set ReviewText as NVARCHAR(max) which gives it up to 2GB of text apparently and supports unicode
