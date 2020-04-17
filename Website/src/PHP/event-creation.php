@@ -61,7 +61,7 @@
              */
             $_SESSION['EventCreated'] = true;
             $eventID = $_SESSION['eventID'];
-            header("location: events-edit.php?EventID=$eventID");
+            header("location: event-edit.php?EventID=$eventID");
             exit;
         }
 
