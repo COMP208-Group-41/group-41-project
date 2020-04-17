@@ -31,7 +31,7 @@
         $venueID = $getVenueID['VenueID'];
     } elseif (isset($_GET['VenueID'])){
         $venueID = $_GET['VenueID'];
-        $eventID = 0;
+        $eventID = 1;
     } else {
         // If both unset ERROR as no venue or event exists under that name
         $errorMessage = "Error opening review creation form for this venue or event";
@@ -45,7 +45,6 @@
         // Any PDO errors are shown here
         exit("PDO Error: ".$e->getMessage()."<br>");
     }
-
 
 
     function checkInputs($userID,$eventID,$venueID,&$errorMessage,$pdo){
@@ -111,12 +110,8 @@
     }
 
     function createReview($venueID,$eventID,$userID,$reviewDate,$reviewText,$reviewPrice,$reviewSafety,$reviewAtmosphere,$reviewQueue,$pdo){
-        if ($eventID = NULL){
-            $createReviewStmt = $pdo->prepare("INSERT INTO Review (VenueID,EventID,UserID,ReviewDate,ReviewText,ReviewPrice,ReviewQuality,ReviewSafety,ReviewQueue) VALUES (VenueID,EventID,UserID,ReviewDate,ReviewText,ReviewPrice,ReviewQuality,ReviewSafety,ReviewQueue)");
-            $createReviewStmt->bindValue(":EventID",$eventID);
-        } else {
-          $createReviewStmt = $pdo->prepare("INSERT INTO Review (VenueID,UserID,ReviewDate,ReviewText,ReviewPrice,ReviewQuality,ReviewSafety,ReviewQueue) VALUES (VenueID,UserID,ReviewDate,ReviewText,ReviewPrice,ReviewQuality,ReviewSafety,ReviewQueue)");
-        }
+        $createReviewStmt = $pdo->prepare("INSERT INTO Review (VenueID,EventID,UserID,ReviewDate,ReviewText,ReviewPrice,ReviewQuality,ReviewSafety,ReviewQueue) VALUES (VenueID,EventID,UserID,ReviewDate,ReviewText,ReviewPrice,ReviewQuality,ReviewSafety,ReviewQueue)");
+        $createReviewStmt->bindValue(":EventID",$eventID);
         $createReviewStmt->bindValue(":VenueID",$venueID);
         $createReviewStmt->bindValue(":UserID",$userID);
         $createReviewStmt->bindValue(":ReviewDate",$reviewDate);
@@ -131,9 +126,6 @@
             return false;
         }
     }
-
-
-
 ?>
 
 <!DOCTYPE html>
