@@ -64,6 +64,8 @@
 
                  $currentTagIDs = getEventTagID($venueID,$pdo);
              }
+        } else {
+            $errorMessage = "No submit!";
         }
 
     } catch (PDOException $e) {
@@ -187,7 +189,7 @@
 
         // Try uploading image
         if (!empty($_FILES['eventImage']['name'])) {
-            if (!uploadEventImage($venueUserID,$venueID,$EventID,$pdo)) {
+            if (!uploadEventImage($venueUserID,$venueID,$eventID,$pdo)) {
                 $errorMessage = "Error in uploading image!";
                 $pdo->rollBack();
                 return false;
