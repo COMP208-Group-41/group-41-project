@@ -43,7 +43,7 @@
         }
     } catch (PDOException $e) {
         // Any PDO errors are shown here
-        exit("PDO Error: ".$e->getMessage()."<br>");
+        //exit("PDO Error: ".$e->getMessage()."<br>");
     }
 
 
@@ -120,6 +120,7 @@
         $createReviewStmt->bindValue(":ReviewSafety",$reviewSafety);
         $createReviewStmt->bindValue(":ReviewAtmosphere",$reviewAtmosphere);
         $createReviewStmt->bindValue(":ReviewQueue",$reviewQueue);
+        echo "$eventID $venueID $userID $reviewDate $reviewText $reviewPrice $reviewSafety $reviewAtmosphere $reviewQueue";
         if ($createReviewStmt->execute()) {
             return true;
         } else {
