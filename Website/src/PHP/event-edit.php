@@ -1,7 +1,7 @@
 <?php
 
     // TODO: Implement function to convert mysql datetime to html datetime-local
-    // TODO: Implement try catch for datetime-local input checking
+    // TODO: Implement try catch for datetime-local input checking - Coded, needs testing
 
     session_start();
 
