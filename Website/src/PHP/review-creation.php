@@ -39,7 +39,7 @@
 
     try{
         if (isset($_POST['SubmitReview'])){
-          checkInputs($errorMessage,$pdo);
+          checkInputs($userID,$eventID,$venueID,$errorMessage,$pdo);
         }
     } catch (PDOException $e) {
         // Any PDO errors are shown here
