@@ -183,7 +183,7 @@ function validate255($name) {
                 echo $tag['TagName'].", ";
             }
         } else {
-            echo "No Tags for this Venue";
+            echo "No Tags";
         }
 
     }

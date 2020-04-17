@@ -38,7 +38,6 @@
         exit;
     }
 
-
     // Retrive existing values and populate fields
     $result = getEventInfo($eventID,$pdo);
     $venueID = $result['VenueID'];
