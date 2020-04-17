@@ -362,6 +362,8 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/venue.css">
+    <link rel="stylesheet" type="text/css" href="../css/events.css">
+
 </head>
 <body>
 <div class="banner">
@@ -408,9 +410,8 @@
                 <div class="seperator">
                     <h2 class="title">Additional Information</h2>
                 </div>
-                <label>Add Venue Image (must be .jpg and cannot be bigger than 2MB)</label>
                 <input type='file' id="Image" name='Image' class='input-file' accept=".jpg">
-
+                <label for="Image">Add Venue Image (must be .jpg and cannot be bigger than 2MB)</label>
 
 
                 <!-- Script here, if no tags present dont display any of the tag stuff -->
