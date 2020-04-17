@@ -82,7 +82,7 @@
             return false;
         } else {
             $name = trim($_POST['venueName']);
-            if (!validateVenueName($name)) {
+            if (!validate255($name)) {
                 $errorMessage = "The name cannot be more than 255 characters!";
                 return false;
             }
