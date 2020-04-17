@@ -216,7 +216,7 @@
 
 
     function updateEvent($eventID,$name,$description,$startTime,$endTime,$pdo) {
-        $updateEventStmt = $pdo->prepare("UPDATE Event SET  EventName=:EventName, EventDescription=:EventDescription, EventStartTime=:EventStartTime EventEndTime=:EventEndTime WHERE EventID=:EventID");
+        $updateEventStmt = $pdo->prepare("UPDATE Event SET EventName=:EventName, EventDescription=:EventDescription, EventStartTime=:EventStartTime EventEndTime=:EventEndTime WHERE EventID=:EventID");
         $updateEventStmt->bindValue(":EventName",$name);
         $updateEventStmt->bindValue(":EventDescription",$description);
         $updateEventStmt->bindValue(":EventStartTime",$startTime);
@@ -402,5 +402,10 @@
 <!--        TODO: FILL IN HREF ONCLICK OF CANCEL-->
         <input type="button" onclick="location.href='BACK TO DASHBOARD OR HOMEPAGE';" value="Cancel" />
     </div>
+    <?php
+        if ($errorMessage != "") {
+            echo "<div class='error'>$errorMessage</div>";
+        }
+     ?>
 </form>
 </body>
