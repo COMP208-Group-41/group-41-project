@@ -331,23 +331,56 @@
 <html lang='en-GB'>
 <head>
     <title>OutOut - Edit Venue User Account</title>
-    <!-- <link rel="stylesheet" type="text/css" href="../css/venue-edit-user.css"> -->
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/venue.css">
 </head>
 <body>
-<div class="wrapper">
-    <img src="../Assets/outout.svg" alt="OutOut">
-    <form name='EditVenueUserDetails' method='post' style="margin-top: 10px">
-        <div class="edit-fields">
-            <input type='text' name='email' placeholder="Email" value="<?php echo $email; ?>"><br>
-            <input type='password' name='newPassword' placeholder="New Password"><br>
-            <input type='password' name='confirmNewPassword' placeholder="Confirm New Password"><br>
-            <input type='text' name='companyName' placeholder="Change Company Name" value="<?php echo $name; ?>"><br>
-            <input type='text' name='external' placeholder="Venue Website Link" value="<?php echo $external; ?>"><br>
-            <input type='password' name='password' placeholder="Current Password"><br>
-            <!-- require password for any change! -->
-            <input type='submit' name='submit' value='Save'><br>
-        </div>
-    </form>
+<div class="banner" >
+    <img src="../Assets/menu-icon.svg" alt="Menu" width="25" onclick="openNav()" class="menu-image">
+    <img src="../Assets/outout.svg" alt="OutOut" width="100">
+    <img src="../Assets/profile.svg" alt="Profile" width="40" >
+</div>
+<div id="mySidenav" class="sidenav">
+    <div class="sidebar-content">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Dashboard</a>
+        <a href="#">Venues</a>
+        <a href="#">Account</a>
+        <a href="#">Contact</a>
+    </div>
+</div>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "200px";
+    }
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+<div class="background">
+    <div class="wrapper">
+        <h1 class="title">Account Settings</h1>
+        <form name='EditVenueUserDetails' method='post' style="margin-top: 10px">
+            <div class="edit-fields">
+                <label>Email:</label>
+                <input type='text' name='email' value="<?php echo $email; ?>">
+                <label>Password:</label>
+                <input type='password' name='newPassword'>
+                <label>Confirm password:</label>
+                <input type='password' name='confirmNewPassword'>
+                <label>Company name:</label>
+                <input type='text' name='companyName' value="<?php echo $name; ?>">
+                <label>Website link:</label>
+                <input type='text' name='external' value="<?php echo $external; ?>">
+                <div class="seperator">
+                    <label>Enter current password to allow changes:</label>
+                    <input type='password' name='password'>
+                </div>
+                <!-- require password for any change! -->
+                <input type='submit' name='submit' value='Save' class="button">
+            </div>
+        </form>
+    </div>
 </div>
 <?php
     if ($errorMessage != "") {
