@@ -54,28 +54,28 @@
 
         // Check review text
         $reviewText= trim($_POST['Review']);
-        if (!validateDescription($description)) {
+        if (!validateDescription($reviewText)) {
             $errorMessage = "The review cannot be longer than 1000 characters!";
             return false;
         }
 
         // All numeric ratings are validated below
-        $reviewPrice = ($_POST['ReviewPrice']);
+        $reviewPrice = ($_POST['RatingPrice']);
         if (!validationReviewScore($reviewPrice)) {
             $errorMessage = "Error! Review price out of boundries";
             return false;
         }
-        $reviewSafety = ($_POST['ReviewSafety']);
+        $reviewSafety = ($_POST['RatingSafety']);
         if (!validationReviewScore($reviewSafety)) {
             $errorMessage = "Error! Review safety out of boundries";
             return false;
         }
-        $reviewQueue = ($_POST['ReviewQueue']);
+        $reviewQueue = ($_POST['RatingQueue']);
         if (!validationReviewScore($reviewQueue)) {
             $errorMessage = "Error! Review queue out of boundries";
             return false;
         }
-        $reviewAtmosphere = ($_POST['ReviewAtmosphere']);
+        $reviewAtmosphere = ($_POST['RatingAtmosphere']);
         if (!validationReviewScore($reviewAtmosphere)) {
             $errorMessage = "Error! Review atmosphere out of boundries";
             return false;
