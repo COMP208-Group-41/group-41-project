@@ -355,7 +355,7 @@
     <link rel="stylesheet" type="text/css" href="../css/events.css">
 </head>
 <body>
-<form name='EventForm' method='post' enctype="multipart/form-data">
+<form id='EventForm' name='EventForm' method='post' enctype="multipart/form-data">
     <div>
         <input type='text' name='name' placeholder="Event Name"  value="<?php echo $name; ?>" required><br>
         <label for='description'>Event Description:</label>
