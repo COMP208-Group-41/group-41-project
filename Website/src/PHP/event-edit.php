@@ -400,7 +400,7 @@
     </div>
     <div style= "display: flex">
         <input type='password' name='password' autocomplete="off" placeholder="Current Password" required><br>
-        <input type='submit' id='submit' value='Update'>
+        <input type='submit' name='submit' value='Update'>
 <!--        TODO: FILL IN HREF ONCLICK OF CANCEL-->
         <input type="button" onclick="location.href='BACK TO DASHBOARD OR HOMEPAGE';" value="Cancel" />
     </div>
