@@ -1,10 +1,5 @@
 <?php
 
-    /* As with venue-creation, won't have tag entry in this page, or image
-     * upload
-     */
-
-     /* This page will not work on safari or firefox, add checks */
 
     session_start();
 
