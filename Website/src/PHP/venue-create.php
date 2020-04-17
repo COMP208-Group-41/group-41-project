@@ -246,6 +246,7 @@
     <div class="container">
         <form id='CreateVenue' name='CreateVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
             <div class="edit-fields">
+                <h1 class="title">Add a venue</h1>
                 <label>Venue name:</label>
                 <input type='text' name='venueName' required>
                 <label>Open and closing times:</label>
