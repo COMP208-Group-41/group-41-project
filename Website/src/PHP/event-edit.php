@@ -1,6 +1,5 @@
 <?php
 
-    // TODO: Implement function to convert mysql datetime to html datetime-local
     // TODO: Implement try catch for datetime-local input checking - Coded, needs testing
 
     session_start();
@@ -148,7 +147,7 @@
 
         // Check images, if valid then try to add everything to database
 
-        if (!empty($_FILES['eventImage']['name'])) {
+        if (!empty($_FILES['Image']['name'])) {
             if (!checkImage($errorMessage)) {
                 return false;
             }
@@ -186,7 +185,7 @@
         }
 
         // Try uploading image
-        if (!empty($_FILES['eventImage']['name'])) {
+        if (!empty($_FILES['Image']['name'])) {
             if (!uploadEventImage($venueUserID,$venueID,$eventID,$pdo)) {
                 $errorMessage = "Error in uploading image!";
                 $pdo->rollBack();
@@ -206,7 +205,7 @@
             chmod($directory,0755);
             unlink($directory);
         }
-        if (move_uploaded_file($_FILES['eventImage']['tmp_name'],$directory)) {
+        if (move_uploaded_file($_FILES['Image']['tmp_name'],$directory)) {
             return true;
         } else {
             // Error in file upload!
@@ -369,8 +368,8 @@
         <input type='datetime-local' id="endTime" name='endTime' placeholder="End time" value="<?php echo $endTime; ?>" required><br>
 <!--    TODO: RESTRICT SIZE OF PICTURE THAT CAN BE UPLOADED -->
         Event Image: <br>
-        <input type='file' id="eventImage" name='eventImage' class='input-file' accept=".jpg">
-        <label for="eventImage">Upload Image</label>
+        <input type='file' id="Image" name='Image' class='input-file' accept=".jpg">
+        <label for="Image">Upload Image</label>
 
         <!-- TAG INPUT -->
         <p>Current Tags: <?php getTags($currentTagIDs,$pdo); ?></p>

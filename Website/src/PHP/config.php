@@ -152,17 +152,17 @@ function validate255($name) {
     }
 
     function checkImage(&$errorMessage) {
-        if ($_FILES['venueImage']['size'] == 0) {
+        if ($_FILES['Image']['size'] == 0) {
             $errorMessage = "No file selected or the selected file is too large!";
             return false;
         }
 
-        if ($_FILES['venueImage']['error'] != 0) {
+        if ($_FILES['Image']['error'] != 0) {
             $errorMessage = "Error in file upload";
             return false;
         }
 
-        if ($_FILES['venueImage']['type'] != "image/jpeg") {
+        if ($_FILES['Image']['type'] != "image/jpeg") {
             $errorMessage = "File must be a jpeg!";
             return false;
         }
