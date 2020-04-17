@@ -29,7 +29,7 @@
     $eventID = $_GET['EventID'];
     $errorMessage = "";
 
-    $eventToVenueUser = eventToVenueUser($eventID, $pdo);
+    $eventToVenueUser = eventToVenueUser($eventID,$pdo);
     if($eventToVenueUser === false){
       $errorMessage = "Error getting VenueUserID";
     } elseif ($eventToVenueUser != $venueUserID) {

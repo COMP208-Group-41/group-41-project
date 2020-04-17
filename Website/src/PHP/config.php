@@ -130,7 +130,7 @@ function validate255($name) {
         $getVenuesUserStmt = $pdo->prepare("SELECT VenueUserID FROM Venue WHERE VenueID=:VenueID");
         $getVenuesUserStmt->bindValue(":VenueID",$result['VenueID']);
         $getVenuesUserStmt->execute();
-        $result = $getVenuesStmt->fetch();
+        $result = $getVenuesUserStmt->fetch();
         if (sizeof($result) == 0) {
             // Error
             return false;
