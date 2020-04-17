@@ -347,7 +347,6 @@
         <a href="#">Venues</a>
         <a href="#">Account</a>
         <a href="#">Contact</a>
-        <a href="#">Logout</a>
     </div>
 </div>
 <script>
