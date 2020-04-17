@@ -39,7 +39,7 @@
 
     try{
         if (isset($_POST['SubmitReview'])){
-          checkInputs($errorMessage,$pdo);
+          checkInputs($userID,$eventID,$venueID,$errorMessage,$pdo);
         }
     } catch (PDOException $e) {
         // Any PDO errors are shown here
@@ -113,18 +113,18 @@
     function createReview($venueID,$eventID,$userID,$reviewDate,$reviewText,$reviewPrice,$reviewSafety,$reviewAtmosphere,$reviewQueue,$pdo){
         if ($eventID != false){
             $createReviewStmt = $pdo->prepare("INSERT INTO Review (VenueID,EventID,UserID,ReviewDate,ReviewText,ReviewPrice,ReviewQuality,ReviewSafety,ReviewQueue) VALUES (VenueID,EventID,UserID,ReviewDate,ReviewText,ReviewPrice,ReviewQuality,ReviewSafety,ReviewQueue)");
-            $getVenueStmt->bindValue(":EventID",$eventID);
+            $createReviewStmt->bindValue(":EventID",$eventID);
         } else {
           $createReviewStmt = $pdo->prepare("INSERT INTO Review (VenueID,UserID,ReviewDate,ReviewText,ReviewPrice,ReviewQuality,ReviewSafety,ReviewQueue) VALUES (VenueID,UserID,ReviewDate,ReviewText,ReviewPrice,ReviewQuality,ReviewSafety,ReviewQueue)");
         }
-        $getVenueStmt->bindValue(":VenueID",$venueID);
-        $getVenueStmt->bindValue(":UserID",$userID);
-        $getVenueStmt->bindValue(":ReviewDate",$reviewDate);
-        $getVenueStmt->bindValue(":ReviewText",$reviewText);
-        $getVenueStmt->bindValue(":ReviewPrice",$reviewPrice);
-        $getVenueStmt->bindValue(":ReviewSafety",$reviewSafety);
-        $getVenueStmt->bindValue(":ReviewAtmosphere",$reviewAtmosphere);
-        $getVenueStmt->bindValue(":ReviewQueue",$reviewQueue);
+        $createReviewStmt->bindValue(":VenueID",$venueID);
+        $createReviewStmt->bindValue(":UserID",$userID);
+        $createReviewStmt->bindValue(":ReviewDate",$reviewDate);
+        $createReviewStmt->bindValue(":ReviewText",$reviewText);
+        $createReviewStmt->bindValue(":ReviewPrice",$reviewPrice);
+        $createReviewStmt->bindValue(":ReviewSafety",$reviewSafety);
+        $createReviewStmt->bindValue(":ReviewAtmosphere",$reviewAtmosphere);
+        $createReviewStmt->bindValue(":ReviewQueue",$reviewQueue);
         if ($createEventStmt->execute()) {
             return true;
         } else {
