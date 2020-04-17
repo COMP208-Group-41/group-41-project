@@ -157,7 +157,7 @@
         }
 
         //Check existing venues
-        if (checkExistingEvent($name,$mysqlStartDateTime,$mysqlEndDateTime,$venueID,$pdo)) {
+        if (checkExistingEvent($name,$mysqlStartDateTime,$mysqlEndDateTime,$eventID,$pdo)) {
             // A event already exists with the same name and start times at the same venue!
             $errorMessage = "An event already exists at this venue with the same name and time!";
             return false;
@@ -233,12 +233,12 @@
         }
     }
 
-    function checkExistingEvent($name,$startTime,$endTime,$venueID,$pdo) {
-        $checkExistingStmt = $pdo->prepare("SELECT EventID FROM Event WHERE EventName=:EventName AND (EventStartTime=:EventStartTime OR EventEndTime=:EventEndTime) AND VenueID=:VenueID");
+    function checkExistingEvent($name,$startTime,$endTime,$eventID,$pdo) {
+        $checkExistingStmt = $pdo->prepare("SELECT EventID FROM Event WHERE EventName=:EventName AND (EventStartTime=:EventStartTime OR EventEndTime=:EventEndTime) AND EventID<>:EventID");
         $checkExistingStmt->bindValue(":EventName",$name);
         $checkExistingStmt->bindValue(":EventStartTime",$startTime);
         $checkExistingStmt->bindValue(":EventEndTime",$endTime);
-        $checkExistingStmt->bindValue(":VenueID",$venueID);
+        $checkExistingStmt->bindValue(":EventID",$eventID);
         $checkExistingStmt->execute();
         if ($checkExistingStmt->rowCount() > 0) {
             // A event exists with the same name and time and at the same venue!
