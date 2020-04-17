@@ -78,7 +78,7 @@
             return false;
         } else {
             $name = trim($_POST['venueName']);
-            if (!validateVenueName($name)) {
+            if (!validate255($name)) {
                 $errorMessage = "The name cannot be more than 255 characters!";
                 return false;
             }
@@ -103,7 +103,7 @@
         } else {
             $address = trim($_POST['venueLocation']);
             // Using the same validation as the venue name for length limit
-            if (!validateVenueName($address)) {
+            if (!validate255($address)) {
                 $errorMessage = "The address cannot be more than 255 characters!";
                 return false;
             }
@@ -146,15 +146,6 @@
         $pdo->commit();
         // Everything completed successfully! return true
         return true;
-    }
-
-    /* If the description is longer than 1000 bytes then it is not valid */
-    function validateDescription($description) {
-        if (strlen($description) <= 1000) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /* If the time info is longer than 300 bytes then it is not valid */

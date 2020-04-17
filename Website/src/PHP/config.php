@@ -62,7 +62,7 @@ function checkVenueEmailExists($email,$pdo) {
 /* validateVenueName returns true if the name given does not exceed 255
  * characters and returns false if it does
  */
-function validateVenueName($name) {
+function validate255($name) {
     if (strlen($name) <= 255) {
         return true;
     } else {
@@ -84,6 +84,108 @@ function validateVenueName($name) {
         } else {
             return false;
         }
+    }
+
+    /* If the description is longer than 1000 bytes then it is not valid */
+    function validateDescription($description) {
+        if (strlen($description) <= 1000) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function getVenues($venueUserID,$pdo) {
+        $getVenuesStmt = $pdo->prepare("SELECT VenueID,VenueName FROM Venue WHERE VenueUserID=:VenueUserID");
+        $getVenuesStmt->bindValue(":VenueUserID",$venueUserID);
+        $getVenuesStmt->execute();
+        $results = $getVenuesStmt->fetchAll();
+        if (sizeof($results) == 0) {
+            // Venue User has no venues, show error message!
+            return false;
+        } else {
+            return $results;
+        }
+
+    }
+
+    function getEvents($venueID,$pdo) {
+        $getVenuesStmt = $pdo->prepare("SELECT EventID,EventName FROM Event WHERE VenueID=:VenueID");
+        $getVenuesStmt->bindValue(":VenueID",$venueID);
+        $getVenuesStmt->execute();
+        $results = $getVenuesStmt->fetchAll();
+        if (sizeof($results) == 0) {
+            // Venue has no events, show error message!
+            return false;
+        } else {
+            return $results;
+        }
+    }
+
+    function eventToVenueUser($eventID,$pdo) {
+        $getVenuesStmt = $pdo->prepare("SELECT VenueID FROM Event WHERE EventID=:EventID");
+        $getVenuesStmt->bindValue(":EventID",$eventID);
+        $getVenuesStmt->execute();
+        $result = $getVenuesStmt->fetch();
+        $getVenuesUserStmt = $pdo->prepare("SELECT VenueUserID FROM Venue WHERE VenueID=:VenueID");
+        $getVenuesUserStmt->bindValue(":VenueID",$result['VenueID']);
+        $getVenuesUserStmt->execute();
+        $result = $getVenuesUserStmt->fetch();
+        if (sizeof($result) == 0) {
+            // Error
+            return false;
+        } else {
+            return $result;
+        }
+    }
+
+    function echoVenues($venues) {
+        foreach ($venues as $row) {
+            echo "<option value=".$row['VenueID'].">".$row['VenueName']."</option>";
+        }
+    }
+
+    function echoEvents($events) {
+        foreach ($events as $row) {
+            echo "<option value=".$row['EventID'].">".$row['EventName']."</option>";
+        }
+    }
+
+    function checkImage(&$errorMessage) {
+        if ($_FILES['Image']['size'] == 0) {
+            $errorMessage = "No file selected or the selected file is too large!";
+            return false;
+        }
+
+        if ($_FILES['Image']['error'] != 0) {
+            $errorMessage = "Error in file upload";
+            return false;
+        }
+
+        if ($_FILES['Image']['type'] != "image/jpeg") {
+            $errorMessage = "File must be a jpeg!";
+            return false;
+        }
+
+        return true;
+    }
+
+    /* Get the existing tag Names from the Tag table, this relies on the
+     * getTagID function being called at the top of the code
+     */
+    function getTags($tagIDs,$pdo) {
+        if (sizeof($tagIDs) > 0) {
+            foreach ($tagIDs as $tagID) {
+                $getTagNameStmt = $pdo->prepare("SELECT TagName FROM Tag WHERE TagID=:TagID");
+                $getTagNameStmt->bindValue(":TagID",$tagID['TagID']);
+                $getTagNameStmt->execute();
+                $tag = $getTagNameStmt->fetch();
+                echo $tag['TagName'].", ";
+            }
+        } else {
+            echo "No Tags";
+        }
+
     }
 
 

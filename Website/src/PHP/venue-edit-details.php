@@ -28,6 +28,7 @@
     if (!checkVenueUserAllowed($venueID,$venueUserID,$pdo)) {
         // User is not allowed to edit!
         header("location: venue-home.php");
+        exit;
     }
 
     // First get all existing values and populate fields
@@ -81,7 +82,7 @@
             return false;
         } else {
             $name = trim($_POST['venueName']);
-            if (!validateVenueName($name)) {
+            if (!validate255($name)) {
                 $errorMessage = "The name cannot be more than 255 characters!";
                 return false;
             }
@@ -106,7 +107,7 @@
             return false;
         } else {
             $address = trim($_POST['venueLocation']);
-            if (!validateVenueName($address)) {
+            if (!validate255($address)) {
                 $errorMessage = "The address cannot be more than 255 characters!";
                 return false;
             }
@@ -142,8 +143,8 @@
         }
 
         // Check images, if valid then try to add everything to database
-        if (!empty($_FILES['venueImage']['name'])) {
-            if (!checkImage($venueUserID,$errorMessage)) {
+        if (!empty($_FILES['Image']['name'])) {
+            if (!checkImage($errorMessage)) {
                 return false;
             }
         }
@@ -173,7 +174,7 @@
             }
         }
         // Try uploading image
-        if (!empty($_FILES['venueImage']['name'])) {
+        if (!empty($_FILES['Image']['name'])) {
             if (!uploadImage($venueUserID,$venueID,$pdo)) {
                 $errorMessage = "Error in uploading image!";
                 $pdo->rollBack();
@@ -184,15 +185,6 @@
         // Everything completed successfully! return true
         $pdo->commit();
         return true;
-    }
-
-    /* If the description is longer than 1000 characters then it is not valid */
-    function validateDescription($description) {
-        if (strlen($description) <= 1000) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     function validateTimes($times) {
@@ -256,24 +248,6 @@
         return $tags;
     }
 
-    function checkImage($venueUserID,&$errorMessage) {
-        if ($_FILES['venueImage']['size'] == 0) {
-            $errorMessage = "No file selected or the selected file is too large!";
-            return false;
-        }
-
-        if ($_FILES['venueImage']['error'] != 0) {
-            $errorMessage = "Error in file upload";
-            return false;
-        }
-
-        if ($_FILES['venueImage']['type'] != "image/jpeg") {
-            $errorMessage = "File must be a jpeg!";
-            return false;
-        }
-
-        return true;
-    }
 
     function uploadImage($venueUserID,$venueID,$pdo) {
         // Remove any existing file first
@@ -282,30 +256,12 @@
             chmod($directory,0755);
             unlink($directory);
         }
-        if (move_uploaded_file($_FILES['venueImage']['tmp_name'],$directory)) {
+        if (move_uploaded_file($_FILES['Image']['tmp_name'],$directory)) {
             return true;
         } else {
             // Error in file upload!
             return false;
         }
-    }
-
-    /* Get the existing tag Names from the Tag table, this relies on the
-     * getTagID function being called at the top of the code
-     */
-    function getTags($tagIDs,$pdo) {
-        if (sizeof($tagIDs) > 0) {
-            foreach ($tagIDs as $tagID) {
-                $getTagNameStmt = $pdo->prepare("SELECT TagName FROM Tag WHERE TagID=:TagID");
-                $getTagNameStmt->bindValue(":TagID",$tagID['TagID']);
-                $getTagNameStmt->execute();
-                $tag = $getTagNameStmt->fetch();
-                echo $tag['TagName'].", ";
-            }
-        } else {
-            echo "No Tags for this Venue";
-        }
-
     }
 
     function getTagID($venueID,$pdo) {
@@ -423,8 +379,8 @@
 
             <h2>Additional Information</h2>
 
-            <input type='file' id="venueImage" name='venueImage' class='input-file' accept=".jpg">
-            <label for="venueImage">Add Venue Image (must be .jpg and cannot be bigger than 2MB)</label><br>
+            <input type='file' id="Image" name='Image' class='input-file' accept=".jpg">
+            <label for="Image">Add Venue Image (must be .jpg and cannot be bigger than 2MB)</label><br>
             <p>Current Tags: <?php getTags($currentTagIDs,$pdo); ?></p>
             <label for='tag1'>Add Tags for your venue, these are optional but are used to recommend your venue to users. Any changes made below will overwrite any existing Tags, If you want to keep the existing Tags then leave the tag fields below empty</label><br>
             <select name='tag1' id='tag1'>

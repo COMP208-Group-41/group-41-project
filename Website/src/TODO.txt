@@ -1,0 +1,11 @@
+TODO: Fully implement events-edit page (at the moment only html, but might want to take html from event-create) (MOSTLY COMPLETE)
+TODO: Further test event-creation.php (CAN'T TEST DON'T HAVE DB ACCESS)
+TODO: Add a check to see if there is an existing event with the same name and start and end times as the one being created/edited by the user, if so then don't let them do it! See venue-create for reference
+TODO: Test pages on firefox and safari if possible to see how input fields change
+TODO: for the normal user registration page the date of birth input will have the same issue on safari and firefox because the same input type is used, use Try Catches and DateTime and date types to ensure errors do not occur with this code
+TODO: Communicate with Dan about progress with the css and navbar implementation
+
+If you have any issues then I might be able to help before 1pm but maybe not, I definitely will not be available from 2pm until 6pm.
+Best of luck, apologies in advance for my PHP code in event-creation
+
+pages can be accessed at https://student.csc.liv.ac.uk/~sgstribe/test/php/events/event-creation for the create page (I am manually setting the $_SESSION variables so you don't need to log in first)
