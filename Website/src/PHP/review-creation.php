@@ -110,7 +110,7 @@
     }
 
     function createReview($venueID,$eventID,$userID,$reviewDate,$reviewText,$reviewPrice,$reviewSafety,$reviewAtmosphere,$reviewQueue,$pdo){
-        $createReviewStmt = $pdo->prepare("INSERT INTO Review (VenueID,EventID,UserID,ReviewDate,ReviewText,ReviewPrice,ReviewQuality,ReviewSafety,ReviewQueue) VALUES (:VenueID,:EventID,:UserID,:ReviewDate,:ReviewText,:ReviewPrice,:ReviewQuality,:ReviewSafety,:ReviewQueue)");
+        $createReviewStmt = $pdo->prepare("INSERT INTO Review (VenueID,EventID,UserID,ReviewDate,ReviewText,ReviewPrice,ReviewAtmosphere,ReviewSafety,ReviewQueue) VALUES (:VenueID,:EventID,:UserID,:ReviewDate,:ReviewText,:ReviewPrice,:ReviewAtmosphere,:ReviewSafety,:ReviewQueue)");
         $createReviewStmt->bindValue(":EventID",$eventID);
         $createReviewStmt->bindValue(":VenueID",$venueID);
         $createReviewStmt->bindValue(":UserID",$userID);
