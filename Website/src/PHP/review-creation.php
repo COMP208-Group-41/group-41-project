@@ -125,7 +125,7 @@
         $createReviewStmt->bindValue(":ReviewSafety",$reviewSafety);
         $createReviewStmt->bindValue(":ReviewAtmosphere",$reviewAtmosphere);
         $createReviewStmt->bindValue(":ReviewQueue",$reviewQueue);
-        if ($createEventStmt->execute()) {
+        if ($createReviewStmt->execute()) {
             return true;
         } else {
             return false;
