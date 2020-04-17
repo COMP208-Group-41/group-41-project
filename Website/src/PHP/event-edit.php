@@ -218,7 +218,7 @@
 
 
     function updateEvent($eventID,$name,$description,$startTime,$endTime,$pdo) {
-        $updateEventStmt = $pdo->prepare("UPDATE Event SET EventName=:EventName, EventDescription=:EventDescription, EventStartTime=:EventStartTime EventEndTime=:EventEndTime WHERE EventID=:EventID");
+        $updateEventStmt = $pdo->prepare("UPDATE Event SET EventName=:EventName, EventDescription=:EventDescription, EventStartTime=:EventStartTime, EventEndTime=:EventEndTime WHERE EventID=:EventID");
         $updateEventStmt->bindValue(":EventName",$name);
         $updateEventStmt->bindValue(":EventDescription",$description);
         $updateEventStmt->bindValue(":EventStartTime",$startTime);
