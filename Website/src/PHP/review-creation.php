@@ -49,7 +49,7 @@
 
 
     function checkInputs($userID,$eventID,$venueID,&$errorMessage,$pdo){
-        $reviewDate = new DateTime("now");
+        $reviewDate = date("Y-m-d");
 
         // Check review text
         $reviewText= trim($_POST['Review']);
