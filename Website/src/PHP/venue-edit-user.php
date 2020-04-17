@@ -248,7 +248,7 @@
             $newName = trim($_POST['companyName']);
 
             // If the new name given is not valid then return false
-            if (!validateVenueName($newName)) {
+            if (!validate255($newName)) {
                 $errorMessage = "Name of company cannot be more than 255 characters!";
                 return false;
             }

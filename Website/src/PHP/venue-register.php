@@ -35,7 +35,7 @@
                         } else {
                             $hashedPassword = passwordHasher($password);
                             $name = trim($_POST['nameOfCompany']);
-                            if (!validateVenueName($name)) {
+                            if (!validate255($name)) {
                                 $nameError = 'Name of Company cannot be more than 255 characters!';
                             } else {
                                 if (createUser($email,$hashedPassword,$name,$pdo)) {
