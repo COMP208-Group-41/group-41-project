@@ -81,13 +81,6 @@
             return false;
         }
 
-        //Check existing venues
-        if (checkExistingEvent($name,$startTime,$endTime,$venueID,$pdo)) {
-            // A event already exists with the same name and start times at the same venue!
-            $errorMessage = "An event already exists at this venue with the same name and time!";
-            return false;
-        }
-
         if (!(isset($_POST['eventName']) && !empty(trim($_POST['eventName'])))) {
             $errorMessage = "Please enter a name for the event!";
             return false;
@@ -161,6 +154,13 @@
             if (!checkImage($errorMessage)) {
                 return false;
             }
+        }
+
+        //Check existing venues
+        if (checkExistingEvent($name,$mysqlStartTime,$mysqlEndTime,$venueID,$pdo)) {
+            // A event already exists with the same name and start times at the same venue!
+            $errorMessage = "An event already exists at this venue with the same name and time!";
+            return false;
         }
 
         $pdo->beginTransaction();
