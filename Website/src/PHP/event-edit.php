@@ -30,11 +30,12 @@
     $errorMessage = "";
 
     $eventToVenueUser = eventToVenueUser($eventID,$pdo);
+    $eventToVenueUser = $eventToVenueUser['VenueUserID'];
     if($eventToVenueUser === false){
       $errorMessage = "Error getting VenueUserID";
     } elseif ($eventToVenueUser != $venueUserID) {
-      header("location: venue-home.php");
-      exit;
+        header("location: venue-home.php");
+        exit;
     }
 
 
