@@ -360,59 +360,102 @@
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
-    <title><?php echo $name; ?></title>
-    <link rel="stylesheet" type="text/css" href="../css/venue-edit-details.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/venue.css">
 </head>
 <body>
+<div class="banner">
+    <img src="../Assets/menu-icon.svg" alt="Menu" width="25" onclick="openNav()" class="menu-image">
+    <img src="../Assets/outout.svg" alt="OutOut" width="100">
+    <img src="../Assets/profile.svg" alt="Profile" width="40">
+</div>
+<div id="mySidenav" class="sidenav">
+    <div class="sidebar-content">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Dashboard</a>
+        <a href="#">Venues</a>
+        <a href="#">Account</a>
+        <a href="#">Contact</a>
+    </div>
+</div>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "200px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
 <div class="wrapper">
-    <img src="../Assets/outout.svg" alt="OutOut">
-    <form id='CreateVenue' name='CreateVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
-        <div class="edit-fields">
-            <label for='venueName'>Venue Name:</label>
-            <input type='text' id='venueName' name='venueName' placeholder="Venue Name" value="<?php echo $name; ?>"><br>
-            <label for='times'>Time Information:</label>
-            <textarea id='times' name='times' form='CreateVenue' placeholder="Venue Opening and Closing Times"><?php echo $times; ?></textarea><br>
-            <label for='venueLocation'>Location Information:</label>
-            <textarea id='venueLocation' name='venueLocation' form='CreateVenue' placeholder="Venue Address and Location details, no more than 255 characters"><?php echo $address; ?></textarea><br>
-            <label for='description'>Venue Description:</label>
-            <textarea id='description' name ='description' form='CreateVenue' placeholder="Venue Description"><?php echo $description; ?></textarea><br>
+    <div class="container">
+        <h1 class="title"><?php echo $name; ?></h1>
+        <form id='CreateVenue' name='CreateVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
+            <div class="edit-fields">
+                <label for='venueName'>Venue Name:</label>
+                <input type='text' id='venueName' name='venueName' placeholder="Venue Name"
+                       value="<?php echo $name; ?>">
+                <label for='times'>Time Information:</label>
+                <textarea id='times' name='times'
+                          form='CreateVenue'
+                          placeholder="Venue Opening and Closing Times"><?php echo $times; ?></textarea>
+                <label for='venueLocation'>Location Information:</label>
+                <textarea id='venueLocation' name='venueLocation' form='CreateVenue'
+                          placeholder="Venue Address and Location details, no more than 255 characters"><?php echo $address; ?></textarea>
+                <label for='description'>Venue Description:</label>
+                <textarea id='description' name='description' form='CreateVenue'
+                          placeholder="Venue Description"><?php echo $description; ?></textarea>
+                <div class="seperator">
+                    <h2 class="title">Additional Information</h2>
+                </div>
+                <label>Add Venue Image (must be .jpg and cannot be bigger than 2MB)</label>
+                <input type='file' id="Image" name='Image' class='input-file' accept=".jpg">
 
-            <h2>Additional Information</h2>
 
-            <input type='file' id="Image" name='Image' class='input-file' accept=".jpg">
-            <label for="Image">Add Venue Image (must be .jpg and cannot be bigger than 2MB)</label><br>
-            <p>Current Tags: <?php getTags($currentTagIDs,$pdo); ?></p>
-            <label for='tag1'>Add Tags for your venue, these are optional but are used to recommend your venue to users. Any changes made below will overwrite any existing Tags, If you want to keep the existing Tags then leave the tag fields below empty</label><br>
-            <select name='tag1' id='tag1'>
-                <option value='Optional'>No Tag</option>
-                <?php echoTags($pdo); ?>
-            </select>
-            <select name='tag2' id='tag2'>
-                <option value='Optional'>No Tag</option>
-                <?php echoTags($pdo); ?>
-            </select>
-            <select name='tag3' id='tag3'>
-                <option value='Optional'>No Tag</option>
-                <?php echoTags($pdo); ?>
-            </select>
-            <select name='tag4' id='tag4'>
-                <option value='Optional'>No Tag</option>
-                <?php echoTags($pdo); ?>
-            </select>
-            <select name='tag5' id='tag5'>
-                <option value='Optional'>No Tag</option>
-                <?php echoTags($pdo); ?>
-            </select><br>
-            <input type='password' name='password' placeholder="Current Password"><br>
 
-            <input type='submit' name='submit' value='Add Venue'>
-        </div>
-    </form>
+                <!-- Script here, if no tags present dont display any of the tag stuff -->
+                <label style="text-align: center; margin-top: 16px;"><b>Current Tags:</b></label>
+                <div style="display: flex; justify-content: center; ">
+                    <div class="tag-container" style="text-align: center">
+                        <?php getTags($currentTagIDs,$pdo); ?>
+                    </div>
+                </div>
+
+                <label for='tag1'>Add some tags that best describe your venue - this will overwrite old tags</label>
+                <select name='tag1' id='tag1'>
+                    <option value='Optional'>No Tag</option>
+                    <?php echoTags($pdo); ?>
+                </select>
+                <select name='tag2' id='tag2'>
+                    <option value='Optional'>No Tag</option>
+                    <?php echoTags($pdo); ?>
+                </select>
+                <select name='tag3' id='tag3'>
+                    <option value='Optional'>No Tag</option>
+                    <?php echoTags($pdo); ?>
+                </select>
+                <select name='tag4' id='tag4'>
+                    <option value='Optional'>No Tag</option>
+
+                    <?php echoTags($pdo); ?>
+                </select>
+                <select name='tag5' id='tag5' style="margin-bottom: 16px">
+                    <option value='Optional'>No Tag</option>
+                    <?php echoTags($pdo); ?>
+                </select>
+                <div class="seperator">
+                    <label>Enter current password to allow changes:</label>
+                    <input type='password' name='password' required>
+                </div>
+                <input type='submit' name='submit' value='Save changes' class="button" style="width: 100%">
+            </div>
+        </form>
+    </div>
 </div>
 <?php
-    if ($errorMessage != "") {
-        echo "<div class='error'>$errorMessage</div>";
-    }
+if ($errorMessage != "") {
+    echo "<div class='error'>$errorMessage</div>";
+}
 ?>
 </body>
 </html>
