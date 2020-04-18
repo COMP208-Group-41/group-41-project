@@ -40,7 +40,9 @@
     if ($result['UserID'] != $userID) {
         // User is not allowed to edit someone elses page!
         // TODO: THIS IS THE LINK THAT NEEDS DECIDING
-        header("location: ");
+        $_SESSION['message'] = "You are not allowed to edit someone else's review!";
+        header("location: home.php");
+        exit;
     }
     $reviewText = $result['ReviewText'];
     $reviewPrice = $result['ReviewPrice'];
