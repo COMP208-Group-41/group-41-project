@@ -143,6 +143,7 @@
 ?>
 
 <!DOCTYPE html>
+<html>
   <head>
     <title>OutOut - Edit Review</title>
     <link rel="stylesheet" type="text/css" href="../css/reviews.css">

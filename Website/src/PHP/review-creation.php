@@ -121,6 +121,7 @@
 ?>
 
 <!DOCTYPE html>
+<html>
   <head>
     <title>OutOut - Submit Review</title>
     <link rel="stylesheet" type="text/css" href="../css/reviews.css">
