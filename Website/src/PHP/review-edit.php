@@ -50,16 +50,14 @@
 
     try{
         if (isset($_POST['SubmitReview'])){
-          checkInputs($userID,$eventID,$venueID,$errorMessage,$pdo);
+          checkInputs($reviewID,$errorMessage,$pdo);
         }
     } catch (PDOException $e) {
         // Any PDO errors are shown here
         exit("PDO Error: ".$e->getMessage()."<br>");
     }
 
-
-
-    function checkInputs($userID,$eventID,$venueID,&$errorMessage,$pdo){
+    function checkInputs($reviewID,&$errorMessage,$pdo){
         $reviewDate = date("Y-m-d");
 
         // Check review text
@@ -118,7 +116,7 @@
 
 <!DOCTYPE html>
   <head>
-    <title>OutOut - Submit Review</title>
+    <title>OutOut - Edit Review</title>
     <link rel="stylesheet" type="text/css" href="../css/reviews.css">
   </head>
   <body>

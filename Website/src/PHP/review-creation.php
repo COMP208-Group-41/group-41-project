@@ -46,13 +46,48 @@
         exit("PDO Error: ".$e->getMessage()."<br>");
     }
 
-    // Checks review scores are within suitable boundries
-    function validationReviewScore($reviewScore){
-        if ($reviewScore < 1 || $reviewScore > 5){
-          return false;
-        } else {
-          return true;
+    function checkInputs($userID,$eventID,$venueID,&$errorMessage,$pdo){
+        $reviewDate = date("Y-m-d");
+
+        // Check review text
+        $reviewText= trim($_POST['Review']);
+        if (!validateDescription($reviewText)) {
+            $errorMessage = "The review cannot be longer than 1000 characters!";
+            return false;
         }
+
+        // All numeric ratings are validated below
+        $reviewPrice = ($_POST['RatingPrice']);
+        if (!validationReviewScore($reviewPrice)) {
+            $errorMessage = "Error! Review price out of boundries";
+            return false;
+        }
+        $reviewSafety = ($_POST['RatingSafety']);
+        if (!validationReviewScore($reviewSafety)) {
+            $errorMessage = "Error! Review safety out of boundries";
+            return false;
+        }
+        $reviewQueue = ($_POST['RatingQueue']);
+        if (!validationReviewScore($reviewQueue)) {
+            $errorMessage = "Error! Review queue out of boundries";
+            return false;
+        }
+        $reviewAtmosphere = ($_POST['RatingAtmosphere']);
+        if (!validationReviewScore($reviewAtmosphere)) {
+            $errorMessage = "Error! Review atmosphere out of boundries";
+            return false;
+        }
+
+        // Al valid, transaction attempted
+        $pdo->beginTransaction();
+        if (!createReview($venueID,$eventID,$userID,$reviewDate,$reviewText,$reviewPrice,$reviewSafety,$reviewAtmosphere,$reviewQueue,$pdo)) {
+            $errorMessage = "Error in inserting review into database!";
+            $pdo->rollBack();
+            return false;
+        }
+        $pdo->commit();
+        // Everything completed successfully, return true!
+        return true;
     }
 
 
