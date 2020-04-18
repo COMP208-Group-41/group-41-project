@@ -91,8 +91,8 @@
 
         // Al valid, transaction attempted
         $pdo->beginTransaction();
-        if (!createReview($venueID,$eventID,$userID,$reviewDate,$reviewText,$reviewPrice,$reviewSafety,$reviewAtmosphere,$reviewQueue,$pdo)) {
-            $errorMessage = "Error in inserting review into database!";
+        if (!updateReview($reviewID,$reviewDate,$reviewText,$reviewPrice,$reviewSafety,$reviewAtmosphere,$reviewQueue,$pdo)) {
+            $errorMessage = "Error in editing review in database!";
             $pdo->rollBack();
             return false;
         }
@@ -110,6 +110,25 @@
         $getReviewStmt->bindValue(":ReviewID",$reviewID);
         $getReviewStmt->execute();
         return $getReviewStmt->fetch();
+    }
+
+    // Update the existing review in the database
+    function updateReview($reviewID,$reviewDate,$reviewText,$reviewPrice,$reviewSafety,$reviewAtmosphere,$reviewQueue,$pdo) {
+        $updateReviewStmt = $pdo->prepare("UPDATE Review SET ReviewDate=:ReviewDate, ReviewText=:ReviewText, ReviewPrice=:ReviewPrice, ReviewSafety=:ReviewSafety, ReviewAtmosphere=:ReviewAtmosphere, ReviewQueue=:ReviewQueue WHERE ReviewID=:ReviewID");
+        $updateReviewStmt->bindValue(":ReviewDate",$reviewDate);
+        $updateReviewStmt->bindValue(":ReviewText",$reviewText);
+        $updateReviewStmt->bindValue(":ReviewPrice",$reviewPrice);
+        $updateReviewStmt->bindValue(":ReviewSafety",$reviewSafety);
+        $updateReviewStmt->bindValue(":ReviewAtmosphere",$reviewAtmosphere);
+        $updateReviewStmt->bindValue(":ReviewQueue",$reviewQueue);
+        $updateReviewStmt->bindValue(":ReviewID",$reviewID);
+        if (!$updateReviewStmt->execute()) {
+            // Error in update
+            return false;
+        } else {
+            // Values updated successfully
+            return true;
+        }
     }
 
 ?>
