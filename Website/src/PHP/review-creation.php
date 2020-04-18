@@ -156,7 +156,7 @@
     function checkVenueEventExists($eventID,$venueID,$pdo) {
         if ($eventID == 1) {
             // Just check venue exists
-            $checkVenueExists = $pdo("SELECT VenueID FROM Venue WHERE VenueID=:VenueID");
+            $checkVenueExists = $pdo->prepare("SELECT VenueID FROM Venue WHERE VenueID=:VenueID");
             $checkVenueExists->bindValue(":VenueID",$venueID);
             $checkVenueExists->execute();
             if ($checkVenueExists->rowcount() == 0) {
