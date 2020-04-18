@@ -167,6 +167,11 @@
       <div style= "display: flex">
           <input type='submit' name='SubmitReview' value='Submit'>
       </div>
+      <?php
+          if ($errorMessage != "") {
+              echo "<div class='error'>$errorMessage</div>";
+          }
+       ?>
     </form>
   </body>
 </html>
