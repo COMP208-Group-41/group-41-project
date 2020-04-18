@@ -50,7 +50,16 @@
 
     try{
         if (isset($_POST['SubmitReview'])){
-          checkInputs($reviewID,$errorMessage,$pdo);
+          if (checkInputs($reviewID,$errorMessage,$pdo)) {
+              $errorMessage = "Review Updated successfully!";
+              // Update values on the page after successful update
+              $result = getReviewInfo($reviewID,$pdo);
+              $reviewText = $result['ReviewText'];
+              $reviewPrice = $result['ReviewPrice'];
+              $reviewAtmosphere = $result['ReviewAtmosphere'];
+              $reviewSafety = $result['ReviewSafety'];
+              $reviewQueue = $result['ReviewQueue'];
+          }
         }
     } catch (PDOException $e) {
         // Any PDO errors are shown here

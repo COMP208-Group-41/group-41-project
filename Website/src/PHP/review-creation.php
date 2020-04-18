@@ -39,7 +39,10 @@
 
     try{
         if (isset($_POST['SubmitReview'])){
-          checkInputs($userID,$eventID,$venueID,$errorMessage,$pdo);
+          if (checkInputs($userID,$eventID,$venueID,$errorMessage,$pdo)) {
+              // TODO: After the review is created successfully, redirect to
+              // appropriate page (ideally showing success message or similar)
+          }
         }
     } catch (PDOException $e) {
         // Any PDO errors are shown here
