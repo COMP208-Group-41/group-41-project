@@ -51,8 +51,7 @@
                                      } else {
                                          // sendVerificationEmail($email,$hash);
                                          // Verification not working so set verified to true
-                                         $_SESSION['verified'] = true;
-
+                                         $_SESSION['message'] = "Venue Account Created Successfully!";
                                          header('location: venue-login.php');
                                          exit;
                                      }
@@ -170,6 +169,11 @@ if ($nameError != '') {
  */
 if ($createError != '') {
     echo "<div class='error'>$createError</div>";
+}
+
+if (isset($_SESSION['message'])) {
+    echo "<div class='success'>".$_SESSION['message']."</div>";
+    unset($_SESSION['message']);
 }
 ?>
 

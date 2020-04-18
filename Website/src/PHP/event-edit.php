@@ -1,7 +1,5 @@
 <?php
 
-    // TODO: Implement try catch for datetime-local input checking - Coded, needs testing
-
     session_start();
 
     if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
@@ -461,13 +459,15 @@
                 </script>
         </form>
     </div>
-</div>
-<?php
-if ($errorMessage != "") {
-    echo "<div class='error'>$errorMessage
-</div>
-";
-}
-?>
+</form>
+  <?php
+        if ($errorMessage != "") {
+            echo "<div class='error'>$errorMessage</div>";
+        }
+        if (isset($_SESSION['message'])) {
+            echo "<div class='success'>".$_SESSION['message']."</div>";
+            unset($_SESSION['message']);
+        }
+     ?>
 </body>
 </html>

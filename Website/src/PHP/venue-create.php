@@ -38,11 +38,10 @@
              */
              if (checkInputs($venueUserID,$errorMessage,$pdo)) {
                  /* If everything is valid and the venue has been added to the
-                  * db then VenueCreated session variable is set to true (to
-                  * show message on the next page) and the user is redirected
+                  * db then the user is redirected
                   * to the edit venue page to fill in additional details
                   */
-                 $_SESSION['VenueCreated'] = true;
+                 $_SESSION['message'] = "Venue Created successfully!";
                  $venueID = $_SESSION['venueID'];
                  header("location: venue-edit-details.php?venueID=$venueID");
                  exit;
@@ -276,9 +275,13 @@
     </div>
 </div>
 <?php
-if ($errorMessage != "") {
-    echo "<div class='error'>$errorMessage</div>";
-}
+    if ($errorMessage != "") {
+        echo "<div class='error'>$errorMessage</div>";
+    }
+    if (isset($_SESSION['message'])) {
+        echo "<div class='success'>".$_SESSION['message']."</div>";
+        unset($_SESSION['message']);
+    }
 ?>
 </body>
 </html>

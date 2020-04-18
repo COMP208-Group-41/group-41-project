@@ -185,7 +185,15 @@ function validate255($name) {
         } else {
             echo "No Tags";
         }
+    }
 
+    // Checks review scores are within suitable boundries
+    function validationReviewScore($reviewScore){
+        if ($reviewScore < 1 || $reviewScore > 5){
+          return false;
+        } else {
+          return true;
+        }
     }
 
 

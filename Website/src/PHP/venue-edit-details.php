@@ -454,9 +454,14 @@
     </div>
 </div>
 <?php
-if ($errorMessage != "") {
-    echo "<div class='error'>$errorMessage</div>";
-}
+    if ($errorMessage != "") {
+        echo "<div class='error'>$errorMessage</div>";
+    }
+    if (isset($_SESSION['message'])) {
+        echo "<div class='success'>".$_SESSION['message']."</div>";
+        unset($_SESSION['message']);
+    }
+
 ?>
 </body>
 </html>

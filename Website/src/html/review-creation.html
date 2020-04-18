@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+  <head>
+    <title>OutOut - Submit Review</title>
+    <link rel="stylesheet" type="text/css" href="../css/reviews.css">
+    <script src="ratings-script.js"></script>
+  </head>
+  <body>
+    <form name='ReviewVenue' method='post'>
+      <div>
+          <textarea name='review-textarea' id='review-textarea' placeholder="Write your review here..." rows="4" cols="50" required></textarea><br>
+          Price <br>
+          <select class="rating-price" data-options='{"clearable":false, "showText":false, "maxStars":5}'>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+          </select>
+          Atmosphere <br>
+          <select class="rating-atmosphere" data-options='{"clearable":false, "showText":false, "maxStars":5}'>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+          </select>
+          Safety <br>
+          <select class="rating-safety" data-options='{"clearable":false, "showText":false, "maxStars":5}'>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+          </select>
+          Queue Times <br>
+          <select class="rating-queue" data-options='{"clearable":false, "showText":false, "maxStars":5}'>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+          </select>
+      </div>
+
+      <div style= "display: flex">
+          <input type='submit' value='Submit'>
+          <input type="button" onclick="location.href='BACK TO VENUUE PAGE';" value="Cancel" />
+      </div>
+    </form>
+  </body>
+</html>

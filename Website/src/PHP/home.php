@@ -25,5 +25,11 @@
     <body>
         <h1>OutOut - Home</h1>
         <a href="logout.php" class="btn btn-danger">Logout of Account</a>
+        <?php
+            if (isset($_SESSION['message'])) {
+                echo "<div class='success'>".$_SESSION['message']."</div>";
+                unset($_SESSION['message']);
+            }
+        ?>
     </body>
 </html>
