@@ -6,7 +6,7 @@
 <body>
 <div class="wrapper">
     <div class="outout-wrapper">
-        <img src="../../Assets/outout.svg" alt="OutOut">
+        <img src="../Assets/outout.svg" alt="OutOut">
     </div>
     <div class="form">
         <form name='RegisterForm' method='post'>
@@ -14,7 +14,18 @@
                 <input type='text' name='email' placeholder="Email">
                 <input type='password' name='password' placeholder="Password">
                 <input type='password' name='confirmPassword' placeholder="Confirm Password">
-                <input type='date' name='DOB' placeholder="Select Date of Birth">
+                <input type='text' name='DOB' id="dateOfBirth" placeholder="Select Date of Birth">
+                <script>
+                    var dtt = document.getElementById('dateOfBirth')
+                    dtt.onfocus = function (event) {
+                        this.type = 'date';
+                        this.focus();
+                    }
+                    dtt.onblur = function (event) {
+                        this.type = 'text';
+                        this.blur();
+                    };
+                </script>
             </div>
             <div style="display: flex">
                 <a href="login.php" class="login-button">Log In</a>

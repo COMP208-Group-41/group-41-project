@@ -30,10 +30,9 @@ CREATE TABLE Venue (
     VenueID INT(10) NOT NULL UNIQUE AUTO_INCREMENT,
     VenueUserID INT(10) NOT NULL,
     VenueName VARCHAR(255) NOT NULL,
-    VenueDescription VARCHAR(255) NOT NULL,
-    VenueImage VARCHAR(255),
+    VenueDescription VARCHAR(1000) NOT NULL,
     VenueAddress VARCHAR(255) NOT NULL,
-    VenueTimes VARCHAR(255),
+    VenueTimes VARCHAR(300),
     PRIMARY KEY (VenueID),
     FOREIGN KEY (VenueUserID) REFERENCES VenueUser(VenueUserID)
 );
@@ -51,8 +50,7 @@ CREATE TABLE Event (
     EventID INT(10) NOT NULL UNIQUE AUTO_INCREMENT,
     VenueID INT(10) NOT NULL,
     EventName VARCHAR(255) NOT NULL,
-    EventDescription VARCHAR(255) NOT NULL,
-    EventImage VARCHAR(255),
+    EventDescription VARCHAR(1000) NOT NULL,
     EventStartTime DATETIME NOT NULL,
     EventEndTime DATETIME NOT NULL,
     PRIMARY KEY (EventID),
@@ -75,8 +73,6 @@ CREATE TABLE User (
     UserDOB DATE NOT NULL,
     UserLocation VARCHAR(255),
     IsAdmin BOOLEAN DEFAULT '0' NOT NULL,
-    IsVerified BOOLEAN DEFAULT '1' NOT NULL,
-    VerifyHash VARCHAR(32) NOT NULL,
     PRIMARY KEY (UserID)
 );
 
@@ -101,12 +97,12 @@ CREATE TABLE UserPreferences (
 CREATE TABLE Review (
     ReviewID INT(10) NOT NULL UNIQUE AUTO_INCREMENT,
     VenueID INT(10) NOT NULL,
-    EventID INT(10) NOT NULL,
+    EventID INT(10),
     UserID INT(10) NOT NULL,
     ReviewDate DATE NOT NULL,
     -- Currently set ReviewText as NVARCHAR(max) which gives it up to 2GB of text apparently and supports unicode
     -- Communicate with everyone about character limit on the text input to specify this value here
-    ReviewText NVARCHAR(500),
+    ReviewText NVARCHAR(1000),
     ReviewPrice INT NOT NULL,
     ReviewQuality INT NOT NULL,
     ReviewSafety INT NOT NULL,
@@ -138,4 +134,14 @@ CREATE TABLE GroupMembers (
     FOREIGN KEY (MemberID) REFERENCES User(UserID)
 );
 
-INSERT INTO User (UserEmail,UserPass,UserDOB,IsAdmin,VerifyHash) VALUES ('test@test.com','$2y$10$aVqNr61OO6Yy.muh4Um4seiZ2pdOr76RQH.g8a5eJilVNSLQDpxbO','2000-02-02',false,'33e75ff09dd601bbe69f351039152189');
+INSERT INTO User (UserEmail,UserPass,UserDOB,IsAdmin) VALUES ('test@test.com','$2y$10$aVqNr61OO6Yy.muh4Um4seiZ2pdOr76RQH.g8a5eJilVNSLQDpxbO','2000-02-02',false);
+INSERT INTO VenueUser (VenueUserEmail,VenueUserPass,VenueUserName) VALUES ('venuetest@test.com','$2y$10$aVqNr61OO6Yy.muh4Um4seiZ2pdOr76RQH.g8a5eJilVNSLQDpxbO', 'Test Company Name');
+INSERT INTO Tag (TagName) VALUES ('Bar');
+INSERT INTO Tag (TagName) VALUES ('Club');
+INSERT INTO Tag (TagName) VALUES ('EDM');
+INSERT INTO Tag (TagName) VALUES ('Pop');
+INSERT INTO Tag (TagName) VALUES ('Budget');
+INSERT INTO Tag (TagName) VALUES ('Premium');
+INSERT INTO Tag (TagName) VALUES ('Rock');
+INSERT INTO Tag (TagName) VALUES ('Disabled-access');
+INSERT INTO Tag (TagName) VALUES ('Cocktails');

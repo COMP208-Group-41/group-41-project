@@ -1,0 +1,75 @@
+<!-- I think we need something like check boxes for each day for selecting
+     opening times for the days that a venue might not be open, for example if
+     a venue is only open on weekends then they shouldn't have to put a time for
+     Monday-Friday, also we need 2 time inputs for opening and closing times -->
+
+<!DOCTYPE html>
+<html lang='en-GB'>
+<head>
+    <title>OutOut - Edit Venue User Account</title>
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/venue.css">
+</head>
+<body>
+<div class="banner">
+    <img src="../Assets/menu-icon.svg" alt="Menu" width="25" onclick="openNav()" class="menu-image">
+    <img src="../Assets/outout.svg" alt="OutOut" width="100">
+    <img src="../Assets/profile.svg" alt="Profile" width="40">
+</div>
+<div id="mySidenav" class="sidenav">
+    <div class="sidebar-content">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Dashboard</a>
+        <a href="#">Venues</a>
+        <a href="#">Account</a>
+        <a href="#">Contact</a>
+    </div>
+</div>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "200px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+<div class="wrapper">
+    <div class="container">
+        <form id='CreateVenue' name='CreateVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
+            <div class="edit-fields">
+                <label>Venue name:</label>
+                <input type='text' name='venueName' required>
+                <label>Open and closing times:</label>
+                <textarea id='times' name='times'
+                          form='CreateVenue'
+                          placeholder="Open every Friday, Saturday 21:00-04:00!"
+                          required></textarea>
+                <label>Address of venue:</label>
+                <textarea form='CreateVenue'
+                          id='venueLocation'
+                          name='venueLocation'
+                          placeholder="Maximum 255 characters"
+                          required></textarea>
+                <label>Describe your venue:</label>
+                <textarea id='description'
+                          name='description'
+                          form='CreateVenue'
+                          placeholder="Venue Description"
+                          required></textarea>
+                <div class="seperator">
+                    <label>Enter current password to allow changes:</label>
+                    <input type='password' name='password' required>
+                </div>
+                <input type='submit' name='submit' value='Add Venue' class="button" required style="width: 100%">
+            </div>
+        </form>
+    </div>
+</div>
+<?php
+    if ($errorMessage != "") {
+        echo "<div class='error'>$errorMessage</div>";
+}
+?>
+</body>
+</html>

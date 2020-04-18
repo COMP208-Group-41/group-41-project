@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang='en-GB'>
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/login-register.css">
+</head>
+<body>
+<div class="wrapper">
+    <div class="outout-wrapper">
+        <img src="../Assets/outout.svg" alt="OutOut">
+    </div>
+    <div class="form">
+        <div style="padding-bottom: 8px; text-align: center">
+            <b style="color: #e9e9e9; font-size: 24px">Venue Registration</b>
+        </div>
+        <form name='RegisterForm' method='post'>
+            <div class="login-field">
+                <input type='text' name='email' placeholder="Email">
+                <input type='password' name='password' placeholder="Password">
+                <input type='password' name='confirmPassword' placeholder="Confirm Password">
+                <input type="text" name='address' placeholder="Address">
+                <input type="text" id="openingTime" name='openingTimes' placeholder="Opening times">
+                <script>
+                    var dtt = document.getElementById('openingTime')
+                    dtt.onfocus = function (event) {
+                        this.type = 'datetime-local';
+                        this.focus();
+                    }
+                    dtt.onblur = function (event) {
+                        this.type = 'text';
+                        this.blur();
+                    };
+                </script>
+                <input type="text" name="tags" placeholder="Tags: e.g. Pop, Indie">
+            </div>
+            <div style="display: flex">
+                <a href="login.php" class="login-button">Log In</a>
+                <input type='submit' value='Register' class="register-button">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
