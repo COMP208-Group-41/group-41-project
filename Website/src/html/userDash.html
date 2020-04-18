@@ -316,7 +316,85 @@
         opacity: .2;
         cursor: pointer;
     }
+    .container2{
+        height: 850px;
+        border: 1px solid #c3c3c3;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    * {
+        box-sizing: border-box;
+    }
 
+    body {
+        margin: 0;
+        font-family: Arial;
+    }
+
+    .header {
+        text-align: center;
+        padding: 32px;
+    }
+
+    .row {
+        width: 1000px;
+        display: -ms-flexbox; /* IE10 */
+        display: flex;
+        -ms-flex-wrap: wrap; /* IE10 */
+        flex-wrap: wrap;
+        padding: 0 4px;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+
+    }
+    .row2 {
+        width: 1000px;
+        display: -ms-flexbox; /* IE10 */
+        display: flex;
+        -ms-flex-wrap: wrap; /* IE10 */
+        flex-wrap: wrap;
+        padding: 0 4px;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+
+    /* Create four equal columns that sits next to each other */
+    .column {
+        -ms-flex: 25%; /* IE10 */
+        flex: 25%;
+        max-width: 25%;
+        padding: 0 4px;
+
+    }
+
+    .column img {
+        margin-top: 8px;
+        vertical-align: middle;
+        width: 100%;
+    }
+
+    /* Responsive layout - makes a two column-layout instead of four columns */
+    @media screen and (max-width: 800px) {
+        .column {
+            -ms-flex: 50%;
+            flex: 50%;
+            max-width: 50%;
+        }
+    }
+
+    /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 600px) {
+        .column {
+            -ms-flex: 100%;
+            flex: 100%;
+            max-width: 100%;
+        }
+    }
 
 </style>
 <head>
@@ -356,10 +434,10 @@
     </div>
 
     <div class="form">
-        <form name='LoginForm' method='post'>
-            <div class="login-field">
-                <input type='text' name='venue, artist' placeholder="Email">
-                <input type='text' name='location' placeholder="Password">
+        <form name='search form' method='post'>
+            <div class="search">
+                <input type='text' name='venue, artist' placeholder="venue, artist">
+                <input type='text' name='location' placeholder="location">
                 <input type='date' name='date' placeholder="Password">
             </div>
         </form>
@@ -373,6 +451,15 @@
     <span class="dot"></span>
 </div>
 
+
+<div class="info_banner">
+    <div infomessage1>
+    </div>
+</div>
+
+
+
+<div class="container2">
     <section class="cms-boxes">
         <div class="container-fluid">
             <div class="row">
@@ -428,9 +515,45 @@
                     </div>
                 </div>
             </div>
+        </div>
 
     </section>
+
 </div>
+
+<!-- Header -->
+<div class="header">
+    <h1>Responsive Image Grid</h1>
+</div>
+
+<!-- Photo Grid -->
+<div class="row">
+    <div class="column">
+        <img src="../../Assets/background.jpg" style="width:100%">
+        <img src="../../Assets/background.jpg" style="width:100%">
+        <img src="../../Assets/background.jpg" style="width:100%">
+        <img src="../../Assets/background.jpg" style="width:100%">
+    </div>
+    <div class="column">
+        <img src="../../Assets/background.jpg" style="width:100%">
+        <img src="../../Assets/background.jpg" style="width:100%">
+        <img src="../../Assets/background.jpg" style="width:100%">
+        <img src="../../Assets/background.jpg" style="width:100%">
+    </div>
+    <div class="column">
+        <img src="../../Assets/background.jpg" style="width:100%">
+        <img src="../../Assets/background.jpg" style="width:100%">
+        <img src="../../Assets/background.jpg" style="width:100%">
+        <img src="../../Assets/background.jpg" style="width:100%">
+    </div>
+    <div class="column">
+        <img src="../../Assets/background.jpg" style="width:100%">
+        <img src="../../Assets/background.jpg" style="width:100%">
+        <img src="../../Assets/background.jpg" style="width:100%">
+        <img src="../../Assets/background.jpg" style="width:100%">
+    </div>
+</div>
+
 
 
 
