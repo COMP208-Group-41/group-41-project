@@ -57,7 +57,7 @@
                          * (either they are under 18 or the date given is in
                          * the future)
                          */
-                        $ageError = 'Either your age is under 18 or the format of the date of birth was wrong, please match the format dd-mm-yyyy!';
+                        $ageError = 'You must be over 18 to register an account!';
                     } else {
                         $ageError = '';
                         // The user is over 18, continue with registration
@@ -122,30 +122,18 @@
      * user means they are under 18 or the date is in the future
      */
     function checkValidAge($dob) {
-
-
         // First check the date isn't in the future
-        try {
-            $dobTimestamp = strtotime($dob);
-            $mysqlDob = date("Y-m-d",$dobTimestamp);
-            /* If the dob entered was invalid then the strtotime and date
-             * conversions above will throw an exception, otherwise they are
-             * valid
-             */
-            $bday = new DateTime($dob);
-            $bday->add(new DateInterval("P18Y"));
 
-            if ($bday > new DateTime("now")) {
-                // user is under 18
-                return false;
-            } else {
-                // user is over 18
-                return true;
-            }
-        } catch (Exception $e) {
+        $bday = new DateTime($dob);
+        $bday->add(new DateInterval("P18Y"));
+
+        if ($bday > new DateTime("now")) {
+            // user is under 18
             return false;
+        } else {
+            // user is over 18
+            return true;
         }
-
     }
 
     /* The function createUser returns true if the account has been created

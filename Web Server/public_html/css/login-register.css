@@ -6,6 +6,8 @@
     --text: #2E2E2E;
 }
 
+/* HAD TO CHANGE PATH FOR ASSETS FOR WEB SEVER */
+
 body {
     margin: 0;
     background: url("../Assets/background2.jpg") no-repeat center center fixed;
@@ -71,7 +73,7 @@ input  {
 
 .login-button:hover {
      background-color: var(--button-highlight);
-     cursor: pointer;
+     cursor: grab;
  }
 
 .login-button:active {
@@ -118,28 +120,4 @@ input  {
     display: flex;
     flex-direction: column;
 
-}
-
-.error {
-    margin-top: 8px;
-    background: rgba(32, 32, 32, 0.95);
-    border-radius: 10px;
-    border-color: #e74948;
-    border-width: 2px;
-    border-style: solid;
-    padding: 16px;
-    color: var(--header-gray);
-    width: 400px;
-}
-
-.success {
-    margin-top: 8px;
-    background: rgba(32, 32, 32, 0.95);
-    border-radius: 10px;
-    border-color: #4bc54c;
-    border-width: 2px;
-    border-style: solid;
-    padding: 16px;
-    color: var(--header-gray);
-    width: 400px;
 }
