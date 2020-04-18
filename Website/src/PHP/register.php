@@ -82,7 +82,7 @@
                                      * will not work at the moment
                                      */
                                     // sendVerificationEmail($email,$hash);
-                                    $_SESSION['verified'] = true;
+                                    $_SESSION['message'] = "Your account has been created successfully!";
                                     header('location: login.php');
                                     exit;
                                 } else {
@@ -250,6 +250,11 @@
          */
         if ($createError != '') {
             echo "<div class='error'>$createError</div>";
+        }
+
+        if (isset($_SESSION['message'])) {
+            echo "<div class='success'>".$_SESSION['message']."</div>";
+            unset($_SESSION['message']);
         }
         ?>
     </body>

@@ -48,6 +48,9 @@
           if (checkInputs($userID,$eventID,$venueID,$errorMessage,$pdo)) {
               // TODO: After the review is created successfully, redirect to
               // appropriate page (ideally showing success message or similar)
+              $_SESSION['message'] = "Review Created Successfully!";
+              header("location: home.php");
+              exit;
           }
         }
     } catch (PDOException $e) {
@@ -192,6 +195,10 @@
       <?php
           if ($errorMessage != "") {
               echo "<div class='error'>$errorMessage</div>";
+          }
+          if (isset($_SESSION['message'])) {
+              echo "<div class='success'>".$_SESSION['message']."</div>";
+              unset($_SESSION['message']);
           }
        ?>
     </form>

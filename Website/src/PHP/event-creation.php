@@ -55,11 +55,10 @@
 
         if (checkInputs($venueUserID,$errorMessage,$pdo)) {
             /* If everything is valid and the event has been added to the
-             * db then EventCreated session variable is set to true (to
-             * show message on the next page) and the user is redirected
+             * db then the user is redirected
              * to the edit event page to fill in additional details
              */
-            $_SESSION['EventCreated'] = true;
+            $_SESSION['message'] = "Event Created Successfully!";
             $eventID = $_SESSION['eventID'];
             header("location: event-edit.php?EventID=$eventID");
             exit;
@@ -249,9 +248,10 @@
     if ($errorMessage != "") {
         echo "<div class='error'>$errorMessage</div>";
     }
-    // if ($unsupportedBrowser != "") {
-    //     echo "<div class='browser-error'>$unsupportedBrowser</div>";
-    // }
+    if (isset($_SESSION['message'])) {
+        echo "<div class='success'>".$_SESSION['message']."</div>";
+        unset($_SESSION['message']);
+    }
  ?>
 </body>
 </html>
