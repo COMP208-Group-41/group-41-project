@@ -1,7 +1,5 @@
 <?php
 
-    // TODO: Implement try catch for datetime-local input checking - Coded, needs testing
-
     session_start();
 
     if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
