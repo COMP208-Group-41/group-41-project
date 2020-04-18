@@ -37,6 +37,12 @@
         exit;
     }
 
+    /* Check if the user has already written a review for this Venue/Event, if
+     * so then they are not allowed to write another one, redirect to the review
+     * edit page
+     */
+     checkExistingReview($userID,$venueID,$eventID,$pdo);
+
     try{
         if (isset($_POST['SubmitReview'])){
           if (checkInputs($userID,$eventID,$venueID,$errorMessage,$pdo)) {
@@ -93,6 +99,21 @@
         return true;
     }
 
+    // Check if the user has already written a review for this venue/event
+    function checkExistingReview($userID,$venueID,$eventID,$pdo) {
+        $checkExistingReviewStmt = $pdo->prepare("SELECT ReviewID FROM Review WHERE UserID=:UserID AND VenueID=:VenueID AND EventID=:EventID");
+        $checkExistingReviewStmt->bindValue(":UserID",$userID);
+        $checkExistingReviewStmt->bindValue(":VenueID",$venueID);
+        $checkExistingReviewStmt->bindValue(":EventID",$eventID);
+        $checkExistingReviewStmt->execute();
+        if ($checkExistingReviewStmt->rowCount() != 0) {
+            // User already has a review for this venue/event!
+            $result = $checkExistingReviewStmt->fetch();
+            $reviewID = $result['ReviewID'];
+            header("location: review-edit.php?ReviewID=$reviewID");
+            exit;
+        }
+    }
 
     function eventIDToVenueID($eventID, $pdo){
         $getVenueStmt = $pdo->prepare("SELECT VenueID FROM Event WHERE EventID=:EventID");
