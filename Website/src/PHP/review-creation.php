@@ -37,6 +37,16 @@
         exit;
     }
 
+    if (!checkVenueEventExists($eventID,$venueID,$pdo)) {
+        // Venue or Event does not exist! redirect to home and show error
+        $_SESSION['message'] = "That Venue/Event does not exist!";
+        header("location: home.php");
+        exit;
+    }
+
+    // Need to check if specified venue or event exists
+
+
     /* Check if the user has already written a review for this Venue/Event, if
      * so then they are not allowed to write another one, redirect to the review
      * edit page
@@ -140,6 +150,34 @@
             return true;
         } else {
             return false;
+        }
+    }
+
+    function checkVenueEventExists($eventID,$venueID,$pdo) {
+        if ($eventID == 1) {
+            // Just check venue exists
+            $checkVenueExists = $pdo("SELECT VenueID FROM Venue WHERE VenueID=:VenueID");
+            $checkVenueExists->bindValue(":VenueID",$venueID);
+            $checkVenueExists->execute();
+            if ($checkVenueExists->rowcount() == 0) {
+                // Venue does not exist!
+                return false;
+            } else {
+                // Venue does exist
+                return true;
+            }
+        } else {
+            // Check Event Exists
+            $checkEventExists = $pdo("SELECT EventID FROM Event WHERE EventID=:EventID");
+            $checkEventExists->bindValue(":EventID",$eventID);
+            $checkEventExists->execute();
+            if ($checkEventExists->rowcount() == 0) {
+                // Venue does not exist!
+                return false;
+            } else {
+                // Venue does exist
+                return true;
+            }
         }
     }
 ?>
