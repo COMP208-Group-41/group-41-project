@@ -3,11 +3,10 @@
 
     session_start();
 
-    // Testing purposes
     if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         header("location: login.php");
         exit;
-        /* If the user is logged in but they are not a venue user then they are
+        /* If the user is logged in but they are a venue user then they are
          * redirected to home page
          */
     } else if (isset($_SESSION["VenueUserID"])) {
@@ -34,7 +33,8 @@
         $eventID = 1;
     } else {
         // If both unset ERROR as no venue or event exists under that name
-        $errorMessage = "Error opening review creation form for this venue or event";
+        header("location: 404.php");
+        exit;
     }
 
     try{
@@ -45,52 +45,6 @@
         // Any PDO errors are shown here
         exit("PDO Error: ".$e->getMessage()."<br>");
     }
-
-
-    function checkInputs($userID,$eventID,$venueID,&$errorMessage,$pdo){
-        $reviewDate = date("Y-m-d");
-
-        // Check review text
-        $reviewText= trim($_POST['Review']);
-        if (!validateDescription($reviewText)) {
-            $errorMessage = "The review cannot be longer than 1000 characters!";
-            return false;
-        }
-
-        // All numeric ratings are validated below
-        $reviewPrice = ($_POST['RatingPrice']);
-        if (!validationReviewScore($reviewPrice)) {
-            $errorMessage = "Error! Review price out of boundries";
-            return false;
-        }
-        $reviewSafety = ($_POST['RatingSafety']);
-        if (!validationReviewScore($reviewSafety)) {
-            $errorMessage = "Error! Review safety out of boundries";
-            return false;
-        }
-        $reviewQueue = ($_POST['RatingQueue']);
-        if (!validationReviewScore($reviewQueue)) {
-            $errorMessage = "Error! Review queue out of boundries";
-            return false;
-        }
-        $reviewAtmosphere = ($_POST['RatingAtmosphere']);
-        if (!validationReviewScore($reviewAtmosphere)) {
-            $errorMessage = "Error! Review atmosphere out of boundries";
-            return false;
-        }
-
-        // Al valid, transaction attempted
-        $pdo->beginTransaction();
-        if (!createReview($venueID,$eventID,$userID,$reviewDate,$reviewText,$reviewPrice,$reviewSafety,$reviewAtmosphere,$reviewQueue,$pdo)) {
-            $errorMessage = "Error in inserting review into database!";
-            $pdo->rollBack();
-            return false;
-        }
-        $pdo->commit();
-        // Everything completed successfully, return true!
-        return true;
-    }
-
 
     // Checks review scores are within suitable boundries
     function validationReviewScore($reviewScore){
@@ -173,7 +127,6 @@
 
       <div style= "display: flex">
           <input type='submit' name='SubmitReview' value='Submit'>
-          <input type="button" onclick="location.href='BACK TO Venue/Event';" value="Cancel" />
       </div>
     </form>
   </body>
