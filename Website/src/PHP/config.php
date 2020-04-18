@@ -180,7 +180,7 @@ function validate255($name) {
                 $getTagNameStmt->bindValue(":TagID",$tagID['TagID']);
                 $getTagNameStmt->execute();
                 $tag = $getTagNameStmt->fetch();
-                echo $tag['TagName'].", ";
+                echo $tag['TagName']."<br>";
             }
         } else {
             echo "No Tags";

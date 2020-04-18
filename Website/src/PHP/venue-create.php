@@ -213,28 +213,66 @@
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
-    <title>OutOut - Add A Venue</title>
-    <link rel="stylesheet" type="text/css" href="../css/venue-edit-details.css">
+    <title>OutOut - Edit Venue User Account</title>
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/venue.css">
 </head>
 <body>
+<div class="banner">
+    <img src="../Assets/menu-icon.svg" alt="Menu" width="25" onclick="openNav()" class="menu-image">
+    <img src="../Assets/outout.svg" alt="OutOut" width="120">
+    <img src="../Assets/profile.svg" alt="Profile" width="40">
+</div>
+<div id="mySidenav" class="sidenav">
+    <div class="sidebar-content">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Dashboard</a>
+        <a href="#">Venues</a>
+        <a href="#">Account</a>
+        <a href="#">Contact</a>
+    </div>
+</div>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "200px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
 <div class="wrapper">
-    <img src="../Assets/outout.svg" alt="OutOut">
-    <form id='CreateVenue' name='CreateVenue' method='post' style="margin-top: 10px" autocomplete="off" enctype="multipart/form-data">
-        <div class="edit-fields">
-
-            <input type='text' name='venueName' autocomplete="off" placeholder="Venue Name"><br>
-
-            <textarea id='times' name='times' form='CreateVenue' placeholder="Venue Opening and Closing Times"></textarea><br>
-
-            <textarea id='venueLocation' name='venueLocation' form='CreateVenue' placeholder="Venue Address and Location details, no more than 255 characters"></textarea><br>
-
-            <textarea id='description' name ='description' form='CreateVenue' placeholder="Venue Description"></textarea><br>
-
-            <input type='password' name='password' autocomplete="off" placeholder="Current Password"><br>
-
-            <input type='submit' name='submit' value='Add Venue'>
-        </div>
-    </form>
+    <div class="container">
+        <form id='CreateVenue' name='CreateVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
+            <div class="edit-fields">
+                <h1 class="title">Add a venue</h1>
+                <label>Venue name:</label>
+                <input type='text' name='venueName' required>
+                <label>Open and closing times:</label>
+                <textarea id='times' name='times'
+                          form='CreateVenue'
+                          placeholder="Open every Friday, Saturday 21:00-04:00!"
+                          required></textarea>
+                <label>Address of venue:</label>
+                <textarea form='CreateVenue'
+                          id='venueLocation'
+                          name='venueLocation'
+                          placeholder="Maximum 255 characters"
+                          required></textarea>
+                <label>Describe your venue:</label>
+                <textarea id='description'
+                          name='description'
+                          form='CreateVenue'
+                          placeholder="Venue Description"
+                          required></textarea>
+                <div class="seperator">
+                    <label>Enter current password to allow changes:</label>
+                    <input type='password' name='password' required>
+                </div>
+                <input type='submit' name='submit' value='Add Venue' class="button" required style="width: 100%">
+            </div>
+        </form>
+    </div>
 </div>
 <?php
     if ($errorMessage != "") {

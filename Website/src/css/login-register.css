@@ -71,7 +71,7 @@ input  {
 
 .login-button:hover {
      background-color: var(--button-highlight);
-     cursor: grab;
+     cursor: pointer;
  }
 
 .login-button:active {

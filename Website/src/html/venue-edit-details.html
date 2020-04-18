@@ -1,70 +1,103 @@
-<!-- I think we need something like check boxes for each day for selecting
-     opening times for the days that a venue might not be open, for example if
-     a venue is only open on weekends then they shouldn't have to put a time for
-     Monday-Friday, also we need 2 time inputs for opening and closing times -->
-
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
-    <title>OutOut - Edit Venue Details</title>
-    <link rel="stylesheet" type="text/css" href="../css/venue-edit-details.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/venue.css">
+    <link rel="stylesheet" type="text/css" href="../css/events.css">
+
 </head>
 <body>
-<div class="wrapper">
-    <img src="../Assets/outout.svg" alt="OutOut">
-    <form name='EditVenueDetails' method='post' style="margin-top: 10px">
-        <div class="edit-fields">
-            <input type='text' name='email' placeholder="Email"><br>
-
-            <input type='text' name='venueName' placeholder="New Venue Name"><br>
-
-            <input type='checkbox' id='mondayCheck' name='mondayCheck' value='monday'>
-            <label for='mondayCheck'>Monday: </label>
-            <input type='time' name="timeStartMonday" id="timeStartMonday">
-            <input type='time' name="timeEndMonday" id="timeEndMonday"><br>
-
-            <input type='checkbox' id='tuesdayCheck' name='tuesdayCheck' value='tuesday'>
-            <label for='tuesdayCheck'>Tuesday: </label>
-            <input type='time' name="timeStartTuesday" id="timeStartTuesday">
-            <input type='time' name="timeEndTuesday" id="timeEndTuesday"><br>
-
-            <input type='checkbox' id='wednesdayCheck' name='wednesdayCheck' value='wednesday'>
-            <label for='wednesdayCheck'>Wednesday: </label>
-            <input type='time' name="timeStartWednesday" id="timeStartWednesday">
-            <input type='time' name="timeEndWednesday" id="timeEndWednesday"><br>
-
-            <input type='checkbox' id='thursdayCheck' name='thursdayCheck' value='thursday'>
-            <label for='thursdayCheck'>Thursday: </label>
-            <input type='time' name='timeStartThursday' id='timeStartThursday'>
-            <input type='time' name='timeEndThursday' id='timeEndThursday'><br>
-
-            <input type='checkbox' id='fridayCheck' name='fridayCheck' value='friday'>
-            <label for='fridayCheck'>Friday: </label>
-            <input type='time' name='timeStartFriday' id='timeStartFriday'>
-            <input type='time' name='timeEndFriday' id='timeEndFriday'><br>
-
-            <input type='checkbox' id='saturdayCheck' name='saturdayCheck' value='saturday'>
-            <label for='saturdayCheck'>Saturday: </label>
-            <input type='time' name='timeStartSaturday' id='timeStartSaturday'>
-            <input type='time' name='timeEndSaturday' id='timeEndSaturday'><br>
-
-            <input type='checkbox' id='sundayCheck' name='sundayCheck' value='sunday'>
-            <label for='sundayCheck'>Sunday: </label>
-            <input type='time' name='timeStartSunday' id='timeStartSunday'>
-            <input type='time' name='timeEndSunday' id='timeEndSunday'><br>
-
-            <input type='text' name='venueLocation' placeholder="Venue Address"><br>
-            <textarea id='description' name ='description' placeholder="Venue Description"></textarea><br>
-
-            <input type='file' id="venueImage" name='venueImage' class='input-file' accept="image/*">
-            <label for="venueImage">Add Venue Image</label><br>
-            <input type="text" name="tags" placeholder="Tags - Separate each tag with a comma"><br>
-
-            <input type='password' name='password' placeholder="Current Password"><br>
-
-            <input type='submit' value='Save'>
-        </div>
-    </form>
+<div class="banner">
+    <img src="../Assets/menu-icon.svg" alt="Menu" width="25" onclick="openNav()" class="menu-image">
+    <img src="../Assets/outout.svg" alt="OutOut" width="100">
+    <img src="../Assets/profile.svg" alt="Profile" width="40">
 </div>
+<div id="mySidenav" class="sidenav">
+    <div class="sidebar-content">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Dashboard</a>
+        <a href="#">Venues</a>
+        <a href="#">Account</a>
+        <a href="#">Contact</a>
+    </div>
+</div>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "200px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+<div class="wrapper">
+    <div class="container">
+        <h1 class="title"><?php echo $name; ?></h1>
+        <form id='CreateVenue' name='CreateVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
+            <div class="edit-fields">
+                <label for='venueName'>Venue Name:</label>
+                <input type='text' id='venueName' name='venueName' placeholder="Venue Name"
+                       value="<?php echo $name; ?>">
+                <label for='times'>Time Information:</label>
+                <textarea id='times' name='times'
+                          form='CreateVenue'
+                          placeholder="Venue Opening and Closing Times"><?php echo $times; ?></textarea>
+                <label for='venueLocation'>Location Information:</label>
+                <textarea id='venueLocation' name='venueLocation' form='CreateVenue'
+                          placeholder="Venue Address and Location details, no more than 255 characters"><?php echo $address; ?></textarea>
+                <label for='description'>Venue Description:</label>
+                <textarea id='description' name='description' form='CreateVenue'
+                          placeholder="Venue Description"><?php echo $description; ?></textarea>
+                <div class="seperator">
+                    <h2 class="title">Additional Information</h2>
+                </div>
+                <input type='file' id="Image" name='Image' class='input-file' accept=".jpg">
+                <label for="Image">Add Venue Image (must be .jpg and cannot be bigger than 2MB)</label>
+
+
+                <!-- Script here, if no tags present dont display any of the tag stuff -->
+                <label style="text-align: center; margin-top: 16px;"><b>Current Tags:</b></label>
+                <div style="display: flex; justify-content: center; ">
+                    <div class="tag-container" style="text-align: center">
+                        <?php getTags($currentTagIDs,$pdo); ?>
+                    </div>
+                </div>
+
+                <label for='tag1'>Add some tags that best describe your venue - this will overwrite old tags</label>
+                <select name='tag1' id='tag1'>
+                    <option value='Optional'>No Tag</option>
+                    <?php echoTags($pdo); ?>
+                </select>
+                <select name='tag2' id='tag2'>
+                    <option value='Optional'>No Tag</option>
+                    <?php echoTags($pdo); ?>
+                </select>
+                <select name='tag3' id='tag3'>
+                    <option value='Optional'>No Tag</option>
+                    <?php echoTags($pdo); ?>
+                </select>
+                <select name='tag4' id='tag4'>
+                    <option value='Optional'>No Tag</option>
+
+                    <?php echoTags($pdo); ?>
+                </select>
+                <select name='tag5' id='tag5' style="margin-bottom: 16px">
+                    <option value='Optional'>No Tag</option>
+                    <?php echoTags($pdo); ?>
+                </select>
+                <div class="seperator">
+                    <label>Enter current password to allow changes:</label>
+                    <input type='password' name='password' required>
+                </div>
+                <input type='submit' name='submit' value='Save changes' class="button" style="width: 100%">
+            </div>
+        </form>
+    </div>
+</div>
+<?php
+    if ($errorMessage != "") {
+        echo "<div class='error'>$errorMessage</div>";
+}
+?>
 </body>
 </html>
