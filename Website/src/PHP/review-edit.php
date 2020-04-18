@@ -150,6 +150,7 @@
   <body>
     <form name='ReviewVenue' method='post'>
       <div>
+          <label for='Review'>Review:</label>
           <textarea name='Review' id='Review' placeholder="Write your review here..." rows="4" cols="50"><?php echo $reviewText; ?></textarea><br>
           <label for='RatingPrice'>Price:</label>
           <select name="RatingPrice" id="RatingPrice" required>
