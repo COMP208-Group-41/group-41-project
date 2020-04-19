@@ -96,12 +96,12 @@
         $venueID = $_POST['venue'];
 
         // Check name input
-        if (!(isset($_POST['eventName']) && !empty(trim($_POST['eventName'])))) {
+        if (!(isset($_POST['name']) && !empty(trim($_POST['name'])))) {
             $errorMessage = "Please enter a name for the event!";
             return false;
         }
 
-        $name = trim($_POST['eventName']);
+        $name = trim($_POST['name']);
         // Use same validation as venue name as they have the same constraints!
         if (!validate255($name)) {
             $errorMessage = "The name cannot be more than 255 characters!";
