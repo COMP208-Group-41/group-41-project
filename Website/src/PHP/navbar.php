@@ -21,10 +21,10 @@
 <div id="mySidenav" class="sidenav">
     <div class="sidebar-content">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="<?php echo $dashboardLink; ?>">Dashboard</a>
+        <a href="<?php echo $dashboardLink; ?>">My Account</a>
+        <a href="<?php echo $accountLink; ?>">Edit Account</a>
         <a href="<?php echo $venueLink; ?>">Venues</a>
         <a href="<?php echo $eventLink; ?>">Events</a>
-        <a href="<?php echo $accountLink; ?>">Account</a>
         <?php
             if (!isset($_SESSION['UserID']) && !isset($_SESSION['VenueUserID'])) {
                 echo '<a href="login.php">Log In</a>';
