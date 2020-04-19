@@ -29,6 +29,7 @@
         <a href="<?php echo $accountLink; ?>">Edit Account</a>
         <a href="<?php echo $venueLink; ?>">Venues</a>
         <a href="<?php echo $eventLink; ?>">Events</a>
+        <br>
         <?php
             if (!isset($_SESSION['UserID']) && !isset($_SESSION['VenueUserID'])) {
                 echo '<a href="login.php">Log In</a>';
