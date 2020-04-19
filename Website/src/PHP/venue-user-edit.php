@@ -13,18 +13,13 @@
     // Session is started
     session_start();
 
-    /* If the venue user is not logged in then redirect to venue login */
-    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-        header("location: venue-user-login.php");
-        exit;
-        /* If the user is logged in but they are not a venue user then they are
-         * redirected to home page
-         */
-    } else if (!isset($_SESSION["VenueUserID"])) {
+    if (isset($_SESSION["UserID"])) {
         header("location: home.php");
         exit;
+    } else if (!isset($_SESSION['VenueUserID'])) {
+        header("location: venue-user-login.php");
     }
-
+    
     error_reporting( E_ALL );
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);

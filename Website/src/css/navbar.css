@@ -62,8 +62,8 @@ body {
     flex-direction: column;
 }
 
-.menu-icon:hover {
-
+img:hover {
+    cursor: pointer;
 }
 
 @media screen and (max-height: 450px) {
