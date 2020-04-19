@@ -87,6 +87,5 @@ if (isset($_SESSION['message'])) {
     </div>
 </div>
 </div>
-
 </body>
 </html>
