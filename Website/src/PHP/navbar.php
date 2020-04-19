@@ -1,24 +1,24 @@
 <?php
     // Links are for devel branch, need to adapt for master
+
+    $path = "https://student.csc.liv.ac.uk/~sgstribe/test/php/dashboards/";
+
     if (isset($_SESSION['UserID'])) {
-        $dashboardLink = "https://student.csc.liv.ac.uk/~sgstribe/test/php/dashboards/user-dash.php";
-        $accountLink = "https://student.csc.liv.ac.uk/~sgstribe/test/php/dashboards/user-edit.php";
+        $dashboardLink = $path."user-dash.php";
+        $accountLink = $path."user-edit.php";
     }
     if (isset($_SESSION['VenueUserID'])) {
-        $dashboardLink = "https://student.csc.liv.ac.uk/~sgstribe/test/php/dashboards/venue-user-dashboard.php";
-        $accountLink = "https://student.csc.liv.ac.uk/~sgstribe/test/php/dashboards/venue-user-edit.php"
+        $dashboardLink = $path."venue-user-dashboard.php";
+        $accountLink = $path."venue-user-edit.php";
+    }
+    $eventLink = $path."events.php";
+    $venueLink = $path."venues.php";
+    if (!isset($_SESSION['UserID']) && !isset($_SESSION['VenueUserID'])) {
+
     }
 
 ?>
 
-<!DOCTYPE html>
-<html lang='en-GB'>
-<head>
-    <title>OutOut - Edit Venue User Account</title>
-    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="../css/venue.css">
-</head>
-<body>
 <div class="banner" >
     <img src="../Assets/menu-icon.svg" alt="Menu" width="25" onclick="openNav()" class="menu-image">
     <img src="../Assets/outout.svg" alt="OutOut" width="100">
@@ -29,8 +29,15 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="<?php echo $dashboardLink; ?>">Dashboard</a>
         <a href="<?php echo ; ?>">Venues</a>
+        <a href="<?php echo $eventLink; ?>">Events</a>
         <a href="<?php echo $accountLink; ?>">Account</a>
-        <a href="<?php echo $dashboardLink; ?>">Contact</a>
+        <?php
+            if (!isset($_SESSION['UserID']) && !isset($_SESSION['VenueUserID'])) {
+                echo '<a href="'$path.'login.php">Log In</a>';
+            } else {
+                echo '<a href="'.$path.'logout.php">Log Out</a>';
+            }
+        ?>
     </div>
 </div>
 <script>
@@ -41,4 +48,3 @@
         document.getElementById("mySidenav").style.width = "0";
     }
 </script>
-</body>
