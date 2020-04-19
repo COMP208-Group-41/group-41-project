@@ -25,6 +25,7 @@
     $name = $result['VenueUserName'];
     $email = $result['VenueUserEmail'];
     $external = $result['VenueUserExternal'];
+    $venues = getVenues($venueUserID,$pdo);
 
 
 
@@ -37,39 +38,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/venue-user-dashboard.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
 </head>
 <body>
-<h1>Account Details</h1>
-<table align="center" border="1px" style="width:600px; line-height:40px;">
-  <tr>
-    <th>Name</th>
-    <td><?php echo "$name"; ?></td>
-  </tr>
-  <tr>
-    <th>Email</th>
-    <td><?php echo "$email"; ?></td>
-  </tr>
-  <tr>
-    <th>External Site</th>
-    <td><?php echo "$external"; ?></td>
-  </tr>
-</table>
-<button onclick="location.href='venue-user-edit.php';" class="edit-account">Edit Account</button>
-<h2>Venues</h2>
-<button class="create-edit-venue">Create/Edit Venue</button>
-<table align="center" border="1px" style="width:600px; line-height:40px;">
-    <t>
+  <?php include "navbar.php" ?>
+  <h1>Account Details</h1>
+  <table align="center" border="1px" style="width:600px; line-height:40px;">
+    <tr>
+      <th>Name</th>
+      <td><?php echo "$name"; ?></td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td><?php echo "$email"; ?></td>
+    </tr>
+    <tr>
+      <th>External Site</th>
+      <td><?php echo "$external"; ?></td>
+    </tr>
+  </table>
+  <button onclick="location.href='venue-user-edit.php';" class="edit-account">Edit Account Details</button>
+  <h2>Registered Venues</h2>
+  <button class="createVenue">Add Venue</button>
+  <table align="center" border="1px" style="width:600px; line-height:40px;">
+    <tr>
       <th>Venue</th>
-      <th>Upcoming Events</th>
       <td>
-          <div class="dropdown">
-              <button onclick="dropdown()" class="editbtn">Edit</button>
-              <div id="venueOptions" class="dropdown-content">
-                  <a href="#venue-page">View Venue</a>
-                  <a href="#edit-venue">Edit/Delete Venue</a>
-              </div>
+        <div class="dropdown">
+          <button onclick="dropdown()" class="editbtn">Edit</button>
+          <div id="venueOptions" class="dropdown-content">
+            <a href="#venue-page">View Venue</a>
+            <a href="">Edit/Delete Venue</a>
           </div>
+        </div>
       </td>
+    <?php 
+
+      ?>
 </table>
 <script>function dropdown() {
     document.getElementById("venueOptions").classList.toggle("show");
