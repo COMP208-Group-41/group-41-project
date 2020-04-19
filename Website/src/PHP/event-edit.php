@@ -56,7 +56,7 @@
                  $startTime = $result['EventStartTime'];
                  $endTime = $result['EventEndTime'];
 
-                 $currentTagIDs = getEventTagID($venueID,$pdo);
+                 $currentTagIDs = getEventTagID($eventID,$pdo);
              }
         }
 
