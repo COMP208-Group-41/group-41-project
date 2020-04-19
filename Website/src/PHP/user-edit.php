@@ -94,6 +94,13 @@
         }
         $dob = $_POST['dob'];
 
+        // Try inserting Tags
+        unset($tags);
+        $tags = checkTags($errorMessage);
+        if ($tags === false) {
+            return false;
+        }
+
         $pdo->beginTransaction();
 
         if (isset($_POST['newPassword']) && !empty($_POST['newPassword'])) {
@@ -121,9 +128,49 @@
             return false;
         }
 
-        // Try inserting Tags
-        if ()
 
+        if (!sizeof($tags) == 0) {
+            if (!deleteUserPreferences($userID,$pdo)) {
+                $errorMessage = "Error in deleting existing preferences!";
+                $pdo->rollBack();
+                return false;
+            }
+            foreach ($tags as $tag) {
+                if (!insertUserPreferences($tag,$userID,$pdo)) {
+                    $errorMessage = "Error in inserting new User Preferences!";
+                    $pdo->rollBack();
+                    return false;
+                }
+            }
+        }
+
+
+        // Everything completed successfully, commit and return true
+        $pdo->commit();
+        return true;
+    }
+
+    function insertUserPreferences($tag,$userID,$pdo) {
+        $insertUserPreferencesStmt = $pdo->prepare("INSERT INTO UserPreferences (UserID,TagID) VALUES (:UserID,:TagID)");
+        $insertUserPreferencesStmt->bindValue(":UserID",$userID);
+        $insertUserPreferencesStmt->bindValue(":TagID",$tag);
+        if ($insertUserPreferencesStmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function deleteUserPreferences($userID,$pdo) {
+        $deleteTagsStmt = $pdo->prepare("DELETE FROM UserPreferences WHERE UserID=:UserID");
+        $deleteTagsStmt->bindValue(":UserID",$userID);
+        if ($deleteTagsStmt->execute()) {
+            // Tags deleted successfully!
+            return true;
+        } else {
+            // Tags not deleted successfully!
+            return false;
+        }
     }
 
     function updateUser($userID,$username,$email,$dob,$pdo) {
