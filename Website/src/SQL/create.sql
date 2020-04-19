@@ -135,7 +135,7 @@ CREATE TABLE GroupMembers (
     FOREIGN KEY (MemberID) REFERENCES User(UserID)
 );
 
-INSERT INTO User (UserEmail,UserPass,UserDOB,IsAdmin) VALUES ('test@test.com','$2y$10$aVqNr61OO6Yy.muh4Um4seiZ2pdOr76RQH.g8a5eJilVNSLQDpxbO','2000-02-02',false);
+INSERT INTO User (UserEmail,UserName,UserPass,UserDOB,IsAdmin) VALUES ('test@test.com','TestUsername','$2y$10$aVqNr61OO6Yy.muh4Um4seiZ2pdOr76RQH.g8a5eJilVNSLQDpxbO','2000-02-02',false);
 INSERT INTO VenueUser (VenueUserEmail,VenueUserPass,VenueUserName) VALUES ('venuetest@test.com','$2y$10$aVqNr61OO6Yy.muh4Um4seiZ2pdOr76RQH.g8a5eJilVNSLQDpxbO', 'Test Company Name');
 INSERT INTO Venue (VenueUserID,VenueName,VenueDescription,VenueAddress,VenueTimes) VALUES ('1','AdminVenue','AdminDescription','AdminAddress','AdminTimings');
 INSERT INTO Event (VenueID,EventName,EventDescription,EventStartTime,EventEndTime) VALUES ('1','AdminEvent','AdminDescription','2030-02-02 10:00:00','2030-02-03 11:00:00');
