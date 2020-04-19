@@ -13,9 +13,6 @@
     }
     $eventLink = $path."events.php";
     $venueLink = $path."venues.php";
-    if (!isset($_SESSION['UserID']) && !isset($_SESSION['VenueUserID'])) {
-
-    }
 
 ?>
 
@@ -34,6 +31,7 @@
         <?php
             if (!isset($_SESSION['UserID']) && !isset($_SESSION['VenueUserID'])) {
                 echo '<a href="'.$path.'login.php">Log In</a>';
+                echo '<a href="'.$path.'venue-user-login">Venue Log In</a>';
             } else {
                 echo '<a href="'.$path.'logout.php">Log Out</a>';
             }
