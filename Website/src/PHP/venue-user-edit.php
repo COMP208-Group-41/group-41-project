@@ -334,18 +334,18 @@
         <h1 class="title">Account Settings</h1>
         <form name='EditVenueUserDetails' method='post' style="margin-top: 10px">
             <div class="edit-fields">
-                <label>Email:</label>
+                <label for='email'>Email:</label>
                 <input type='text' name='email' value="<?php echo $email; ?>">
-                <label>New password:</label>
+                <label for='newPassword'>New password:</label>
                 <input type='password' name='newPassword'>
-                <label>Confirm new password:</label>
+                <label for='confirmNewPassword'>Confirm new password:</label>
                 <input type='password' name='confirmNewPassword'>
-                <label>Company name:</label>
+                <label for='companyName'>Company name:</label>
                 <input type='text' name='companyName' value="<?php echo $name; ?>">
-                <label>Website link:</label>
+                <label for='external'>Website link:</label>
                 <input type='text' name='external' value="<?php echo $external; ?>">
                 <div class="seperator">
-                    <label>Enter current password to allow changes:</label>
+                    <label for='password'>Enter current password to allow changes:</label>
                     <input type='password' name='password' required>
                 </div>
                 <!-- require password for any change! -->
