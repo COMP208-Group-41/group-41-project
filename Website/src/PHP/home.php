@@ -22,6 +22,7 @@
         unset($_SESSION['message']);
     }
 ?>
+<div class="wrapper">
 <div class="container">
     <div class="form">
         <form name='search form' method='post'>
@@ -151,6 +152,7 @@
     </div>-->
 
 
+</div>
 </div>
 </body>
 </html>
