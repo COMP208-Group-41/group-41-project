@@ -241,7 +241,9 @@
                 <label for='endTime'>End Time:</label>
                 <input type='datetime-local' id="endTime" name='endTime' placeholder="End time" required><br>
             </div>
-            <div style= "display: flex;">
+            <div class="seperator">
+                <label>Enter current password to allow changes:</label>
+                <input type='password' name='password' required>
                 <input type='submit' value='Create' class="button" style="width: 100%">
             </div>
         </form>
