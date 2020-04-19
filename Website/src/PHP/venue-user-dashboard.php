@@ -1,23 +1,50 @@
+<?php
+
+  session_start();
+
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+        header("location: venue-user-login.php");
+        exit;
+    /* If the user is logged in but they are not a venue user then they are
+     * redirected to home page
+     */
+    } else if (isset($_SESSION["UserID"])) {
+        header("location: venue-user-login.php.php");
+        exit;
+    } else if (!isset($_SESSION["VenueUserID"])) {
+        header("location: user-dashboard.php");
+        exit;
+    }
+
+    // Config file is imported
+    require_once "config.php";
+
+    $venueUserID = $_SESSION["VenueUserID"];
+    $errorMessage = "";
+    $name = $email = $external = "";
+    $result = getVenueUserInfo($venueUserID,$pdo);
+    $name = $result['VenueUserName'];
+    $email = $result['VenueUserEmail'];
+    $external = $result['VenueUserExternal'];
+
+
+
+
+?>
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
-    <title>OutOut - Venue Dashboard</title>
+    <title>OutOut - Venue User Dashboard</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/venue-user-dashboard.css">
-    <div class="header">
-        <img src="../Assets/outout.svg" alt="OutOut">
-        <div class="header-right">
-            <a class="active" href="#event">create event</a>
-            <a href="#contact">Contact</a>
-            <a href="#about">About</a>
-            <a href="#login">login</a>
-            <a href="#viewEvents">view events</a>
-        </div>
-    </div>
 </head>
 <body>
-<h1>Venues</h1>
+<h1>Account Details</h1>
+
+
+<button class="edit">Edit Account</button>
+<h2>Venues</h2>
 <button class="create-edit-venue">Create/Edit Venue</button>
 <table align="center" border="1px" style="width:600px; line-height:40px;">
     <t>
@@ -53,5 +80,3 @@ window.onclick = function (event) {
 </script>
 </body>
 </html>
-
-
