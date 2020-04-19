@@ -143,10 +143,10 @@
         </div>
         <form name='RegisterForm' method='post'>
             <div class="login-field">
-                <input type='text' name='email' placeholder="Email">
-                <input type='password' name='password' placeholder="Password">
-                <input type='password' name='confirmPassword' placeholder="Confirm Password">
-                <input type="text" name='nameOfCompany' placeholder="Name of Company">
+                <input type='text' name='email' placeholder="Email" required>
+                <input type='password' name='password' placeholder="Password" required>
+                <input type='password' name='confirmPassword' placeholder="Confirm Password" required>
+                <input type="text" name='nameOfCompany' placeholder="Name of Company" required>
             </div>
             <div style="display: flex">
                 <a href="venue-user-login.php" class="login-button">Log In</a>
