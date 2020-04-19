@@ -37,7 +37,7 @@
         /* If email, password, confirm password and dob are provided using the submit
          * form then start processing inputs (validation, assigning values to
          * variables etc.) */
-        if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirmPassword']) && isset($_POST['DOB'] && isset($_POST['username']))) {
+        if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirmPassword']) && isset($_POST['DOB']) && isset($_POST['username'])) {
             // Trim email to remove whitespaces at start or end
             $email = trim($_POST['email']);
             $username = trim($_POST['username']);
