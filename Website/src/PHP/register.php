@@ -83,7 +83,7 @@
                             } else {
                                 // The password is hashed
                                 $hashedPassword = passwordHasher($password);
-                                if (createUser($email,$hashedPassword,$dob,$pdo)) {
+                                if (createUser($username,$email,$hashedPassword,$dob,$pdo)) {
                                     /* The verification email would be sent here but
                                      * as we do not have a working mail server this
                                      * will not work at the moment
