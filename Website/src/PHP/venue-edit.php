@@ -27,7 +27,8 @@
     // Now check that the user accessing this venue is allowed to
     if (!checkVenueUserAllowed($venueID,$venueUserID,$pdo)) {
         // User is not allowed to edit!
-        header("location: venue-home.php");
+        $_SESSION['message'] = "You are not allowed to edit this venue!";
+        header("location: venue-user-dashboard.php");
         exit;
     }
 
