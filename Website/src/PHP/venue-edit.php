@@ -48,7 +48,7 @@
              * correct, if so then continue with creation
              */
              if (checkInputs($venueUserID,$venueID,$errorMessage,$pdo)) {
-                 $errorMessage = "Venue Edited Successfully!";
+                 $_SESSION['message'] = "Venue Edited Successfully!";
                  // Refresh details!
 
                  $result = getVenueInfo($venueID,$pdo);
@@ -441,7 +441,6 @@
     if ($errorMessage != "") {
         echo "<div class='error-wrapper'><div class='error'>$errorMessage</div></div>";
     }
-
 ?>
 </div>
 </body>
