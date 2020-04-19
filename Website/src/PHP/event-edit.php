@@ -159,7 +159,7 @@
 
         if (!updateEvent($eventID,$name,$description,$mysqlStartDateTime,$mysqlEndDateTime,$pdo)) {
             $errorMessage = "Error in editing event!";
-            $pdo-rollBack();
+            $pdo->rollBack();
             return false;
         }
 
@@ -167,7 +167,7 @@
         if (!sizeof($tags) == 0) {
             if (!deleteTags($eventID,$pdo)) {
                 $errorMessage = "Error in deleting existing tags!";
-                $pdo-rollBack();
+                $pdo->rollBack();
                 return false;
             }
             foreach ($tags as $tag) {
@@ -382,14 +382,14 @@
                 <textarea id='description' name='description' form='EventForm'
                           placeholder="Event Description, max 1000 characters"
                           required><?php echo $description; ?></textarea>
-                <!--    TODO: Revert input types to datetime-local -->
+
                 <label for='endTime'>Event Start Time:</label>
                 <input type='datetime-local' id="startTime" name='startTime' placeholder="Start time"
                        value="<?php echo $startTime; ?>" required>
                 <label for='endTime'>Event End Time:</label>
                 <input type='datetime-local' id="endTime" name='endTime' placeholder="End time"
                        value="<?php echo $endTime; ?>" required>
-                <!--    TODO: RESTRICT SIZE OF PICTURE THAT CAN BE UPLOADED -->
+
                 <input type='file' id="eventImage" name='eventImage' accept="image/*" class="input-file">
                 <label for="eventImage">Upload Image</label>
                 <div style="display: flex; justify-content: center">
