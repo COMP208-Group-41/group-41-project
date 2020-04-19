@@ -11,7 +11,10 @@
 <?php include "navbar.php" ?>
 <div class="wrapper">
     <div class="container">
-        <h1 class="title">Account Details</h1>
+        <h1 class="title"><?php echo "$name"; ?> - Dashboard</h1>
+        <div class="seperator">
+            <h2 class="title">Account details</h2>
+        </div>
         <table align="center" border="1px" style="width:600px">
             <tr>
                 <th>Name</th>
@@ -27,21 +30,33 @@
             </tr>
         </table>
         <button onclick="location.href='venue-user-edit.php';" class="button" style="width: 100%; margin-bottom: 16px">Edit Account Details</button>
-        <div class="seperator" style="margin-top: 8px">
-        <h2 class="title">Registered Venues</h2>
+        <div class="seperator" style="margin-top: 4px">
+
         </div>
-        <button onclick="location.href='venue-creation.php';" class="button" style="width: 100%; margin-bottom: 16px">Add Venue</button>
+        <h2 class="title">Registered Venues</h2>
         <div class="venuelist">
             <div class="venue">
-                <?php
-            foreach ($venues as $row) {
-                echo "<div class="venue-image"></div>"
-                echo "<div class="venue-name">".$row['VenueName']."</div>";
-                echo '<div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="button" style="width: 50%">View Venue</a>';
-                echo '<a href="venue-edit.php?venueID='.$row['VenueID'].'" class="button" style="width: 50%">Edit Venue</a></div>';
-                }
-                ?>
+                <div class="venue-image">
+                </div>
+                <div class="venue-name">
+                    Turkey Club
+                </div>
+                <div class="venue-buttons">
+                    <a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -1px">View Venue</a>
+                    <a href="venue-edit.php?venueID='.$row['VenueID'].'" class="venue-button">Edit Venue</a></div>
+                </div>
+            <div class="venue">
+                <div class="venue-image">
+                </div>
+                <div class="venue-name">
+                    Chicken Ranch
+                </div>
+                <div class="venue-buttons">
+                    <a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -1px">View Venue</a>
+                    <a href="venue-edit.php?venueID='.$row['VenueID'].'" class="venue-button">Edit Venue</a></div>
             </div>
+            </div>
+        <button onclick="location.href='venue-creation.php';" class="button" style="width: 100%; margin-bottom: 16px">Add a new Venue</button>
         </div>
     </div>
 </div>
