@@ -196,5 +196,12 @@ function validate255($name) {
         }
     }
 
+    function getVenueUserInfo($venueUserID, $pdo) {
+        $infoStmt = $pdo->prepare("SELECT VenueUserEmail,VenueUserName,VenueUserExternal FROM VenueUser WHERE VenueUserID=:VenueUserID");
+        $infoStmt->bindValue(":VenueUserID",$venueUserID);
+        $infoStmt->execute();
+        return $infoStmt->fetch();
+    }
+
 
 ?>
