@@ -76,13 +76,6 @@
         exit("PDO Error: ".$e->getMessage()."<br>");
     }
 
-    function getVenueUserInfo($venueUserID, $pdo) {
-        $infoStmt = $pdo->prepare("SELECT VenueUserEmail,VenueUserName,VenueUserExternal FROM VenueUser WHERE VenueUserID=:VenueUserID");
-        $infoStmt->bindValue(":VenueUserID",$venueUserID);
-        $infoStmt->execute();
-        return $infoStmt->fetch();
-    }
-
     /* perform checks for every field that can be edited, if changes are being
      * made then checks are performed and if updates are successful then the
      * transactions are comitted, otherwise they are rolled back and the
