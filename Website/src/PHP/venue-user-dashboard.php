@@ -69,8 +69,8 @@
       foreach ($venues as $row) {
         echo "<tr>";
           echo "<td>".$row['VenueName']."</td>";
-          echo "<td><button href='venue.php?venueID=".$row['VenueID']."' class='viewVenue'>View Venue</button>";
-          echo "<button href='venue-edit.php?venueID=".$row['VenueID']."' class='editVenue'>Edit Venue</button></td>";
+          echo '<td><button href="venue.php?venueID='.$row['VenueID'].'" class="viewVenue">View Venue</button>';
+          echo '<button href="venue-edit.php?venueID='.$row['VenueID'].'" class="editVenue">Edit Venue</button></td>';
         echo "</tr>";
       }
     ?>
