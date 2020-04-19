@@ -42,7 +42,7 @@
 
 
     function performChecks($userID, &$errorMessage,$pdo) {
-        if (!(isset($_POST['password']) && !empty($_POST['password']))) {
+        if (isset($_POST['password']) && !empty($_POST['password'])) {
             $password = $_POST['password'];
             if (!verifyPassword($userID,$password,$pdo)) {
                 $errorMessage = "Password Incorrect!";
