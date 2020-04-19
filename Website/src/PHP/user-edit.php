@@ -77,7 +77,7 @@
             }
         }
 
-        
+        if (checkEmailExists)
     }
 
 ?>
