@@ -27,10 +27,10 @@
 <div id="mySidenav" class="sidenav">
     <div class="sidebar-content">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">Dashboard</a>
-        <a href="#">Venues</a>
-        <a href="#">Account</a>
-        <a href="#">Contact</a>
+        <a href="<?php echo $dashboardLink; ?>">Dashboard</a>
+        <a href="<?php echo ; ?>">Venues</a>
+        <a href="<?php echo $accountLink; ?>">Account</a>
+        <a href="<?php echo $dashboardLink; ?>">Contact</a>
     </div>
 </div>
 <script>
