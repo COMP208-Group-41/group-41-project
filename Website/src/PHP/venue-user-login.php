@@ -93,6 +93,12 @@
 </head>
 <body>
 <div class="wrapper">
+    <?php
+        if (isset($_SESSION['message'])) {
+            echo "<div class='success'>".$_SESSION['message']."</div>";
+            unset($_SESSION['message']);
+        }
+    ?>
     <div class="outout-wrapper" style="padding-bottom: 10px">
         <img src="../Assets/outout.svg" alt="OutOut">
     </div>
@@ -116,10 +122,6 @@
     // If the details are incorrect then error message is shown
     if ($loginError != '') {
         echo "<div class='error'>$loginError</div>";
-    }
-    if (isset($_SESSION['message'])) {
-        echo "<div class='success'>".$_SESSION['message']."</div>";
-        unset($_SESSION['message']);
     }
 ?>
 </body>
