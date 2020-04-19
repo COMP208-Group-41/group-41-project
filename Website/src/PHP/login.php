@@ -13,7 +13,7 @@
      */
 
      $registeredMsg = '';
-     $loginError = '';
+     $errorMessage = '';
 
     // Config file for connecting to the database is grabbed here
     require_once "config.php";
@@ -39,14 +39,14 @@
                     exit;
                 } else {
                     // Password doesn't match!
-                    $loginError = 'Email or Password incorrect!';
+                    $errorMessage = 'Email or Password incorrect!';
                 }
             } else {
                 /* If the user's details are not in the system or their account
                  * is not verified then their login attempt is unsuccessful
                  * and the message is shown to them
                  */
-                $loginError = 'Email or Password incorrect!';
+                $errorMessage = 'Email or Password incorrect!';
             }
         }
     } catch (PDOException $e) {
@@ -89,7 +89,7 @@
         </div>
         <?php
             // If the details are incorrect then error message is shown
-            if ($loginError != '') {
+            if ($errorMessage != '') {
                 echo "<div class='error-wrapper'><div class='error'>$errorMessage</div></div>";
             }
         ?>
