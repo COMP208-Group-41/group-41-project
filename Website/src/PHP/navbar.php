@@ -33,7 +33,7 @@
         <a href="<?php echo $accountLink; ?>">Account</a>
         <?php
             if (!isset($_SESSION['UserID']) && !isset($_SESSION['VenueUserID'])) {
-                echo '<a href="'$path.'login.php">Log In</a>';
+                echo '<a href="'.$path.'login.php">Log In</a>';
             } else {
                 echo '<a href="'.$path.'logout.php">Log Out</a>';
             }
