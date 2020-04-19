@@ -1,18 +1,15 @@
 <?php
-    // Links are for devel branch, need to adapt for master
-
-    $path = "https://student.csc.liv.ac.uk/~sgstribe/test/php/dashboards/";
 
     if (isset($_SESSION['UserID'])) {
-        $dashboardLink = $path."user-dash.php";
-        $accountLink = $path."user-edit.php";
+        $dashboardLink = "user-dashboard.php";
+        $accountLink = "user-edit.php";
     }
     if (isset($_SESSION['VenueUserID'])) {
-        $dashboardLink = $path."venue-user-dashboard.php";
-        $accountLink = $path."venue-user-edit.php";
+        $dashboardLink = "venue-user-dashboard.php";
+        $accountLink = "venue-user-edit.php";
     }
-    $eventLink = $path."events.php";
-    $venueLink = $path."venues.php";
+    $eventLink = "events.php";
+    $venueLink = "venues.php";
 
 ?>
 
@@ -30,10 +27,10 @@
         <a href="<?php echo $accountLink; ?>">Account</a>
         <?php
             if (!isset($_SESSION['UserID']) && !isset($_SESSION['VenueUserID'])) {
-                echo '<a href="'.$path.'login.php">Log In</a>';
-                echo '<a href="'.$path.'venue-user-login">Venue Log In</a>';
+                echo '<a href="login.php">Log In</a>';
+                echo '<a href="venue-user-login.php">Venue Log In</a>';
             } else {
-                echo '<a href="'.$path.'logout.php">Log Out</a>';
+                echo '<a href="logout.php">Log Out</a>';
             }
         ?>
     </div>

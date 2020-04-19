@@ -132,3 +132,15 @@ hr {
     color: var(--text);
     line-height: 1.5;
 }
+
+.searchbar {
+    font-family: "K2D", sans-serif;
+    width: 0;
+    background: var(--header-background);
+    overflow-x: hidden;
+    transition: 0.2s;
+}
+
+.form {
+    text-align: left;
+}
