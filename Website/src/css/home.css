@@ -64,7 +64,7 @@ input:focus {
     background-color: var(--body-background);
     padding: 6px;
     color: var(--body);
-    width: 30%;
+    width: 20%;
     text-align: center;
     text-decoration: none;
 }
@@ -120,6 +120,10 @@ hr {
     margin-top: 8px;
 }
 
+.text {
+    font-family: "K2D", sans-serif;
+
+}
 
 .tag-container {
     text-align: center;
@@ -133,12 +137,22 @@ hr {
     line-height: 1.5;
 }
 
-.searchbar {
-    font-family: "K2D", sans-serif;
-    width: 0;
-    background: var(--header-background);
-    overflow-x: hidden;
-    transition: 0.2s;
+input.searchbar {
+    height: 32px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    width: 30%;
+    margin-right: -8px;
+}
+
+input.searchbar:focus {
+    width: 80%;
+}
+
+.button.search-button {
+    height: 32px;
+    line-height: 1;
+    margin-left: 0;
 }
 
 .form {
