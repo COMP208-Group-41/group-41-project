@@ -171,7 +171,7 @@
                 return false;
             }
             foreach ($tags as $tag) {
-                if (!insertTags($tag,$eventID,$pdo)) {
+                if (!insertEventTags($tag,$eventID,$pdo)) {
                     $errorMessage = "Error in inserting tags!";
                     $pdo->rollBack();
                     return false;
@@ -311,11 +311,11 @@
     }
 
     // New tags added to the database
-    function insertTags($tag,$eventID,$pdo) {
-        $insertTagsStmt = $pdo->prepare("INSERT INTO EventTag (EventID,TagID) VALUES (:EventID,:TagID)");
-        $insertTagsStmt->bindValue(":EventID",$eventID);
-        $insertTagsStmt->bindValue(":TagID",$tag);
-        if ($insertTagsStmt->execute()) {
+    function insertEventTags($tag,$eventID,$pdo) {
+        $insertEventTagsStmt = $pdo->prepare("INSERT INTO EventTag (EventID,TagID) VALUES (:EventID,:TagID)");
+        $insertEventTagsStmt->bindValue(":EventID",$eventID);
+        $insertEventTagsStmt->bindValue(":TagID",$tag);
+        if ($insertEventTagsStmt->execute()) {
 
             return true;
         } else {

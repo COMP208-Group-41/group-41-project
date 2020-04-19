@@ -190,7 +190,7 @@
                 <label style="text-align: center; margin-top: 16px;"><b>Current Tags:</b></label>
                 <div style="display: flex; justify-content: center; ">
                     <div class="tag-container" style="text-align: center">
-                        <?php getTags($currentTagIDs,$pdo); ?>
+                        <?php getTags($userPrefs,$pdo); ?>
                     </div>
                 </div>
 
@@ -216,7 +216,7 @@
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select>
-                
+
                 <div class="seperator">
                     <label for='password'>Enter current password to allow changes:</label>
                     <input type='password' name='password' required>
