@@ -199,7 +199,7 @@
         }
     }
 
-    function checkEmailExistsOmit($username,$userID,$pdo) {
+    function checkEmailExistsOmit($email,$userID,$pdo) {
         $checkExistingStmt = $pdo->prepare("SELECT UserEmail FROM User WHERE UserEmail=:UserEmail AND UserID<>:UserID");
         $checkExistingStmt->bindValue(':UserEmail',$email);
         $checkExistingStmt->bindValue(':UserID',$userID);
