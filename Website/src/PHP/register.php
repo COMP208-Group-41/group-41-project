@@ -31,7 +31,7 @@
     /* All variables needed for registration delcared here as empty string,
      * Error messages are also declared here */
     $email = $password = $confirmPassword = $dob = '';
-    $emailError = $passwordError = $accountExists = $ageError = $createError = '';
+    $errorMessage = '';
 
     try {
         /* If email, password, confirm password and dob are provided using the submit
@@ -41,21 +41,23 @@
             // Trim email to remove whitespaces at start or end
             $email = trim($_POST['email']);
             $username = trim($_POST['username']);
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            if ($_POST['username'] = "" || !isset($_POST['username']){
+              $errorMessage = 'The username entered is invalid';
+            }
+            else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 // The email address provided is invalid!
-                $emailError = 'The email address entered is not valid!';
+                $errorMessage = 'The email address entered is not valid!';
             } else {
                 if (checkEmailExists($email,$pdo)) {
                     // Account already exists with email address entered!
-                    $accountExists = 'An Account already exists with that email!';
+                    $errorMessage = 'An Account already exists with that email!';
                 } elseif (checkUsernameExists($username, $pdo)) {
                   // Account already exists with username address entered!
-                    $accountExists = 'An Account already exists with that username!';
+                    $errorMessage = 'An Account already exists with that username!';
                 } elseif (!validate255($username)) {
                   // Account username too long
-                    $accountExists = 'Username too long!';
+                    $errorMessage = 'Username too long!';
                 } else {
-                    $accountExists = '';
                     // Account does not exist with email, continue with registration
                     $dob = $_POST['DOB'];
 
@@ -64,22 +66,20 @@
                          * (either they are under 18 or the date given is in
                          * the future)
                          */
-                        $ageError = 'Either your age is under 18 or the format of the date of birth was wrong, please match the format dd-mm-yyyy!';
+                        $errorMessage = 'Either your age is under 18 or the format of the date of birth was wrong, please match the format dd-mm-yyyy!';
                     } else {
-                        $ageError = '';
                         // The user is over 18, continue with registration
                         // Check passwords match
                         $password = $_POST['password'];
                         $confirmPassword = $_POST['confirmPassword'];
                         if ($password != $confirmPassword) {
                             // Passwords do not match!
-                            $passwordError = 'Passwords do not match!';
+                            $errorMessage = 'Passwords do not match!';
                         } else {
-                            $passwordError = '';
                             // Validate password
                             if (!validatePassword($password)) {
                                 // The password is not valid
-                                $passwordError = 'password must be at least 8 characters long and contain a lower case letter and a number!';
+                                $errorMessage = 'password must be at least 8 characters long and contain a lower case letter and a number!';
                             } else {
                                 // The password is hashed
                                 $hashedPassword = passwordHasher($password);
@@ -93,7 +93,7 @@
                                     header('location: login.php');
                                     exit;
                                 } else {
-                                    $createError = 'Error creating new account, please try again later!';
+                                    $errorMessage = 'Error creating new account, please try again later!';
                                 }
                             }
                         }
@@ -253,36 +253,8 @@
     </div>
 </div>
         <?php
-        /* If the email entered is not valid then the user is dispalayed an
-         * error message below
-         */
-        if ($emailError != '') {
-            echo "<div class='error-wrapper'><div class='error'>$emailError</div></div>";
-        }
-        /* If the accountExists string is not blank then the error message is
-         * displayed telling the user that an account already exists in the
-         * database with the email they provided
-         */
-        if ($accountExists != '') {
-            echo "<div class='error-wrapper'><div class='error'>$accountExists</div></div>";
-        }
-        /* If the age entered by the user is under 18 then ageError is set as an
-         * error string which is displayed below
-         */
-        if ($ageError != '') {
-            echo "<div class='error-wrapper'><div class='error'>$ageError</div></div>";
-        }
-        /* If there are any errors with the password (not matching or not valid)
-         * then the error is displayed below
-         */
-        if ($passwordError != '') {
-            echo "<div class='error-wrapper'><div class='error'>$passwordError</div></div>";
-        }
-        /* If there is an error in creating the account then the error message
-         * is displayed below
-         */
-        if ($createError != '') {
-            echo "<div class='error-wrapper'><div class='error'>$createError</div></div>";
+        if ($errorMessage != '') {
+            echo "<div class='error-wrapper'><div class='error'>$errorMessage</div></div>";
         }
         ?>
     </body>
