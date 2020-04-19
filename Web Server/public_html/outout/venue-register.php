@@ -53,7 +53,7 @@
                                          // Verification not working so set verified to true
                                          $_SESSION['verified'] = true;
 
-                                         header('location: venue-login.php');
+                                         header('location: venue-user-login.php');
                                          exit;
                                      }
 

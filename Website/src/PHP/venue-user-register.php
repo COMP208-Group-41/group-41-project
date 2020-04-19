@@ -52,7 +52,7 @@
                                          // sendVerificationEmail($email,$hash);
                                          // Verification not working so set verified to true
                                          $_SESSION['message'] = "Venue Account Created Successfully!";
-                                         header('location: venue-login.php');
+                                         header('location: venue-user-login.php');
                                          exit;
                                      }
 
@@ -133,7 +133,7 @@
                 <input type="text" name='nameOfCompany' placeholder="Name of Company">
             </div>
             <div style="display: flex">
-                <a href="venue-login.php" class="login-button">Log In</a>
+                <a href="venue-user-login.php" class="login-button">Log In</a>
                 <input type='submit' value='Register' class="register-button">
             </div>
         </form>

@@ -11,7 +11,7 @@
     // Testing purposes
 
     if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-        header("location: venue-login.php");
+        header("location: venue-user-login.php");
         exit;
         /* If the user is logged in but they are not a venue user then they are
          * redirected to home page
