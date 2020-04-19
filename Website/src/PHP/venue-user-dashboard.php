@@ -37,44 +37,49 @@
     <title>OutOut - Venue User Dashboard</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../css/venue-user-dashboard.css">
+    <link rel="stylesheet" href="../css/venue.css">
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
 </head>
 <body>
-  <?php include "navbar.php" ?>
-  <h1>Account Details</h1>
-  <table align="center" border="1px" style="width:600px; line-height:40px;">
-    <tr>
-      <th>Name</th>
-      <td><?php echo "$name"; ?></td>
-    </tr>
-    <tr>
-      <th>Email</th>
-      <td><?php echo "$email"; ?></td>
-    </tr>
-    <tr>
-      <th>External Site</th>
-      <td><?php echo "$external"; ?></td>
-    </tr>
-  </table>
-  <button onclick="location.href='venue-user-edit.php';" class="edit-account">Edit Account Details</button>
-  <h2>Registered Venues</h2>
-  <button onclick="location.href='venue-creation.php';" class="createVenue">Add Venue</button>
-  <table align="center" border="1px" style="width:600px; line-height:40px;">
-    <tr>
-      <th>Venue</th>
-      <th>View/Edit Venue</th>
-    </tr>
-    <?php
-      foreach ($venues as $row) {
-        echo "<tr>";
-          echo "<td>".$row['VenueName']."</td>";
-          echo "<td><button href='venue.php?venueID=".$row['VenueID']."' class='viewVenue'>View Venue</button>";
-          echo "<button href='venue-edit.php?venueID=".$row['VenueID']."' class='editVenue'>Edit Venue</button></td>";
-        echo "</tr>";
-      }
-    ?>
-</table>
+<?php include "navbar.php" ?>
+<div class="wrapper">
+    <div class="container">
+        <h1>Account Details</h1>
+        <table align="center" border="1px" style="width:600px; line-height:40px;">
+            <tr>
+                <th>Name</th>
+                <td><?php echo "$name"; ?></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><?php echo "$email"; ?></td>
+            </tr>
+            <tr>
+                <th>External Site</th>
+                <td><?php echo "$external"; ?></td>
+            </tr>
+        </table>
+        <button onclick="location.href='venue-user-edit.php';" class="edit-account">Edit Account Details</button>
+        <h2>Registered Venues</h2>
+        <button onclick="location.href='venue-creation.php';" class="createVenue">Add Venue</button>
+        <table align="center" border="1px" style="width:600px; line-height:40px;">
+            <tr>
+                <th>Venue</th>
+                <th>View/Edit Venue</th>
+            </tr>
+            <?php
+            foreach ($venues as $row) {
+                echo "<tr>";
+                echo "<td>".$row['VenueName']."</td>";
+                echo '<td><a href="venue.php?venueID='.$row['VenueID'].'" class="button">View Venue</a>';
+                echo '<a href="venue-edit.php?venueID='.$row['VenueID'].'" class="button">Edit Venue</a></td>';
+                echo "</tr>";
+            }
+            ?>
+        </table>
+    </div>
+</div>
+
 <script>function dropdown() {
     document.getElementById("venueOptions").classList.toggle("show");
 }
