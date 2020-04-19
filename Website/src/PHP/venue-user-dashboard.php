@@ -43,6 +43,12 @@
 <body>
 <?php include "navbar.php" ?>
 <div class="wrapper">
+    <?php
+        if (isset($_SESSION['message'])) {
+            echo "<div class='success'>".$_SESSION['message']."</div>";
+            unset($_SESSION['message']);
+        }
+    ?>
     <div class="container">
         <h1>Account Details</h1>
         <table align="center" border="1px" style="width:600px; line-height:40px;">

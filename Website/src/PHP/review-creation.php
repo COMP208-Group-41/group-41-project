@@ -190,6 +190,12 @@
   </head>
   <body>
     <?php include "navbar.php" ?>
+    <?php
+        if (isset($_SESSION['message'])) {
+            echo "<div class='success'>".$_SESSION['message']."</div>";
+            unset($_SESSION['message']);
+        }
+    ?>
     <form name='ReviewVenue' method='post'>
       <div>
           <label for='Review'>Review:</label>
@@ -234,10 +240,6 @@
       <?php
           if ($errorMessage != "") {
               echo "<div class='error'>$errorMessage</div>";
-          }
-          if (isset($_SESSION['message'])) {
-              echo "<div class='success'>".$_SESSION['message']."</div>";
-              unset($_SESSION['message']);
           }
        ?>
     </form>

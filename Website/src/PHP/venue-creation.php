@@ -220,6 +220,12 @@
 <body>
 <?php include "navbar.php" ?>
 <div class="wrapper">
+    <?php
+        if (isset($_SESSION['message'])) {
+            echo "<div class='success'>".$_SESSION['message']."</div>";
+            unset($_SESSION['message']);
+        }
+    ?>
     <div class="container">
         <form id='CreateVenue' name='CreateVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
             <div class="edit-fields">
@@ -255,10 +261,6 @@
 <?php
     if ($errorMessage != "") {
         echo "<div class='error'>$errorMessage</div>";
-    }
-    if (isset($_SESSION['message'])) {
-        echo "<div class='success'>".$_SESSION['message']."</div>";
-        unset($_SESSION['message']);
     }
 ?>
 </body>

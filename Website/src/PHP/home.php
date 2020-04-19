@@ -16,6 +16,12 @@
 </head>
 <body>
 <?php include "navbar.php" ?>
+<?php
+    if (isset($_SESSION['message'])) {
+        echo "<div class='success'>".$_SESSION['message']."</div>";
+        unset($_SESSION['message']);
+    }
+?>
 <div class="container">
     <div class="form">
         <form name='search form' method='post'>
