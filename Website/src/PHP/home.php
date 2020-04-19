@@ -11,31 +11,50 @@
 <head>
     <title>OutOut - Edit Venue User Account</title>
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" type="text/css" href="../css/home.css">
+    <link rel="stylesheet" type="text/css" href="../css/slideshow.css">
 </head>
 <body>
 <?php include "navbar.php" ?>
 <div class="container">
     <div class="form">
         <form name='search form' method='post'>
-            <input type='text' name='venue' placeholder="venue">
-            <input type='date' name='date' placeholder="Password">
+            <input type='text' name='search' placeholder="Search for venue.." class="searchbar">
+            <input type='submit' value='Search' class='button search-button'>
         </form>
     </div>
-    <br>
-
-    <div style="text-align:center">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(1)"></span>
-    </div>
-
-    <div class="info_banner">
-        <div infomessage1>
+    <!-- Slideshow from W3Schools https://www.w3schools.com/howto/howto_js_slideshow.asp -->
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <div class="numbertext">1 / 3</div>
+            <img src="../Assets/background.jpg">
+            <div class="text">Caption Text</div>
         </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">2 / 3</div>
+            <img src="../Assets/background1.jpg">
+            <div class="text">Caption Two</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">3 / 3</div>
+            <img src="../Assets/background2.jpg">
+            <div class="text">Caption Three</div>
+        </div>
+
+        <!-- Next and previous buttons -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
     </div>
 
-
+    <div style="text-align:center; margin-top: 8px">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+    <script src="../js/slideshow.js"></script>
+    <br>
     <div class="container2">
         <section class="cms-boxes">
             <div class="container-fluid">
@@ -127,39 +146,5 @@
 
 
 </div>
-<script>
-    var slideIndex = 1;
-    showSlides(slideIndex);
-
-    // Next/previous controls
-    function plusSlides(n) {
-        showSlides(slideIndex += n);
-    }
-
-    // Thumbnail image controls
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
-    }
-
-    function showSlides(n) {
-        var i;
-        var slides = document.getElementsByClassName("mySlides");
-        var dots = document.getElementsByClassName("dot");
-        if (n > slides.length) {
-            slideIndex = 1
-        }
-        if (n < 1) {
-            slideIndex = slides.length
-        }
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
-        }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
-        }
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
-    }
-</script>
 </body>
 </html>
