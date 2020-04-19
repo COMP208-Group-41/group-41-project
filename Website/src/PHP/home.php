@@ -55,6 +55,7 @@
     </div>
     <script src="../js/slideshow.js"></script>
     <br>
+
     <div class="container2">
         <section class="cms-boxes">
             <div class="container-fluid">
@@ -116,7 +117,6 @@
 
         </section>
     </div>
-
     <!-- Photo Grid  <div class="row">
         <div class="column">
             <img src="../Assets/background.jpg" style="width:100%">
