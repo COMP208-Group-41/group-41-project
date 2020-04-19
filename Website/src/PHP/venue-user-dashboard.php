@@ -59,7 +59,7 @@
   </table>
   <button onclick="location.href='venue-user-edit.php';" class="edit-account">Edit Account Details</button>
   <h2>Registered Venues</h2>
-  <button class="createVenue">Add Venue</button>
+  <button onclick="location.href='venue-creation.php';" class="createVenue">Add Venue</button>
   <table align="center" border="1px" style="width:600px; line-height:40px;">
     <tr>
       <th>Venue</th>
