@@ -65,20 +65,6 @@
       <th>Venue</th>
       <th>View/Edit Venue</th>
     </tr>
-    <!--
-    <tr>
-      <td>VENUE NAME HERE</td>
-      <td>
-        <div class="dropdown">
-          <button onclick="dropdown()" class="editbtn">Edit</button>
-          <div id="venueOptions" class="dropdown-content">
-            <a href="#venue-page">View Venue</a>
-            <a href="">Edit/Delete Venue</a>
-          </div>
-        </div>
-      </td>
-    </tr>
-    -->
     <?php
       foreach ($venues as $row) {
         echo "<tr>";
