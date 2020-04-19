@@ -47,6 +47,7 @@ if (isset($_SESSION['message'])) {
     unset($_SESSION['message']);
 }
 ?>
+<div class="wrapper">
 <div class="container">
     <h1 class="title">Account Details</h1>
     <table align="center" border="1px" style="width:600px; line-height:40px;">
@@ -87,6 +88,7 @@ if (isset($_SESSION['message'])) {
         }
         ?>
     </table>
+</div>
 </div>
 </body>
 </html>

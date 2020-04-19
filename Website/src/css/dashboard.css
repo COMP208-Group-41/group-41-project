@@ -14,5 +14,22 @@ th, td {
 }
 
 th {
-    width: 25%;
+    width: 20%;
 }
+
+.venuelist {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 0;
+}
+
+.venue {
+    display: flex;
+    height: 32px;
+}
+
+.venue-buttons {
+    width: 50%;
+}
+
+

@@ -9,9 +9,10 @@
 </head>
 <body>
 <?php include "navbar.php" ?>
+<div class="wrapper">
     <div class="container">
         <h1 class="title">Account Details</h1>
-        <table align="center" border="1px" style="width:600px; line-height:40px;">
+        <table align="center" border="1px" style="width:600px">
             <tr>
                 <th>Name</th>
                 <td><?php echo "$name"; ?></td>
@@ -30,21 +31,19 @@
         <h2 class="title">Registered Venues</h2>
         </div>
         <button onclick="location.href='venue-creation.php';" class="button" style="width: 100%; margin-bottom: 16px">Add Venue</button>
-        <table align="center" border="1px" style="width:600px; line-height:40px;">
-            <tr>
-                <th>Venue</th>
-                <th>View/Edit Venue</th>
-            </tr>
-            <?php
+        <div class="venuelist">
+            <div class="venue">
+                <?php
             foreach ($venues as $row) {
-                echo "<tr>";
-            echo "<td>".$row['VenueName']."</td>";
-            echo '<td><a href="venue.php?venueID='.$row['VenueID'].'" class="button">View Venue</a>';
-            echo '<a href="venue-edit.php?venueID='.$row['VenueID'].'" class="button">Edit Venue</a></td>';
-            echo "</tr>";
-            }
-            ?>
-        </table>
+                echo "<div class="venue-image"></div>"
+                echo "<div class="venue-name">".$row['VenueName']."</div>";
+                echo '<div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="button" style="width: 50%">View Venue</a>';
+                echo '<a href="venue-edit.php?venueID='.$row['VenueID'].'" class="button" style="width: 50%">Edit Venue</a></div>';
+                }
+                ?>
+            </div>
+        </div>
     </div>
+</div>
 </body>
 </html>
