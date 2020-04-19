@@ -62,8 +62,11 @@
 <html lang='en-GB'>
 <head>
     <link rel="stylesheet" type="text/css" href="../css/login-register.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <title>OutOut - Login</title>
 </head>
 <body>
+    <?php include "navbar.php" ?>
         <div class="wrapper">
             <?php
                 if (isset($_SESSION['message'])) {
