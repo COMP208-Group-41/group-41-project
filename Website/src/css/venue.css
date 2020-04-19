@@ -17,6 +17,12 @@ body {
     text-align: center;
 }
 
+.wrapper {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+}
+
 .container {
     background: var(--body);
     display: inline-block;
