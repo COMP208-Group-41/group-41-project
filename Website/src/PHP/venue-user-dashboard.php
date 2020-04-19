@@ -53,6 +53,7 @@
     <th>External Site</th>
     <td><?php $name ?><td>
   </tr>
+</table>
 <button onclick="location.href='venue-user-edit.php';" class="edit-account">Edit Account</button>
 <h2>Venues</h2>
 <button class="create-edit-venue">Create/Edit Venue</button>
