@@ -32,7 +32,7 @@ $venues = getVenues($venueUserID, $pdo);
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
-    <title>OutOut - Venue User Dashboard</title>
+    <title><?php echo "$name"; ?> - Dashboard</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/venue.css">
@@ -49,7 +49,7 @@ if (isset($_SESSION['message'])) {
 ?>
 <div class="wrapper">
     <div class="container">
-        <h1 class="title"><?php echo "$name"; ?> - Dashboard</h1>
+        <h1 class="title"><?php echo "$name"; ?></h1>
         <div class="seperator">
             <h2 class="title">Account details</h2>
         </div>
