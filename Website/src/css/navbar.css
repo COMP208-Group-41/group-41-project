@@ -1,5 +1,5 @@
 :root {
-    --header-background: linear-gradient(270deg, rgba(7, 41, 29, 0.92) 0%, rgba(6, 27, 41, 0.92) 100%);
+    --header-background: linear-gradient(90deg, #272727 0%, #202020 100%);
     --body-gray: #F7F7F7;
     --body: #D6D6D6;
     --button-border: #3B3B3B;

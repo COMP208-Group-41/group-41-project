@@ -121,7 +121,7 @@
 <?php
     // If the details are incorrect then error message is shown
     if ($loginError != '') {
-        echo "<div class='error'>$loginError</div>";
+        echo "<div class='error-wrapper'><div class='error'>$errorMessage</div></div>";
     }
 ?>
 </body>

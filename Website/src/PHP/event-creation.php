@@ -257,7 +257,7 @@
 </div>
 <?php
     if ($errorMessage != "") {
-        echo "<div class='error'>$errorMessage</div>";
+        echo "<div class='error-wrapper'><div class='error'>$errorMessage</div></div>";
     }
  ?>
 </body>
