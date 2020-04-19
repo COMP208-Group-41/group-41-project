@@ -70,7 +70,7 @@
         echo "<tr>";
           echo "<td>".$row['VenueName']."</td>";
           echo "<td><button class='viewVenue'>View Venue</button>";
-          echo "<td><button class='editVenue'>Edit Venue</button>";
+          echo "<button class='editVenue'>Edit Venue</button></td>";
         echo "</tr>";
       }
     ?>
