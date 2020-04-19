@@ -115,6 +115,28 @@
             }
         }
 
+        if (!updateUser($userID,$username,$email,$dob,$pdo)) {
+            $errorMessage = "Error in updating your details!";
+            $pdo-rollBack();
+            return false;
+        }
+
+        // Try inserting Tags
+        if ()
+
+    }
+
+    function updateUser($userID,$username,$email,$dob,$pdo) {
+        $updateUserStmt = $pdo->prepare("UPDATE User SET UserName=:UserName, UserEmail=:UserEmail, UserDOB=:UserDOB WHERE UserID=:UserID");
+        $updateUserStmt->bindValue(":UserName",$username);
+        $updateUserStmt->bindValue(":UserEmail",$email);
+        $updateUserStmt->bindValue(":UserDOB",$dob);
+        $updateUserStmt->bindValue(":UserID",$userID);
+        if ($updateUserStmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function updateUserPass($userID,$hashedPassword,$pdo) {

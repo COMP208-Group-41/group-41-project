@@ -325,4 +325,57 @@ function validate255($name) {
         }
     }
 
+    /* CheckTags returns an array of the user-selected tags if they are entered
+     * Correctly. If they are not then false is returned
+     */
+    function checkTags(&$errorMessage) {
+        unset($tags);
+        $tags = [];
+        if ((isset($_POST['tag1']) && $_POST['tag1'] != 'Optional')) {
+            $tags[0] = $_POST['tag1'];
+        }
+
+        if (isset($_POST['tag2']) && $_POST['tag2'] != 'Optional') {
+            if (in_array($_POST['tag2'],$tags)) {
+                // Cannot have 2 of the same tag!
+                $errorMessage = "You cannot have more than one of each tag!";
+                return false;
+            } else {
+                $tags[1] = $_POST['tag2'];
+            }
+        }
+
+        if (isset($_POST['tag3']) && $_POST['tag3'] != 'Optional') {
+            if (in_array($_POST['tag3'],$tags)) {
+                // Cannot have 2 of the same tag!
+                $errorMessage = "You cannot have more than one of each tag!";
+                return false;
+            } else {
+                $tags[2] = $_POST['tag3'];
+            }
+        }
+
+        if (isset($_POST['tag4']) && $_POST['tag4'] != 'Optional') {
+            if (in_array($_POST['tag4'],$tags)) {
+                // Cannot have 2 of the same tag!
+                $errorMessage = "You cannot have more than one of each tag!";
+                return false;
+            } else {
+                $tags[3] = $_POST['tag4'];
+            }
+        }
+
+        if (isset($_POST['tag5']) && $_POST['tag5'] != 'Optional') {
+            if (in_array($_POST['tag5'],$tags)) {
+                // Cannot have 2 of the same tag!
+                $errorMessage = "You cannot have more than one of each tag!";
+                return false;
+            } else {
+                $tags[4] = $_POST['tag5'];
+            }
+        }
+
+        return $tags;
+    }
+
 ?>
