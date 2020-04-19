@@ -203,5 +203,12 @@ function validate255($name) {
         return $infoStmt->fetch();
     }
 
+    function getUserInfo($UserID, $pdo) {
+        $infoStmt = $pdo->prepare("SELECT UserEmail,UserDOB FROM User WHERE UserID=:UserID");
+        $infoStmt->bindValue(":UserID",$UserID);
+        $infoStmt->execute();
+        return $infoStmt->fetch();
+    }
+
 
 ?>
