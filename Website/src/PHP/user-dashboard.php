@@ -28,7 +28,7 @@
     $result = getUserInfo($userID,$pdo);
     $name = $result['UserName'];
     $email = $result['UserEmail'];
-    $userDOB = $result['VenueUserDOB'];
+    $userDOB = $result['UserDOB'];
     $userPrefs = getUserTags($userID,$pdo);
     $interestedIn = getInterested($userID,$pdo);
 
