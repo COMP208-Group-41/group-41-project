@@ -20,6 +20,7 @@
 
     $email = $password = $passwordConfirm = $name = "";
     $emailError = $passwordError = $accountExists = $nameError = $createError = '';
+    $companyNameError;
 
     try {
         if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirmPassword']) && isset($_POST['nameOfCompany'])) {
@@ -39,30 +40,34 @@
                             $passwordError = 'password must be at least 8 characters long and contain a lower case letter and a number!';
                         } else {
                             $hashedPassword = passwordHasher($password);
-                            $name = trim($_POST['nameOfCompany']);
-                            if (!validate255($name)) {
-                                $nameError = 'Name of Company cannot be more than 255 characters!';
+                            if (!isset($_POST['nameOfCompany']) || empty(trim($_POST['nameOfCompany']))) {
+                                $nameError = "Your company name cannot be blank!";
                             } else {
-                                if (createUser($email,$hashedPassword,$name,$pdo)) {
-                                    /* The verification email would be sent here but
-                                     * as we do not have a working mail server this
-                                     * will not work at the moment
-                                     */
-
-                                     // CREATE FOLDER IN PRIVATE_UPLOAD FOR IMAGES
-                                     if (!createVenueUserFolder($email,$hashedPassword,$pdo)) {
-                                         // ERROR!
-                                         $createError = "Error creating user folder!";
-                                     } else {
-                                         // sendVerificationEmail($email,$hash);
-                                         // Verification not working so set verified to true
-                                         $_SESSION['message'] = "Venue Account Created Successfully!";
-                                         header('location: venue-user-login.php');
-                                         exit;
-                                     }
-
+                                $name = trim($_POST['nameOfCompany']);
+                                if (!validate255($name)) {
+                                    $nameError = 'Name of Company cannot be more than 255 characters!';
                                 } else {
-                                    $createError = 'Error creating new account, please try again later!';
+                                    if (createUser($email,$hashedPassword,$name,$pdo)) {
+                                        /* The verification email would be sent here but
+                                         * as we do not have a working mail server this
+                                         * will not work at the moment
+                                         */
+
+                                         // CREATE FOLDER IN PRIVATE_UPLOAD FOR IMAGES
+                                         if (!createVenueUserFolder($email,$hashedPassword,$pdo)) {
+                                             // ERROR!
+                                             $createError = "Error creating user folder!";
+                                         } else {
+                                             // sendVerificationEmail($email,$hash);
+                                             // Verification not working so set verified to true
+                                             $_SESSION['message'] = "Venue Account Created Successfully!";
+                                             header('location: venue-user-login.php');
+                                             exit;
+                                         }
+
+                                    } else {
+                                        $createError = 'Error creating new account, please try again later!';
+                                    }
                                 }
                             }
                         }
@@ -138,10 +143,10 @@
         </div>
         <form name='RegisterForm' method='post'>
             <div class="login-field">
-                <input type='text' name='email' placeholder="Email">
-                <input type='password' name='password' placeholder="Password">
-                <input type='password' name='confirmPassword' placeholder="Confirm Password">
-                <input type="text" name='nameOfCompany' placeholder="Name of Company">
+                <input type='text' name='email' placeholder="Email" required>
+                <input type='password' name='password' placeholder="Password" required>
+                <input type='password' name='confirmPassword' placeholder="Confirm Password" required>
+                <input type="text" name='nameOfCompany' placeholder="Name of Company" required>
             </div>
             <div style="display: flex">
                 <a href="venue-user-login.php" class="login-button">Log In</a>
