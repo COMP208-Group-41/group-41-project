@@ -59,46 +59,50 @@
             unset($_SESSION['message']);
         }
     ?>
-    <h1 class='title'>Account Details</h1>
-    <table align="center" border="1px" style="width:600px; line-height:40px;">
-      <tr>
-        <th>User Name</th>
-        <td><?php echo "$name"; ?></td>
-      </tr>
-      <tr>
-        <th>Email</th>
-        <td><?php echo "$email"; ?></td>
-      </tr>
-      <tr>
-        <th>Date of Birth</th>
-        <td><?php echo "$userDOB"; ?></td>
-      </tr>
-      <tr>
-        <th>Your Favourite Tags</th>
-      </tr>
-      <tr>
-        <?php
-          foreach ($userPrefs as $tag) {
-            echo "<td>".$tag."</td>";
-          }
-        ?>
-      </tr>
-    </table>
-    <button onclick="location.href='user-edit.php';" class="edit-account">Edit Account Details</button>
-    <h2>Your Interested Events</h2>
-    <table align="center" border="1px" style="width:600px; line-height:40px;">
-    <tr>
-      <th>Event</th>
-      <th>View Event</th>
-    </tr>
-    <?php
-      foreach ($interestedIn as $row) {
-        echo "<tr>";
-          echo "<td>".$row['EventName']."</td>";
-          echo '<td><a href="event.php?eventID='.$row['EventID'].'" class="button">View Event</a>';
-        echo "</tr>";
-      }
-    ?>
-  </table>
+    <div class='wrapper'>
+        <div class='container'>
+            <h1 class='title'>Account Details</h1>
+            <table align="center" border="1px" style="width:600px; line-height:40px;">
+              <tr>
+                <th>User Name</th>
+                <td><?php echo "$name"; ?></td>
+              </tr>
+              <tr>
+                <th>Email</th>
+                <td><?php echo "$email"; ?></td>
+              </tr>
+              <tr>
+                <th>Date of Birth</th>
+                <td><?php echo "$userDOB"; ?></td>
+              </tr>
+              <tr>
+                <th>Your Favourite Tags</th>
+              </tr>
+              <tr>
+                <?php
+                  foreach ($userPrefs as $tag) {
+                    echo "<td>".$tag."</td>";
+                  }
+                ?>
+              </tr>
+            </table>
+            <button onclick="location.href='user-edit.php';" class="edit-account">Edit Account Details</button>
+            <h2>Your Interested Events</h2>
+            <table align="center" border="1px" style="width:600px; line-height:40px;">
+            <tr>
+              <th>Event</th>
+              <th>View Event</th>
+            </tr>
+            <?php
+              foreach ($interestedIn as $row) {
+                echo "<tr>";
+                  echo "<td>".$row['EventName']."</td>";
+                  echo '<td><a href="event.php?eventID='.$row['EventID'].'" class="button">View Event</a>';
+                echo "</tr>";
+              }
+            ?>
+          </table>
+      </div>
+  </div>
   </body>
 </html>
