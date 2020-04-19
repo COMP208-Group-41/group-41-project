@@ -63,6 +63,9 @@
   <table align="center" border="1px" style="width:600px; line-height:40px;">
     <tr>
       <th>Venue</th>
+      <th>View/Edit Venue</th>
+    <tr>
+      <td>VENUE NAME HERE</td>
       <td>
         <div class="dropdown">
           <button onclick="dropdown()" class="editbtn">Edit</button>
@@ -72,9 +75,7 @@
           </div>
         </div>
       </td>
-    <?php 
-
-      ?>
+    </tr>
 </table>
 <script>function dropdown() {
     document.getElementById("venueOptions").classList.toggle("show");
