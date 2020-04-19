@@ -9,6 +9,6 @@
     // The session is detroyed
     session_destroy();
     // The user is redirected to the login page
-    header("location: login.php");
+    header("location: home.php");
     exit;
 ?>

@@ -16,7 +16,7 @@
 
 ?>
 
-<div class="banner" >
+<div class="banner">
     <img src="../Assets/menu-icon.svg" alt="Menu" width="25" onclick="openNav()" class="menu-image">
     <img src="../Assets/outout.svg" alt="OutOut" width="100">
     <img src="../Assets/profile.svg" alt="Profile" width="40" >
