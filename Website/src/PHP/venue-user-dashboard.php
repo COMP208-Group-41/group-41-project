@@ -43,15 +43,15 @@
 <table align="center" border="1px" style="width:600px; line-height:40px;">
   <tr>
     <th>Name</th>
-    <td><?php $name ?><td>
+    <td><?php echo "$name"; ?></td>
   </tr>
   <tr>
     <th>Email</th>
-    <td><?php $name ?><td>
+    <td><?php echo "$email"; ?></td>
   </tr>
   <tr>
     <th>External Site</th>
-    <td><?php $name ?><td>
+    <td><?php echo "$external"; ?></td>
   </tr>
 </table>
 <button onclick="location.href='venue-user-edit.php';" class="edit-account">Edit Account</button>
