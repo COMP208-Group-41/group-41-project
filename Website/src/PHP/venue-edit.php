@@ -272,13 +272,6 @@
         return $getVenueTagsStmt->fetchAll();
     }
 
-    function echoTags($pdo) {
-        $tags = $pdo->query("SELECT * FROM Tag ORDER BY TagName");
-        foreach ($tags as $row) {
-            echo "<option value='".$row['TagID']."'>".$row['TagName']."</option>";
-        }
-    }
-
     function checkExistingVenue($name,$address,$venueID,$pdo) {
         $checkExistingStmt = $pdo->prepare("SELECT VenueID FROM Venue WHERE VenueName=:VenueName AND VenueAddress=:VenueAddress AND VenueID<>:VenueID");
         $checkExistingStmt->bindValue(":VenueName",$name);
