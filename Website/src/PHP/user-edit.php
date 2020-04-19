@@ -247,15 +247,15 @@
         <form name='EditVenueUserDetails' method='post' style="margin-top: 10px">
             <div class="edit-fields">
                 <label for='username'>Username:</label>
-                <input type='text' name='username' value="<?php echo $username; ?>">
+                <input type='text' name='username' value="<?php echo $username; ?>" required>
                 <label for='email'>Email:</label>
-                <input type='text' name='email' value="<?php echo $email; ?>">
+                <input type='text' name='email' value="<?php echo $email; ?>" required>
                 <label for='newPassword'>New password:</label>
                 <input type='password' name='newPassword'>
                 <label for='confirmNewPassword'>Confirm new password:</label>
                 <input type='password' name='confirmNewPassword'>
                 <label for='dob'>Date of birth:</label>
-                <input type='date' name='dob' value="<?php echo $dob; ?>">
+                <input type='date' name='dob' value="<?php echo $dob; ?>" required>
 
                 <!-- Script here, if no tags present dont display any of the tag stuff -->
                 <label style="text-align: center; margin-top: 16px;"><b>Current Tags:</b></label>
