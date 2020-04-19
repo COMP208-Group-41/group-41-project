@@ -18,7 +18,8 @@ body {
 }
 
 .wrapper {
-    display: flex;
+    display: inline-flex;
+    flex-direction: column;
     justify-content: center;
     flex: 1;
 }
