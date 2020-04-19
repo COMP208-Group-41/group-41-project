@@ -257,32 +257,32 @@
          * error message below
          */
         if ($emailError != '') {
-            echo "<div class='error'>$emailError</div>";
+            echo "<div class='error-wrapper'><div class='error'>$emailError</div></div>";
         }
         /* If the accountExists string is not blank then the error message is
          * displayed telling the user that an account already exists in the
          * database with the email they provided
          */
         if ($accountExists != '') {
-            echo "<div class='error'>$accountExists</div>";
+            echo "<div class='error-wrapper'><div class='error'>$accountExists</div></div>";
         }
         /* If the age entered by the user is under 18 then ageError is set as an
          * error string which is displayed below
          */
         if ($ageError != '') {
-            echo "<div class='error'>$ageError</div>";
+            echo "<div class='error-wrapper'><div class='error'>$ageError</div></div>";
         }
         /* If there are any errors with the password (not matching or not valid)
          * then the error is displayed below
          */
         if ($passwordError != '') {
-            echo "<div class='error'>$passwordError</div>";
+            echo "<div class='error-wrapper'><div class='error'>$passwordError</div></div>";
         }
         /* If there is an error in creating the account then the error message
          * is displayed below
          */
         if ($createError != '') {
-            echo "<div class='error'>$createError</div>";
+            echo "<div class='error-wrapper'><div class='error'>$createError</div></div>";
         }
         ?>
     </body>
