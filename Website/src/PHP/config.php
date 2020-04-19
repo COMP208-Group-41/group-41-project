@@ -226,5 +226,37 @@ function validate255($name) {
         }
     }
 
+    function getUserTags($userID,$pdo){
+      $infoStmt = $pdo->prepare("SELECT TagID FROM UserPreferences WHERE UserID=:UserID");
+      $infoStmt->bindValue(":UserID",$userID);
+      $infoStmt->execute();
+      return $infoStmt->fetchAll();
+    }
+
+    function getInterested($userID,$pdo){
+      $infoStmt = $pdo->prepare("SELECT EventID FROM InterestedIn WHERE UserID=:UserID");
+      $infoStmt->bindValue(":UserID",$userID);
+      $infoStmt->execute();
+      return $infoStmt->fetchAll();
+    }
+
+    /* The function findUser checks if the account exists in the database
+     * with the email and password, and returns the UserID if the user
+     * exists, or 0 if they do not (no UserID can be 0)
+     */
+    function findUser($email,$pdo) {
+        /* Try to find the user in the database using provided
+         * username and password
+         */
+        $loginstmt = $pdo->prepare("SELECT UserID FROM User WHERE UserEmail=:UserEmail");
+        $loginstmt->bindValue(":UserEmail",$email);
+        $loginstmt->execute();
+        if ($loginstmt->rowCount() == 1) {
+            $row = $loginstmt->fetch();
+            return $row['UserID'];
+        } else {
+            return 0;
+        }
+    }
 
 ?>

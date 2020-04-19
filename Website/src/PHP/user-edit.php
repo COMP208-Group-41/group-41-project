@@ -16,40 +16,37 @@
     $username = $result['UserName'];
     $email = $result['UserEmail'];
     $dob = $result['UserDOB'];
+    $userPrefs = getUserTags($userID,$pdo);
+    $interestedIn = getInterested($userID,$pdo);
 
-    
+
+
 
 
     try {
         if (!empty($_POST) && isset($_POST['submit'])) {
-            if (isset($_POST['password']) && !empty($_POST['password'])) {
-                // First check if the original password is correct
-                $password = $_POST['password'];
-                if (verifyVenuePassword($venueUserID,$password,$pdo)) {
-                    // If the password given is correct then check other fields
-                    if (performChecks($venueUserID,$email,$name,$external,$pdo,$errorMessage)) {
-                        // Changes done successfully, show confirmation message
-                        $_SESSION['message'] = "Changes made successfully!";
-                        // Refresh details
-                        $result = getVenueUserInfo($venueUserID,$pdo);
-                        $name = $result['VenueUserName'];
-                        $email = $result['VenueUserEmail'];
-                        $external = $result['VenueUserExternal'];
-                    }
-                } else {
-                    // Password was not correct, show error message
-                    $errorMessage = "Password incorrect!";
-                }
-            } else {
-                /* The password field is empty, show error message and don't save
-                 * any changes!
-                 */
-                 $errorMessage = "You must enter your password to make any changes!";
+            if (performChecks($userID,$errorMessage,$pdo)) {
+                // Changes done successfully, show confirmation message
+                $_SESSION['message'] = "Changes made successfully!";
+                // Refresh details
+                $result = getUserInfo($userID,$pdo);
+                $username = $result['UserName'];
+                $email = $result['UserEmail'];
+                $dob = $result['UserDOB'];
+                $userPrefs = getUserTags($userID,$pdo);
+                $interestedIn = getInterested($userID,$pdo);
             }
         }
     } catch (PDOException $e) {
         $pdo->rollBack();
         exit("PDO Error: ".$e->getMessage()."<br>");
+    }
+
+
+    performChecks($userID,&$errorMessage,$pdo) {
+        if (!(isset($_POST['password']) && !empty($_POST['password']))) {
+            
+        }
     }
 
 ?>
