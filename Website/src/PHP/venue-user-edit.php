@@ -48,7 +48,7 @@
                     // If the password given is correct then check other fields
                     if (performChecks($venueUserID,$email,$name,$external,$pdo,$errorMessage)) {
                         // Changes done successfully, show confirmation message
-                        $errorMessage = "Changes saved successfully!";
+                        $_SESSION['message'] = "Changes made successfully!";
                         // Refresh details
                         $result = getVenueUserInfo($venueUserID,$pdo);
                         $name = $result['VenueUserName'];
