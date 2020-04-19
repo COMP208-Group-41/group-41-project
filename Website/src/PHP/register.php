@@ -37,7 +37,7 @@
         /* If email, password, confirm password and dob are provided using the submit
          * form then start processing inputs (validation, assigning values to
          * variables etc.) */
-        if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirmPassword']) && isset($_POST['DOB'] && isset($_POST['username']))) {
+        if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirmPassword']) && isset($_POST['DOB']) && isset($_POST['username'])) {
             // Trim email to remove whitespaces at start or end
             $email = trim($_POST['email']);
             $username = trim($_POST['username']);
@@ -107,70 +107,6 @@
          * on */
         $pdo->rollback();
         exit("PDO Error: ".$e->getMessage()."<br>");
-    }
-
-
-    /* The function checkUsernameExists returns true if the username provided already
-     * exists in the User database table
-     */
-    function checkUsernameExists($username,$pdo) {
-        // Register form has been filled out and submitted, check if username already exists in db
-        $checkExistingStmt = $pdo->prepare("SELECT UserName FROM User WHERE UserName=:UserName");
-        $checkExistingStmt->bindValue(':UserName',$username);
-        $checkExistingStmt->execute();
-        if ($checkExistingStmt->rowCount() > 0) {
-            // Username exists, return true
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    /* The function checkEmailExists returns true if the email provided already
-     * exists in the User database table
-     */
-    function checkEmailExists($email,$pdo) {
-        // Register form has been filled out and submitted, check if email already exists in db
-        $checkExistingStmt = $pdo->prepare("SELECT UserEmail FROM User WHERE UserEmail=:UserEmail");
-        $checkExistingStmt->bindValue(':UserEmail',$email);
-        $checkExistingStmt->execute();
-        if ($checkExistingStmt->rowCount() > 0) {
-            // Email exists, return true
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /* The function checkValidAge returns false if the date of birth given by the
-     * user means they are under 18 or the date is in the future
-     */
-    function checkValidAge($dob) {
-
-
-        // First check the date isn't in the future
-        try {
-            $dobTimestamp = strtotime($dob);
-            $mysqlDob = date("Y-m-d",$dobTimestamp);
-            /* If the dob entered was invalid then the strtotime and date
-             * conversions above will throw an exception, otherwise they are
-             * valid
-             */
-            $bday = new DateTime($dob);
-            $bday->add(new DateInterval("P18Y"));
-
-            if ($bday > new DateTime("now")) {
-                // user is under 18
-                return false;
-            } else {
-                // user is over 18
-                return true;
-            }
-        } catch (Exception $e) {
-            return false;
-        }
-
     }
 
     /* The function createUser returns true if the account has been created
