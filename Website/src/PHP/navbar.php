@@ -8,6 +8,10 @@
         $dashboardLink = "venue-user-dashboard.php";
         $accountLink = "venue-user-edit.php";
     }
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+      $dashboardLink = "login.php";
+      $accountLink = "login.php";
+    }
     $eventLink = "events.php";
     $venueLink = "venues.php";
 

@@ -13,7 +13,7 @@
      */
 
      $registeredMsg = '';
-     $loginError = '';
+     $errorMessage = '';
 
     // Config file for connecting to the database is grabbed here
     require_once "config.php";
@@ -39,14 +39,14 @@
                     exit;
                 } else {
                     // Password doesn't match!
-                    $loginError = 'Email or Password incorrect!';
+                    $errorMessage = 'Email or Password incorrect!';
                 }
             } else {
                 /* If the user's details are not in the system or their account
                  * is not verified then their login attempt is unsuccessful
                  * and the message is shown to them
                  */
-                $loginError = 'Email or Password incorrect!';
+                $errorMessage = 'Email or Password incorrect!';
             }
         }
     } catch (PDOException $e) {
@@ -55,25 +55,6 @@
          * for the final page
          */
         exit("PDO Error: ".$e->getMessage()."<br>");
-    }
-
-    /* The function findUser checks if the account exists in the database
-     * with the email and password, and returns the UserID if the user
-     * exists, or 0 if they do not (no UserID can be 0)
-     */
-    function findUser($email,$pdo) {
-        /* Try to find the user in the database using provided
-         * username and password
-         */
-        $loginstmt = $pdo->prepare("SELECT UserID FROM User WHERE UserEmail=:UserEmail");
-        $loginstmt->bindValue(":UserEmail",$email);
-        $loginstmt->execute();
-        if ($loginstmt->rowCount() == 1) {
-            $row = $loginstmt->fetch();
-            return $row['UserID'];
-        } else {
-            return 0;
-        }
     }
 
 ?>
@@ -108,7 +89,7 @@
         </div>
         <?php
             // If the details are incorrect then error message is shown
-            if ($loginError != '') {
+            if ($errorMessage != '') {
                 echo "<div class='error-wrapper'><div class='error'>$errorMessage</div></div>";
             }
         ?>
