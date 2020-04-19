@@ -26,10 +26,6 @@ body {
     border-radius: 10px;
 }
 
-form {
-    width: 1000px;
-}
-
 input {
     margin: 0px 0px 16px;
     box-sizing: border-box;
