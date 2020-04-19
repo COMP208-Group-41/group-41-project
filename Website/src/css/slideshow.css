@@ -5,6 +5,12 @@
     display: inline-block;
 }
 
+.slideshow-container img {
+    width:100%;
+    max-height: 400px;
+    object-fit: cover
+}
+
 /* Hide the images by default */
 .mySlides {
     display: none;
