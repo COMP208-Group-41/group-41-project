@@ -227,6 +227,12 @@
 </head>
 <body>
 <div class="wrapper">
+    <?php
+        if (isset($_SESSION['message'])) {
+            echo "<div class='success'>".$_SESSION['message']."</div>";
+            unset($_SESSION['message']);
+        }
+    ?>
     <div class="outout-wrapper">
         <img src="../Assets/outout.svg" alt="OutOut">
     </div>
@@ -277,11 +283,6 @@
          */
         if ($createError != '') {
             echo "<div class='error'>$createError</div>";
-        }
-
-        if (isset($_SESSION['message'])) {
-            echo "<div class='success'>".$_SESSION['message']."</div>";
-            unset($_SESSION['message']);
         }
         ?>
     </body>

@@ -66,7 +66,13 @@
   </head>
   <body>
     <?php include "navbar.php" ?>
-    <h1>Account Details</h1>
+    <?php
+        if (isset($_SESSION['message'])) {
+            echo "<div class='success'>".$_SESSION['message']."</div>";
+            unset($_SESSION['message']);
+        }
+    ?>
+    <h1 class='title'>Account Details</h1>
     <table align="center" border="1px" style="width:600px; line-height:40px;">
       <tr>
         <th>User Name</th>
