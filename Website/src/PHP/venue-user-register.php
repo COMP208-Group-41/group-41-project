@@ -2,7 +2,12 @@
 
     session_start();
 
-    if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+    if(isset($_SESSION["VenueUserID"])) {
+        header("location: venue-user-dashboard.php");
+        exit;
+    }
+
+    if (isset($_SESSION['UserID'])) {
         header("location: home.php");
         exit;
     }

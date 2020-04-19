@@ -82,7 +82,7 @@
     <tr>
       <?php
         foreach ($venues as $row) {
-            echo "<td>'.$row['VenueName'].'</td>";
+            echo "<td>".$row['VenueName']."</td>";
             echo "<td></td>";
         }
 
