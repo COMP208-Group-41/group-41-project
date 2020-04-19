@@ -265,7 +265,7 @@
                     </div>
                 </div>
 
-                <label for='tag1'>Add some tags that best describe your venue - this will overwrite old tags</label>
+                <label for='tag1'>Add some tags that you look for in a night out, these are used for recommending you places! - this will overwrite old tags</label>
                 <select name='tag1' id='tag1'>
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
