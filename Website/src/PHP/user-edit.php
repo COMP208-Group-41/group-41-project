@@ -2,6 +2,8 @@
 
     session_start();
 
+    require_once "config.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +20,7 @@
         <h1 class="title">Account Settings</h1>
         <form name='EditVenueUserDetails' method='post' style="margin-top: 10px">
             <div class="edit-fields">
-                <label for='email'>Email:</label>
+                <label>Email:</label>
                 <input type='text' name='email' value="<?php echo $email; ?>">
                 <label for='username'>Username:</label>
                 <input type='text' name='username' value="<?php echo $username; ?>">
