@@ -346,7 +346,7 @@
                 <input type='text' name='external' value="<?php echo $external; ?>">
                 <div class="seperator">
                     <label>Enter current password to allow changes:</label>
-                    <input type='password' name='password'>
+                    <input type='password' name='password' required>
                 </div>
                 <!-- require password for any change! -->
                 <input type='submit' name='submit' value='Save' class="button">
