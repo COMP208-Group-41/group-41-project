@@ -79,28 +79,14 @@
       </td>
     </tr>
     -->
-    <tr>
-      <?php
-        foreach ($venues as $row) {
-            echo "<td>".$row['VenueName']."</td>";
-            echo "<td></td>";
-        }
-
-      ?>
+    <?php
       foreach ($venues as $row) {
-          echo "<option value=".$row['VenueID'].">".$row['VenueName']."</option>";
+        echo "<tr>";
+          echo "<td>".$row['VenueName']."</td>";
+          echo "<td>BUTTONS GO HERE</td>";
+        echo "</tr>";
       }
-      <td>VENUE NAME HERE</td>
-      <td>
-        <div class="dropdown">
-          <button onclick="dropdown()" class="editbtn">Edit</button>
-          <div id="venueOptions" class="dropdown-content">
-            <a href="#venue-page">View Venue</a>
-            <a href="">Edit/Delete Venue</a>
-          </div>
-        </div>
-      </td>
-    </tr>
+    ?>
 </table>
 <script>function dropdown() {
     document.getElementById("venueOptions").classList.toggle("show");
