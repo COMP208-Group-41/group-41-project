@@ -15,7 +15,7 @@
 
 <div class="banner">
     <img src="../Assets/menu-icon.svg" alt="Menu" width="25" onclick="openNav()" class="menu-image">
-    <img src="../Assets/outout.svg" alt="OutOut" width="100" onclick="location.href='venue-user-edit.php';">
+    <img src="../Assets/outout.svg" alt="OutOut" width="100" onclick="location.href='home.php';">
     <img src="../Assets/profile.svg" alt="Profile" width="40" >
 </div>
 <div id="mySidenav" class="sidenav">
