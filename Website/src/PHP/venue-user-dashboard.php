@@ -9,10 +9,10 @@
      * redirected to home page
      */
     } else if (isset($_SESSION["UserID"])) {
-        header("location: venue-user-login.php.php");
+        header("location: user-dashboard.php");
         exit;
     } else if (!isset($_SESSION["VenueUserID"])) {
-        header("location: user-dashboard.php");
+        header("location: venue-user-login.php");
         exit;
     }
 
@@ -21,7 +21,6 @@
 
     $venueUserID = $_SESSION["VenueUserID"];
     $errorMessage = "";
-    $name = $email = $external = "";
     $result = getVenueUserInfo($venueUserID,$pdo);
     $name = $result['VenueUserName'];
     $email = $result['VenueUserEmail'];
@@ -43,7 +42,7 @@
 <h1>Account Details</h1>
 
 
-<button class="edit">Edit Account</button>
+<button onclick="location.href='venue-user-edit.php';" class="edit-account">Edit Account</button>
 <h2>Venues</h2>
 <button class="create-edit-venue">Create/Edit Venue</button>
 <table align="center" border="1px" style="width:600px; line-height:40px;">
