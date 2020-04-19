@@ -168,6 +168,12 @@ hr {
     width: 400px;
 }
 
+.error-wrapper {
+    display: flex;
+    justify-content: center;
+
+}
+
 .success {
     margin-top: 8px;
     background: rgba(32, 32, 32, 0.95);
