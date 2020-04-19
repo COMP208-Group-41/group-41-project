@@ -67,7 +67,6 @@
     </tr>
     <?php
       foreach ($venues as $row) {
-        href='venue-edit.php?VenueID=3'
         echo "<tr>";
           echo "<td>".$row['VenueName']."</td>";
           echo "<td><button href='venue.php?".$row['VenueID']."' class='viewVenue'>View Venue</button>";
