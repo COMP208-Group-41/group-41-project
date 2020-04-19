@@ -67,10 +67,11 @@
     </tr>
     <?php
       foreach ($venues as $row) {
+        href='venue-edit.php?VenueID=3'
         echo "<tr>";
           echo "<td>".$row['VenueName']."</td>";
-          echo "<td><button class='viewVenue'>View Venue</button>";
-          echo "<button class='editVenue'>Edit Venue</button></td>";
+          echo "<td><button href='venue.php?".$row['VenueID']."' class='viewVenue'>View Venue</button>";
+          echo "<button href='venue-edit.php?".$row['VenueID']."' class='editVenue'>Edit Venue</button></td>";
         echo "</tr>";
       }
     ?>
