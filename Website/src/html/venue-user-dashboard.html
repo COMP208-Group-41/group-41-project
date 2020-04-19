@@ -42,21 +42,23 @@
                     Turkey Club
                 </div>
                 <div class="venue-buttons">
-                    <a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="border-right-color: #C4C4C4">View Venue</a>
+                    <a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -1px">View Venue</a>
                     <a href="venue-edit.php?venueID='.$row['VenueID'].'" class="venue-button">Edit Venue</a></div>
                 </div>
+            <div class="venue">
+                <div class="venue-image">
+                </div>
+                <div class="venue-name">
+                    Chicken Ranch
+                </div>
+                <div class="venue-buttons">
+                    <a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -1px">View Venue</a>
+                    <a href="venue-edit.php?venueID='.$row['VenueID'].'" class="venue-button">Edit Venue</a></div>
+            </div>
             </div>
         <button onclick="location.href='venue-creation.php';" class="button" style="width: 100%; margin-bottom: 16px">Add a new Venue</button>
         </div>
     </div>
 </div>
-    <?php
-            foreach ($venues as $row) {
-                echo "<div class="venue-image"></div>"
-echo "<div class="venue-name">".$row['VenueName']."</div>";
-echo '<div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="width: 50%">View Venue</a>';
-    echo '<a href="venue-edit.php?venueID='.$row['VenueID'].'" class="venue-button" style="width: 50%">Edit Venue</a></div>';
-}
-?>
 </body>
 </html>

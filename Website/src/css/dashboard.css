@@ -46,6 +46,7 @@ th {
     background: var(--body-background);
     justify-content: center;
     align-items: center;
+    margin: -2px 0;
 
 }
 .venue-name {
@@ -73,7 +74,7 @@ th {
     box-sizing: border-box;
     font-size: 16px;
     background-color: var(--body-background);
-    border: 2px solid var(--body-background);
+    border: 2px solid var(--button-border);
     border-radius: 4px;
     padding: 12px 0px;
     color: var(--body);
