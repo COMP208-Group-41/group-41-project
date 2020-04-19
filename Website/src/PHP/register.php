@@ -41,7 +41,7 @@
             // Trim email to remove whitespaces at start or end
             $email = trim($_POST['email']);
             $username = trim($_POST['username']);
-            if ($_POST['username'] = "" || !isset($_POST['username']){
+            if ($_POST['username'] = "" || !isset($_POST['username'])){
               $errorMessage = 'The username entered is invalid';
             }
             else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
