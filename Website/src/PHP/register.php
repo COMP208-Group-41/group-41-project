@@ -40,6 +40,7 @@
         if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirmPassword']) && isset($_POST['DOB'])) {
             // Trim email to remove whitespaces at start or end
             $email = trim($_POST['email']);
+            $username = trim($_POST['username']);
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 // The email address provided is invalid!
                 $emailError = 'The email address entered is not valid!';
@@ -47,6 +48,12 @@
                 if (checkEmailExists($email,$pdo)) {
                     // Account already exists with email address entered!
                     $accountExists = 'An Account already exists with that email!';
+                } elseif (checkUsernameExists($username, $pdo)) {
+                  // Account already exists with username address entered!
+                    $accountExists = 'An Account already exists with that username!';
+                } elseif (!validate255($username)) {
+                  // Account username too long
+                    $accountExists = 'Username too long!';
                 } else {
                     $accountExists = '';
                     // Account does not exist with email, continue with registration
@@ -102,6 +109,24 @@
         exit("PDO Error: ".$e->getMessage()."<br>");
     }
 
+
+    /* The function checkUsernameExists returns true if the username provided already
+     * exists in the User database table
+     */
+    function checkUsernameExists($username,$pdo) {
+        // Register form has been filled out and submitted, check if username already exists in db
+        $checkExistingStmt = $pdo->prepare("SELECT UserName FROM User WHERE UserName=:UserName");
+        $checkExistingStmt->bindValue(':UserName',$username);
+        $checkExistingStmt->execute();
+        if ($checkExistingStmt->rowCount() > 0) {
+            // Username exists, return true
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     /* The function checkEmailExists returns true if the email provided already
      * exists in the User database table
      */
@@ -151,12 +176,13 @@
     /* The function createUser returns true if the account has been created
      * successfully
      */
-    function createUser($email,$password,$dob,$pdo) {
+    function createUser($username,$email,$password,$dob,$pdo) {
         // Verification hash is generated here using md5 and random numbers
 
         // Create user in db
         $pdo->beginTransaction();
-        $registerStmt = $pdo->prepare("INSERT INTO User (UserEmail,UserPass,UserDOB) VALUES (:UserEmail,:UserPass,:UserDOB)");
+        $registerStmt = $pdo->prepare("INSERT INTO User (UserName,UserEmail,UserPass,UserDOB) VALUES (:UserName,:UserEmail,:UserPass,:UserDOB)");
+        $registerStmt->bindValue(':UserName',$username);
         $registerStmt->bindValue(':UserEmail',$email);
         $registerStmt->bindValue(':UserPass',$password);
         $registerStmt->bindValue(':UserDOB',$dob);
@@ -207,6 +233,7 @@
     <div class="form">
         <form name='RegisterForm' method='post'>
             <div class="login-field">
+                <input type='text' name='username' placeholder="Username">
                 <input type='text' name='email' placeholder="Email">
                 <input type='password' name='password' placeholder="Password">
                 <input type='password' name='confirmPassword' placeholder="Confirm Password">
