@@ -189,6 +189,7 @@
     <link rel="stylesheet" type="text/css" href="../css/reviews.css">
   </head>
   <body>
+    <?php include "navbar.php" ?>
     <form name='ReviewVenue' method='post'>
       <div>
           <label for='Review'>Review:</label>

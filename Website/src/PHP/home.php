@@ -23,6 +23,7 @@
         <title>OutOut - Home</title>
     </head>
     <body>
+        <?php include "navbar.php" ?>
         <h1>OutOut - Home</h1>
         <a href="logout.php" class="btn btn-danger">Logout of Account</a>
         <?php

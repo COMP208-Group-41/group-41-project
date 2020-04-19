@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="../css/404.css">
     </head>
     <body>
+        <?php include "navbar.php" ?>
         <h1>Error 404 - Page Not Found!</h1>
         <p>The page you tried to access was not found!</p>
         <?php
