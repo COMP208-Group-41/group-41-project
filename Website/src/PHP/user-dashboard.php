@@ -32,20 +32,6 @@
     $userPrefs = getUserTags($userID,$pdo);
     $interestedIn = getInterested($userID,$pdo);
 
-    function getUserTags($userID,$pdo){
-      $infoStmt = $pdo->prepare("SELECT TagID FROM UserPreferences WHERE UserID=:UserID");
-      $infoStmt->bindValue(":UserID",$userID);
-      $infoStmt->execute();
-      return $infoStmt->fetchAll();
-    }
-
-    function getInterested($userID,$pdo){
-      $infoStmt = $pdo->prepare("SELECT EventID FROM InterestedIn WHERE UserID=:UserID");
-      $infoStmt->bindValue(":UserID",$userID);
-      $infoStmt->execute();
-      return $infoStmt->fetchAll();
-    }
-
     function eventToVenueID($eventID,$pdo){
       $getVenuesStmt = $pdo->prepare("SELECT VenueID FROM Event WHERE EventID=:EventID");
       $getVenuesStmt->bindValue(":EventID",$eventID);
