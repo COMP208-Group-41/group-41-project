@@ -3,7 +3,7 @@
     session_start();
     // If the user is already logged in then they are redirected to the homepage
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
-        header("location: user-dash.php");
+        header("location: user-dashboard.php");
         exit;
     }
 
@@ -35,7 +35,7 @@
                      */
                     $_SESSION["loggedin"] = true;
                     $_SESSION['UserID'] = $result;
-                    header("location: user-dash.php");
+                    header("location: user-dashboard.php");
                     exit;
                 } else {
                     // Password doesn't match!
