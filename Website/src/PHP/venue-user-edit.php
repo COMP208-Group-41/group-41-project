@@ -336,9 +336,9 @@
             <div class="edit-fields">
                 <label>Email:</label>
                 <input type='text' name='email' value="<?php echo $email; ?>">
-                <label>Password:</label>
+                <label>New password:</label>
                 <input type='password' name='newPassword'>
-                <label>Confirm password:</label>
+                <label>Confirm new password:</label>
                 <input type='password' name='confirmNewPassword'>
                 <label>Company name:</label>
                 <input type='text' name='companyName' value="<?php echo $name; ?>">
