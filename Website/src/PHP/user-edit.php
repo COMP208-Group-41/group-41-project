@@ -64,7 +64,7 @@
             }
         }
 
-        if (!(isset($_POST['email']) && !empty(trim($_POST['email']))) {
+        if (!(isset($_POST['email']) && !empty(trim($_POST['email'])))) {
             $errorMessage = "Please enter an email!";
             return false;
         } else {
