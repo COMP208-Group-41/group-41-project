@@ -159,8 +159,8 @@
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/login-register.css">
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/login-register.css">
     <title>OutOut - Register</title>
 </head>
 <body>
