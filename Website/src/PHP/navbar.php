@@ -28,7 +28,7 @@
     <div class="sidebar-content">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="<?php echo $dashboardLink; ?>">Dashboard</a>
-        <a href="<?php echo ; ?>">Venues</a>
+        <a href="<?php echo $venueLink; ?>">Venues</a>
         <a href="<?php echo $eventLink; ?>">Events</a>
         <a href="<?php echo $accountLink; ?>">Account</a>
         <?php
