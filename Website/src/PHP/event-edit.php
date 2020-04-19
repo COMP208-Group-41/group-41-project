@@ -370,12 +370,6 @@
 
                 <input type='file' id="eventImage" name='eventImage' accept="image/*" class="input-file">
                 <label for="eventImage">Upload Image</label>
-                <div style="display: flex; justify-content: center">
-                    <div class="image-preview" id="imagePreview">
-                        <img src="" alt="Image Preview" class="image-preview__image">
-                        <span class="image-preview__default-text">Image Preview</span>
-                    </div>
-                </div>
 
                 <!-- TAG INPUT -->
                 <!-- Script here, if no tags present dont display any of the tag stuff -->
@@ -411,30 +405,6 @@
                 <label>Enter current password to allow changes:</label>
                 <input type='password' name='password' required>
                 <input type='submit' name='submit' value='Update' class="button" style="width: 100%">
-
-                <script>
-                    // For Image Preview
-                    const inpFile = document.getElementById("eventImage");
-                    const previewContainer = document.getElementById("imagePreview");
-                    const previewImage = previewContainer.querySelector(".image-preview__image");
-                    const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
-
-                    inpFile.addEventListener("change", function () {
-                        const file = this.files[0];
-                        if (file) {
-                            const reader = new FileReader();
-
-                            previewDefaultText.style.display = "none";
-                            previewImage.style.display = "block";
-
-                            reader.addEventListener("load", function () {
-                                previewImage.setAttribute("src", this.result);
-                            });
-
-                            reader.readAsDataURL(file);
-                        }
-                    });
-                </script>
         </form>
     </div>
 </div>
