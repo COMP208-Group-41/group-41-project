@@ -76,21 +76,6 @@
         }
     }
 
-    /* The verifyPassword function returns true if the user's password is correct
-     * using the password_verify function
-     */
-    function verifyPassword($UserID,$password,$pdo) {
-        $checkPasswordStmt = $pdo->prepare("SELECT UserPass FROM User WHERE UserID=:UserID");
-        $checkPasswordStmt->bindValue(':UserID',$UserID);
-        $checkPasswordStmt->execute();
-        $row = $checkPasswordStmt->fetch();
-        /* If the password is verified then return true */
-        if (password_verify($password,$row['UserPass'])) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 ?>
 <!DOCTYPE html>
 <html lang='en-GB'>
