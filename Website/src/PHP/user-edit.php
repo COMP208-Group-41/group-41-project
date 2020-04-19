@@ -17,6 +17,8 @@
     $email = $result['UserEmail'];
     $dob = $result['UserDOB'];
 
+    
+
 
     try {
         if (!empty($_POST) && isset($_POST['submit'])) {
