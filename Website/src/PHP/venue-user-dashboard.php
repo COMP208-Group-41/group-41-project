@@ -69,8 +69,8 @@
       foreach ($venues as $row) {
         echo "<tr>";
           echo "<td>".$row['VenueName']."</td>";
-          echo "<td><button class="view Venue">View Venue</button>";
-          echo "<td><button class="edit-account">Edit Venue</button>";
+          echo "<td><button class='viewVenue'>View Venue</button>";
+          echo "<td><button class='editVenue'>Edit Venue</button>";
         echo "</tr>";
       }
     ?>
