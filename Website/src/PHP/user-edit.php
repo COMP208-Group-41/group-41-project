@@ -4,6 +4,21 @@
 
     require_once "config.php";
 
+    error_reporting( E_ALL );
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+
+    $userID = $_SESSION['UserID'];
+    $name = $email = $username = $newPassword = $password = "";
+    $errorMessage = "";
+
+    $result = getUserInfo($userID,$pdo);
+    $name = $result['VenueUserName'];
+    $email = $result['VenueUserEmail'];
+    $external = $result['VenueUserExternal'];
+
+
+
 ?>
 
 <!DOCTYPE html>
