@@ -48,47 +48,45 @@ if (isset($_SESSION['message'])) {
 }
 ?>
 <div class="wrapper">
-<div class="container">
-    <h1 class="title">Account Details</h1>
-    <table align="center" border="1px" style="width:600px; line-height:40px;">
-        <tr>
-            <th>Name</th>
-            <td><?php echo "$name"; ?></td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td><?php echo "$email"; ?></td>
-        </tr>
-        <tr>
-            <th>External Site</th>
-            <td><?php echo "$external"; ?></td>
-        </tr>
-    </table>
-    <button onclick="location.href='venue-user-edit.php';" class="button" style="width: 100%; margin-bottom: 16px">Edit
-        Account Details
-    </button>
-    <div class="seperator" style="margin-top: 8px">
+    <div class="container">
+        <h1 class="title"><?php echo "$name"; ?> - Dashboard</h1>
+        <div class="seperator">
+            <h2 class="title">Account details</h2>
+        </div>
+        <table align="center" border="1px" style="width:600px">
+            <tr>
+                <th>Name</th>
+                <td><?php echo "$name"; ?></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><?php echo "$email"; ?></td>
+            </tr>
+            <tr>
+                <th>External Site</th>
+                <td><?php echo "$external"; ?></td>
+            </tr>
+        </table>
+        <button onclick="location.href='venue-user-edit.php';" class="button" style="width: 100%; margin-bottom: 16px">Edit Account Details</button>
+        <div class="seperator" style="margin-top: 4px">
+
+        </div>
         <h2 class="title">Registered Venues</h2>
+        <div class="venuelist">
+            <?php
+            foreach ($venues as $row) {
+                echo '<div class="venue">';
+                echo '<div class="venue-image"></div>';
+                echo '<div class="venue-name">'.$row['VenueName']."</div>";
+                echo '<div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="border-right-color: #C4C4C4">View Venue</a>';
+                echo '<a href="venue-edit.php?venueID='.$row['VenueID'].'" class="venue-button" style="width: 50%">Edit Venue</a></div></div>';
+            }
+            ?>
+        </div>
+        <button onclick="location.href='venue-creation.php';" class="button" style="width: 100%; margin-bottom: 16px">Add a new Venue</button>
     </div>
-    <button onclick="location.href='venue-creation.php';" class="button" style="width: 100%; margin-bottom: 16px">Add
-        Venue
-    </button>
-    <table align="center" border="1px" style="width:600px; line-height:40px;">
-        <tr>
-            <th>Venue</th>
-            <th>View/Edit Venue</th>
-        </tr>
-        <?php
-        foreach ($venues as $row) {
-            echo "<tr>";
-            echo "<td>" . $row['VenueName'] . "</td>";
-            echo '<td><a href="venue.php?venueID=' . $row['VenueID'] . '" class="button">View Venue</a>';
-            echo '<a href="venue-edit.php?venueID=' . $row['VenueID'] . '" class="button">Edit Venue</a></td>';
-            echo "</tr>";
-        }
-        ?>
-    </table>
 </div>
 </div>
+
 </body>
 </html>
