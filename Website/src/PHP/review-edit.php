@@ -160,6 +160,8 @@
             unset($_SESSION['message']);
         }
     ?>
+    <div class="wrapper">
+        <div class="container">
     <form name='ReviewVenue' method='post'>
       <div>
           <label for='Review'>Review:</label>
@@ -207,5 +209,7 @@
           }
        ?>
     </form>
+</div>
+</div>
   </body>
 </html>
