@@ -63,6 +63,17 @@
                     <?php getTags($currentTagIDs,$pdo); ?>
                 </div>
             </div>
+            <h2>Reviews</h2>
+            <label>Overall Review Scores</label>
+
+
+
+            <label>All Reviews</label>
+            <div class="reviewlist">
+                <?php
+
+                ?>
+            </div>
         </div>
     </div>
 </div>
