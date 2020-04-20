@@ -111,7 +111,7 @@
                 return false;
             }
             if (!validatePassword($newPassword)) {
-                $errorMessage = "New password must contain at least 1 number and 1 lowercase letter!";
+                $errorMessage = "New password must contain at least 1 number, 1 lowercase letter and be at least 8 characters long!";
                 return false;
             }
             $hashedPassword = passwordHasher($newPassword);
