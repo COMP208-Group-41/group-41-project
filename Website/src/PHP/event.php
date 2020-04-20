@@ -39,12 +39,12 @@
 
     // Check if there is an image for this event
     function checkImageOnServer($venueUserID,$venueID,$eventID) {
-        $target = "/home/sgstribe/private_upload/Venue/$venueUserID/$venueID/$eventID/event.jpg";
+        $target = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID/event.jpg";
         if (!file_exists($target)) {
             return false;
         } else {
-            // Get the file
-            return $target;
+            // If the file exists then return true
+            return true;
         }
     }
 
@@ -72,9 +72,9 @@
             <h1 class="title"><?php echo $name; ?></h1>
             <div class='image'>
                 <?php
-                    // if ($image !== false ) {
-                    //     echo file_get_contents($image);
-                    // }
+                    if ($image) {
+                        echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/'.$owner.'/'.$venueID.'/'.$eventID.'/event.jpg" alt="Venue Image">';
+                    }
                 ?>
             </div>
             <div class="seperator"></div>

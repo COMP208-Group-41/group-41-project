@@ -194,7 +194,7 @@
     }
 
     function createEventFolder($venueUserID,$venueID,$eventID) {
-        $path = "/home/sgstribe/private_upload/Venue/$venueUserID/$venueID/$eventID";
+        $path = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID";
         if (mkdir($path,0755)) {
             // Folder created successfully
             return true;

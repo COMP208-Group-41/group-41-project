@@ -191,7 +191,7 @@
 
     function uploadEventImage($venueUserID,$venueID,$eventID,$pdo) {
         // Remove any existing file first
-        $directory = "/home/sgstribe/private_upload/Venue/$venueUserID/$venueID/$eventID/event.jpg";
+        $directory = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID/event.jpg";
         if (file_exists($directory)) {
             chmod($directory,0755);
             unlink($directory);

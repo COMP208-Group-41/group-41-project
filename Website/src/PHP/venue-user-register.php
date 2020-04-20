@@ -108,7 +108,7 @@
         $row = $getVenueUserIDStmt->fetch();
         $venueUserID = $row['VenueUserID'];
 
-        $path = "/home/sgstribe/private_upload/Venue/$venueUserID";
+        $path = "/home/sgstribe/public_html/Images/Venue/$venueUserID";
         if (mkdir($path,0755)) {
             // Folder created successfully
             return true;
