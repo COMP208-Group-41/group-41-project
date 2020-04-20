@@ -37,12 +37,11 @@
                 echo '<a href="register.php">Register</a>';
                 echo '<br>';
                 echo '<a href="venue-user-login.php">Venue Log In</a>';
-                echo '<a href="venue-user-register.php">Register Venue</a>';
+                echo '<a href="venue-user-register.php">Register Venue</a><br>';
             } else {
-                echo '<a href="logout.php">Log Out</a>';
+                echo '<a href="logout.php">Log Out</a><br>';
             }
         ?>
-        <br>
         <a href="<?php echo $aboutLink; ?>">About Us</a>
     </div>
 </div>
