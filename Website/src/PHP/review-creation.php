@@ -9,10 +9,8 @@
         /* If the user is logged in but they are a venue user then they are
          * redirected to home page
          */
-    } else if (isset($_SESSION["VenueUserID"])) {
-        header("location: venue-home.php");
-        exit;
     }
+
 
     error_reporting( E_ALL );
     ini_set('display_errors', 1);
@@ -37,6 +35,15 @@
         header("location: 404.php");
         exit;
     }
+
+    if (isset($_SESSION["VenueUserID"]) && $eventID == 1) {
+        header("location: venue.php?venueID=3".$venueID."");
+        exit;
+    } else if isset($_SESSION["VenueUserID"]) {
+      header("location: venue.php?venueID=3".$eventID."");
+      exit;
+    }
+
 
     if (!checkVenueEventExists($eventID,$venueID,$pdo)) {
         // Venue or Event does not exist! redirect to home and show error
