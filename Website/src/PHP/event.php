@@ -73,7 +73,7 @@
             <div class='image'>
                 <?php
                     if ($image) {
-                        echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/'.$owner.'/'.$venueID.'/'.$eventID.'/event.jpg" alt="Venue Image">';
+                        echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$owner.'/'.$venueID.'/'.$eventID.'/event.jpg" alt="Venue Image">';
                     }
                 ?>
             </div>
