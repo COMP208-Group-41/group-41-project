@@ -36,10 +36,15 @@
     }
 
     $image = checkImageOnServer($owner,$venueID,$eventID);
+    if ($image === false) {
+        echo "Image  is false!";
+    } else {
+        echo $image;
+    }
 
     // Check if there is an image for this event
     function checkImageOnServer($venueUserID,$venueID,$eventID) {
-        $target = "/home/sgstribe/private_upload/".$venueUserID."/".$venueID."/".$eventID."/event.jpg";
+        $target = "/home/sgstribe/private_upload/$venueUserID/$venueID/$eventID/event.jpg";
         if (!file_exists($target)) {
             return false;
         } else {
