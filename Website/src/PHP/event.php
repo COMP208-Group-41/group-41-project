@@ -33,6 +33,19 @@
         $venueUserID = $_SESSION['VenueUserID'];
     }
 
+    $image = checkImage($owner,$venueID,$eventID);
+
+    // Check if there is an image for this event
+    function checkImage($venueUserID,$venueID,$eventID) {
+        $target = "/home/sgstribe/private_upload/$venueUserID/$venueID/$eventID/event.jpg";
+        if (!file_exists($target)) {
+            return false;
+        } else {
+            // Get the file
+            return file_get_contents($target);
+        }
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en-GB">
@@ -55,8 +68,13 @@
     <div class="container">
         <div style="display: flex; flex-direction: column">
             <h1 class="title"><?php echo $name; ?></h1>
+            <?php
+                if ($image !== false ) {
+                     echo $image;
+                 }
+            ?>
             <label>Image:</label>
-            <img src="../Assets/event-image.jpg">
+            <img src="<?php if ($image !== false ) { echo $image; } ?>">
             <div class="seperator"></div>
             <label>Venue: <?php echo '<a href="venue.php?venueID='.$venueID.'">'.$venueName.'</a>'; ?></label>
 
