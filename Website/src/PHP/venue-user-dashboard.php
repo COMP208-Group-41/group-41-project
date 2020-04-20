@@ -26,8 +26,8 @@ $name = $result['VenueUserName'];
 $email = $result['VenueUserEmail'];
 $external = $result['VenueUserExternal'];
 $venues = getVenues($venueUserID, $pdo);
-if (isset($_GET['VenueID'])){
-  $venueID = $_GET['VenueID'];
+if (isset($_GET['venueID'])){
+  $venueID = $_GET['venueID'];
 }
 if (isset($venueID)){
   $venueNamestmt =  getVenueInfo($venueID,$pdo);
