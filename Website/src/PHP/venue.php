@@ -118,6 +118,7 @@
             <label>All Reviews</label>
             <div class="reviewlist">
                 <?php
+                if ($reviews !== false){
                   $counter = 0;
                   foreach ($reviews as $row) {
                     if($counter<5){
@@ -130,6 +131,10 @@
                     }
                     $counter++;
                   }
+                } else {
+                  echo '<div class="">';
+                  echo '<div class="">No reviews currently posted for this venue</div></div>';
+                }
                 ?>
             </div>
         </div>
