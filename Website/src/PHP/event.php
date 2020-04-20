@@ -18,6 +18,7 @@
 
     $result = getEventInfo($eventID,$pdo);
     $owner = eventToVenueUser($eventID,$pdo);
+    $owner = $owner['VenueUserID'];
     $venueID = $result['VenueID'];
     $getVenueDetails = getVenueInfo($venueID,$pdo);
     $venueName = $getVenueDetails['VenueName'];
