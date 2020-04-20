@@ -75,13 +75,13 @@
                 <th>Date of Birth</th>
                 <td><?php echo "$userDOB"; ?></td>
               </tr>
-              <label style="text-align: center; margin-top: 16px;"><b>Your Favourite Tags:</b></label>
-              <div style="display: flex; justify-content: center; ">
-                  <div class="tag-container" style="text-align: center">
-                      <?php getTags($userPrefs,$pdo); ?>
-                  </div>
-              </div>
             </table>
+            <label style="text-align: center; margin-top: 16px;"><b>Your Favourite Tags:</b></label>
+            <div style="display: flex; justify-content: center; ">
+                <div class="tag-container" style="text-align: center">
+                    <?php getTags($userPrefs,$pdo); ?>
+                </div>
+            </div>
             <button onclick="location.href='user-edit.php';" class="edit-account">Edit Account Details</button>
             <h2>Your Interested Events</h2>
             <table align="center" border="1px" style="width:600px; line-height:40px;">
