@@ -445,10 +445,10 @@ function validate255($name) {
       $total = 0;
       $counter = 0;
       foreach ($results as $score) {
-        $total += $score['ReviewPrice']
+        $total += $score['ReviewPrice'];
         $counter++;
       }
-      return $total/$counter
+      return $total/$counter;
     }
 
     function getVenueSafetyScore($venueID, $pdo){
@@ -459,10 +459,10 @@ function validate255($name) {
       $total = 0;
       $counter = 0;
       foreach ($results as $score) {
-        $total += $score['ReviewSafety']
+        $total += $score['ReviewSafety'];
         $counter++;
       }
-      return $total/$counter
+      return $total/$counter;
     }
 
     function getVenueQueueScore($venueID, $pdo){
@@ -473,10 +473,10 @@ function validate255($name) {
       $total = 0;
       $counter = 0;
       foreach ($results as $score) {
-        $total += $score['ReviewQueue']
+        $total += $score['ReviewQueue'];
         $counter++;
       }
-      return $total/$counter
+      return $total/$counter;
     }
 
     function getVenueAtmosphereScore($venueID, $pdo){
@@ -487,10 +487,10 @@ function validate255($name) {
       $total = 0;
       $counter = 0;
       foreach ($results as $score) {
-        $total += $score['ReviewAtmosphere']
+        $total += $score['ReviewAtmosphere'];
         $counter++;
       }
-      return $total/$counter
+      return $total/$counter;
     }
 
 ?>
