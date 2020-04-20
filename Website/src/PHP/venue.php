@@ -85,7 +85,7 @@
             ?>
             <div class="eventlist">
                 <?php
-                if (sizeof($events) !== false){
+                if ($events !== false){
                   foreach ($events as $row) {
                       echo '<div class="event">';
                       echo '<div class="event-image"></div>';
@@ -97,7 +97,7 @@
                   }
                 } else {
                   echo '<div class="event">';
-                  echo '<div class="event-name">No events currently listed</div></div>";';
+                  echo '<div class="event-name">No events currently listed</div></div>';
                 }
                 echo '<div class=""><a href="" class="event-button" style="">View All EventS</a>';
                 ?>
