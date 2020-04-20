@@ -29,6 +29,9 @@
 
     $venueUserID = $_SESSION['VenueUserID'];
     $errorMessage = "";
+    if (isset($_GET['VenueID'])){
+      $venueID = $_GET['VenueID'];
+    }
     // $unsupportedBrowser = "";
 
     // $user_agent = $_SERVER['HTTP_USER_AGENT'];
