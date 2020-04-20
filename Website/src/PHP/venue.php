@@ -132,8 +132,8 @@
                   $counter = 0;
                   foreach ($reviews as $row) {
                     if($counter<5){
-                      echo "<label>Review left by: ".userIDtoUserName($userID,$pdo)."</label>";
-                      echo "<textarea readonly>".$row['ReviewText']."</textarea>";
+                      echo "<label>Review left by: ".userIDtoUserName($row['UserID'],$pdo)."</label><br>";
+                      echo "<textarea readonly>".$row['ReviewText']."</textarea><br>";
                       echo "<label>Price Score: ".$row['ReviewPrice']."</label><br>";
                       echo "<label>Safety Score ".$row['ReviewSafety']."</label><br>";
                       echo "<label>Atmosphere Score ".$row['ReviewAtmosphere']."</label><br>";
