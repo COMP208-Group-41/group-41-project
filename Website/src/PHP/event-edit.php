@@ -15,14 +15,14 @@
     require_once "config.php";
 
     $venueUserID = $_SESSION["VenueUserID"];
-    $eventID = $_GET['EventID'];
+    $eventID = $_GET['eventID'];
     $errorMessage = "";
 
     $eventToVenueUser = eventToVenueUser($eventID,$pdo);
     $eventToVenueUser = $eventToVenueUser['VenueUserID'];
     if($eventToVenueUser === false){
       $errorMessage = "Error getting VenueUserID";
-    } elseif ($eventToVenueUser != $venueUserID) {
+    } else if ($eventToVenueUser != $venueUserID) {
         header("location: venue-home.php");
         exit;
     }
