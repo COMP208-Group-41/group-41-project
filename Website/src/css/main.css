@@ -186,3 +186,13 @@ hr {
     color: var(--header-gray);
     width: 400px;
 }
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.image {
+    width: 100%;
+    max-height: auto;
+}
