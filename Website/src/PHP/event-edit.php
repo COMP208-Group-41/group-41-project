@@ -47,7 +47,7 @@
         if (!empty($_POST) && isset($_POST['submit'])) {
 
              if (checkInputs($venueUserID,$eventID,$venueID,$errorMessage,$pdo)) {
-                 $errorMessage = "Event Edited Successfully!";
+                 $_SESSION['message'] = "Event Edited Successfully!";
                  // Refresh details!
 
                  $result = getEventInfo($eventID,$pdo);
