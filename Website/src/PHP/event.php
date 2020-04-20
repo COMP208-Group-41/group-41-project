@@ -25,6 +25,7 @@
     $description = $result['EventDescription'];
     $startTime = str_replace("T"," ",$result['EventStartTime']);
     $endTime = str_replace("T"," ",$result['EventEndTime']);
+    $currentTagIDs = getEventTagID($eventID,$pdo);
 
     if (isset($_SESSION['UserID'])) {
         $userID = $_SESSION['UserID'];
