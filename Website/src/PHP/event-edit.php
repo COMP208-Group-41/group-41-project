@@ -22,7 +22,7 @@
     $eventToVenueUser = $eventToVenueUser['VenueUserID'];
     if($eventToVenueUser === false){
       $errorMessage = "Error getting VenueUserID";
-    } elseif ($eventToVenueUser != $venueUserID) {
+    } else if ($eventToVenueUser != $venueUserID) {
         header("location: venue-home.php");
         exit;
     }

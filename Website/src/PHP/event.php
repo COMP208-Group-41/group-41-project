@@ -33,10 +33,10 @@
         $venueUserID = $_SESSION['VenueUserID'];
     }
 
-    $image = checkImage($owner,$venueID,$eventID);
+    $image = checkImageOnServer($owner,$venueID,$eventID);
 
     // Check if there is an image for this event
-    function checkImage($venueUserID,$venueID,$eventID) {
+    function checkImageOnServer($venueUserID,$venueID,$eventID) {
         $target = "/home/sgstribe/private_upload/$venueUserID/$venueID/$eventID/event.jpg";
         if (!file_exists($target)) {
             return false;
