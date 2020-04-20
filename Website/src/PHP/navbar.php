@@ -14,6 +14,7 @@
     }
     $eventLink = "events.php";
     $venueLink = "venues.php";
+    $aboutLink = "about.php";
 
 ?>
 
@@ -41,6 +42,8 @@
                 echo '<a href="logout.php">Log Out</a>';
             }
         ?>
+        <br>
+        <a href="<?php echo $aboutLink; ?>">About Us</a>
     </div>
 </div>
 <script>
