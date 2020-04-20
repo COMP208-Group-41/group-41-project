@@ -74,6 +74,7 @@
                 <?php
                     echo $owner." ".$venueID." ".$eventID;
                     if ($image !== false ) {
+                        header("content-type: image/jpg");
                         echo file_get_contents($image);
                     }
                 ?>
