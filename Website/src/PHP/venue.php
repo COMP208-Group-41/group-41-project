@@ -87,6 +87,7 @@
                     <?php getTags($currentTagIDs,$pdo); ?>
                 </div>
             </div>
+            <div class="seperator"></div>
             <h2>Upcoming Events</h2>
             <?php
             if (isset($venueUserID)){
@@ -118,11 +119,12 @@
                 echo '<div class=""><a href="" class="event-button" style="">View All EventS</a>';
                 ?>
             </div>
+            <div class="seperator"></div>
             <h2>Reviews</h2>
             <label>Overall Review Scores</label>
 
 
-
+            <div class="seperator"></div>
             <label>All Reviews</label>
             <div class="reviewlist">
                 <?php
