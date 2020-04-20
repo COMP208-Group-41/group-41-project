@@ -89,7 +89,7 @@ if (isset($_SESSION['message'])) {
             }
             ?>
           </div>
-          <button onclick="location.href='venue-creation.php';" class="button" style="width: 100%; margin-bottom: 16px">Add a new Venue</button>
+          <button onclick="location.href='venue-creation.php';" class="button" style="width: 100%; margin-bottom: 16px">Add New Venue</button>
         </div>
           <h2 class="title">Registered Events</h2>
           <div class="venuelist">
@@ -108,6 +108,7 @@ if (isset($_SESSION['message'])) {
               }
             }
             ?>
+            <button onclick="location.href='event-creation.php';" class="button" style="width: 100%; margin-bottom: 16px">Add New Event</button>
         </div>
     </div>
 </div>
