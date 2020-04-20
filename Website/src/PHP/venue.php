@@ -8,7 +8,14 @@
 
   require_once "config.php";
 
-  $venueID = $_GET['venueID'];
+  if (isset($_GET['venueID'])) {
+      $venueID = $_GET['venueID'];
+  } else {
+      $_SESSION['message'] = "No Venue ID specified!";
+      header("location: 404.php");
+      exit;
+  }
+
   $result = getVenueInfo($venueID,$pdo);
   $owner = $result['VenueUserID'];
   $name = $result['VenueName'];
@@ -17,6 +24,7 @@
   $times = $result['VenueTimes'];
   $events = getEvents($venueID,$pdo);
   $currentTagIDs = getTagID($venueID,$pdo);
+
 
   // Fetchs type of user and checks if venue user is owner
   if (isset($_SESSION["UserID"])){
@@ -69,16 +77,27 @@
                 </div>
             </div>
             <h2>Upcoming Events</h2>
+            <?php
+            if (isset($venueUserID)){
+              echo '<div class="">';
+              echo '<div class=""><a href="event-creation.php?eventID='.$row['EventID'].'" class="event-button" style="margin-right: -1px">Add Event</a>';
+            }
+            ?>
             <div class="eventlist">
                 <?php
-                foreach ($events as $row) {
-                    echo '<div class="event">';
-                    echo '<div class="event-image"></div>';
-                    echo '<div class="event-name">'.$row['EventName']."</div>";
-                    echo '<div class="event-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="event-button" style="margin-right: -1px">View Event</a>';
-                    if (isset($venueUserID)){
-                      echo '<a href="event-edit.php?eventID='.$row['EventID'].'" class="event-button" style="width: 50%">Edit Event</a></div></div>';
-                    }
+                if (sizeof($events) > 0){
+                  foreach ($events as $row) {
+                      echo '<div class="event">';
+                      echo '<div class="event-image"></div>';
+                      echo '<div class="event-name">'.$row['EventName']."</div>";
+                      echo '<div class="event-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="event-button" style="margin-right: -1px">View Event</a>';
+                      if (isset($venueUserID)){
+                        echo '<a href="event-edit.php?eventID='.$row['EventID'].'" class="event-button" style="width: 50%">Edit Event</a></div></div>';
+                      }
+                  }
+                } else {
+                  echo '<div class="event">';
+                  echo '<div class="event-name">No events currently listed</div></div>";';
                 }
                 echo '<div class=""><a href="" class="event-button" style="">View All EventS</a>';
                 ?>
