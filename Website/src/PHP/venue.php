@@ -15,7 +15,7 @@
   $description = $result['VenueDescription'];
   $address = $result['VenueAddress'];
   $times = $result['VenueTimes'];
-  $events = getEvents($venueID,$pdo)
+  $events = getEvents($venueID,$pdo);
 
   // Fetchs type of user and checks if venue user is owner
   if (isset($_SESSION["UserID"])){
