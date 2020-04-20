@@ -85,7 +85,7 @@
             ?>
             <div class="eventlist">
                 <?php
-                if (sizeof($events) > 0){
+                if (sizeof($events) !== false){
                   foreach ($events as $row) {
                       echo '<div class="event">';
                       echo '<div class="event-image"></div>';
