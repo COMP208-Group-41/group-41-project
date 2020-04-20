@@ -31,7 +31,7 @@ if (isset($_GET['VenueID'])){
 }
 if (isset($venueID)){
   $venueNamestmt =  getVenueInfo($venueID,$pdo);
-    $venueName = $venueNamestmt['VenueName']
+  $venueName = $venueNamestmt['VenueName'];
   $events = getEvents($venueID,$pdo);
 }
 
