@@ -8,8 +8,8 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
 
-    if (isset($_GET['EventID'])) {
-        $eventID = $_GET['EventID'];
+    if (isset($_GET['eventID'])) {
+        $eventID = $_GET['eventID'];
     } else {
         $_SESSION['message'] = "No Event ID specified!";
         header("location: 404.php");
