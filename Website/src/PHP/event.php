@@ -68,13 +68,13 @@
     <div class="container">
         <div style="display: flex; flex-direction: column">
             <h1 class="title"><?php echo $name; ?></h1>
-            <?php
-                if ($image !== false ) {
-                     echo $image;
-                 }
-            ?>
-            <label>Image:</label>
-            <img src="<?php if ($image !== false ) { echo $image; } ?>">
+            <div class='image'>
+                <?php
+                    if ($image !== false ) {
+                        echo $image;
+                    }
+                ?>
+            </div>
             <div class="seperator"></div>
             <label>Venue: <?php echo '<a href="venue.php?venueID='.$venueID.'">'.$venueName.'</a>'; ?></label>
 
