@@ -15,7 +15,7 @@
     require_once "config.php";
 
     $venueUserID = $_SESSION["VenueUserID"];
-    $eventID = $_GET['EventID'];
+    $eventID = $_GET['eventID'];
     $errorMessage = "";
 
     $eventToVenueUser = eventToVenueUser($eventID,$pdo);
