@@ -27,10 +27,11 @@
     $userID = $_SESSION['UserID'];
     $errorMessage = "";
 
-    if (isset($_GET['ReviewID'])) {
-        $reviewID = $_GET['ReviewID'];
+    if (isset($_GET['reviewID'])) {
+        $reviewID = $_GET['reviewID'];
     } else {
         // No ReviewID specified, redirect to 404 page
+        $_SESSION['message'] = "No ID specified!";
         header("location: 404.php");
         exit;
     }
@@ -148,7 +149,8 @@
 <html>
   <head>
     <title>OutOut - Edit Review</title>
-    <link rel="stylesheet" type="text/css" href="../css/reviews.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/venue.css">
   </head>
   <body>
     <?php include "navbar.php" ?>

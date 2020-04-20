@@ -24,15 +24,16 @@
     $errorMessage = "";
 
     // Gets which event or venue the review is for
-    if (isset($_GET['EventID'])){
-        $eventID = $_GET['EventID'];
+    if (isset($_GET['eventID'])){
+        $eventID = $_GET['eventID'];
         $getVenueID = eventIDToVenueID($eventID, $pdo);
         $venueID = $getVenueID['VenueID'];
-    } elseif (isset($_GET['VenueID'])){
-        $venueID = $_GET['VenueID'];
+    } elseif (isset($_GET['venueID'])){
+        $venueID = $_GET['venueID'];
         $eventID = 1;
     } else {
         // If both unset ERROR as no venue or event exists under that name
+        $_SESSION['message'] = "No ID specified for review!";
         header("location: 404.php");
         exit;
     }
@@ -168,7 +169,7 @@
             }
         } else {
             // Check Event Exists
-            $checkEventExists = $pdo("SELECT EventID FROM Event WHERE EventID=:EventID");
+            $checkEventExists = $pdo->prepare("SELECT EventID FROM Event WHERE EventID=:EventID");
             $checkEventExists->bindValue(":EventID",$eventID);
             $checkEventExists->execute();
             if ($checkEventExists->rowcount() == 0) {
@@ -186,7 +187,8 @@
 <html>
   <head>
     <title>OutOut - Submit Review</title>
-    <link rel="stylesheet" type="text/css" href="../css/reviews.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/venue.css">
   </head>
   <body>
     <?php include "navbar.php" ?>

@@ -400,4 +400,18 @@ function validate255($name) {
         return $EventTags->fetchAll();
     }
 
+    function checkReviewWritten($userID,$eventID,$venueID,$pdo) {
+        $getReviewIDStmt = $pdo->prepare("SELECT ReviewID FROM Review WHERE UserID=:UserID AND EventID=:EventID AND VenueID=:VenueID");
+        $getReviewIDStmt->bindValue(":UserID",$userID);
+        $getReviewIDStmt->bindValue(":EventID",$eventID);
+        $getReviewIDStmt->bindValue(":VenueID",$venueID);
+        $getReviewIDStmt->execute();
+        if ($getReviewIDStmt->rowCount() == 0) {
+            return false;
+        } else {
+            $result = $getReviewIDStmt->fetch();
+            return $result['ReviewID'];
+        }
+    }
+
 ?>

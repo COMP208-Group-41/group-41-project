@@ -64,6 +64,17 @@
                 </div>
             </div>
             <h2>Reviews</h2>
+            <?php
+                if (isset($userID)) {
+                    $checkReview = checkReviewWritten($userID,$eventID,$venueID,$pdo);
+                    if ($checkReview === false) {
+                        echo '<a href="review-creation.php?eventID='.$eventID.'">Write a Review</a>';
+                    } else {
+                        echo '<a href="review-edit.php?reviewID='.$checkReview.'">Write a Review</a>';
+                    }
+                }
+
+            ?>
             <label>Overall Review Scores</label>
 
 
