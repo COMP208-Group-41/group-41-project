@@ -4,14 +4,6 @@
     --button-border: #3B3B3B;
 }
 
-body {
-    font-family: "K2D", sans-serif;
-}
-
-input {
-    font-family: "K2D", sans-serif;
-}
-
 .input-file {
     width: 0.1px;
     height: 0.1px;

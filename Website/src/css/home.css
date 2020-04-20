@@ -12,130 +12,13 @@
     --gradient: linear-gradient(270deg, rgba(7, 41, 29, 0.92) 0%, rgba(6, 27, 41, 0.92) 100%);
 }
 
-body {
-    background: var(--gradient);
-    font-family: "K2D", serif;
-    text-align: center;
-}
-
-.container {
-    background: var(--light-body);
-    display: inline-block;
-    padding: 20px;
-    margin: 20px;
-    border-radius: 10px;
-    min-width: 400px;
-}
-
-input {
-    margin: 0px 0px 16px;
-    box-sizing: border-box;
-    border: 2px solid var(--button-border);
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: var(--dark-body);
-    padding: 12px 20px 12px 10px;
-    color: var(--text);
-}
-
-textarea {
-    margin: 0px 0px 16px;
-    box-sizing: border-box;
-    border: 2px solid var(--button-border);
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: var(--dark-body);
-    padding: 12px 20px 12px 10px;
-    color: var(--text);
-    resize: vertical;
-    min-height: 65px;
-    max-height: 150px;
-}
-
-input:focus {
-    outline: none;
-}
-
-.button {
-    margin: 0;
-    box-sizing: border-box;
-    border: 2px solid var(--button-border);
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: var(--body-background);
-    padding: 6px;
-    color: var(--light-body);
-    width: 20%;
-    text-align: center;
-    text-decoration: none;
-}
-
-.button:focus {
-    outline: none;
-    background-color: var(--button-highlight);
-}
-
-.button:hover {
-    background-color: var(--dark-gold);
-    cursor: pointer;
-}
-
-.button:active {
-    background-color: var(--gold)
-}
-
-.edit-fields {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
-.title {
-    color: var(--body-background);
-    font-family: "K2D", sans-serif;
-    text-align: left;
-    margin-top: 0;
-}
-
-.menu-image:hover {
-    cursor: pointer;
-}
-
-label {
-    text-align: left;
-    color: var(--text);
-    font-size: 14px;
-    margin-bottom: 4px;
-    font-family: "K2D", sans-serif;
-}
-
 hr {
     background: #3B3B3B;
-}
-
-.seperator {
-    display: flex;
-    flex-direction: column;
-    border-top: var(--dark-body) solid 2px;
-    padding-top: 20px;
-    margin-top: 8px;
 }
 
 .text {
     font-family: "K2D", sans-serif;
 
-}
-
-.tag-container {
-    text-align: center;
-    margin-bottom: 16px;
-    width: 30%;
-    border: var(--button-border) solid 2px;
-    border-radius: 4px;
-    font-family: "K2D", sans-serif;
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.5;
 }
 
 input.searchbar {
@@ -152,6 +35,7 @@ input.searchbar:focus {
 
 .button.search-button {
     height: 32px;
+    width: 20.5%;
     line-height: 1;
     margin-left: 0;
 }
