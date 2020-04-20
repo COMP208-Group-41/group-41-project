@@ -40,7 +40,7 @@
         header("location: venue.php?venueID=".$venueID."");
         exit;
     } else if (isset($_SESSION["VenueUserID"])) {
-      header("location: venue.php?eventID=".$eventID."");
+      header("location: event.php?eventID=".$eventID."");
       exit;
     }
 
