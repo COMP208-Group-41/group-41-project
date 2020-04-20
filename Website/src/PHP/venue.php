@@ -24,6 +24,7 @@
   $times = $result['VenueTimes'];
   $events = getEvents($venueID,$pdo);
   $currentTagIDs = getTagID($venueID,$pdo);
+  $reviews = getVenueReviews($venueID,$pdo);
 
 
   // Fetchs type of user and checks if venue user is owner
@@ -39,6 +40,8 @@
       $getVenueTagsStmt->execute();
       return $getVenueTagsStmt->fetchAll();
   }
+
+
 
 ?>
 
@@ -86,7 +89,9 @@
             <div class="eventlist">
                 <?php
                 if ($events !== false){
+                  $counter = 0;
                   foreach ($events as $row) {
+                    if($counter<5){
                       echo '<div class="event">';
                       echo '<div class="event-image"></div>';
                       echo '<div class="event-name">'.$row['EventName']."</div>";
@@ -94,6 +99,9 @@
                       if (isset($venueUserID)){
                         echo '<a href="event-edit.php?eventID='.$row['EventID'].'" class="event-button" style="width: 50%">Edit Event</a></div></div>';
                       }
+
+                    }
+                    $counter++;
                   }
                 } else {
                   echo '<div class="event">';
@@ -110,10 +118,20 @@
             <label>All Reviews</label>
             <div class="reviewlist">
                 <?php
-
+                  $counter = 0;
+                  foreach ($reviews as $row) {
+                    if($counter<5){
+                      echo "<label>Review left by: ".$reviews['']."</label>";
+                      echo "<textarea readonly>".$reviews['ReviewText']."</textarea>";
+                      echo "<label>Price Score: ".$reviews['ReviewPrice']."</label>";
+                      echo "<label>Safety Score ".$reviews['ReviewSafety']."</label>";
+                      echo "<label>Atmosphere Score ".$reviews['ReviewAtmosphere']."</label>";
+                      echo "<label>Queue Times Score ".$reviews['ReviewQueue']."</label>";
+                    }
+                    $counter++;
+                  }
                 ?>
             </div>
-
         </div>
     </div>
 </div>
