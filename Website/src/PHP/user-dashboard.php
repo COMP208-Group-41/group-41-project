@@ -78,13 +78,12 @@
               <tr>
                 <th>Your Favourite Tags</th>
               </tr>
-              <tr>
-                <?php
-                  foreach ($userPrefs as $tag) {
-                    echo "<td>".$tag."</td>";
-                  }
-                ?>
-              </tr>
+              <label style="text-align: center; margin-top: 16px;"><b>Current Tags:</b></label>
+              <div style="display: flex; justify-content: center; ">
+                  <div class="tag-container" style="text-align: center">
+                      <?php getTags($interestedIn,$pdo); ?>
+                  </div>
+              </div>
             </table>
             <button onclick="location.href='user-edit.php';" class="edit-account">Edit Account Details</button>
             <h2>Your Interested Events</h2>
