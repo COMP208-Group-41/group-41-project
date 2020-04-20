@@ -50,6 +50,8 @@
     $reviewAtmosphere = $result['ReviewAtmosphere'];
     $reviewSafety = $result['ReviewSafety'];
     $reviewQueue = $result['ReviewQueue'];
+    $eventID = $result['EventID'];
+    $venueID = $result['VenueID'];
 
     try{
         if (isset($_POST['SubmitReview'])){
@@ -119,7 +121,7 @@
      * edit it)
      */
     function getReviewInfo($reviewID,$pdo) {
-        $getReviewStmt = $pdo->prepare("SELECT UserID, ReviewText, ReviewPrice, ReviewAtmosphere, ReviewSafety, ReviewQueue FROM Review WHERE ReviewID=:ReviewID");
+        $getReviewStmt = $pdo->prepare("SELECT VenueID, EventID, UserID, ReviewText, ReviewPrice, ReviewAtmosphere, ReviewSafety, ReviewQueue FROM Review WHERE ReviewID=:ReviewID");
         $getReviewStmt->bindValue(":ReviewID",$reviewID);
         $getReviewStmt->execute();
         return $getReviewStmt->fetch();
