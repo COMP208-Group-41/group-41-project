@@ -27,6 +27,7 @@
     $startTime = str_replace("T"," ",$result['EventStartTime']);
     $endTime = str_replace("T"," ",$result['EventEndTime']);
     $currentTagIDs = getEventTagID($eventID,$pdo);
+    $reviews = getEventReviews($eventID,$pdo);
 
     if (isset($_SESSION['UserID'])) {
         $userID = $_SESSION['UserID'];
@@ -110,7 +111,25 @@
             <label>All Reviews</label>
             <div class="reviewlist">
                 <?php
-
+                if ($reviews !== false){
+                  $counter = 0;
+                  foreach ($reviews as $row) {
+                    if($counter<5){
+                      echo "<label>Review left by: ".userIDtoUserName($row['UserID'],$pdo)."</label><br>";
+                      echo "<textarea readonly>".$row['ReviewText']."</textarea><br>";
+                      echo "<label>Price Score: ".$row['ReviewPrice']."</label><br>";
+                      echo "<label>Safety Score ".$row['ReviewSafety']."</label><br>";
+                      echo "<label>Atmosphere Score ".$row['ReviewAtmosphere']."</label><br>";
+                      echo "<label>Queue Times Score ".$row['ReviewQueue']."</label><br>";
+                      echo "<label>Review posted on: ".$row['ReviewDate']."</label><br>";
+                      echo '<div class="seperator"></div>';
+                    }
+                    $counter++;
+                  }
+                } else {
+                  echo '<div class="">';
+                  echo '<div class="">No reviews currently posted for this event</div></div>';
+                }
                 ?>
             </div>
         </div>
