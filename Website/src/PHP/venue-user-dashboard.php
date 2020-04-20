@@ -105,11 +105,16 @@ if (isset($_SESSION['message'])) {
               </form>
             <?php
             if ($events !== false){
+              echo '<div class="venue">';
+              echo '<div class="venue-name">Venue</div>';
+              echo '<div class="venue-name">Event Name</div>';
+              echo '<div class="venue-name">View Event</div>';
+              echo '<div class="venue-name">Edit Event</div></div>';
               foreach ($events as $row) {
                 echo '<div class="venue">';
                 echo '<div class="venue-name">'.$venueName."</div>";
                 echo '<div class="venue-name">'.$row['EventName']."</div>";
-                echo '<div class="venue-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="event-button" style="margin-right: -1px">View Event</a>';
+                echo '<div class="venue-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="venue-button" style="margin-right: -1px">View Event</a>';
                 echo '<a href="event-edit.php?eventID='.$row['EventID'].'" class="venue-button" style="width: 50%">Edit Event</a></div></div>';
               }
             }
