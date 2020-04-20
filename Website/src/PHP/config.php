@@ -420,5 +420,12 @@ function validate255($name) {
       $getReviewStmt->execute();
       return $getReviewStmt->fetchAll();
     }
+    function userIDtoUserName($userID,$pdo) {
+        $getUsernameStmt = $pdo->prepare("SELECT UserName FROM User WHERE UserID=:UserID");
+        $getUsernameStmt->bindValue(":UserID",$userID);
+        $getUsernameStmt->execute();
+        $name = $getUsernameStmt->fetch();
+        return $name;
+    }
 
 ?>
