@@ -25,7 +25,7 @@
                 <img src="../Assets/outout.svg" alt="OutOut">
             </div>
             <div style="padding-bottom: 8px; text-align: center">
-                <b style="color: #e9e9e9; font-size: 24px">About Us</b>
+                <b style="color: #2E2E2E; font-size: 24px">About Us</b>
             </div>
             <p>OutOut is a website to view and recommend venues and events for
             nightlife around Liverpool for people looking for a good night out.<br>
