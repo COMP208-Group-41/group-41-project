@@ -23,7 +23,7 @@
     if($eventToVenueUser === false){
       $errorMessage = "Error getting VenueUserID";
     } else if ($eventToVenueUser != $venueUserID) {
-        $_SESSION['message'] = "You are not allowed to edit this event!"
+        $_SESSION['message'] = "You are not allowed to edit this event!";
         header("location: venue-home.php");
         exit;
     }
