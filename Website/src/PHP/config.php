@@ -378,4 +378,11 @@ function validate255($name) {
         return $tags;
     }
 
+    function getVenueInfo($venueID,$pdo) {
+        $getVenueStmt = $pdo->prepare("SELECT VenueName,VenueDescription,VenueAddress,VenueTimes FROM Venue WHERE VenueID=:VenueID");
+        $getVenueStmt->bindValue(":VenueID",$venueID);
+        $getVenueStmt->execute();
+        return $getVenueStmt->fetch();
+    }
+
 ?>
