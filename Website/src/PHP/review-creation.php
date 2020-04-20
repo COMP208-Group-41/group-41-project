@@ -37,10 +37,10 @@
     }
 
     if (isset($_SESSION["VenueUserID"]) && $eventID == 1) {
-        header("location: venue.php?venueID=3".$venueID."");
+        header("location: venue.php?venueID=".$venueID."");
         exit;
     } else if isset($_SESSION["VenueUserID"]) {
-      header("location: venue.php?venueID=3".$eventID."");
+      header("location: venue.php?eventID=".$eventID."");
       exit;
     }
 
