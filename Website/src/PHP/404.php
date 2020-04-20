@@ -7,7 +7,7 @@
 <html>
     <head>
         <title>Error 404 - Page Not Found!</title>
-        <link rel="stylesheet" type="text/css" href="../css/404.css">
+        <link rel="stylesheet" type="text/css" href="../css/venue.css">
         <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     </head>
     <body>
