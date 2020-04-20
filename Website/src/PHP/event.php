@@ -66,7 +66,7 @@
             <h2>Reviews</h2>
             <?php
                 if (isset($userID)) {
-
+                    $checkReview = checkReviewWritten($userID,$eventID,$venueID,$pdo);
                 }
 
             ?>

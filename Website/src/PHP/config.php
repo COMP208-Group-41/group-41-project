@@ -401,7 +401,7 @@ function validate255($name) {
     }
 
     function checkReviewWritten($userID,$eventID,$venueID,$pdo) {
-        $getReviewIDStmt = $pdo->("SELECT ReviewID FROM Review WHERE UserID=:UserID AND EventID=:EventID AND VenueID=:VenueID");
+        $getReviewIDStmt = $pdo->prepare("SELECT ReviewID FROM Review WHERE UserID=:UserID AND EventID=:EventID AND VenueID=:VenueID");
         $getReviewIDStmt->bindValue(":UserID",$userID);
         $getReviewIDStmt->bindValue(":EventID",$eventID);
         $getReviewIDStmt->bindValue(":VenueID",$venueID);
