@@ -187,7 +187,8 @@
 <html>
   <head>
     <title>OutOut - Submit Review</title>
-    <link rel="stylesheet" type="text/css" href="../css/reviews.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/venue.css">
   </head>
   <body>
     <?php include "navbar.php" ?>
