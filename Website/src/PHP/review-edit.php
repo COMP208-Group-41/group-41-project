@@ -154,7 +154,7 @@
     <?php include "navbar.php" ?>
     <?php
         if (isset($_SESSION['message'])) {
-            echo "<div class='success'>".$_SESSION['message']."</div>";
+            echo "<div class='message-wrapper'><div class='success'>".$_SESSION['message']."</div></div>";
             unset($_SESSION['message']);
         }
     ?>
@@ -201,7 +201,7 @@
       </div>
       <?php
           if ($errorMessage != "") {
-              echo "<div class='error-wrapper'><div class='error'>$errorMessage</div></div>";
+              echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
           }
        ?>
     </form>
