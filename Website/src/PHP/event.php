@@ -14,6 +14,16 @@
         $venueUserID = $_SESSION['VenueUserID'];
     }
 
+    if (isset($_GET['EventID'])) {
+        $eventID = $_GET['EventID'];
+    } else {
+        $_SESSION['message'] = "No Event ID specified!";
+        header("location: 404.php");
+        exit;
+    }
+
+    
+
 
 ?>
 <!DOCTYPE html>
