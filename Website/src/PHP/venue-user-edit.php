@@ -232,7 +232,7 @@
      * validate it and then update in the database
      */
     function nameCheck($venueUserID,$name,$pdo,&$errorMessage) {
-        if (isset($_POST['companyName']) && !empty($_POST['companyName']) && trim($_POST['companyName']) != $name) {
+        if (isset($_POST['companyName']) && !empty(trim($_POST['companyName'])) && trim($_POST['companyName']) != $name) {
             $newName = trim($_POST['companyName']);
 
             // If the new name given is not valid then return false
