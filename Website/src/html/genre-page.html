@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang='en-GB'>
+
+<head>
+    <title>OutOut - Edit Venue User Account</title>
+    <link rel="stylesheet" type="text/css" href="../css/genre-page.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/venue.css">
+</head>
+<body>
+<div class="banner" >
+    <img src="../Assets/menu-icon.svg" alt="Menu" width="25" onclick="openNav()" class="menu-image">
+    <img src="../Assets/outout.svg" alt="OutOut" width="100">
+    <img src="../Assets/profile.svg" alt="Profile" width="40" >
+</div>
+<div id="mySidenav" class="sidenav">
+    <div class="sidebar-content">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Dashboard</a>
+        <a href="#">Venues</a>
+        <a href="#">Account</a>
+        <a href="#">Contact</a>
+    </div>
+</div>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "200px";
+    }
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+
+<div class="grid-container">
+    <div class="genre">genre-1</div>
+    <div class="genre">genre-2</div>
+    <div class="genre">genre-3</div>
+    <div class="genre">genre-4</div>
+    <div class="genre">genre-5</div>
+    <div class="genre">genre-6</div>
+
+
+</div>
+
+</head>
+
+<div class="slideshow-container">
+
+    <div class="mySlides fade">
+        <div class="numbertext">1 / 3</div>
+        <img src="../Assets/background2.jpg" style="width:100%">
+        <div class="text">genres we recommend</div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">2 / 3</div>
+        <img src="../Assets/background2.jpg" style="width:100%">
+        <div class="text">genres we recommend</div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">3 / 3</div>
+        <img src="../Assets/background2.jpg" style="width:100%">
+        <div class="text">genres we recommend</div>
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+</div>
+<br>
+
+<div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+</div>
+
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+    }
+</script>
+<div class="grid-container">
+    <div class="genre">events from popular genre</div>
+    <div class="genre">events from popular genre</div>
+    <div class="genre">events from popular genre</div>
+    <div class="genre">events from popular genre</div>
+    <div class="genre">events from popular genre</div>
+    <div class="genre">events from popular genre</div>
+
+</div>
+
+</body>
