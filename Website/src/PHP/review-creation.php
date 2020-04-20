@@ -24,12 +24,12 @@
     $errorMessage = "";
 
     // Gets which event or venue the review is for
-    if (isset($_GET['EventID'])){
-        $eventID = $_GET['EventID'];
+    if (isset($_GET['eventID'])){
+        $eventID = $_GET['eventID'];
         $getVenueID = eventIDToVenueID($eventID, $pdo);
         $venueID = $getVenueID['VenueID'];
-    } elseif (isset($_GET['VenueID'])){
-        $venueID = $_GET['VenueID'];
+    } elseif (isset($_GET['venueID'])){
+        $venueID = $_GET['venueID'];
         $eventID = 1;
     } else {
         // If both unset ERROR as no venue or event exists under that name

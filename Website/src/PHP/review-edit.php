@@ -27,8 +27,8 @@
     $userID = $_SESSION['UserID'];
     $errorMessage = "";
 
-    if (isset($_GET['ReviewID'])) {
-        $reviewID = $_GET['ReviewID'];
+    if (isset($_GET['reviewID'])) {
+        $reviewID = $_GET['reviewID'];
     } else {
         // No ReviewID specified, redirect to 404 page
         header("location: 404.php");
