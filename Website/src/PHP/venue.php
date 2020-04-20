@@ -25,6 +25,11 @@
   $events = getEvents($venueID,$pdo);
   $currentTagIDs = getTagID($venueID,$pdo);
   $reviews = getVenueReviews($venueID,$pdo);
+  $priceScore = getVenuePriceScore($venueID,$pdo);
+  $safetyScore = getVenueSafetyScore($venueID,$pdo);
+  $atmosphereScore = getVenueAtmosphereScore($venueID,$pdo);
+  $queueScore = getVenueQueueScore($venueID,$pdo);
+  $totalScore = ($queueScore + $atmosphereScore + $safetyScore + $priceScore) / 4
 
 
   // Fetchs type of user and checks if venue user is owner
@@ -41,18 +46,7 @@
       return $getVenueTagsStmt->fetchAll();
   }
 
-  $image = checkImageOnServer($owner,$venueID);
 
-  // Check if there is an image for this event
-  function checkImageOnServer($venueUserID,$venueID) {
-      $target = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/venue.jpg";
-      if (!file_exists($target)) {
-          return false;
-      } else {
-          // If the file exists then return true
-          return true;
-      }
-  }
 
 ?>
 
@@ -79,11 +73,7 @@
 
             <div class="seperator"></div>
 
-            <?php
-                if ($image) {
-                    echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$owner.'/'.$venueID.'/venue.jpg" alt="Venue Image">';
-                }
-            ?>
+            <img src="../Assets/venue-image.jpg" alt="Venue Image">
 
             <div class="seperator"></div>
 
@@ -135,8 +125,13 @@
                 ?>
             </div>
             <div class="seperator"></div>
-            <h2>Reviews</h2>
-            <label>Overall Review Scores</label>
+            <h2>Reviews</h2><br><br>
+            
+            <label>Venue Score: <?php $totalScore?></label><br>
+            <label>Price Score: <?php $priceScore?></label><br>
+            <label>Safety Score: <?php $safetyScore?></label><br>
+            <label>Atmosphere Score: <?php $atmosphereScore?></label><br>
+            <label>Queue Times Score: <?php $queueScore?></label><br>
 
 
             <div class="seperator"></div>
