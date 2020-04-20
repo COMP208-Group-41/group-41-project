@@ -41,7 +41,18 @@
       return $getVenueTagsStmt->fetchAll();
   }
 
+  $image = checkImageOnServer($owner,$venueID);
 
+  // Check if there is an image for this event
+  function checkImageOnServer($venueUserID,$venueID) {
+      $target = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/venue.jpg";
+      if (!file_exists($target)) {
+          return false;
+      } else {
+          // If the file exists then return true
+          return true;
+      }
+  }
 
 ?>
 
@@ -68,7 +79,11 @@
 
             <div class="seperator"></div>
 
-            <img src="../Assets/venue-image.jpg" alt="Venue Image">
+            <?php
+                if ($image) {
+                    echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$owner.'/'.$venueID.'/venue.jpg" alt="Venue Image">';
+                }
+            ?>
 
             <div class="seperator"></div>
 
