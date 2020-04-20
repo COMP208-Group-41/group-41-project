@@ -132,10 +132,11 @@
                     if($counter<5){
                       echo "<label>Review left by: ".$row['']."</label>";
                       echo "<textarea readonly>".$row['ReviewText']."</textarea>";
-                      echo "<label>Price Score: ".$row['ReviewPrice']."</label>";
-                      echo "<label>Safety Score ".$row['ReviewSafety']."</label>";
-                      echo "<label>Atmosphere Score ".$row['ReviewAtmosphere']."</label>";
-                      echo "<label>Queue Times Score ".$row['ReviewQueue']."</label>";
+                      echo "<label>Price Score: ".$row['ReviewPrice']."</label><br>";
+                      echo "<label>Safety Score ".$row['ReviewSafety']."</label><br>";
+                      echo "<label>Atmosphere Score ".$row['ReviewAtmosphere']."</label><br>";
+                      echo "<label>Queue Times Score ".$row['ReviewQueue']."</label><br>";
+                      echo "<div class="seperator"></div>"
                     }
                     $counter++;
                   }
