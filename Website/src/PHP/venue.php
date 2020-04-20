@@ -53,6 +53,14 @@
 </head>
 <body>
 <?php include "navbar.php" ?>
+<div class="message-wrapper">
+<?php
+    if (isset($_SESSION['message'])) {
+        echo "<div class='success'>".$_SESSION['message']."</div>";
+        unset($_SESSION['message']);
+    }
+?>
+</div>
 <div class="wrapper">
     <div class="container">
         <div style="display: flex; flex-direction: column">
@@ -123,7 +131,7 @@
                   foreach ($reviews as $row) {
                     if($counter<5){
                       echo "<label>Review left by: ".$row['']."</label>";
-                      echo "<textarea readonly>".$rowrow['ReviewText']."</textarea>";
+                      echo "<textarea readonly>".$row['ReviewText']."</textarea>";
                       echo "<label>Price Score: ".$row['ReviewPrice']."</label>";
                       echo "<label>Safety Score ".$row['ReviewSafety']."</label>";
                       echo "<label>Atmosphere Score ".$row['ReviewAtmosphere']."</label>";
