@@ -32,8 +32,10 @@
 <html lang="en-GB">
 <head>
     <link rel="stylesheet" type="text/css" href="../css/venue.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
 </head>
 <body>
+<?php include "navbar.php" ?>
 <div class="wrapper">
     <div class="container">
         <div style="display: flex; flex-direction: column">
