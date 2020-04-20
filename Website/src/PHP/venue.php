@@ -16,6 +16,7 @@
   $address = $result['VenueAddress'];
   $times = $result['VenueTimes'];
   $events = getEvents($venueID,$pdo);
+  $currentTagIDs = getTagID($venueID,$pdo);
 
   // Fetchs type of user and checks if venue user is owner
   if (isset($_SESSION["UserID"])){
@@ -24,7 +25,12 @@
     $venueUserID = $_SESSION["VenueUserID"];
   }
 
-
+  function getTagID($venueID,$pdo) {
+      $getVenueTagsStmt = $pdo->prepare("SELECT TagID FROM VenueTag WHERE VenueID=:VenueID");
+      $getVenueTagsStmt->bindValue(":VenueID",$venueID);
+      $getVenueTagsStmt->execute();
+      return $getVenueTagsStmt->fetchAll();
+  }
 
 ?>
 
@@ -48,7 +54,7 @@
             <div class="seperator"></div>
 
             <label>Venue description:</label>
-            <textarea readonly placeholder="Description of event here"><?php echo "$VenueDescription" ?></textarea>
+            <textarea readonly placeholder="Description of event here"><?php echo "$description" ?></textarea>
 
             <label>Opening times:</label>
             <textarea readonly placeholder="Opening times here"><?php echo "$times" ?></textarea>
