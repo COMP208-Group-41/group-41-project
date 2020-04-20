@@ -2,8 +2,8 @@
     --header-background: linear-gradient(90deg, #272727 0%, #202020 100%);;
     --body-background: #202020;
     --body-highlight: #2E2E2E;
-    --body: #D6D6D6;
-    --body-gray: #C4C4C4;
+    --light-body: #D6D6D6;
+    --dark-body: #C4C4C4;
     --button-border: #3B3B3B;
     --button-highlight: #ccc;
     --text: #2E2E2E;
@@ -19,7 +19,7 @@ body {
 }
 
 .container {
-    background: var(--body);
+    background: var(--light-body);
     display: inline-block;
     padding: 20px;
     margin: 20px;
@@ -33,7 +33,7 @@ input {
     border: 2px solid var(--button-border);
     border-radius: 4px;
     font-size: 16px;
-    background-color: var(--body-gray);
+    background-color: var(--dark-body);
     padding: 12px 20px 12px 10px;
     color: var(--text);
 }
@@ -44,7 +44,7 @@ textarea {
     border: 2px solid var(--button-border);
     border-radius: 4px;
     font-size: 16px;
-    background-color: var(--body-gray);
+    background-color: var(--dark-body);
     padding: 12px 20px 12px 10px;
     color: var(--text);
     resize: vertical;
@@ -64,7 +64,7 @@ input:focus {
     font-size: 16px;
     background-color: var(--body-background);
     padding: 6px;
-    color: var(--body);
+    color: var(--light-body);
     width: 20%;
     text-align: center;
     text-decoration: none;
@@ -116,7 +116,7 @@ hr {
 .seperator {
     display: flex;
     flex-direction: column;
-    border-top: var(--body-gray) solid 2px;
+    border-top: var(--dark-body) solid 2px;
     padding-top: 20px;
     margin-top: 8px;
 }
