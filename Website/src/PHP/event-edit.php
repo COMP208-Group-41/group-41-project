@@ -23,10 +23,8 @@
     if($eventToVenueUser === false){
       $errorMessage = "Error getting VenueUserID";
     } else if ($eventToVenueUser != $venueUserID) {
-        echo $eventToVenueUser;
-        echo $venueUserID;
-        // header("location: venue-home.php");
-        // exit;
+        header("location: venue-home.php");
+        exit;
     }
 
     // Retrive existing values and populate fields
