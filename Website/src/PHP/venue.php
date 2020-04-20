@@ -127,11 +127,11 @@
             <div class="seperator"></div>
             <h2>Reviews</h2><br><br>
 
-            <label>Venue Score: <?php echo"$totalScore"?></label><br>
-            <label>Price Score: <?php echo"$priceScore"?></label><br>
-            <label>Safety Score: <?php echo"$safetyScore"?></label><br>
-            <label>Atmosphere Score: <?php echo"$atmosphereScore"?></label><br>
-            <label>Queue Times Score: <?php echo"$queueScore"?></label><br>
+            <label>Venue Score: <?php echo"$totalScore";?></label><br>
+            <label>Price Score: <?php echo"$priceScore";?></label><br>
+            <label>Safety Score: <?php echo"$safetyScore";?></label><br>
+            <label>Atmosphere Score: <?php echo"$atmosphereScore";?></label><br>
+            <label>Queue Times Score: <?php echo"$queueScore";?></label><br>
 
 
             <div class="seperator"></div>
