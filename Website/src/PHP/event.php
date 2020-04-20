@@ -64,6 +64,12 @@
                 </div>
             </div>
             <h2>Reviews</h2>
+            <?php
+                if (isset($userID)) {
+
+                }
+
+            ?>
             <label>Overall Review Scores</label>
 
 
