@@ -36,7 +36,7 @@
         exit;
     }
 
-    if (isset($_SESSION["VenueUserID"])) && $eventID == 1) {
+    if (isset($_SESSION["VenueUserID"]) && $eventID == 1) {
         header("location: venue.php?venueID=".$venueID."");
         exit;
     } else if (isset($_SESSION["VenueUserID"])) {
