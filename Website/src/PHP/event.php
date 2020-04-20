@@ -72,11 +72,9 @@
             <h1 class="title"><?php echo $name; ?></h1>
             <div class='image'>
                 <?php
-                    echo $owner." ".$venueID." ".$eventID;
-                    if ($image !== false ) {
-                        header("content-type: image/jpg");
-                        echo file_get_contents($image);
-                    }
+                    // if ($image !== false ) {
+                    //     echo file_get_contents($image);
+                    // }
                 ?>
             </div>
             <div class="seperator"></div>
