@@ -98,7 +98,7 @@ if (isset($_SESSION['message'])) {
           <h2 class="title">Registered Events</h2>
           <div class="venuelist">
               <form name='venueSelect' method='post'>
-                  <select name='venue' id='venue' onChange='document.moduleForm.submit()' style="margin-bottom: 16px">
+                  <select name='venue' id='venue' onChange='document.venueSelect.submit()' style="margin-bottom: 16px">
                       <option value='None'>Select Venue</option>
                       <?php echoVenues($venues); ?>
                   </select>
