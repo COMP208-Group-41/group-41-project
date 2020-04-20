@@ -425,7 +425,7 @@ function validate255($name) {
         $getUsernameStmt->bindValue(":UserID",$userID);
         $getUsernameStmt->execute();
         $nameArray = $getUsernameStmt->fetch();
-        $name = $nameArray['UserName']
+        $name = $nameArray['UserName'];
         return $name;
     }
 
