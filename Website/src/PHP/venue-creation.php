@@ -215,7 +215,7 @@
 <head>
     <title>OutOut - Edit Venue User Account</title>
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="../css/venue.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
 </head>
 <body>
 <?php include "navbar.php" ?>
