@@ -24,7 +24,9 @@
             <div class="outout-wrapper" style="padding-bottom: 10px">
                 <img src="../Assets/outout.svg" alt="OutOut">
             </div>
-            <h1 class='title'>About Us</h1>
+            <div style="padding-bottom: 8px; text-align: center">
+                <b style="color: #e9e9e9; font-size: 24px">About Us</b>
+            </div>
             <p>OutOut is a website to view and recommend venues and events for
             nightlife around Liverpool for people looking for a good night out.<br>
             This website was made for a second year group project for Computer
