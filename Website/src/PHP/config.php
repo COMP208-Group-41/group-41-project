@@ -420,11 +420,20 @@ function validate255($name) {
       $getReviewStmt->execute();
       return $getReviewStmt->fetchAll();
     }
+
+    function getEventReviews($eventID,$pdo){
+      $getReviewStmt = $pdo->prepare("SELECT UserID, ReviewDate, ReviewText, ReviewAtmosphere,ReviewPrice, ReviewSafety, ReviewQueue  FROM Review WHERE EventID=:EventID ORDER BY ReviewDate");
+      $getReviewStmt->bindValue(":EventID",$eventID);
+      $getReviewStmt->execute();
+      return $getReviewStmt->fetchAll();
+    }
+
     function userIDtoUserName($userID,$pdo) {
         $getUsernameStmt = $pdo->prepare("SELECT UserName FROM User WHERE UserID=:UserID");
         $getUsernameStmt->bindValue(":UserID",$userID);
         $getUsernameStmt->execute();
-        $name = $getUsernameStmt->fetch();
+        $nameArray = $getUsernameStmt->fetch();
+        $name = $nameArray['UserName'];
         return $name;
     }
 
