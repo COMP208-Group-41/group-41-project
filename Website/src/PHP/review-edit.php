@@ -55,13 +55,14 @@
         if (isset($_POST['SubmitReview'])){
           if (checkInputs($reviewID,$errorMessage,$pdo)) {
               $_SESSION['message'] = "Review Updated successfully!";
-              // Update values on the page after successful update
-              $result = getReviewInfo($reviewID,$pdo);
-              $reviewText = $result['ReviewText'];
-              $reviewPrice = $result['ReviewPrice'];
-              $reviewAtmosphere = $result['ReviewAtmosphere'];
-              $reviewSafety = $result['ReviewSafety'];
-              $reviewQueue = $result['ReviewQueue'];
+
+              if ($eventID == 1) {
+                  header("location: venue.php?venueID=$venueID");
+                  exit;
+              } else {
+                  header("location: event.php?eventID=$eventID");
+                  exit;
+              }
           }
         }
     } catch (PDOException $e) {
