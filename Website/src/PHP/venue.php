@@ -20,7 +20,7 @@
   // Fetchs type of user and checks if venue user is owner
   if (isset($_SESSION["UserID"])){
     $userID = $_SESSION["UserID"];
-  } elseif (isset($_SESSION["VenueUserID"]) && $owner == $_SESSION["VenueUserID"]){
+  } else if (isset($_SESSION["VenueUserID"]) && $owner == $_SESSION["VenueUserID"]){
     $venueUserID = $_SESSION["VenueUserID"];
   }
 
