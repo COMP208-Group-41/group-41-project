@@ -31,6 +31,7 @@
         $reviewID = $_GET['reviewID'];
     } else {
         // No ReviewID specified, redirect to 404 page
+        $_SESSION['message'] = "No ID specified!";
         header("location: 404.php");
         exit;
     }

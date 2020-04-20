@@ -33,6 +33,7 @@
         $eventID = 1;
     } else {
         // If both unset ERROR as no venue or event exists under that name
+        $_SESSION['message'] = "No ID specified for review!";
         header("location: 404.php");
         exit;
     }
