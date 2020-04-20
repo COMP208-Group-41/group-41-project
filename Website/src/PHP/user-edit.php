@@ -266,7 +266,7 @@
                 </div>
 
                 <label for='tag1'>Add some tags that you look for in a night out, these are used for recommending you places! - this will overwrite old tags</label>
-                <select name='tag1' id='tag1'>
+                <select name='tag1' id='tag1' onmousedown="if(this.options.length>5){this.size=8;}" onchange="this.size=0;" onblur="this.size=0;">
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select>
