@@ -26,7 +26,7 @@
             </div>
             <h1 class='title'>About Us</h1>
             <p>OutOut is a website to view and recommend venues and events for
-            nightlife around Liverpool for people looking for a good night out.
+            nightlife around Liverpool for people looking for a good night out.<br>
             This website was made for a second year group project for Computer
             Science at the University of Liverpool. <br> This was made by Samuel Tribe,
             Will Dunnion, Daniel Ambrose, Orestes Vasilikos, Desmond Anianu and
