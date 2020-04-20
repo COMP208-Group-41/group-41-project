@@ -23,24 +23,15 @@
     $venueName = $getVenueDetails['VenueName'];
     $name = $result['EventName'];
     $description = $result['EventDescription'];
-    $startTime = preg_replace("/T/"," ",$result['EventStartTime']);
-    $endTime = preg_replace("/T/"," ",$result['EventEndTime']);
+    $startTime = str_replace("T"," ",$result['EventStartTime']);
+    $endTime = str_replace("T"," ",$result['EventEndTime']);
+    $currentTagIDs = getEventTagID($eventID,$pdo);
 
     if (isset($_SESSION['UserID'])) {
         $userID = $_SESSION['UserID'];
     } else if (isset($_SESSION['VenueUserID']) && $owner == $_SESSION['VenueUserID']) {
         $venueUserID = $_SESSION['VenueUserID'];
     }
-
-    $result = getEventInfo($eventID,$pdo);
-    $owner = eventToVenueUser($eventID,$pdo);
-    $name = $result['EventName'];
-    $description = $result['EventDescription'];
-    $startTime = $result['EventStartTime'];
-    $endTime = $result['EventEndTime'];
-
-
-
 
 ?>
 <!DOCTYPE html>

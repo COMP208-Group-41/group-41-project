@@ -393,4 +393,11 @@ function validate255($name) {
         return $getVenueStmt->fetch();
     }
 
+    function getEventTagID($eventID,$pdo) {
+        $EventTags = $pdo->prepare("SELECT TagID FROM EventTag WHERE EventID=:EventID");
+        $EventTags->bindValue(":EventID",$eventID);
+        $EventTags->execute();
+        return $EventTags->fetchAll();
+    }
+
 ?>
