@@ -437,4 +437,60 @@ function validate255($name) {
         return $name;
     }
 
+    function getVenuePriceScore($venueID, $pdo){
+      $getStmt = $pdo->prepare("SELECT ReviewPrice FROM Review WHERE VenueID=:VenueID");
+      $getStmt->bindValue(":VenueID",$venueID);
+      $getStmt->execute();
+      $results = $getStmt->fetchAll();
+      $total = 0;
+      $counter = 0;
+      foreach ($results as $score) {
+        $total += $score['ReviewPrice']
+        $counter++;
+      }
+      return $total/$counter
+    }
+
+    function getVenueSafetyScore($venueID, $pdo){
+      $getStmt = $pdo->prepare("SELECT ReviewSafety FROM Review WHERE VenueID=:VenueID");
+      $getStmt->bindValue(":VenueID",$venueID);
+      $getStmt->execute();
+      $results = $getStmt->fetchAll();
+      $total = 0;
+      $counter = 0;
+      foreach ($results as $score) {
+        $total += $score['ReviewSafety']
+        $counter++;
+      }
+      return $total/$counter
+    }
+
+    function getVenueQueueScore($venueID, $pdo){
+      $getStmt = $pdo->prepare("SELECT ReviewQueue FROM Review WHERE VenueID=:VenueID");
+      $getStmt->bindValue(":VenueID",$venueID);
+      $getStmt->execute();
+      $results = $getStmt->fetchAll();
+      $total = 0;
+      $counter = 0;
+      foreach ($results as $score) {
+        $total += $score['ReviewQueue']
+        $counter++;
+      }
+      return $total/$counter
+    }
+
+    function getVenueAtmosphereScore($venueID, $pdo){
+      $getStmt = $pdo->prepare("SELECT ReviewAtmosphere FROM Review WHERE VenueID=:VenueID");
+      $getStmt->bindValue(":VenueID",$venueID);
+      $getStmt->execute();
+      $results = $getStmt->fetchAll();
+      $total = 0;
+      $counter = 0;
+      foreach ($results as $score) {
+        $total += $score['ReviewAtmosphere']
+        $counter++;
+      }
+      return $total/$counter
+    }
+
 ?>
