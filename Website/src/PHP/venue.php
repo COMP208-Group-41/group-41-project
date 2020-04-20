@@ -80,12 +80,12 @@
             <?php
             if (isset($venueUserID)){
               echo '<div class="">';
-              echo '<div class=""><a href="event-creation.php?eventID='.$row['EventID'].'" class="event-button" style="margin-right: -1px">Add Event</a>';
+              echo '<div class=""><a href="event-creation.php?venueID='.$venueID.'" class="event-button" style="margin-right: -1px">Add Event</a>';
             }
             ?>
             <div class="eventlist">
                 <?php
-                if (sizeof($events) > 0){
+                if (sizeof($events) !== false){
                   foreach ($events as $row) {
                       echo '<div class="event">';
                       echo '<div class="event-image"></div>';
