@@ -299,7 +299,7 @@
                        value="<?php echo $endTime; ?>" required>
 
                 <input type='file' id="Image" name='Image' accept=".jpg" class="input-file">
-                <label for="eventImage">Upload Image</label>
+                <label for="Image">Upload Image</label>
 
                 <!-- TAG INPUT -->
                 <!-- Script here, if no tags present dont display any of the tag stuff -->
