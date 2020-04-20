@@ -26,14 +26,18 @@ $name = $result['VenueUserName'];
 $email = $result['VenueUserEmail'];
 $external = $result['VenueUserExternal'];
 $venues = getVenues($venueUserID, $pdo);
-if (isset($_GET['venueID'])){
-  $venueID = $_GET['venueID'];
+
+if (isset($_POST['venue']) && $_POST['venue'] != 'None') {
+    $venueID = $_POST['venue'];
 }
+
 if (isset($venueID)){
   $venueNamestmt =  getVenueInfo($venueID,$pdo);
   $venueName = $venueNamestmt['VenueName'];
   $events = getEvents($venueID,$pdo);
 }
+
+
 
 
 ?>
@@ -93,10 +97,12 @@ if (isset($_SESSION['message'])) {
         </div>
           <h2 class="title">Registered Events</h2>
           <div class="venuelist">
-            <select name='venue' id='venue' style="margin-bottom: 16px">
-                <option value='None'>Select Venue</option>
-                <?php echoVenues($venues); ?>
-            </select>
+              <form name='venueSelect' method='post'>
+                  <select name='venue' id='venue' onChange='document.moduleForm.submit()' style="margin-bottom: 16px">
+                      <option value='None'>Select Venue</option>
+                      <?php echoVenues($venues); ?>
+                  </select>
+              </form>
             <?php
             if ($events !== false){
               foreach ($events as $row) {
