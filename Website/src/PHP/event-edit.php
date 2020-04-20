@@ -329,23 +329,23 @@
                     </div>
                 </div>
                 <label>Add some tags that best describe your event - this will overwrite old tags</label>
-                <select name='tag1' id='tag1'>
+                <select name='tag1' id='tag1' onmousedown="if(this.options.length>5){this.size=4;}" onchange="this.size=0;" onblur="this.size=0;">
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select>
-                <select name='tag2' id='tag2'>
+                <select name='tag2' id='tag2' onmousedown="if(this.options.length>5){this.size=4;}" onchange="this.size=0;" onblur="this.size=0;">
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select>
-                <select name='tag3' id='tag3'>
+                <select name='tag3' id='tag3' onmousedown="if(this.options.length>5){this.size=4;}" onchange="this.size=0;" onblur="this.size=0;">
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select>
-                <select name='tag4' id='tag4'>
+                <select name='tag4' id='tag4' onmousedown="if(this.options.length>5){this.size=4;}" onchange="this.size=0;" onblur="this.size=0;">
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select>
-                <select name='tag5' id='tag5'>
+                <select name='tag5' id='tag5' onmousedown="if(this.options.length>5){this.size=4;}" onchange="this.size=0;" onblur="this.size=0;">
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select><br>
