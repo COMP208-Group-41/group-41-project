@@ -8,12 +8,6 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
 
-    if (isset($_SESSION['UserID'])) {
-        $userID = $_SESSION['UserID'];
-    } else if (isset($_SESSION['VenueUserID'])) {
-        $venueUserID = $_SESSION['VenueUserID'];
-    }
-
     if (isset($_GET['EventID'])) {
         $eventID = $_GET['EventID'];
     } else {
@@ -22,30 +16,51 @@
         exit;
     }
 
-    
+    $result = getEventInfo($eventID,$pdo);
+    $owner = eventToVenueUser($eventID,$pdo);
+    $name = $result['EventName'];
+    $description = $result['EventDescription'];
+    $startTime = $result['EventStartTime'];
+    $endTime = $result['EventEndTime'];
+
+    if (isset($_SESSION['UserID'])) {
+        $userID = $_SESSION['UserID'];
+    } else if (isset($_SESSION['VenueUserID']) && $owner == $_SESSION['VenueUserID']) {
+        $venueUserID = $_SESSION['VenueUserID'];
+    }
+
+    $result = getEventInfo($eventID,$pdo);
+    $owner = eventToVenueUser($eventID,$pdo);
+    $name = $result['EventName'];
+    $description = $result['EventDescription'];
+    $startTime = $result['EventStartTime'];
+    $endTime = $result['EventEndTime'];
+
+
 
 
 ?>
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/venue.css">
 </head>
 <body>
+<?php include "navbar.php" ?>
 <div class="wrapper">
     <div class="container">
         <div style="display: flex; flex-direction: column">
-            <h1 class="title">Event name here</h1>
+            <h1 class="title"><?php echo $name; ?></h1>
             <label>Image:</label>
             <img src="../Assets/event-image.jpg">
             <div class="seperator"></div>
-            <label>Location:</label>
-            <label>Location here</label>
+            <label>Venue: </label>
 
-            <label>Event time:</label>
-            <label>Time here:</label>
+            <label>Start Time: <?php echo $startTime; ?></label>
+            <label>EndTime: <?php echo $endTime; ?></label>
             <label>Event description:</label>
-            <textarea readonly placeholder="Description of event here"></textarea>
+            <textarea readonly placeholder="Description of event here"><?php echo $description; ?></textarea>
 
             <label style="text-align: center; margin-top: 16px;"><b>Venue Tags:</b></label>
             <div style="display: flex; justify-content: center; ">
