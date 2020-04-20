@@ -122,12 +122,12 @@
                   $counter = 0;
                   foreach ($reviews as $row) {
                     if($counter<5){
-                      echo "<label>Review left by: ".$reviews['']."</label>";
-                      echo "<textarea readonly>".$reviews['ReviewText']."</textarea>";
-                      echo "<label>Price Score: ".$reviews['ReviewPrice']."</label>";
-                      echo "<label>Safety Score ".$reviews['ReviewSafety']."</label>";
-                      echo "<label>Atmosphere Score ".$reviews['ReviewAtmosphere']."</label>";
-                      echo "<label>Queue Times Score ".$reviews['ReviewQueue']."</label>";
+                      echo "<label>Review left by: ".$row['']."</label>";
+                      echo "<textarea readonly>".$rowrow['ReviewText']."</textarea>";
+                      echo "<label>Price Score: ".$row['ReviewPrice']."</label>";
+                      echo "<label>Safety Score ".$row['ReviewSafety']."</label>";
+                      echo "<label>Atmosphere Score ".$row['ReviewAtmosphere']."</label>";
+                      echo "<label>Queue Times Score ".$row['ReviewQueue']."</label>";
                     }
                     $counter++;
                   }
