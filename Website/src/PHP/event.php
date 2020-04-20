@@ -23,8 +23,8 @@
     $venueName = $getVenueDetails['VenueName'];
     $name = $result['EventName'];
     $description = $result['EventDescription'];
-    $startTime = $result['EventStartTime'];
-    $endTime = $result['EventEndTime'];
+    $startTime = str_replace("T"," ",$result['EventStartTime']);
+    $endTime = str_replace("T"," ",$result['EventEndTime']);
 
     if (isset($_SESSION['UserID'])) {
         $userID = $_SESSION['UserID'];
