@@ -2,8 +2,8 @@
     --header-background: linear-gradient(90deg, #272727 0%, #202020 100%);
     --body-background: #202020;
     --body-highlight: #2E2E2E;
-    --body: #D6D6D6;
-    --body-gray: #C4C4C4;
+    --light-body: #D6D6D6;
+    --dark-body: #C4C4C4;
     --button-border: #3B3B3B;
     --button-highlight: #ccc;
     --text: #2E2E2E;
@@ -37,6 +37,7 @@ th {
     flex-direction: column;
     padding-bottom: 16px;
     justify-content: center;
+    width: 100%;
 }
 
 .venue {
@@ -56,7 +57,7 @@ th {
     border: 2px solid var(--button-border);
     border-radius: 4px;
     font-size: 16px;
-    background-color: var(--body-gray);
+    background-color: var(--dark-body);
     padding: 12px 20px 12px 10px;
     color: var(--text);
 }
@@ -77,11 +78,11 @@ th {
     border: 2px solid var(--button-border);
     border-radius: 4px;
     padding: 12px 0px;
-    color: var(--body);
-    width: 50%;
+    color: var(--light-body);
     text-align: center;
     text-decoration: none;
     height: 100%;
+    flex-grow: 1;
 }
 
 .venue-button:focus {
