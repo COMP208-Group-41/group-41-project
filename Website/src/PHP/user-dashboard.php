@@ -75,10 +75,10 @@
                 <th>Date of Birth</th>
                 <td><?php echo "$userDOB"; ?></td>
               </tr>
-              <label style="text-align: center; margin-top: 16px;"><b>Current Tags:</b></label>
+              <label style="text-align: center; margin-top: 16px;"><b>Your Favourite Tags:</b></label>
               <div style="display: flex; justify-content: center; ">
                   <div class="tag-container" style="text-align: center">
-                      <?php getTags($interestedIn,$pdo); ?>
+                      <?php getTags($userPrefs,$pdo); ?>
                   </div>
               </div>
             </table>
