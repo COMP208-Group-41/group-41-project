@@ -70,6 +70,7 @@
             <h1 class="title"><?php echo $name; ?></h1>
             <div class='image'>
                 <?php
+                    echo $venueUserID." ".$venueID." ".$eventID;
                     if ($image !== false ) {
                         echo $image;
                     }
