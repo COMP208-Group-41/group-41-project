@@ -39,16 +39,18 @@
 <head>
     <title>OutOut - <?php echo $name; ?></title>
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="../css/venue.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
 </head>
 <body>
 <?php include "navbar.php" ?>
+<div class="message-wrapper">
 <?php
     if (isset($_SESSION['message'])) {
         echo "<div class='success'>".$_SESSION['message']."</div>";
         unset($_SESSION['message']);
     }
 ?>
+</div>
 <div class="wrapper">
     <div class="container">
         <div style="display: flex; flex-direction: column">

@@ -50,18 +50,21 @@
     $reviewAtmosphere = $result['ReviewAtmosphere'];
     $reviewSafety = $result['ReviewSafety'];
     $reviewQueue = $result['ReviewQueue'];
+    $eventID = $result['EventID'];
+    $venueID = $result['VenueID'];
 
     try{
         if (isset($_POST['SubmitReview'])){
           if (checkInputs($reviewID,$errorMessage,$pdo)) {
-              $errorMessage = "Review Updated successfully!";
-              // Update values on the page after successful update
-              $result = getReviewInfo($reviewID,$pdo);
-              $reviewText = $result['ReviewText'];
-              $reviewPrice = $result['ReviewPrice'];
-              $reviewAtmosphere = $result['ReviewAtmosphere'];
-              $reviewSafety = $result['ReviewSafety'];
-              $reviewQueue = $result['ReviewQueue'];
+              $_SESSION['message'] = "Review Updated successfully!";
+
+              if ($eventID == 1) {
+                  header("location: venue.php?venueID=$venueID");
+                  exit;
+              } else {
+                  header("location: event.php?eventID=$eventID");
+                  exit;
+              }
           }
         }
     } catch (PDOException $e) {
@@ -118,7 +121,7 @@
      * edit it)
      */
     function getReviewInfo($reviewID,$pdo) {
-        $getReviewStmt = $pdo->prepare("SELECT UserID, ReviewText, ReviewPrice, ReviewAtmosphere, ReviewSafety, ReviewQueue FROM Review WHERE ReviewID=:ReviewID");
+        $getReviewStmt = $pdo->prepare("SELECT VenueID, EventID, UserID, ReviewText, ReviewPrice, ReviewAtmosphere, ReviewSafety, ReviewQueue FROM Review WHERE ReviewID=:ReviewID");
         $getReviewStmt->bindValue(":ReviewID",$reviewID);
         $getReviewStmt->execute();
         return $getReviewStmt->fetch();
