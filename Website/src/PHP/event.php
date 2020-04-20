@@ -18,6 +18,9 @@
 
     $result = getEventInfo($eventID,$pdo);
     $owner = eventToVenueUser($eventID,$pdo);
+    $venueID = $result['VenueID'];
+    $getVenueDetails = getVenueInfo($venueID,$pdo);
+    $venueName = $getVenueDetails['VenueName'];
     $name = $result['EventName'];
     $description = $result['EventDescription'];
     $startTime = $result['EventStartTime'];
@@ -55,7 +58,7 @@
             <label>Image:</label>
             <img src="../Assets/event-image.jpg">
             <div class="seperator"></div>
-            <label>Venue: </label>
+            <label>Venue: <?php echo '<a href="venue.php?venueID='.$venueID.'">'.$venueName.'</a>'; ?></label>
 
             <label>Start Time: <?php echo $startTime; ?></label>
             <label>EndTime: <?php echo $endTime; ?></label>
