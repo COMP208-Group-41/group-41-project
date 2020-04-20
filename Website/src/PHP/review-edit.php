@@ -54,7 +54,7 @@
     try{
         if (isset($_POST['SubmitReview'])){
           if (checkInputs($reviewID,$errorMessage,$pdo)) {
-              $errorMessage = "Review Updated successfully!";
+              $_SESSION['message'] = "Review Updated successfully!";
               // Update values on the page after successful update
               $result = getReviewInfo($reviewID,$pdo);
               $reviewText = $result['ReviewText'];

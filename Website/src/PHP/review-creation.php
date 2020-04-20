@@ -56,15 +56,19 @@
 
     try{
         if (isset($_POST['SubmitReview'])){
-          if (checkInputs($userID,$eventID,$venueID,$errorMessage,$pdo)) {
-              // TODO: After the review is created successfully, redirect to
-              // appropriate page (ideally showing success message or similar)
+            if (checkInputs($userID,$eventID,$venueID,$errorMessage,$pdo)) {
+
               $_SESSION['message'] = "Review Created Successfully!";
-              header("location: home.php");
-              exit;
+              if ($eventID == 1) {
+                  header("location: venue.php?venueID=$venueID");
+                  exit;
+              } else {
+                  header("location: event.php?eventID=$eventID");
+                  exit;
+              }
           }
-        }
-    } catch (PDOException $e) {
+      }
+  } catch (PDOException $e) {
         // Any PDO errors are shown here
         exit("PDO Error: ".$e->getMessage()."<br>");
     }
