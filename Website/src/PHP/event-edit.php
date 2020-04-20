@@ -23,6 +23,7 @@
     if($eventToVenueUser === false){
       $errorMessage = "Error getting VenueUserID";
     } else if ($eventToVenueUser != $venueUserID) {
+        $_SESSION['message'] = "You are not allowed to edit this event!"
         header("location: venue-home.php");
         exit;
     }
@@ -297,7 +298,7 @@
                 <input type='datetime-local' id="endTime" name='endTime' placeholder="End time"
                        value="<?php echo $endTime; ?>" required>
 
-                <input type='file' id="eventImage" name='eventImage' accept="image/*" class="input-file">
+                <input type='file' id="Image" name='Image' accept=".jpg" class="input-file">
                 <label for="eventImage">Upload Image</label>
 
                 <!-- TAG INPUT -->
