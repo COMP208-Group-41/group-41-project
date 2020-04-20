@@ -26,6 +26,14 @@ $name = $result['VenueUserName'];
 $email = $result['VenueUserEmail'];
 $external = $result['VenueUserExternal'];
 $venues = getVenues($venueUserID, $pdo);
+if (isset($_GET['VenueID'])){
+  $venueID = $_GET['VenueID'];
+}
+if (isset($venueID)){
+  $venueNamestmt =  getVenueInfo($venueID,$pdo);
+    $venueName = $venueNamestmt['VenueName']
+  $events = getEvents($venueID,$pdo);
+}
 
 
 ?>
@@ -69,10 +77,8 @@ if (isset($_SESSION['message'])) {
         </table>
         <button onclick="location.href='venue-user-edit.php';" class="button" style="width: 100%; margin-bottom: 16px">Edit Account Details</button>
         <div class="seperator" style="margin-top: 4px">
-
-        </div>
-        <h2 class="title">Registered Venues</h2>
-        <div class="venuelist">
+          <h2 class="title">Registered Venues</h2>
+          <div class="venuelist">
             <?php
             foreach ($venues as $row) {
                 echo '<div class="venue">';
@@ -82,8 +88,27 @@ if (isset($_SESSION['message'])) {
                 echo '<a href="venue-edit.php?venueID='.$row['VenueID'].'" class="venue-button" style="width: 50%">Edit Venue</a></div></div>';
             }
             ?>
+          </div>
+          <button onclick="location.href='venue-creation.php';" class="button" style="width: 100%; margin-bottom: 16px">Add a new Venue</button>
         </div>
-        <button onclick="location.href='venue-creation.php';" class="button" style="width: 100%; margin-bottom: 16px">Add a new Venue</button>
+          <h2 class="title">Registered Events</h2>
+          <div class="venuelist">
+            <select name='venue' id='venue' style="margin-bottom: 16px">
+                <option value='None'>Select Venue</option>
+                <?php echoVenues($venues); ?>
+            </select>
+            <?php
+            if ($events !== false){
+              foreach ($events as $row) {
+                echo '<div class="venue">';
+                echo '<div class="venue-name">'.$venueName."</div>";
+                echo '<div class="venue-name">'.$row['EventName']."</div>";
+                echo '<div class="venue-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="event-button" style="margin-right: -1px">View Event</a>';
+                echo '<a href="event-edit.php?eventID='.$row['EventID'].'" class="venue-button" style="width: 50%">Edit Event</a></div></div>';
+              }
+            }
+            ?>
+        </div>
     </div>
 </div>
 </div>
