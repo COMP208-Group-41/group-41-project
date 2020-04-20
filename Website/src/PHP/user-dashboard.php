@@ -75,9 +75,6 @@
                 <th>Date of Birth</th>
                 <td><?php echo "$userDOB"; ?></td>
               </tr>
-              <tr>
-                <th>Your Favourite Tags</th>
-              </tr>
               <label style="text-align: center; margin-top: 16px;"><b>Current Tags:</b></label>
               <div style="display: flex; justify-content: center; ">
                   <div class="tag-container" style="text-align: center">
