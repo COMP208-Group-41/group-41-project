@@ -138,6 +138,7 @@
                       echo "<label>Safety Score ".$row['ReviewSafety']."</label><br>";
                       echo "<label>Atmosphere Score ".$row['ReviewAtmosphere']."</label><br>";
                       echo "<label>Queue Times Score ".$row['ReviewQueue']."</label><br>";
+                      echo "<label>Review posted on: ".$row['ReviewDate']."</label><br>";
                       echo "<div class="seperator"></div>";
                     }
                     $counter++;
