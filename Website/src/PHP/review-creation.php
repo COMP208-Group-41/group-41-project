@@ -169,7 +169,7 @@
             }
         } else {
             // Check Event Exists
-            $checkEventExists = $pdo("SELECT EventID FROM Event WHERE EventID=:EventID");
+            $checkEventExists = $pdo->prepare("SELECT EventID FROM Event WHERE EventID=:EventID");
             $checkEventExists->bindValue(":EventID",$eventID);
             $checkEventExists->execute();
             if ($checkEventExists->rowcount() == 0) {
