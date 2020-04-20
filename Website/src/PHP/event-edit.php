@@ -274,14 +274,6 @@
         }
     }
 
-    // Returns an array of all event infomation
-    function getEventInfo($eventID,$pdo) {
-        $getVenueStmt = $pdo->prepare("SELECT VenueID, EventName, EventDescription, DATE_FORMAT(EventStartTime,'%Y-%m-%dT%H:%i') AS EventStartTime, DATE_FORMAT(EventEndTime,'%Y-%m-%dT%H:%i') AS EventEndTime FROM Event WHERE EventID=:EventID");
-        $getVenueStmt->bindValue(":EventID",$eventID);
-        $getVenueStmt->execute();
-        return $getVenueStmt->fetch();
-    }
-
 ?>
 
 <!DOCTYPE html>

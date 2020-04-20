@@ -2,14 +2,17 @@
 
     session_start();
 
+    require_once "config.php";
+
+    error_reporting( E_ALL );
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+
     if (isset($_SESSION['UserID'])) {
         $userID = $_SESSION['UserID'];
     } else if (isset($_SESSION['VenueUserID'])) {
         $venueUserID = $_SESSION['VenueUserID'];
     }
-
-    require_once "config.php";
-
 
 
 ?>
