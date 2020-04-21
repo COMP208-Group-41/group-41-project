@@ -56,12 +56,31 @@
 
     if (isset($_SESSION['UserID'])) {
         $userID = $_SESSION['UserID'];
+        $following = checkInterestedIn($userID,$eventID,$pdo);
     } else if (isset($_SESSION['VenueUserID']) && $owner == $_SESSION['VenueUserID']) {
         $venueUserID = $_SESSION['VenueUserID'];
     }
 
     $image = checkEventImageOnServer($owner,$venueID,$eventID);
 
+    if (isset($_POST['followForm'])) {
+        // Need to unfollow the event
+        $unfollowStmt = $pdo->prepare("SELECT");
+    }
+
+
+    function checkInterestedIn($userID,$eventID,$pdo) {
+        $getStmt = $pdo->prepare("SELECT InterestedID FROM InterestedIn WHERE UserID=:UserID AND EventID=:EventID");
+        $getStmt->bindValue(":UserID",$userID);
+        $getStmt->bindValue(":EventID",$eventID);
+        $getStmt->execute();
+        if ($getStmt->rowCount() == 0) {
+            // The user is not following this event, show the follow button
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 ?>
 <!DOCTYPE html>
@@ -85,6 +104,18 @@
     <div class="container">
         <div style="display: flex; flex-direction: column">
             <h1 class="title"><?php echo $name; ?></h1>
+                <?php
+                    if (isset($following)) {
+                        if ($following) {
+                            echo "<form id='unfollow' name='unfollowForm' method='post'>";
+                            echo "<input type='submit' name='unfollow' value='Unfollow This Event'></form>"
+                        } else {
+                            echo "<form id='follow' name='followForm' method='post'>";
+                            echo "<input type='submit' name='follow' value='Follow This Event'></form>";
+
+                        }
+                    }
+                ?>
             <div class='image'>
                 <?php
                     if ($image) {
