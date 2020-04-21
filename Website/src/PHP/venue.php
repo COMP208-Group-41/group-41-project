@@ -139,9 +139,9 @@
                   echo '<div class="event">';
                   echo '<div class="event-name">No events currently listed</div></div>';
                 }
-                echo '<div class=""><a href="upcoming-events.php?venueID='.$venueID.' "class="button">View All Events</a></div><br>';
+                echo '<a href="upcoming-events.php?venueID='.$venueID.' "class="button">View All Events</a>';
                 echo '<div class="seperator" style="margin-top: 4px">';
-                echo '<div class=""><a href="past-events.php?venueID='.$venueID.'" class="button">View Past Events</a></div><br>';
+                echo '<a href="past-events.php?venueID='.$venueID.'" class="button">View Past Events</a>';
                 ?>
             </div>
             <div class="seperator"></div>
