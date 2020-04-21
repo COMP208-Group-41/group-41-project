@@ -10,6 +10,11 @@
 
   if (isset($_GET['venueID'])) {
       $venueID = $_GET['venueID'];
+      if ($venueID == 1) {
+          $_SESSION['message'] = "That venue does not exist!";
+          header("location: 404.php");
+          exit;
+      }
   } else {
       $_SESSION['message'] = "No Venue ID specified!";
       header("location: 404.php");

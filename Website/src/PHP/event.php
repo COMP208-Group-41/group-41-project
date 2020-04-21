@@ -10,6 +10,11 @@
 
     if (isset($_GET['eventID'])) {
         $eventID = $_GET['eventID'];
+        if ($eventID == 1) {
+            $_SESSION['message'] = "That event does not exist!";
+            header("location: 404.php");
+            exit;
+        }
     } else {
         $_SESSION['message'] = "No Event ID specified!";
         header("location: 404.php");
