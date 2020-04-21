@@ -14,7 +14,14 @@
         return $getStmt->fetchAll();
     }
 
-    func
+    function venueIDtoName($venueID, $pdo){
+      $getStmt = $pdo->prepare("SELECT VenueName FROM Venue WHERE VenueID=:VenueID");
+      $getStmt->bindValue(":VenueID",$venueID);
+      $getStmt->execute();
+      $result = $getStmt->fetch();
+      return $result['VenueName'];
+
+    }
 
 ?>
 <!DOCTYPE html>
@@ -42,7 +49,7 @@
             <?php
               if (sizeof($allEvents) != 0) {
                   foreach($allEvents as $row) {
-                      $venueInfo = getVenueInfo($venueID, $pdo);
+                      echo '<div class="seperator" style="margin-top: 4px">';
                       echo "<table>";
                       echo "<tr>";
                       echo "<td>".$row['EventName']."</td>";
@@ -52,7 +59,7 @@
                       echo "<td>Event Date: ".$row['EventStartTime']."</td>";
                       echo "</tr>";
                       echo "</tr><tr>";
-                      echo "<td>Hosted By: ".$venueInfo['VenueName']."</td>";
+                      echo "<td>Hosted By: ".venueIDtoName($row['VenueID'], $pdo)."</td>";
                       echo "</tr>";
                       echo "</table>";
                   }
