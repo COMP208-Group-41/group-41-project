@@ -115,10 +115,10 @@
             <h2 class='title'>Upcoming Events</h2>
             <?php
             if (isset($venueUserID)){
-              echo '<a href="event-creation.php?venueID='.$venueID.'" class="button" style="width: 100%;">Add Event</a>';
+              echo '<a href="event-creation.php?venueID='.$venueID.'" class="button" style="width: 100%; margin-bottom: 16px">Add Event</a>';
             }
             ?>
-            <div class="eventlist">
+            <div class="eventlist" style="margin-bottom: 16px">
                 <?php
                 if ($events !== false){
                   $counter = 0;
@@ -141,7 +141,7 @@
                 }
                 echo '<a href="upcoming-events.php?venueID='.$venueID.' "class="button" style="width: 100%;">View All Events</a>';
                 echo '<div class="seperator" style="margin-top: 4px">';
-                echo '<a href="past-events.php?venueID='.$venueID.'" class="button" style="width: 100%;">View Past Events</a>';
+                echo '<a href="past-events.php?venueID='.$venueID.'" class="button" style="width: 100%; margin-bottom: 12px">View Past Events</a>';
                 ?>
             <div class="seperator"></div>
             <h2 class='title'>Reviews</h2>
