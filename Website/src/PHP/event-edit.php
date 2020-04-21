@@ -50,6 +50,7 @@
 
     if (new DateTime("now") > new DateTime($endTime)) {
         $editable = false;
+        $errorMessage = "You cannot edit an event that has happened already!";
     } else {
         $editable = true;
     }
