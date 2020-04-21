@@ -196,19 +196,17 @@
     }
 
     // Delete Venue
-    if (isset($_POST['delete'])) {
-        $success = deleteVenue($venueID, $pdo);
+    if (isset($_POST['delete']) && verifyVenuePassword($VenueUserID,$password,$pdo) === true) {
+        $success = deleteVenue($venueID, $pdo, $errorMessage);
         if ($success){
           header("location: venue-user-dashboard.php" );
           exit;
-        } else {
-
         }
     }
 
-    function deleteVenue($venueID, $pdo){
+    function deleteVenue($venueID, $pdo, &$errorMessage){
         $pdo->beginTransaction();
-        $deleteVenueStmt = $pdo->prepare("DELETE FROM Reviews WHERE VenueID=:VenueID");
+        $deleteVenueStmt = $pdo->prepare("DELETE FROM Review WHERE VenueID=:VenueID");
         $deleteVenueStmt->bindValue(':VenueID',$venueID);
         $success = $deleteVenueStmt->execute();
         if (!$success){
@@ -454,11 +452,13 @@
                     <input type='password' name='password' required>
                 </div>
                 <input type='submit' name='submit' value='Save changes' class="button" style="width: 100%"><br>
-                <div class="seperator" style="margin-top: 4px"></div> 
+                <div class="seperator" style="margin-top: 4px"></div>
             </div>
         </form>
         <form id='DeleteVenue' name='DeleteVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
           <div class="edit-fields">
+            <label>Enter current password to delete venue:</label>
+            <input type='password' name='password' required>
             <input type='submit' name='delete' value='Delete Venue' class="button" style="width: 100%">
           </div>
         </form>
