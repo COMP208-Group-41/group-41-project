@@ -150,7 +150,7 @@
             <h2>Reviews</h2><br><br>
             <?php
                 if (isset($userID)) {
-                    $checkReview = checkReviewWritten($userID,$eventID,$venueID,$pdo);
+                    $checkReview = checkReviewWritten($userID,1,$venueID,$pdo);
                     if ($checkReview === false) {
                         echo '<a href="review-creation.php?venueID='.$venueID.'">Write a Review</a>';
                     } else {
