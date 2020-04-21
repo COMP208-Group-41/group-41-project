@@ -89,7 +89,6 @@
     <div class="container">
         <div style="display: flex; flex-direction: column">
             <h1 class="title"><?php echo $name; ?></h1>
-            <div class="seperator"></div>
             <div class='image'>
                 <?php
                     if ($image) {
