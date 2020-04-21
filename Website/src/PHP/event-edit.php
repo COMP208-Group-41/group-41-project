@@ -412,7 +412,7 @@
             <div class="seperator">
                 <label>Enter current password to allow changes:</label>
                 <input type='password' name='password' required>
-                <input type='submit' name='submit' value='Update' class="button" style="width: 100%" ><br>
+                <input type='submit' name='submit' value='Update' class="button" style="width: 100%" <?php if (!$editable) { echo 'disabled'; } ?> ><br>
                 <div class="seperator" style="margin-top: 4px"></div>
         </form>
         <form id='DeleteVenue' name='DeleteVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
