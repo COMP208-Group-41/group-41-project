@@ -116,7 +116,7 @@
             <?php
             if (isset($venueUserID)){
               echo '<div class="">';
-              echo '<div class=""><a href="event-creation.php?venueID='.$venueID.'" class="event-button" style="margin-right: -1px">Add Event</a>';
+              echo '<div class=""><a href="event-creation.php?venueID='.$venueID.'" class="button" style="width: 100%;">Add Event</a>';
             }
             ?>
             <div class="eventlist">
@@ -140,9 +140,9 @@
                   echo '<div class="event">';
                   echo '<div class="event-name">No events currently listed</div></div>';
                 }
-                echo '<div class=""><a href="upcoming-events.php?venueID='.$venueID.' class="event-button" style="">View All Events</a></div><br>';
+                echo '<div class=""><a href="upcoming-events.php?venueID='.$venueID.' "class="button">View All Events</a></div><br>';
                 echo '<div class="seperator" style="margin-top: 4px">';
-                echo '<div class=""><a href="past-events.php?venueID='.$venueID.'" class="event-button" style="">View Past Events</a></div><br>';
+                echo '<div class=""><a href="past-events.php?venueID='.$venueID.'" class="button">View Past Events</a></div><br>';
                 ?>
             </div>
             <div class="seperator"></div>
