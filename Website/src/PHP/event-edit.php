@@ -2,7 +2,6 @@
 
     session_start();
 
-
     if (!isset($_SESSION['VenueUserID'])) {
         header("location: home.php");
         exit;
@@ -49,11 +48,17 @@
     $startTime = $result['EventStartTime'];
     $endTime = $result['EventEndTime'];
 
+    if (new DateTime("now") > new DateTime($endTime)) {
+        $editable = false;
+    } else {
+        $editable = true;
+    }
+
     // Current tags for this event are pulled here
     $currentTagIDs = getEventTagID($eventID,$pdo);
 
     try {
-        if (!empty($_POST) && isset($_POST['submit'])) {
+        if (!empty($_POST) && isset($_POST['submit']) && !$editable) {
 
              if (checkInputs($venueUserID,$eventID,$venueID,$errorMessage,$pdo)) {
                  $_SESSION['message'] = "Event Edited Successfully!";
@@ -356,7 +361,7 @@
             <div class="seperator">
                 <label>Enter current password to allow changes:</label>
                 <input type='password' name='password' required>
-                <input type='submit' name='submit' value='Update' class="button" style="width: 100%">
+                <input type='submit' name='submit' value='Update' class="button" style="width: 100%" <?php if (!$editable) { echo "disabled";} ?>>
         </form>
     </div>
 </div>
