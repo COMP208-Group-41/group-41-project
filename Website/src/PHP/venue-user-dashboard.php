@@ -120,6 +120,7 @@ if (isset($_SESSION['message'])) {
               }
             }
             ?>
+            <br>
             <button onclick="location.href='event-creation.php';" class="button" style="width: 100%; margin-bottom: 16px">Add New Event</button>
         </div>
     </div>
