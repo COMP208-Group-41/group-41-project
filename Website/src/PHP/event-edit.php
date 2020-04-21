@@ -257,7 +257,7 @@
 
         // Image folder deletion
         $directory = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID";
-        deleteAll($directory);
+        deleteEventFiles($directory);
 
         $pdo->commit();
         return true;
@@ -278,16 +278,12 @@
         }
     }
 
-    function deleteAll($dir) {
-    foreach(glob($dir . '/*') as $file) {
-        if(is_dir($file))
-            deleteAll($file);
-        else
-            unlink($file);
+    function deleteEventFiles($path) {
+        if (file_exists("$path/event.jpg")) {
+            unlink($path);
+        }
+        rmdir($path);
     }
-    rmdir($dir);
-    }
-
 
     function updateEvent($eventID,$name,$description,$startTime,$endTime,$pdo) {
         $updateEventStmt = $pdo->prepare("UPDATE Event SET EventName=:EventName, EventDescription=:EventDescription, EventStartTime=:EventStartTime, EventEndTime=:EventEndTime WHERE EventID=:EventID");
