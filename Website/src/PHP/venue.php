@@ -177,7 +177,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
                     </div>
                 </div>
                 <div class="seperator"></div>
-                <h3 class="title">All Reviews</h3>
+                <h2 class="title">All Reviews</h2>
                 <div class="reviewlist">
                     <?php
                     if ($reviews !== false) {
