@@ -71,6 +71,7 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
+    <title>OutOut - <?php echo $name; ?></title>
     <link rel="stylesheet" type="text/css" href="../css/venue.css">
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
 </head>
