@@ -101,8 +101,8 @@
             <?php
               foreach ($interestedIn as $row) {
                 echo "<tr>";
-                  echo "<td>".$row['EventName']."</td>";
-                  echo '<td><a href="event.php?eventID='.eventIDtoName($row['EventID'],$pdo).'" class="button">View Event</a>';
+                  echo "<td>".eventIDtoName($row['EventID'],$pdo)."</td>";
+                  echo '<td><a href="event.php?eventID='.$row['EventID'].'" class="button">View Event</a>';
                 echo "</tr>";
               }
             ?>
