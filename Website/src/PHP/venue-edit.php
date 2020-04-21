@@ -208,7 +208,7 @@
 
     function deleteVenue($venueID, $pdo){
         $pdo->beginTransaction();
-        $deleteVenueStmt = $pdo->prepare("DELETE FROM Reviews WHERE VenueID=:VenueID");
+        $deleteVenueStmt = $pdo->prepare("DELETE FROM Review WHERE VenueID=:VenueID");
         $deleteVenueStmt->bindValue(':VenueID',$venueID);
         $success = $deleteVenueStmt->execute();
         if (!$success){
@@ -454,7 +454,7 @@
                     <input type='password' name='password' required>
                 </div>
                 <input type='submit' name='submit' value='Save changes' class="button" style="width: 100%"><br>
-                <div class="seperator" style="margin-top: 4px"></div> 
+                <div class="seperator" style="margin-top: 4px"></div>
             </div>
         </form>
         <form id='DeleteVenue' name='DeleteVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
