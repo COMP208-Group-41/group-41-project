@@ -89,7 +89,7 @@ if (isset($_SESSION['message'])) {
                 echo '<div class="venue-image"></div>';
                 echo '<div class="venue-name">'.$row['VenueName']."</div>";
                 echo '<div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -1px">View Venue</a>';
-                echo '<a href="venue-edit.php?venueID='.$row['VenueID'].'" class="venue-button" style="width: 50%">Edit Venue</a></div></div>';
+                echo '<a href="venue-edit.php?venueID='.$row['VenueID'].'" class="venue-button" style="width: 33%">Edit Venue</a></div></div>';
             }
             ?>
           </div>
