@@ -114,8 +114,8 @@ if (isset($_SESSION['message'])) {
                 echo '<div class="event">';
                 echo '<div class="event-name" style="width: 35%">'.$venueName."</div>";
                 echo '<div class="event-name" style="width: 35%">'.$row['EventName']."</div>";
-                echo '<div class="event-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="venue-button" style="margin-right: -1px">View Event</a>';
-                echo '<a href="event-edit.php?eventID='.$row['EventID'].'" class="venue-button">Edit Event</a></div></div>';
+                echo '<div class="event-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="event-button" style="margin-right: -1px">View Event</a>';
+                echo '<a href="event-edit.php?eventID='.$row['EventID'].'" class="event-button">Edit Event</a></div></div>';
               }
             }
             ?>
