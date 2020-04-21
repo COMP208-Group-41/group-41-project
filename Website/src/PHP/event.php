@@ -60,31 +60,7 @@
         $venueUserID = $_SESSION['VenueUserID'];
     }
 
-    $image = checkImageOnServer($owner,$venueID,$eventID);
-
-    // Check if there is an image for this event
-    function checkImageOnServer($venueUserID,$venueID,$eventID) {
-        $target = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID/event.jpg";
-        if (!file_exists($target)) {
-            return false;
-        } else {
-            // If the file exists then return true
-            return true;
-        }
-    }
-
-    function checkEventExists($eventID,$pdo) {
-        $getStmt = $pdo->prepare("SELECT EventID FROM Event WHERE EventID=:EventID");
-        $getStmt->bindValue(":EventID",$eventID);
-        $getStmt->execute();
-        if ($getStmt->rowCount() == 0) {
-            // Event doesn't exist!
-            return false;
-        } else {
-            // Event exists
-            return true;
-        }
-    }
+    $image = checkEventImageOnServer($owner,$venueID,$eventID);
 
 ?>
 <!DOCTYPE html>

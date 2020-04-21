@@ -110,7 +110,7 @@ function validate255($name) {
     }
 
     function getEvents($venueID,$pdo) {
-        $getVenuesStmt = $pdo->prepare("SELECT EventID,EventName FROM Event WHERE VenueID=:VenueID");
+        $getVenuesStmt = $pdo->prepare("SELECT EventID,EventName,DATE_FORMAT(EventStartTime,'%H:%i, %d-%m-%Y') AS EventStartTime FROM Event WHERE VenueID=:VenueID");
         $getVenuesStmt->bindValue(":VenueID",$venueID);
         $getVenuesStmt->execute();
         $results = $getVenuesStmt->fetchAll();
@@ -520,6 +520,30 @@ function validate255($name) {
         if (strlen($username) < 6 || strlen($username) > 20) {
             return false;
         } else {
+            return true;
+        }
+    }
+
+    // Check if there is an image for this event
+    function checkEventImageOnServer($venueUserID,$venueID,$eventID) {
+        $target = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID/event.jpg";
+        if (!file_exists($target)) {
+            return false;
+        } else {
+            // If the file exists then return true
+            return true;
+        }
+    }
+
+    function checkEventExists($eventID,$pdo) {
+        $getStmt = $pdo->prepare("SELECT EventID FROM Event WHERE EventID=:EventID");
+        $getStmt->bindValue(":EventID",$eventID);
+        $getStmt->execute();
+        if ($getStmt->rowCount() == 0) {
+            // Event doesn't exist!
+            return false;
+        } else {
+            // Event exists
             return true;
         }
     }

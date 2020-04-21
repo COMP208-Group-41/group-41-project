@@ -18,6 +18,13 @@
     $eventID = $_GET['eventID'];
     $errorMessage = "";
 
+    if (!checkEventExists($eventID,$pdo)) {
+        // Event does not exist!
+        $_SESSION['message'] = "Event does not exist!";
+        header("location: 404.php");
+        exit;
+    }
+
     $eventToVenueUser = eventToVenueUser($eventID,$pdo);
     $eventToVenueUser = $eventToVenueUser['VenueUserID'];
     if($eventToVenueUser === false){
