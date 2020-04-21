@@ -110,7 +110,7 @@ function validate255($name) {
     }
 
     function getEvents($venueID,$pdo) {
-        $getVenuesStmt = $pdo->prepare("SELECT EventID,EventName,DATE_FORMAT(EventStartTime,'%H:%i, %d-%m-%Y') AS EventStartTime FROM Event WHERE VenueID=:VenueID");
+        $getVenuesStmt = $pdo->prepare("SELECT EventID,EventName,DATE_FORMAT(EventStartTime,'%H:%i %d-%m-%Y') AS EventStartTime FROM Event WHERE VenueID=:VenueID");
         $getVenuesStmt->bindValue(":VenueID",$venueID);
         $getVenuesStmt->execute();
         $results = $getVenuesStmt->fetchAll();
