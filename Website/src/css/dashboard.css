@@ -109,7 +109,6 @@ th {
 .event {
     display: flex;
     width: 100%;
-    height: 48px;
     background: var(--body-background);
     justify-content: center;
     align-items: center;
@@ -117,7 +116,7 @@ th {
 
 }
 .event-name {
-    width: 35%;
+    width: 30%;
     font-family: "K2D", sans-serif;
     box-sizing: border-box;
     border: 2px solid var(--button-border);
