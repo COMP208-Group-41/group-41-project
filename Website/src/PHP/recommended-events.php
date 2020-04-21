@@ -15,6 +15,22 @@
     }
 
     $allEvents = getAllEvents($pdo);
+    $userPrefs = getUserTags($userID,$pdo);
+    $nonSortedArray = (array) null;
+    foreach($allEvents as $row){
+      $event = $emptyArray = (array) null;
+      $eventTags = getEventTagID($row['EventID'],$pdo);
+      $count = 0;
+      foreach($userPrefs as $pref){
+        if(in_array($pref, $eventTags)){
+          $count++
+        }
+      }
+      if ($count > 0){
+        array_push($event,$count,$row['EventID']);
+        array_push($nonSortedArray,$event);
+      }
+    }
 
 ?>
 <!DOCTYPE html>
