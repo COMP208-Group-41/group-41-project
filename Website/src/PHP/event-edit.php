@@ -268,7 +268,7 @@
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
-    <title>OutOut - Edit Venue User Account</title>
+    <title>OutOut - Edit <?php echo $name; ?></title>
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/events.css">
@@ -283,6 +283,7 @@
         }
     ?>
     <div class="container">
+        <h1 class='title'>Edit Event</h1>
         <form id='EventForm' name='EventForm' method='post' enctype="multipart/form-data">
             <div class="edit-fields">
                 <input type='text' name='name' placeholder="Event Name" value="<?php echo $name; ?>" required>
