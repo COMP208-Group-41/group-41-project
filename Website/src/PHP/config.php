@@ -415,7 +415,7 @@ function validate255($name) {
     }
 
     function getVenueReviews($venueID,$pdo){
-      $getReviewStmt = $pdo->prepare("SELECT UserID, ReviewDate, ReviewText, ReviewAtmosphere,ReviewPrice, ReviewSafety, ReviewQueue  FROM Review WHERE VenueID=:VenueID ORDER BY ReviewDate");
+      $getReviewStmt = $pdo->prepare("SELECT UserID, ReviewDate, ReviewText, ReviewAtmosphere,ReviewPrice, ReviewSafety, ReviewQueue  FROM Review WHERE VenueID=:VenueID AND EventID='1' ORDER BY ReviewDate");
       $getReviewStmt->bindValue(":VenueID",$venueID);
       $getReviewStmt->execute();
       return $getReviewStmt->fetchAll();
