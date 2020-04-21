@@ -28,7 +28,7 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="<?php echo $dashboardLink; ?>">My Account</a>
         <a href="<?php echo $accountLink; ?>">Edit Account</a>
-        <a href="<?php echo $venueLink; ?>">Venues</a>
+        <a href="<?php echo $venueLink; ?>">All Venues</a>
         <a href="<?php echo $eventLink; ?>">Events</a>
         <br>
         <?php
