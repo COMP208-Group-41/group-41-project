@@ -63,7 +63,6 @@
   <?php include "navbar.php" ?>
   <div class="wrapper">
     <div class="container">
-        <h1 class='title'>All Venues</h1>
         <?php
           if (sizeof($sortedArray) != 0) {
               foreach($sortedArray as $row) {
