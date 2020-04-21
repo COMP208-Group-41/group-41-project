@@ -116,7 +116,7 @@
                 </div>
             </div>
             <div class="seperator"></div>
-            <h2>Upcoming Events</h2>
+            <h2 class='title'>Upcoming Events</h2>
             <?php
             if (isset($venueUserID)){
               echo '<div class="">';
@@ -148,7 +148,7 @@
                 ?>
             </div>
             <div class="seperator"></div>
-            <h2>Reviews</h2>
+            <h2 class='title'>Reviews</h2>
             <?php
                 if (isset($userID)) {
                     $checkReview = checkReviewWritten($userID,1,$venueID,$pdo);
