@@ -46,7 +46,6 @@
                   echo "</div>";
               } else {
                 echo "<h2 class='title'>No venues found!</h2>";
-                echo ""
               }
             ?>
         </div>
