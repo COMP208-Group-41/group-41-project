@@ -619,6 +619,7 @@ function validate255($name) {
             rmdir($path);
         }
     }
+    //https://stackoverflow.com/questions/3338123/how-do-i-recursively-delete-a-directory-and-its-entire-contents-files-sub-dir
 
     function rrmdir($dir) {
         if (is_dir($dir)) {
