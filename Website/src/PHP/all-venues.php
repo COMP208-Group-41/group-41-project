@@ -36,25 +36,27 @@
     <div class="wrapper">
         <div class="container">
             <h1 class='title'>All Venues</h1>
-            <div class="seperator"></div>
             <?php
               if (sizeof($allVenues) != 0) {
-                  echo "<table>";
                   foreach($allVenues as $row) {
+                      echo '<div class="seperator" style="margin-top: 4px">';
                       $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
+                      echo "<table>";
                       echo "<tr>";
                       echo "<td>".$row['VenueName']."</td>";
                       echo '<td><div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-left: -1px">View Venue</a>';
                       echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -1px">View Upcoming Events</a></div></td>';
                       echo '<td><div class="tag-container" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div></td>';
                       echo "</tr>";
+                      echo "</table>";
                   }
               } else {
+                echo "<table>";
                 echo "</tr><tr>";
                 echo "<td>No Upcoming events for this Venue listed</td>";
                 echo "</tr>";
+                echo "</table>";
               }
-              echo "</table>";
             ?>
 
 

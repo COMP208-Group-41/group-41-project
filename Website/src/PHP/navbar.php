@@ -12,7 +12,7 @@
       $dashboardLink = "login.php";
       $accountLink = "login.php";
     }
-    $eventLink = "events.php";
+    $eventLink = "all-events.php";
     $venueLink = "all-venues.php";
     $aboutLink = "about.php";
 
@@ -29,7 +29,7 @@
         <a href="<?php echo $dashboardLink; ?>">My Account</a>
         <a href="<?php echo $accountLink; ?>">Edit Account</a>
         <a href="<?php echo $venueLink; ?>">All Venues</a>
-        <a href="<?php echo $eventLink; ?>">Events</a>
+        <a href="<?php echo $eventLink; ?>">Upcoming Events</a>
         <br>
         <?php
             if (!isset($_SESSION['UserID']) && !isset($_SESSION['VenueUserID'])) {

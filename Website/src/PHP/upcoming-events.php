@@ -47,6 +47,7 @@
               echo '<div class="venue-buttons"><a href="venue.php?venueID='.$venueID.'" class="venue-button" style="margin-right: -1px">View Venue</a></div>';
               if ($events !== false){
                 foreach($events as $row){
+                    echo '<div class="seperator" style="margin-top: 4px">';
                     $currentTagIDs = getEventTagID($row['EventID'],$pdo);
                     echo "<table>";
                     echo "<tr>";
