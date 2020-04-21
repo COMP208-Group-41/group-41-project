@@ -64,17 +64,42 @@
     $image = checkEventImageOnServer($owner,$venueID,$eventID);
 
     if (isset($_POST['followForm'])) {
+        if (follow($userID,$eventID,$pdo)) {
+            // Follow Successful!
+            $_SESSION['message'] = "You are now following this event!";
+            $following = true;
+        }
+    }
+
+    if (isset($_POST['unfollowForm'])) {
+        if (unfollow($userID,$eventID,$pdo)) {
+            // Unfollow successful!
+            $_SESSION['message'] = "You have unfollowed this event!";
+            $following=false;''
+        }
+    }
+
+    function unfollow($userID,$eventID,$pdo) {
         // Need to unfollow the event
         $unfollowStmt = $pdo->prepare("DELETE FROM InterestedIn WHERE UserID=:UserID AND EventID=:EventID");
         $unfollowStmt->bindValue(":UserID",$userID);
         $unfollowStmt->bindValue(":EventID",$eventID);
         if ($unfollowStmt->execute()) {
-
+            return true;
+        } else {
+            return false;
         }
     }
 
-    function unfollow($userID,$eventID,$pdo) {
-        
+    function follow($userID,$eventID,$pdo) {
+        $followStmt = $pdo->prepare("INSERT INTO InterestedIn (UserID,EventID) VALUES (:UserID,:EventID)");
+        $followStmt->bindValue(":UserID",$userID);
+        $followStmt->bindValue(":EventID",$eventID);
+        if ($followStmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
