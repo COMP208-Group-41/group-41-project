@@ -115,8 +115,7 @@
             <h2 class='title'>Upcoming Events</h2>
             <?php
             if (isset($venueUserID)){
-              echo '<div class="">';
-              echo '<div class=""><a href="event-creation.php?venueID='.$venueID.'" class="button" style="width: 100%;">Add Event</a>';
+              echo '<a href="event-creation.php?venueID='.$venueID.'" class="button" style="width: 100%;">Add Event</a>';
             }
             ?>
             <div class="eventlist">
