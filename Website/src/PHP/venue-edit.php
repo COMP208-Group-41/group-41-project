@@ -202,7 +202,7 @@
         $success = deleteVenue($venueID, $pdo, $errorMessage);
         if ($success){
             $directory = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID";
-            deleteAll($directory);
+            rrmdir($directory);
             header("location: venue-user-dashboard.php" );
             exit;
         }
