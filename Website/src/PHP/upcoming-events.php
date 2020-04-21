@@ -57,7 +57,9 @@
                 echo "</tr>";
               }
               echo "</table>";
-              echo '<div class="venue-buttons"><a href="venue.php?venueID='.$venueID.'" class="venue-button" style="margin-right: -1px">View Venue</a></div>';
+              if (sizeof($events) > 5){
+                echo '<div class="venue-buttons"><a href="venue.php?venueID='.$venueID.'" class="venue-button" style="margin-right: -1px">View Venue</a></div>';
+              }
             ?>
         </div>
     </div>
