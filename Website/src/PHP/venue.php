@@ -29,8 +29,15 @@
   $safetyScore = getVenueSafetyScore($venueID,$pdo);
   $atmosphereScore = getVenueAtmosphereScore($venueID,$pdo);
   $queueScore = getVenueQueueScore($venueID,$pdo);
-  $totalScore = ($queueScore + $atmosphereScore + $safetyScore + $priceScore) / 4;
-
+  if ($priceScore === false || $safetyScore === false || $atmosphereScore === false || $queueScore === false) {
+      $totalScore = 0;
+      $priceScore = "No Scores";
+      $safetyScore = "No Scores";
+      $atmosphereScore = "No Scores";
+      $queueScore = "No Scores";
+  } else {
+      $totalScore = ($queueScore + $atmosphereScore + $safetyScore + $priceScore) / 4;
+  }
 
   // Fetchs type of user and checks if venue user is owner
   if (isset($_SESSION["UserID"])){

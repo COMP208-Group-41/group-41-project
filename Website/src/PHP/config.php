@@ -448,7 +448,11 @@ function validate255($name) {
         $total += $score['ReviewPrice'];
         $counter++;
       }
-      return $total/$counter;
+      if ($counter == 0) {
+          return false;
+      } else {
+          return $total/$counter;
+      }
     }
 
     function getVenueSafetyScore($venueID, $pdo){
@@ -462,7 +466,11 @@ function validate255($name) {
         $total += $score['ReviewSafety'];
         $counter++;
       }
-      return $total/$counter;
+      if ($counter == 0) {
+          return false;
+      } else {
+          return $total/$counter;
+      }
     }
 
     function getVenueQueueScore($venueID, $pdo){
@@ -476,7 +484,11 @@ function validate255($name) {
         $total += $score['ReviewQueue'];
         $counter++;
       }
-      return $total/$counter;
+      if ($counter == 0) {
+          return false;
+      } else {
+          return $total/$counter;
+      }
     }
 
     function getVenueAtmosphereScore($venueID, $pdo){
@@ -490,7 +502,10 @@ function validate255($name) {
         $total += $score['ReviewAtmosphere'];
         $counter++;
       }
-      return $total/$counter;
+      if ($counter == 0) {
+          return false;
+      } else {
+          return $total/$counter;
+      }
     }
-
 ?>
