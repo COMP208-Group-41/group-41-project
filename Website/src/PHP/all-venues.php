@@ -8,11 +8,6 @@
 
     $allVenues = getAllVenues($pdo);
 
-    function getAllVenues($pdo) {
-        $getStmt = $pdo->prepare("SELECT VenueID,VenueUserID,VenueName FROM Venue WHERE VenueID<>'1' ORDER BY VenueName");
-        $getStmt->execute();
-        return $getStmt->fetchAll();
-    }
 
 ?>
 <!DOCTYPE html>

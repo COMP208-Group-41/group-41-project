@@ -14,6 +14,8 @@
         exit;
     }
 
+    $allVenues = 
+
 ?>
 <!DOCTYPE html>
 <html lang='en-GB'>
