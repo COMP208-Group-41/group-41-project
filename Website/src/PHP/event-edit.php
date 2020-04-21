@@ -256,7 +256,7 @@
         }
 
         // Image folder deletion
-        $directory = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID";
+        $directory = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID/";
         rrmdir($directory);
 
         $pdo->commit();
