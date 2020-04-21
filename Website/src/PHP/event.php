@@ -65,7 +65,16 @@
 
     if (isset($_POST['followForm'])) {
         // Need to unfollow the event
-        $unfollowStmt = $pdo->prepare("SELECT");
+        $unfollowStmt = $pdo->prepare("DELETE FROM InterestedIn WHERE UserID=:UserID AND EventID=:EventID");
+        $unfollowStmt->bindValue(":UserID",$userID);
+        $unfollowStmt->bindValue(":EventID",$eventID);
+        if ($unfollowStmt->execute()) {
+
+        }
+    }
+
+    function unfollow($userID,$eventID,$pdo) {
+        
     }
 
 
