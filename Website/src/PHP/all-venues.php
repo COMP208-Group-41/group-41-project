@@ -41,13 +41,12 @@
               if (sizeof($allVenues) != 0) {
                   echo "<table>";
                   foreach($allVenues as $row) {
-                      $currentTagIDs = getTagID($row['VenueID'],$pdo);
-                      
+                      $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
                       echo "<tr>";
                       echo "<td>".$row['VenueName']."</td>";
                       echo '<td><div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-left: -1px">View Venue</a>';
                       echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -1px">View Upcoming Events</a></div></td>';
-                      echo '<td><div class="tag-container" style="text-align: center">'.
+                      echo '<td><div class="tag-container" style="text-align: center">'.getTags($currentTagIDs,$pdo).'</div></td>';
                       echo "</tr>";
                   }
               } else {
