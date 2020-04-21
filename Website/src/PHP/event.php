@@ -122,6 +122,7 @@
     <title>OutOut - <?php echo $name; ?></title>
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/events.css">
+    <link rel="stylesheet" type="text/css" href="../css/review.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
 </head>
 <body>
