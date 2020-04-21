@@ -16,6 +16,7 @@
 
     function venueIDtoName($venueID, $pdo){
       $getStmt = $pdo->prepare("SELECT VenueName FROM Venue WHERE VenueID=:VenueID");
+      $getStmt->bindValue(":VenueID",$venueID);
       $getStmt->execute();
       $result = $getStmt->fetch();
       return $result['VenueName']
