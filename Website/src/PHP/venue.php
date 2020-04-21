@@ -30,7 +30,7 @@
   $atmosphereScore = getVenueAtmosphereScore($venueID,$pdo);
   $queueScore = getVenueQueueScore($venueID,$pdo);
   if ($priceScore === false || $safetyScore === false || $atmosphereScore === false || $queueScore === false) {
-      $totalScore = 0;
+      $totalScore = "No Scores";
       $priceScore = "No Scores";
       $safetyScore = "No Scores";
       $atmosphereScore = "No Scores";
