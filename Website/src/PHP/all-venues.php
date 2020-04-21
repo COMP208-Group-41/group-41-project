@@ -8,9 +8,8 @@
 
     $allVenues = getAllVenues($pdo);
 
-
     function getAllVenues($pdo) {
-        $getStmt = $pdo->prepare("SELECT VenueID,VenueUserID,VenueName FROM Venue");
+        $getStmt = $pdo->prepare("SELECT VenueID,VenueUserID,VenueName FROM Venue ORDER BY VenueName");
         $getStmt->execute();
         return $getStmt->fetchAll();
     }
@@ -38,6 +37,23 @@
         <div class="container">
             <h1 class='title'>All Venues</h1>
             <div class="seperator"></div>
+            <?php
+              if (sizeof($allVenues) != 0) {
+                foreach($allVenues as $row){
+                  echo "<table>";
+                    echo "<tr>";
+                      echo "<td>".$row['VenueName']."</td>";
+                      echo '<td><div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -1px">View Event</a></td>';
+                    echo "</tr>";
+                }
+                echo "</table>";
+              } else {
+                echo "</tr><tr>";
+                  echo "<td>No Upcoming events for this Venue listed</td>";
+                echo "</tr>";
+              }
+              echo '<div class="venue-buttons"><a href="venue.php?venueID='.$venueID.'" class="venue-button" style="margin-right: -1px">View Venue</a></div>';
+            ?>
 
 
 
