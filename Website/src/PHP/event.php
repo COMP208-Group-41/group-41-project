@@ -21,6 +21,12 @@
         exit;
     }
 
+    if (!checkEventExists($eventID,$pdo)) {
+        $_SESSION['message'] = "That event does not exist!";
+        header("location: 404.php");
+        exit;
+    }
+
     $result = getEventInfo($eventID,$pdo);
     $owner = eventToVenueUser($eventID,$pdo);
     $owner = $owner['VenueUserID'];
@@ -63,6 +69,19 @@
             return false;
         } else {
             // If the file exists then return true
+            return true;
+        }
+    }
+
+    function checkEventExists($eventID,$pdo) {
+        $getStmt = $pdo->prepare("SELECT EventID FROM Event WHERE EventID=:EventID");
+        $getStmt->bindValue(":EventID",$eventID);
+        $getStmt->execte();
+        if ($getStmt->rowCount() == 0) {
+            // Event doesn't exist!
+            return false;
+        } else {
+            // Event exists
             return true;
         }
     }

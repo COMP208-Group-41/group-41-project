@@ -21,6 +21,12 @@
       exit;
   }
 
+  if (!checkVenueExists($venueID,$pdo)) {
+      $_SESSION['message'] = "That venue does not exist!";
+      header("location: 404.php");
+      exit;
+  }
+
   $result = getVenueInfo($venueID,$pdo);
   $owner = $result['VenueUserID'];
   $name = $result['VenueName'];
@@ -34,7 +40,7 @@
   $safetyScore = getSafetyScore($venueID,1,$pdo);
   $atmosphereScore = getAtmosphereScore($venueID,1,$pdo);
   $queueScore = getQueueScore($venueID,1,$pdo);
-  
+
   if ($priceScore === false || $safetyScore === false || $atmosphereScore === false || $queueScore === false) {
       $totalScore = "No Scores";
       $priceScore = "No Scores";
@@ -70,6 +76,19 @@
         // If the file exists then return true
         return true;
     }
+  }
+
+  function checkVenueExists($venueID,$pdo) {
+      $getStmt = $pdo->prepare("SELECT VenueID FROM Venue WHERE VenueID=:VenueID");
+      $getStmt->bindValue(":VenueID",$venueID);
+      $getStmt->execte();
+      if ($getStmt->rowCount() == 0) {
+          // Event doesn't exist!
+          return false;
+      } else {
+          // Event exists
+          return true;
+      }
   }
 
 ?>
