@@ -39,6 +39,14 @@
       $result = $getVenuesStmt->fetch();
     }
 
+    function eventIDtoName($eventID, $pdo){
+        $getNameStmt = $pdo->prepare("SELECT EventName FROM Event WHERE EventID=:EventID");
+        $getNameStmt->bindValue(':EventID',$eventID);
+        $getNameStmt->execute();
+        $result = $getNameStmt->fetch();
+        return $result['EventName'];
+    }
+
 
 ?>
 <!DOCTYPE html>
@@ -94,7 +102,7 @@
               foreach ($interestedIn as $row) {
                 echo "<tr>";
                   echo "<td>".$row['EventName']."</td>";
-                  echo '<td><a href="event.php?eventID='.$row['EventID'].'" class="button">View Event</a>';
+                  echo '<td><a href="event.php?eventID='.eventIDtoName($row['EventID'],$pdo).'" class="button">View Event</a>';
                 echo "</tr>";
               }
             ?>
