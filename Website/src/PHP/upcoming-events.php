@@ -9,7 +9,7 @@
       $venueID = $_GET['venueID'];
       $events = getEvents($venueID, $pdo);
       $venueDetails = getVenueInfo($venueID,$pdo);
-      $venueName = $venueDetails['VenueName']
+      $venueName = $venueDetails['VenueName'];
     } else {
       $_SESSION['message'] = "Venue ID was not set and page could not be found!";
       header("location: 404.php");
@@ -41,9 +41,9 @@
             <div class="seperator"></div>
             <?php
               echo '<div class="venue-buttons"><a href="venue.php?venueID='.$venueID.'" class="venue-button" style="margin-right: -1px">View Venue</a></div>';
+              echo "<table>";
               if ($events !== false){
                 foreach($events as $row){
-                  echo "<table>";
                     echo "<tr>";
                       echo "<td>".$row['EventName']."</td>";
                       echo '<td><div class="venue-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="venue-button" style="margin-right: -1px">View Event</a></td>';
@@ -53,10 +53,11 @@
                   echo "</table>";
                 }
               } else {
-                echo "</tr><tr>";
+                echo "<tr>";
                   echo "<td>No Upcoming events for this Venue listed</td>";
                 echo "</tr>";
               }
+              echo "</table>";
               echo '<div class="venue-buttons"><a href="venue.php?venueID='.$venueID.'" class="venue-button" style="margin-right: -1px">View Venue</a></div>';
             ?>
         </div>
