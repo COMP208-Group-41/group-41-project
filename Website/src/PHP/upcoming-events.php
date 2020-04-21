@@ -9,6 +9,7 @@
       $venueID = $_GET['venueID'];
       $events = getEvents($venueID, $pdo);
       $venueDetails = getVenueInfo($venueID,$pdo);
+      $venueName = $venueDetails['VenueName']
     } else {
       $_SESSION['message'] = "Venue ID was not set and page could not be found!";
       header("location: 404.php");
@@ -36,7 +37,7 @@
     ?>
     <div class="wrapper">
         <div class="container">
-            <h1 class='title'>Upcoming Events for <?php $venueDetails['VenueName']; ?></h1>
+            <h1 class='title'>Upcoming Events for <?php echo "$venueName"; ?></h1>
             <div class="seperator"></div>
             <?php
               echo '<div class="venue-buttons"><a href="venue.php?venueID='.$venueID.'" class="venue-button" style="margin-right: -1px">View Venue</a></div>';
