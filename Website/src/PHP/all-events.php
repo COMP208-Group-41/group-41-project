@@ -13,7 +13,7 @@
     $allEvents = getAllEvents($pdo);
 
     function getAllEvents($pdo) {
-        $getStmt = $pdo->prepare("SELECT EventID,VenueID,EventName, DATE_FORMAT(EventStartTime,'%H:%i %d-%m-%Y') FROM Event WHERE EventID<>'1' ORDER BY EventStartTime");
+        $getStmt = $pdo->prepare("SELECT EventID,VenueID,EventName, DATE_FORMAT(EventStartTime,'%H:%i %d-%m-%Y') AS EventStartTime FROM Event WHERE EventID<>'1' ORDER BY EventStartTime");
         $getStmt->execute();
         return $getStmt->fetchAll();
     }
