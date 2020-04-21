@@ -24,7 +24,7 @@
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
-    <title>OutOut - Upcoming Events</title>
+    <title>OutOut - Past Events</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
@@ -41,13 +41,13 @@
     ?>
     <div class="wrapper">
         <div class="container">
-            <h1 class='title'>Upcoming Events for <?php echo "$venueName"; ?></h1>
+            <h1 class='title'>Past Events for <?php echo "$venueName"; ?></h1>
             <div class="seperator"></div>
             <?php
               echo '<div class="venue-buttons"><a href="venue.php?venueID='.$venueID.'" class="venue-button" style="margin-right: -1px">View Venue</a></div>';
               if ($events !== false){
                 foreach($events as $row){
-                    if (new DateTime("now") < new DateTime($row['EventEndTime'])) {
+                    if (new DateTime("now") > new DateTime($row['EventEndTime'])) {
                         echo '<div class="seperator" style="margin-top: 4px">';
                         $currentTagIDs = getEventTagID($row['EventID'],$pdo);
                         echo "<table>";
@@ -64,7 +64,7 @@
               } else {
                 echo "<table>";
                 echo "<tr>";
-                echo "<td>No Upcoming events for this Venue listed</td>";
+                echo "<td>No Past events for this Venue listed</td>";
                 echo "</tr>";
                 echo "</table>";
               }
