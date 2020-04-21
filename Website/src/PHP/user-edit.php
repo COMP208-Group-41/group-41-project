@@ -56,8 +56,8 @@
             return false;
         } else {
             $username = $_POST['username'];
-            if (!validate255($username)) {
-                $errorMessage = "The username cannot be more than 255 characters!";
+            if (!validateUserName($username)) {
+                $errorMessage = "The username must be more than 6 characters and less than 20!";
                 return false;
             }
         }
