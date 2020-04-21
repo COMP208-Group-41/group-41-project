@@ -256,8 +256,8 @@
         }
 
         // Image folder deletion
-        $directory = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID/";
-        rrmdir($directory);
+        $directory = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID";
+        deleteAll($directory);
 
         $pdo->commit();
         return true;
@@ -278,20 +278,16 @@
         }
     }
 
-    function rrmdir($dir) {
-        if (is_dir($dir)) {
-          $objects = scandir($dir);
-          foreach ($objects as $object) {
-            if ($object != "." && $object != "..") {
-              if (is_dir($dir. DIRECTORY_SEPARATOR .$object) && !is_link($dir."/".$object))
-                rrmdir($dir. DIRECTORY_SEPARATOR .$object);
-              else
-                unlink($dir. DIRECTORY_SEPARATOR .$object);
-            }
-          }
-          rmdir($dir);
-        }
+    function deleteAll($dir) {
+    foreach(glob($dir . '/*') as $file) {
+        if(is_dir($file))
+            deleteAll($file);
+        else
+            unlink($file);
     }
+    rmdir($dir);
+}
+?>
 
 
     function updateEvent($eventID,$name,$description,$startTime,$endTime,$pdo) {
