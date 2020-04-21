@@ -22,13 +22,13 @@
     color: var(--gold);
     border-radius: 4px;
     padding: 2px 8px;
-    margin-bottom: -3px;
+    margin-bottom: -4px;
     margin-left: 4px;
 }
 
 .rating-wrapper {
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-items: flex-end;
     width: 100%; flex-grow: 1;
 }
@@ -36,6 +36,7 @@
 .venue-name {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     font-family: "K2D", sans-serif;
     box-sizing: border-box;
     border: 2px solid var(--button-border);
@@ -51,13 +52,10 @@
 
 .venue-tags {
     display: flex;
-    flex-direction: column;
-    flex-grow: 1;
     padding: 4px;
     color: var(--light-body);
     background-color: var(--body-background);
     font-family: "K2D", sans-serif;
-    box-sizing: border-box;
     font-size: 16px;
     border: 2px solid var(--button-border);
     border-radius: 4px;
