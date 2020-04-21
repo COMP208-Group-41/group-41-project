@@ -45,15 +45,15 @@
               if ($events !== false){
                 foreach($events as $row){
                     echo "<tr>";
-                      echo "<td>".$row['EventName']."</td>";
-                      echo '<td><div class="venue-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="venue-button" style="margin-right: -1px">View Event</a></td>';
+                    echo "<td>".$row['EventName']."</td>";
+                    echo '<td><div class="venue-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="venue-button" style="margin-right: -1px">View Event</a></td>';
                     echo "</tr><tr>";
-                      echo "<td>Event Date: ".$row['EventStartTime']."</td>";
+                    echo "<td>Event Date: ".$row['EventStartTime']."</td>";
                     echo "</tr>";
                 }
               } else {
                 echo "<tr>";
-                  echo "<td>No Upcoming events for this Venue listed</td>";
+                echo "<td>No Upcoming events for this Venue listed</td>";
                 echo "</tr>";
               }
               echo "</table>";
