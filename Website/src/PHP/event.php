@@ -139,7 +139,7 @@
     <div class="container">
         <div style="display: flex; flex-direction: column">
             <h1 class="title"><?php echo $name; ?></h1>
-            <h2><?php echo '<a href="venue.php?venueID='.$venueID.'">'.$venueName.'</a>'; ?></h2>
+            <h2>@ <?php echo '<a href="venue.php?venueID='.$venueID.'">'.$venueName.'</a>'; ?></h2>
                 <?php
                     if (isset($following)) {
                         if ($following) {
