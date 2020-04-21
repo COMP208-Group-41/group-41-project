@@ -3,7 +3,7 @@
     session_start();
 
 
-    if (!isset($_SESSION["VenueUserID"])) {
+    if (!isset($_SESSION['VenueUserID'])) {
         header("location: home.php");
         exit;
     }
@@ -14,7 +14,7 @@
 
     require_once "config.php";
 
-    $venueUserID = $_SESSION["VenueUserID"];
+    $venueUserID = $_SESSION['VenueUserID'];
     $eventID = $_GET['eventID'];
     $errorMessage = "";
 
@@ -24,7 +24,7 @@
       $errorMessage = "Error getting VenueUserID";
     } else if ($eventToVenueUser != $venueUserID) {
         $_SESSION['message'] = "You are not allowed to edit this event!";
-        header("location: venue-home.php");
+        header("location: venue-user-dashboard.php");
         exit;
     }
 
