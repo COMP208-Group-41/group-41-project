@@ -13,16 +13,11 @@
     // Session is started
     session_start();
 
-    /* If the venue user is not logged in then redirect to venue login */
-    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-        header("location: venue-user-login.php");
-        exit;
-        /* If the user is logged in but they are not a venue user then they are
-         * redirected to home page
-         */
-    } else if (!isset($_SESSION["VenueUserID"])) {
+    if (isset($_SESSION["UserID"])) {
         header("location: home.php");
         exit;
+    } else if (!isset($_SESSION['VenueUserID'])) {
+        header("location: venue-user-login.php");
     }
 
     error_reporting( E_ALL );
@@ -53,7 +48,7 @@
                     // If the password given is correct then check other fields
                     if (performChecks($venueUserID,$email,$name,$external,$pdo,$errorMessage)) {
                         // Changes done successfully, show confirmation message
-                        $errorMessage = "Changes saved successfully!";
+                        $_SESSION['message'] = "Changes made successfully!";
                         // Refresh details
                         $result = getVenueUserInfo($venueUserID,$pdo);
                         $name = $result['VenueUserName'];
@@ -74,13 +69,6 @@
     } catch (PDOException $e) {
         $pdo->rollBack();
         exit("PDO Error: ".$e->getMessage()."<br>");
-    }
-
-    function getVenueUserInfo($venueUserID, $pdo) {
-        $infoStmt = $pdo->prepare("SELECT VenueUserEmail,VenueUserName,VenueUserExternal FROM VenueUser WHERE VenueUserID=:VenueUserID");
-        $infoStmt->bindValue(":VenueUserID",$venueUserID);
-        $infoStmt->execute();
-        return $infoStmt->fetch();
     }
 
     /* perform checks for every field that can be edited, if changes are being
@@ -244,7 +232,7 @@
      * validate it and then update in the database
      */
     function nameCheck($venueUserID,$name,$pdo,&$errorMessage) {
-        if (isset($_POST['companyName']) && !empty($_POST['companyName']) && trim($_POST['companyName']) != $name) {
+        if (isset($_POST['companyName']) && !empty(trim($_POST['companyName'])) && trim($_POST['companyName']) != $name) {
             $newName = trim($_POST['companyName']);
 
             // If the new name given is not valid then return false
@@ -332,64 +320,45 @@
 <head>
     <title>OutOut - Edit Venue User Account</title>
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="../css/venue.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
 </head>
 <body>
-<div class="banner" >
-    <img src="../Assets/menu-icon.svg" alt="Menu" width="25" onclick="openNav()" class="menu-image">
-    <img src="../Assets/outout.svg" alt="OutOut" width="120">
-    <img src="../Assets/profile.svg" alt="Profile" width="40" >
-</div>
-<div id="mySidenav" class="sidenav">
-    <div class="sidebar-content">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">Dashboard</a>
-        <a href="#">Venues</a>
-        <a href="#">Account</a>
-        <a href="#">Contact</a>
-    </div>
-</div>
-<script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "200px";
-    }
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
-</script>
+<?php include "navbar.php" ?>
 <div class="wrapper">
+    <?php
+        if (isset($_SESSION['message'])) {
+            echo "<div class='message-wrapper'><div class='success'>".$_SESSION['message']."</div></div>";
+            unset($_SESSION['message']);
+        }
+    ?>
     <div class="container">
         <h1 class="title">Account Settings</h1>
         <form name='EditVenueUserDetails' method='post' style="margin-top: 10px">
             <div class="edit-fields">
-                <label>Email:</label>
+                <label for='email'>Email:</label>
                 <input type='text' name='email' value="<?php echo $email; ?>">
-                <label>Password:</label>
+                <label for='newPassword'>New password:</label>
                 <input type='password' name='newPassword'>
-                <label>Confirm password:</label>
+                <label for='confirmNewPassword'>Confirm new password:</label>
                 <input type='password' name='confirmNewPassword'>
-                <label>Company name:</label>
+                <label for='companyName'>Company name:</label>
                 <input type='text' name='companyName' value="<?php echo $name; ?>">
-                <label>Website link:</label>
+                <label for='external'>Website link:</label>
                 <input type='text' name='external' value="<?php echo $external; ?>">
                 <div class="seperator">
-                    <label>Enter current password to allow changes:</label>
-                    <input type='password' name='password'>
+                    <label for='password'>Enter current password to allow changes:</label>
+                    <input type='password' name='password' required>
                 </div>
                 <!-- require password for any change! -->
                 <input type='submit' name='submit' value='Save' class="button">
             </div>
         </form>
     </div>
-</div>
 <?php
     if ($errorMessage != "") {
-         echo "<div class='error'>$errorMessage</div>";
-    }
-    if (isset($_SESSION['message'])) {
-        echo "<div class='success'>".$_SESSION['message']."</div>";
-        unset($_SESSION['message']);
+         echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
     }
 ?>
+</div>
 </body>
 </html>

@@ -27,10 +27,11 @@
     $userID = $_SESSION['UserID'];
     $errorMessage = "";
 
-    if (isset($_GET['ReviewID'])) {
-        $reviewID = $_GET['ReviewID'];
+    if (isset($_GET['reviewID'])) {
+        $reviewID = $_GET['reviewID'];
     } else {
         // No ReviewID specified, redirect to 404 page
+        $_SESSION['message'] = "No ID specified!";
         header("location: 404.php");
         exit;
     }
@@ -49,18 +50,21 @@
     $reviewAtmosphere = $result['ReviewAtmosphere'];
     $reviewSafety = $result['ReviewSafety'];
     $reviewQueue = $result['ReviewQueue'];
+    $eventID = $result['EventID'];
+    $venueID = $result['VenueID'];
 
     try{
         if (isset($_POST['SubmitReview'])){
           if (checkInputs($reviewID,$errorMessage,$pdo)) {
-              $errorMessage = "Review Updated successfully!";
-              // Update values on the page after successful update
-              $result = getReviewInfo($reviewID,$pdo);
-              $reviewText = $result['ReviewText'];
-              $reviewPrice = $result['ReviewPrice'];
-              $reviewAtmosphere = $result['ReviewAtmosphere'];
-              $reviewSafety = $result['ReviewSafety'];
-              $reviewQueue = $result['ReviewQueue'];
+              $_SESSION['message'] = "Review Updated successfully!";
+
+              if ($eventID == 1) {
+                  header("location: venue.php?venueID=$venueID");
+                  exit;
+              } else {
+                  header("location: event.php?eventID=$eventID");
+                  exit;
+              }
           }
         }
     } catch (PDOException $e) {
@@ -117,7 +121,7 @@
      * edit it)
      */
     function getReviewInfo($reviewID,$pdo) {
-        $getReviewStmt = $pdo->prepare("SELECT UserID, ReviewText, ReviewPrice, ReviewAtmosphere, ReviewSafety, ReviewQueue FROM Review WHERE ReviewID=:ReviewID");
+        $getReviewStmt = $pdo->prepare("SELECT VenueID, EventID, UserID, ReviewText, ReviewPrice, ReviewAtmosphere, ReviewSafety, ReviewQueue FROM Review WHERE ReviewID=:ReviewID");
         $getReviewStmt->bindValue(":ReviewID",$reviewID);
         $getReviewStmt->execute();
         return $getReviewStmt->fetch();
@@ -148,9 +152,19 @@
 <html>
   <head>
     <title>OutOut - Edit Review</title>
-    <link rel="stylesheet" type="text/css" href="../css/reviews.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/venue.css">
   </head>
   <body>
+    <?php include "navbar.php" ?>
+    <?php
+        if (isset($_SESSION['message'])) {
+            echo "<div class='message-wrapper'><div class='success'>".$_SESSION['message']."</div></div>";
+            unset($_SESSION['message']);
+        }
+    ?>
+    <div class="wrapper">
+        <div class="container">
     <form name='ReviewVenue' method='post'>
       <div>
           <label for='Review'>Review:</label>
@@ -194,13 +208,11 @@
       </div>
       <?php
           if ($errorMessage != "") {
-              echo "<div class='error'>$errorMessage</div>";
-          }
-          if (isset($_SESSION['message'])) {
-              echo "<div class='success'>".$_SESSION['message']."</div>";
-              unset($_SESSION['message']);
+              echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
           }
        ?>
     </form>
+</div>
+</div>
   </body>
 </html>

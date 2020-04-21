@@ -1,22 +1,15 @@
 <?php
 
-    /* As with venue-creation, won't have tag entry in this page, or image
-     * upload
-     */
-
-     /* This page will not work on safari or firefox, add checks */
-
     session_start();
 
-    // Testing purposes
-
-    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-        header("location: venue-user-login.php");
+    if(isset($_SESSION['UserID'])) {
+        $_SESSION['message'] = "You are not allowed to create an event!";
+        header("location: user-dashboard.php");
         exit;
-        /* If the user is logged in but they are not a venue user then they are
-         * redirected to home page
-         */
-    } else if (!isset($_SESSION["VenueUserID"])) {
+    }
+
+    if (!isset($_SESSION["VenueUserID"])) {
+        $_SESSION['message'] = "You must be logged in as a venue user to create an event!";
         header("location: home.php");
         exit;
     }
@@ -29,6 +22,9 @@
 
     $venueUserID = $_SESSION['VenueUserID'];
     $errorMessage = "";
+    if (isset($_GET['VenueID'])){
+      $venueID = $_GET['VenueID'];
+    }
     // $unsupportedBrowser = "";
 
     // $user_agent = $_SERVER['HTTP_USER_AGENT'];
@@ -52,17 +48,19 @@
              header("location: venue-user-dashboard.php");
              exit;
         }
-
-        if (checkInputs($venueUserID,$errorMessage,$pdo)) {
-            /* If everything is valid and the event has been added to the
-             * db then the user is redirected
-             * to the edit event page to fill in additional details
-             */
-            $_SESSION['message'] = "Event Created Successfully!";
-            $eventID = $_SESSION['eventID'];
-            header("location: event-edit.php?EventID=$eventID");
-            exit;
+        if (!empty($_POST) && isset($_POST['submit'])) {
+            if (checkInputs($venueUserID,$errorMessage,$pdo)) {
+                /* If everything is valid and the event has been added to the
+                 * db then the user is redirected
+                 * to the edit event page to fill in additional details
+                 */
+                $_SESSION['message'] = "Event Created Successfully!";
+                $eventID = $_SESSION['eventID'];
+                header("location: event-edit.php?eventID=$eventID");
+                exit;
+            }
         }
+
 
 
     } catch (PDOException $e) {
@@ -96,12 +94,12 @@
         $venueID = $_POST['venue'];
 
         // Check name input
-        if (!(isset($_POST['eventName']) && !empty(trim($_POST['eventName'])))) {
+        if (!(isset($_POST['name']) && !empty(trim($_POST['name'])))) {
             $errorMessage = "Please enter a name for the event!";
             return false;
         }
 
-        $name = trim($_POST['eventName']);
+        $name = trim($_POST['name']);
         // Use same validation as venue name as they have the same constraints!
         if (!validate255($name)) {
             $errorMessage = "The name cannot be more than 255 characters!";
@@ -122,36 +120,37 @@
 
         try {
             // Check times given
-            if (isset($_POST['startTime']) && !empty($_POST['startTime'])) {
-                $phpStartDateTime = new DateTime($_POST['startTime']);
-                if (new DateTime("now") > $phpStartDateTime) {
-                    $errorMessage = "Event cannot be in the past!";
+                if (isset($_POST['startTime']) && !empty($_POST['startTime'])) {
+                    $phpStartDateTime = new DateTime($_POST['startTime']);
+                    if (new DateTime("now") > $phpStartDateTime) {
+                        $errorMessage = "Event cannot be in the past!";
+                        return false;
+                    }
+                } else {
+                    $errorMessage = "You must give a start time!";
                     return false;
                 }
-            } else {
-                $errorMessage = "You must give a start time!";
-                return false;
-            }
-            $startTimestamp = strtotime($_POST['startTime']);
-            $mysqlStartDateTime = date("Y-m-d H:i:s",$startTimestamp);
+                $startTimestamp = strtotime($_POST['startTime']);
+                $mysqlStartDateTime = date("Y-m-d H:i:s",$startTimestamp);
 
-            if (isset($_POST['endTime']) && !empty($_POST['endTime'])) {
-                $phpEndDateTime = new DateTime($_POST['endTime']);
-                if (new DateTime("now") > $phpEndDateTime) {
-                    $errorMessage = "Event cannot be in the past!";
+                if (isset($_POST['endTime']) && !empty($_POST['endTime'])) {
+                    $phpEndDateTime = new DateTime($_POST['endTime']);
+                    if (new DateTime("now") > $phpEndDateTime) {
+                        $errorMessage = "Event cannot be in the past!";
+                        return false;
+                    }
+                    if ($phpStartDateTime > $phpEndDateTime) {
+                        $errorMessage = "end time cannot be before start time!";
+                        return false;
+                    }
+                } else {
+                    $errorMessage = "You must give an end time!";
                     return false;
                 }
-                if ($phpStartDateTime > $phpEndDateTime) {
-                    $errorMessage = "end time cannot be before start time!";
-                    return false;
-                }
-            } else {
-                $errorMessage = "You must give an end time!";
-                return false;
-            }
 
-            $endTimestamp = strtotime($_POST['endTime']);
-            $mysqlEndDateTime = date("Y-m-d H:i:s",$endTimestamp);
+                $endTimestamp = strtotime($_POST['endTime']);
+                $mysqlEndDateTime = date("Y-m-d H:i:s",$endTimestamp);
+
         } catch (Exception $timeException) {
             $errorMessage = "Date and Time in the wrong format! Format (24 hour time) must be: dd-mm-yyyy hh:mm";
             return false;
@@ -191,7 +190,7 @@
     }
 
     function createEventFolder($venueUserID,$venueID,$eventID) {
-        $path = "/home/sgstribe/private_upload/Venue/$venueUserID/$venueID/$eventID";
+        $path = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID";
         if (mkdir($path,0755)) {
             // Folder created successfully
             return true;
@@ -216,36 +215,20 @@
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
-    <title>OutOut - Edit Venue User Account</title>
+    <title>OutOut - Create Event</title>
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="../css/venue.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/events.css">
 </head>
 <body>
-<div class="banner">
-    <img src="../Assets/menu-icon.svg" alt="Menu" width="25" onclick="openNav()" class="menu-image">
-    <img src="../Assets/outout.svg" alt="OutOut" width="120">
-    <img src="../Assets/profile.svg" alt="Profile" width="40">
-</div>
-<div id="mySidenav" class="sidenav">
-    <div class="sidebar-content">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">Dashboard</a>
-        <a href="#">Venues</a>
-        <a href="#">Account</a>
-        <a href="#">Contact</a>
-    </div>
-</div>
-<script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "200px";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
-</script>
+<?php include "navbar.php" ?>
 <div class="wrapper">
+    <?php
+        if (isset($_SESSION['message'])) {
+            echo "<div class='message-wrapper'><div class='success'>".$_SESSION['message']."</div></div>";
+            unset($_SESSION['message']);
+        }
+    ?>
     <div class="container">
         <h1 class="title">Create an event</h1>
         <form id='EventCreation' name='EventCreation' method='post'>
@@ -263,19 +246,17 @@
                 <label for='endTime'>End Time:</label>
                 <input type='datetime-local' id="endTime" name='endTime' placeholder="End time" required><br>
             </div>
-            <div style= "display: flex;">
-                <input type='submit' value='Create' class="button" style="width: 100%">
+            <div class="seperator">
+                <label>Enter current password to allow changes:</label>
+                <input type='password' name='password' required>
+                <input type='submit' name='submit' value='Create' class="button" style="width: 100%">
             </div>
         </form>
     </div>
 </div>
 <?php
     if ($errorMessage != "") {
-        echo "<div class='error'>$errorMessage</div>";
-    }
-    if (isset($_SESSION['message'])) {
-        echo "<div class='success'>".$_SESSION['message']."</div>";
-        unset($_SESSION['message']);
+        echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
     }
  ?>
 </body>

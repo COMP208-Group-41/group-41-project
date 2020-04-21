@@ -2,9 +2,13 @@
     // Starting session
     session_start();
     // If the venue user is already logged in then they are redirected to the homepage
-    if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
-        header("location: venue-user-edit.php");
+    if(isset($_SESSION["VenueUserID"])) {
+        header("location: venue-user-dashboard.php");
         exit;
+    }
+
+    if (isset($_SESSION['UserID'])) {
+        header("location: home.php");
     }
 
     /* If the venue user has just registered then they will be redirected to this
@@ -17,7 +21,7 @@
      ini_set('display_startup_errors', 1);
 
      $registeredMsg = '';
-     $loginError = '';
+     $errorMessage = '';
 
     // Config file for connecting to the database is grabbed here
     require_once "config.php";
@@ -39,18 +43,18 @@
                      */
                     $_SESSION["loggedin"] = true;
                     $_SESSION['VenueUserID'] = $VenueUserID;
-                    header("location: venue-user-edit.php");
+                    header("location: venue-user-dashboard.php");
                     exit;
                 } else {
                     // Password doesn't match!
-                    $loginError = 'Email or Password incorrect!';
+                    $errorMessage = 'Email or Password incorrect!';
                 }
             } else {
                 /* If the user's details are not in the system or their account
                  * is not verified then their login attempt is unsuccessful
                  * and the message is shown to them
                  */
-                $loginError = 'Email or Password incorrect!';
+                $errorMessage = 'Email or Password incorrect!';
             }
         }
 
@@ -84,11 +88,19 @@
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/login-register.css">
     <title>OutOut - Venue User Login</title>
 </head>
 <body>
+    <?php include "navbar.php" ?>
 <div class="wrapper">
+    <?php
+        if (isset($_SESSION['message'])) {
+            echo "<div class='message-wrapper'><div class='success'>".$_SESSION['message']."</div></div>";
+            unset($_SESSION['message']);
+        }
+    ?>
     <div class="outout-wrapper" style="padding-bottom: 10px">
         <img src="../Assets/outout.svg" alt="OutOut">
     </div>
@@ -110,12 +122,8 @@
 </div>
 <?php
     // If the details are incorrect then error message is shown
-    if ($loginError != '') {
-        echo "<div class='error'>$loginError</div>";
-    }
-    if (isset($_SESSION['message'])) {
-        echo "<div class='success'>".$_SESSION['message']."</div>";
-        unset($_SESSION['message']);
+    if ($errorMessage != '') {
+        echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
     }
 ?>
 </body>

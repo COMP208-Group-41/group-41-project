@@ -3,16 +3,17 @@
 
     session_start();
 
-    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-        header("location: login.php");
-        exit;
-        /* If the user is logged in but they are a venue user then they are
-         * redirected to home page
-         */
-    } else if (isset($_SESSION["VenueUserID"])) {
-        header("location: venue-home.php");
+    if (isset($_SESSION['UserID'])) {
+        $userID = $_SESSION['UserID'];
+    }
+
+    if (isset($_SESSION['VenueUserID'])) {
+        // Venue users are not allowed to write reviews
+        $_SESSION['message'] = "Venue users cannot write reviews!";
+        header("location: venue-user-dashboard.php");
         exit;
     }
+
 
     error_reporting( E_ALL );
     ini_set('display_errors', 1);
@@ -20,22 +21,31 @@
 
     require_once "config.php";
 
-    $userID = $_SESSION['UserID'];
     $errorMessage = "";
 
     // Gets which event or venue the review is for
-    if (isset($_GET['EventID'])){
-        $eventID = $_GET['EventID'];
+    if (isset($_GET['eventID'])) {
+        $eventID = $_GET['eventID'];
         $getVenueID = eventIDToVenueID($eventID, $pdo);
         $venueID = $getVenueID['VenueID'];
-    } elseif (isset($_GET['VenueID'])){
-        $venueID = $_GET['VenueID'];
+    } else if (isset($_GET['venueID'])){
+        $venueID = $_GET['venueID'];
         $eventID = 1;
     } else {
         // If both unset ERROR as no venue or event exists under that name
+        $_SESSION['message'] = "No ID specified for review!";
         header("location: 404.php");
         exit;
     }
+
+    if (isset($_SESSION["VenueUserID"]) && $eventID == 1) {
+        header("location: venue.php?venueID=".$venueID."");
+        exit;
+    } else if (isset($_SESSION["VenueUserID"])) {
+      header("location: event.php?eventID=".$eventID."");
+      exit;
+    }
+
 
     if (!checkVenueEventExists($eventID,$venueID,$pdo)) {
         // Venue or Event does not exist! redirect to home and show error
@@ -55,15 +65,19 @@
 
     try{
         if (isset($_POST['SubmitReview'])){
-          if (checkInputs($userID,$eventID,$venueID,$errorMessage,$pdo)) {
-              // TODO: After the review is created successfully, redirect to
-              // appropriate page (ideally showing success message or similar)
+            if (checkInputs($userID,$eventID,$venueID,$errorMessage,$pdo)) {
+
               $_SESSION['message'] = "Review Created Successfully!";
-              header("location: home.php");
-              exit;
+              if ($eventID == 1) {
+                  header("location: venue.php?venueID=$venueID");
+                  exit;
+              } else {
+                  header("location: event.php?eventID=$eventID");
+                  exit;
+              }
           }
-        }
-    } catch (PDOException $e) {
+      }
+  } catch (PDOException $e) {
         // Any PDO errors are shown here
         exit("PDO Error: ".$e->getMessage()."<br>");
     }
@@ -168,7 +182,7 @@
             }
         } else {
             // Check Event Exists
-            $checkEventExists = $pdo("SELECT EventID FROM Event WHERE EventID=:EventID");
+            $checkEventExists = $pdo->prepare("SELECT EventID FROM Event WHERE EventID=:EventID");
             $checkEventExists->bindValue(":EventID",$eventID);
             $checkEventExists->execute();
             if ($checkEventExists->rowcount() == 0) {
@@ -186,9 +200,19 @@
 <html>
   <head>
     <title>OutOut - Submit Review</title>
-    <link rel="stylesheet" type="text/css" href="../css/reviews.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/venue.css">
   </head>
   <body>
+    <?php include "navbar.php" ?>
+    <?php
+        if (isset($_SESSION['message'])) {
+            echo "<div class='message-wrapper'><div class='success'>".$_SESSION['message']."</div></div>";
+            unset($_SESSION['message']);
+        }
+    ?>
+    <div class="wrapper">
+        <div class="container">
     <form name='ReviewVenue' method='post'>
       <div>
           <label for='Review'>Review:</label>
@@ -232,13 +256,11 @@
       </div>
       <?php
           if ($errorMessage != "") {
-              echo "<div class='error'>$errorMessage</div>";
-          }
-          if (isset($_SESSION['message'])) {
-              echo "<div class='success'>".$_SESSION['message']."</div>";
-              unset($_SESSION['message']);
+              echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
           }
        ?>
     </form>
+</div>
+</div>
   </body>
 </html>

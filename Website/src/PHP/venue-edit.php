@@ -27,7 +27,8 @@
     // Now check that the user accessing this venue is allowed to
     if (!checkVenueUserAllowed($venueID,$venueUserID,$pdo)) {
         // User is not allowed to edit!
-        header("location: venue-home.php");
+        $_SESSION['message'] = "You are not allowed to edit this venue!";
+        header("location: venue-user-dashboard.php");
         exit;
     }
 
@@ -47,7 +48,7 @@
              * correct, if so then continue with creation
              */
              if (checkInputs($venueUserID,$venueID,$errorMessage,$pdo)) {
-                 $errorMessage = "Venue Edited Successfully!";
+                 $_SESSION['message'] = "Venue Edited Successfully!";
                  // Refresh details!
 
                  $result = getVenueInfo($venueID,$pdo);
@@ -195,63 +196,10 @@
         }
     }
 
-    /* CheckTags returns an array of the user-selected tags if they are entered
-     * Correctly. If they are not then false is returned
-     */
-    function checkTags(&$errorMessage) {
-        unset($tags);
-        $tags = [];
-        if ((isset($_POST['tag1']) && $_POST['tag1'] != 'Optional')) {
-            $tags[0] = $_POST['tag1'];
-        }
-
-        if (isset($_POST['tag2']) && $_POST['tag2'] != 'Optional') {
-            if (in_array($_POST['tag2'],$tags)) {
-                // Cannot have 2 of the same tag!
-                $errorMessage = "You cannot have more than one of each tag!";
-                return false;
-            } else {
-                $tags[1] = $_POST['tag2'];
-            }
-        }
-
-        if (isset($_POST['tag3']) && $_POST['tag3'] != 'Optional') {
-            if (in_array($_POST['tag3'],$tags)) {
-                // Cannot have 2 of the same tag!
-                $errorMessage = "You cannot have more than one of each tag!";
-                return false;
-            } else {
-                $tags[2] = $_POST['tag3'];
-            }
-        }
-
-        if (isset($_POST['tag4']) && $_POST['tag4'] != 'Optional') {
-            if (in_array($_POST['tag4'],$tags)) {
-                // Cannot have 2 of the same tag!
-                $errorMessage = "You cannot have more than one of each tag!";
-                return false;
-            } else {
-                $tags[3] = $_POST['tag4'];
-            }
-        }
-
-        if (isset($_POST['tag5']) && $_POST['tag5'] != 'Optional') {
-            if (in_array($_POST['tag5'],$tags)) {
-                // Cannot have 2 of the same tag!
-                $errorMessage = "You cannot have more than one of each tag!";
-                return false;
-            } else {
-                $tags[4] = $_POST['tag5'];
-            }
-        }
-
-        return $tags;
-    }
-
 
     function uploadImage($venueUserID,$venueID,$pdo) {
         // Remove any existing file first
-        $directory = "/home/sgstribe/private_upload/Venue/$venueUserID/$venueID/venue.jpg";
+        $directory = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/venue.jpg";
         if (file_exists($directory)) {
             chmod($directory,0755);
             unlink($directory);
@@ -269,13 +217,6 @@
         $getVenueTagsStmt->bindValue(":VenueID",$venueID);
         $getVenueTagsStmt->execute();
         return $getVenueTagsStmt->fetchAll();
-    }
-
-    function echoTags($pdo) {
-        $tags = $pdo->query("SELECT * FROM Tag ORDER BY TagName");
-        foreach ($tags as $row) {
-            echo "<option value='".$row['TagID']."'>".$row['TagName']."</option>";
-        }
     }
 
     function checkExistingVenue($name,$address,$venueID,$pdo) {
@@ -349,47 +290,25 @@
         }
     }
 
-    function getVenueInfo($venueID,$pdo) {
-        $getVenueStmt = $pdo->prepare("SELECT VenueName,VenueDescription,VenueAddress,VenueTimes FROM Venue WHERE VenueID=:VenueID");
-        $getVenueStmt->bindValue(":VenueID",$venueID);
-        $getVenueStmt->execute();
-        return $getVenueStmt->fetch();
-    }
 ?>
 
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="../css/venue.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/events.css">
 
 </head>
 <body>
-<div class="banner">
-    <img src="../Assets/menu-icon.svg" alt="Menu" width="25" onclick="openNav()" class="menu-image">
-    <img src="../Assets/outout.svg" alt="OutOut" width="100">
-    <img src="../Assets/profile.svg" alt="Profile" width="40">
-</div>
-<div id="mySidenav" class="sidenav">
-    <div class="sidebar-content">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">Dashboard</a>
-        <a href="#">Venues</a>
-        <a href="#">Account</a>
-        <a href="#">Contact</a>
-    </div>
-</div>
-<script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "200px";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
-</script>
+<?php include "navbar.php" ?>
 <div class="wrapper">
+    <?php
+        if (isset($_SESSION['message'])) {
+            echo "<div class='message-wrapper'><div class='success'>".$_SESSION['message']."</div></div>";
+            unset($_SESSION['message']);
+        }
+    ?>
     <div class="container">
         <h1 class="title"><?php echo $name; ?></h1>
         <form id='CreateVenue' name='CreateVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
@@ -423,24 +342,24 @@
                 </div>
 
                 <label for='tag1'>Add some tags that best describe your venue - this will overwrite old tags</label>
-                <select name='tag1' id='tag1'>
+                <select name='tag1' id='tag1' onmousedown="if(this.options.length>5){this.size=4;}" onchange="this.size=0;" onblur="this.size=0;">
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select>
-                <select name='tag2' id='tag2'>
+                <select name='tag2' id='tag2' onmousedown="if(this.options.length>5){this.size=4;}" onchange="this.size=0;" onblur="this.size=0;">
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select>
-                <select name='tag3' id='tag3'>
+                <select name='tag3' id='tag3' onmousedown="if(this.options.length>5){this.size=4;}" onchange="this.size=0;" onblur="this.size=0;">
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select>
-                <select name='tag4' id='tag4'>
+                <select name='tag4' id='tag4' onmousedown="if(this.options.length>5){this.size=4;}" onchange="this.size=0;" onblur="this.size=0;">
                     <option value='Optional'>No Tag</option>
 
                     <?php echoTags($pdo); ?>
                 </select>
-                <select name='tag5' id='tag5' style="margin-bottom: 16px">
+                <select name='tag5' id='tag5' onmousedown="if(this.options.length>5){this.size=4;}" onchange="this.size=0;" onblur="this.size=0;" style="margin-bottom: 16px">
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select>
@@ -452,16 +371,11 @@
             </div>
         </form>
     </div>
-</div>
 <?php
     if ($errorMessage != "") {
-        echo "<div class='error'>$errorMessage</div>";
+        echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
     }
-    if (isset($_SESSION['message'])) {
-        echo "<div class='success'>".$_SESSION['message']."</div>";
-        unset($_SESSION['message']);
-    }
-
 ?>
+</div>
 </body>
 </html>

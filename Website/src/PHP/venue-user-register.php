@@ -2,7 +2,12 @@
 
     session_start();
 
-    if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+    if(isset($_SESSION["VenueUserID"])) {
+        header("location: venue-user-dashboard.php");
+        exit;
+    }
+
+    if (isset($_SESSION['UserID'])) {
         header("location: home.php");
         exit;
     }
@@ -15,6 +20,7 @@
 
     $email = $password = $passwordConfirm = $name = "";
     $emailError = $passwordError = $accountExists = $nameError = $createError = '';
+    $companyNameError;
 
     try {
         if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirmPassword']) && isset($_POST['nameOfCompany'])) {
@@ -34,30 +40,34 @@
                             $passwordError = 'password must be at least 8 characters long and contain a lower case letter and a number!';
                         } else {
                             $hashedPassword = passwordHasher($password);
-                            $name = trim($_POST['nameOfCompany']);
-                            if (!validate255($name)) {
-                                $nameError = 'Name of Company cannot be more than 255 characters!';
+                            if (!isset($_POST['nameOfCompany']) || empty(trim($_POST['nameOfCompany']))) {
+                                $nameError = "Your company name cannot be blank!";
                             } else {
-                                if (createUser($email,$hashedPassword,$name,$pdo)) {
-                                    /* The verification email would be sent here but
-                                     * as we do not have a working mail server this
-                                     * will not work at the moment
-                                     */
-
-                                     // CREATE FOLDER IN PRIVATE_UPLOAD FOR IMAGES
-                                     if (!createVenueUserFolder($email,$hashedPassword,$pdo)) {
-                                         // ERROR!
-                                         $createError = "Error creating user folder!";
-                                     } else {
-                                         // sendVerificationEmail($email,$hash);
-                                         // Verification not working so set verified to true
-                                         $_SESSION['message'] = "Venue Account Created Successfully!";
-                                         header('location: venue-user-login.php');
-                                         exit;
-                                     }
-
+                                $name = trim($_POST['nameOfCompany']);
+                                if (!validate255($name)) {
+                                    $nameError = 'Name of Company cannot be more than 255 characters!';
                                 } else {
-                                    $createError = 'Error creating new account, please try again later!';
+                                    if (createUser($email,$hashedPassword,$name,$pdo)) {
+                                        /* The verification email would be sent here but
+                                         * as we do not have a working mail server this
+                                         * will not work at the moment
+                                         */
+
+                                         // CREATE FOLDER IN PRIVATE_UPLOAD FOR IMAGES
+                                         if (!createVenueUserFolder($email,$hashedPassword,$pdo)) {
+                                             // ERROR!
+                                             $createError = "Error creating user folder!";
+                                         } else {
+                                             // sendVerificationEmail($email,$hash);
+                                             // Verification not working so set verified to true
+                                             $_SESSION['message'] = "Venue Account Created Successfully!";
+                                             header('location: venue-user-login.php');
+                                             exit;
+                                         }
+
+                                    } else {
+                                        $createError = 'Error creating new account, please try again later!';
+                                    }
                                 }
                             }
                         }
@@ -98,7 +108,7 @@
         $row = $getVenueUserIDStmt->fetch();
         $venueUserID = $row['VenueUserID'];
 
-        $path = "/home/sgstribe/private_upload/Venue/$venueUserID";
+        $path = "/home/sgstribe/public_html/Images/Venue/$venueUserID";
         if (mkdir($path,0755)) {
             // Folder created successfully
             return true;
@@ -113,11 +123,19 @@
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/login-register.css">
     <title>OutOut - Venue Registration</title>
 </head>
 <body>
+    <?php include "navbar.php" ?>
 <div class="wrapper">
+    <?php
+        if (isset($_SESSION['message'])) {
+            echo "<div class='message-wrapper'><div class='success'>".$_SESSION['message']."</div></div>";
+            unset($_SESSION['message']);
+        }
+    ?>
     <div class="outout-wrapper">
         <img src="../Assets/outout.svg" alt="OutOut">
     </div>
@@ -127,10 +145,10 @@
         </div>
         <form name='RegisterForm' method='post'>
             <div class="login-field">
-                <input type='text' name='email' placeholder="Email">
-                <input type='password' name='password' placeholder="Password">
-                <input type='password' name='confirmPassword' placeholder="Confirm Password">
-                <input type="text" name='nameOfCompany' placeholder="Name of Company">
+                <input type='text' name='email' placeholder="Email" required>
+                <input type='password' name='password' placeholder="Password" required>
+                <input type='password' name='confirmPassword' placeholder="Confirm Password" required>
+                <input type="text" name='nameOfCompany' placeholder="Name of Company" required>
             </div>
             <div style="display: flex">
                 <a href="venue-user-login.php" class="login-button">Log In</a>
@@ -144,37 +162,33 @@
  * error message below
  */
 if ($emailError != '') {
-    echo "<div class='error'>$emailError</div>";
+    echo "<div class='message-wrapper'><div class='error'>$emailError</div></div>";
 }
 /* If the accountExists string is not blank then the error message is
  * displayed telling the user that an account already exists in the
  * database with the email they provided
  */
 if ($accountExists != '') {
-    echo "<div class='error'>$accountExists</div>";
+    echo "<div class='message-wrapper'><div class='error'>$accountExists</div></div>";
 }
 
 /* If there are any errors with the password (not matching or not valid)
  * then the error is displayed below
  */
 if ($passwordError != '') {
-    echo "<div class='error'>$passwordError</div>";
+    echo "<div class='message-wrapper'><div class='error'>$passwordError</div></div>";
 }
 
 if ($nameError != '') {
-    echo "<div class='error'>$nameError</div>";
+    echo "<div class='message-wrapper'><div class='error'>$nameError</div></div>";
 }
 /* If there is an error in creating the account then the error message
  * is displayed below
  */
 if ($createError != '') {
-    echo "<div class='error'>$createError</div>";
+    echo "<div class='message-wrapper'><div class='error'>$createError</div></div>";
 }
 
-if (isset($_SESSION['message'])) {
-    echo "<div class='success'>".$_SESSION['message']."</div>";
-    unset($_SESSION['message']);
-}
 ?>
 
 </body>

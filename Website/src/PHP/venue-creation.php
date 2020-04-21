@@ -189,7 +189,7 @@
     }
 
     function createVenueFolder($venueUserID,$venueID) {
-        $path = "/home/sgstribe/private_upload/Venue/$venueUserID/$venueID";
+        $path = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID";
         if (mkdir($path,0755)) {
             // Folder created successfully
             return true;
@@ -215,33 +215,17 @@
 <head>
     <title>OutOut - Edit Venue User Account</title>
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="../css/venue.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
 </head>
 <body>
-<div class="banner">
-    <img src="../Assets/menu-icon.svg" alt="Menu" width="25" onclick="openNav()" class="menu-image">
-    <img src="../Assets/outout.svg" alt="OutOut" width="120">
-    <img src="../Assets/profile.svg" alt="Profile" width="40">
-</div>
-<div id="mySidenav" class="sidenav">
-    <div class="sidebar-content">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">Dashboard</a>
-        <a href="#">Venues</a>
-        <a href="#">Account</a>
-        <a href="#">Contact</a>
-    </div>
-</div>
-<script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "200px";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
-</script>
+<?php include "navbar.php" ?>
 <div class="wrapper">
+    <?php
+        if (isset($_SESSION['message'])) {
+            echo "<div class='message-wrapper'><div class='success'>".$_SESSION['message']."</div></div>";
+            unset($_SESSION['message']);
+        }
+    ?>
     <div class="container">
         <form id='CreateVenue' name='CreateVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
             <div class="edit-fields">
@@ -276,11 +260,7 @@
 </div>
 <?php
     if ($errorMessage != "") {
-        echo "<div class='error'>$errorMessage</div>";
-    }
-    if (isset($_SESSION['message'])) {
-        echo "<div class='success'>".$_SESSION['message']."</div>";
-        unset($_SESSION['message']);
+        echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
     }
 ?>
 </body>

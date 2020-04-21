@@ -2,13 +2,8 @@
 
     session_start();
 
-    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-        header("location: venue-user-login.php");
-        exit;
-        /* If the user is logged in but they are not a venue user then they are
-         * redirected to home page
-         */
-    } else if (!isset($_SESSION["VenueUserID"])) {
+
+    if (!isset($_SESSION['VenueUserID'])) {
         header("location: home.php");
         exit;
     }
@@ -19,16 +14,17 @@
 
     require_once "config.php";
 
-    $venueUserID = $_SESSION["VenueUserID"];
-    $eventID = $_GET['EventID'];
+    $venueUserID = $_SESSION['VenueUserID'];
+    $eventID = $_GET['eventID'];
     $errorMessage = "";
 
     $eventToVenueUser = eventToVenueUser($eventID,$pdo);
     $eventToVenueUser = $eventToVenueUser['VenueUserID'];
     if($eventToVenueUser === false){
       $errorMessage = "Error getting VenueUserID";
-    } elseif ($eventToVenueUser != $venueUserID) {
-        header("location: venue-home.php");
+    } else if ($eventToVenueUser != $venueUserID) {
+        $_SESSION['message'] = "You are not allowed to edit this event!";
+        header("location: venue-user-dashboard.php");
         exit;
     }
 
@@ -47,7 +43,7 @@
         if (!empty($_POST) && isset($_POST['submit'])) {
 
              if (checkInputs($venueUserID,$eventID,$venueID,$errorMessage,$pdo)) {
-                 $errorMessage = "Event Edited Successfully!";
+                 $_SESSION['message'] = "Event Edited Successfully!";
                  // Refresh details!
 
                  $result = getEventInfo($eventID,$pdo);
@@ -56,7 +52,7 @@
                  $startTime = $result['EventStartTime'];
                  $endTime = $result['EventEndTime'];
 
-                 $currentTagIDs = getEventTagID($venueID,$pdo);
+                 $currentTagIDs = getEventTagID($eventID,$pdo);
              }
         }
 
@@ -171,7 +167,7 @@
                 return false;
             }
             foreach ($tags as $tag) {
-                if (!insertTags($tag,$eventID,$pdo)) {
+                if (!insertEventTags($tag,$eventID,$pdo)) {
                     $errorMessage = "Error in inserting tags!";
                     $pdo->rollBack();
                     return false;
@@ -195,7 +191,7 @@
 
     function uploadEventImage($venueUserID,$venueID,$eventID,$pdo) {
         // Remove any existing file first
-        $directory = "/home/sgstribe/private_upload/Venue/$venueUserID/$venueID/$eventID/event.jpg";
+        $directory = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID/event.jpg";
         if (file_exists($directory)) {
             chmod($directory,0755);
             unlink($directory);
@@ -240,63 +236,6 @@
         }
     }
 
-    // Reused from Venue-edit.php could be moved to config.php
-    function checkTags(&$errorMessage) {
-        unset($tags);
-        $tags = [];
-        if ((isset($_POST['tag1']) && $_POST['tag1'] != 'Optional')) {
-            $tags[0] = $_POST['tag1'];
-        }
-
-        if (isset($_POST['tag2']) && $_POST['tag2'] != 'Optional') {
-            if (in_array($_POST['tag2'],$tags)) {
-                // Cannot have 2 of the same tag!
-                $errorMessage = "You cannot have more than one of the same tag!";
-                return false;
-            } else {
-                $tags[1] = $_POST['tag2'];
-            }
-        }
-
-        if (isset($_POST['tag3']) && $_POST['tag3'] != 'Optional') {
-            if (in_array($_POST['tag3'],$tags)) {
-                // Cannot have 2 of the same tag!
-                $errorMessage = "You cannot have more than one of the same tag!";
-                return false;
-            } else {
-                $tags[2] = $_POST['tag3'];
-            }
-        }
-
-        if (isset($_POST['tag4']) && $_POST['tag4'] != 'Optional') {
-            if (in_array($_POST['tag4'],$tags)) {
-                // Cannot have 2 of the same tag!
-                $errorMessage = "You cannot have more than one of the same tag!";
-                return false;
-            } else {
-                $tags[3] = $_POST['tag4'];
-            }
-        }
-
-        if (isset($_POST['tag5']) && $_POST['tag5'] != 'Optional') {
-            if (in_array($_POST['tag5'],$tags)) {
-                // Cannot have 2 of the same tag!
-                $errorMessage = "You cannot have more than one of the same tag!";
-                return false;
-            } else {
-                $tags[4] = $_POST['tag5'];
-            }
-        }
-        return $tags;
-    }
-
-    function getEventTagID($eventID,$pdo) {
-        $EventTags = $pdo->prepare("SELECT TagID FROM EventTag WHERE EventID=:EventID");
-        $EventTags->bindValue(":EventID",$eventID);
-        $EventTags->execute();
-        return $EventTags->fetchAll();
-    }
-
     // When inserting new tags, the existing ones are deleted
     function deleteTags($eventID,$pdo) {
         $deleteTagsStmt = $pdo->prepare("DELETE FROM EventTag WHERE EventID=:EventID");
@@ -311,11 +250,11 @@
     }
 
     // New tags added to the database
-    function insertTags($tag,$eventID,$pdo) {
-        $insertTagsStmt = $pdo->prepare("INSERT INTO EventTag (EventID,TagID) VALUES (:EventID,:TagID)");
-        $insertTagsStmt->bindValue(":EventID",$eventID);
-        $insertTagsStmt->bindValue(":TagID",$tag);
-        if ($insertTagsStmt->execute()) {
+    function insertEventTags($tag,$eventID,$pdo) {
+        $insertEventTagsStmt = $pdo->prepare("INSERT INTO EventTag (EventID,TagID) VALUES (:EventID,:TagID)");
+        $insertEventTagsStmt->bindValue(":EventID",$eventID);
+        $insertEventTagsStmt->bindValue(":TagID",$tag);
+        if ($insertEventTagsStmt->execute()) {
 
             return true;
         } else {
@@ -324,57 +263,27 @@
         }
     }
 
-    function echoTags($pdo) {
-        $tags = $pdo->query("SELECT * FROM Tag ORDER BY TagName");
-        foreach ($tags as $row) {
-            echo "<option value='".$row['TagID']."'>".$row['TagName']."</option>";
-        }
-    }
-
-    // Returns an array of all event infomation
-    function getEventInfo($eventID,$pdo) {
-        $getVenueStmt = $pdo->prepare("SELECT VenueID, EventName, EventDescription, DATE_FORMAT(EventStartTime,'%Y-%m-%dT%H:%i') AS EventStartTime, DATE_FORMAT(EventEndTime,'%Y-%m-%dT%H:%i') AS EventEndTime FROM Event WHERE EventID=:EventID");
-        $getVenueStmt->bindValue(":EventID",$eventID);
-        $getVenueStmt->execute();
-        return $getVenueStmt->fetch();
-    }
-
 ?>
 
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
-    <title>OutOut - Edit Venue User Account</title>
+    <title>OutOut - Edit <?php echo $name; ?></title>
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="../css/venue.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/events.css">
 </head>
 <body>
-<div class="banner">
-    <img src="../Assets/menu-icon.svg" alt="Menu" width="25" onclick="openNav()" class="menu-image">
-    <img src="../Assets/outout.svg" alt="OutOut" width="120">
-    <img src="../Assets/profile.svg" alt="Profile" width="40">
-</div>
-<div id="mySidenav" class="sidenav">
-    <div class="sidebar-content">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">Dashboard</a>
-        <a href="#">Venues</a>
-        <a href="#">Account</a>
-        <a href="#">Contact</a>
-    </div>
-</div>
-<script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "200px";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
-</script>
+<?php include "navbar.php" ?>
 <div class="wrapper">
+    <?php
+        if (isset($_SESSION['message'])) {
+            echo "<div class='message-wrapper'><div class='success'>".$_SESSION['message']."</div></div>";
+            unset($_SESSION['message']);
+        }
+    ?>
     <div class="container">
+        <h1 class='title'>Edit Event</h1>
         <form id='EventForm' name='EventForm' method='post' enctype="multipart/form-data">
             <div class="edit-fields">
                 <input type='text' name='name' placeholder="Event Name" value="<?php echo $name; ?>" required>
@@ -390,14 +299,8 @@
                 <input type='datetime-local' id="endTime" name='endTime' placeholder="End time"
                        value="<?php echo $endTime; ?>" required>
 
-                <input type='file' id="eventImage" name='eventImage' accept="image/*" class="input-file">
-                <label for="eventImage">Upload Image</label>
-                <div style="display: flex; justify-content: center">
-                    <div class="image-preview" id="imagePreview">
-                        <img src="" alt="Image Preview" class="image-preview__image">
-                        <span class="image-preview__default-text">Image Preview</span>
-                    </div>
-                </div>
+                <input type='file' id="Image" name='Image' accept=".jpg" class="input-file">
+                <label for="Image">Upload Image</label>
 
                 <!-- TAG INPUT -->
                 <!-- Script here, if no tags present dont display any of the tag stuff -->
@@ -408,23 +311,23 @@
                     </div>
                 </div>
                 <label>Add some tags that best describe your event - this will overwrite old tags</label>
-                <select name='tag1' id='tag1'>
+                <select name='tag1' id='tag1' onmousedown="if(this.options.length>5){this.size=4;}" onchange="this.size=0;" onblur="this.size=0;">
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select>
-                <select name='tag2' id='tag2'>
+                <select name='tag2' id='tag2' onmousedown="if(this.options.length>5){this.size=4;}" onchange="this.size=0;" onblur="this.size=0;">
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select>
-                <select name='tag3' id='tag3'>
+                <select name='tag3' id='tag3' onmousedown="if(this.options.length>5){this.size=4;}" onchange="this.size=0;" onblur="this.size=0;">
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select>
-                <select name='tag4' id='tag4'>
+                <select name='tag4' id='tag4' onmousedown="if(this.options.length>5){this.size=4;}" onchange="this.size=0;" onblur="this.size=0;">
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select>
-                <select name='tag5' id='tag5'>
+                <select name='tag5' id='tag5' onmousedown="if(this.options.length>5){this.size=4;}" onchange="this.size=0;" onblur="this.size=0;">
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select><br>
@@ -433,40 +336,12 @@
                 <label>Enter current password to allow changes:</label>
                 <input type='password' name='password' required>
                 <input type='submit' name='submit' value='Update' class="button" style="width: 100%">
-
-                <script>
-                    // For Image Preview
-                    const inpFile = document.getElementById("eventImage");
-                    const previewContainer = document.getElementById("imagePreview");
-                    const previewImage = previewContainer.querySelector(".image-preview__image");
-                    const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
-
-                    inpFile.addEventListener("change", function () {
-                        const file = this.files[0];
-                        if (file) {
-                            const reader = new FileReader();
-
-                            previewDefaultText.style.display = "none";
-                            previewImage.style.display = "block";
-
-                            reader.addEventListener("load", function () {
-                                previewImage.setAttribute("src", this.result);
-                            });
-
-                            reader.readAsDataURL(file);
-                        }
-                    });
-                </script>
         </form>
     </div>
 </div>
   <?php
         if ($errorMessage != "") {
-            echo "<div class='error'>$errorMessage</div>";
-        }
-        if (isset($_SESSION['message'])) {
-            echo "<div class='success'>".$_SESSION['message']."</div>";
-            unset($_SESSION['message']);
+            echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
         }
      ?>
 </body>
