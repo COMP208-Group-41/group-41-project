@@ -12,7 +12,7 @@
     justify-content: center;
     flex-grow: 1;
     border-radius: 4px;
-    width: 500px;
+    width: 400px;
     margin-bottom: 16px;
 }
 
@@ -53,8 +53,8 @@
 .venue-tags {
     display: flex;
     padding: 4px;
-    color: var(--light-body);
-    background-color: var(--body-background);
+    color: var(--body-background);
+    background-color: var(--dark-body);
     font-family: "K2D", sans-serif;
     font-size: 16px;
     border: 2px solid var(--button-border);
@@ -75,7 +75,7 @@
 .venue-buttons {
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 20%;
     justify-content: center;
     margin-right: -4px;
 }
