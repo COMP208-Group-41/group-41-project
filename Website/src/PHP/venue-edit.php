@@ -383,7 +383,9 @@
                     <label>Enter current password to allow changes:</label>
                     <input type='password' name='password' required>
                 </div>
-                <input type='submit' name='submit' value='Save changes' class="button" style="width: 100%">
+                <input type='submit' name='submit' value='Save changes' class="button" style="width: 100%"><br>
+                <div class="seperator" style="margin-top: 4px"></div>
+                <input type='submit' name='delete' value='Delete Event' class="button" style="width: 100%">
             </div>
         </form>
     </div>
