@@ -173,7 +173,7 @@
                 </div>
             </div>
             <div class="seperator"></div>
-            <h2 class='title'>Reviews</h2>
+            <h2 class='title'>Event score</h2>
             <?php
                 if (isset($userID)) {
                     $compareDate = new DateTime($result['EventEndTime']);
@@ -211,11 +211,11 @@
             </div>
 
             <div class="seperator"></div>
-            <label>All Reviews</label>
+            <h2 class="title">All Reviews</h2>
 
                 <?php
                 if ($reviews !== false){
-                    echo '<div class=\"reviewlist\">';
+                    echo '<div class="reviewlist">';
                   $counter = 0;
                   foreach ($reviews as $row) {
                     if($counter<5){
@@ -233,8 +233,7 @@
                   }
                   echo '</div>';
                 } else {
-                  echo '<div class="">';
-                  echo '<div class="">No reviews currently posted for this event</div></div>';
+                  echo '<label>No reviews currently posted for this event</label>';
                 }
                 ?>
             </div>
