@@ -111,9 +111,9 @@ if (isset($_SESSION['message'])) {
               echo '<div class="venue-name">Event Name</div>';
               echo '<div class="event-name">View / Edit Event</div></div>';
               foreach ($events as $row) {
-                echo '<div class="venue">';
-                echo '<div class="venue-name">'.$venueName."</div>";
-                echo '<div class="venue-name">'.$row['EventName']."</div>";
+                echo '<div class="event">';
+                echo '<div class="event-name">'.$venueName."</div>";
+                echo '<div class="event-name">'.$row['EventName']."</div>";
                 echo '<div class="event-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="venue-button" style="margin-right: -1px">View Event</a>';
                 echo '<a href="event-edit.php?eventID='.$row['EventID'].'" class="venue-button" style="width: 50%">Edit Event</a></div></div>';
               }

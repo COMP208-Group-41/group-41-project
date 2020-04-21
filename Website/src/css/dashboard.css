@@ -83,6 +83,7 @@ th {
     text-decoration: none;
     height: 100%;
     flex-grow: 1;
+    min-width: 50%;
 }
 
 .venue-button:focus {
@@ -148,6 +149,7 @@ th {
     text-decoration: none;
     height: 100%;
     flex-grow: 1;
+    min-width: 50%;
 }
 
 .event-button:focus {
