@@ -14,6 +14,8 @@
         exit;
     }
 
+    $allEvents = getAllEvents($pdo);
+
 ?>
 <!DOCTYPE html>
 <html lang='en-GB'>

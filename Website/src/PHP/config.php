@@ -594,4 +594,46 @@ function validate255($name) {
         }
         return $allTags;
     }
+
+    function getAllVenues($pdo) {
+        $getStmt = $pdo->prepare("SELECT VenueID,VenueUserID,VenueName FROM Venue WHERE VenueID<>'1' ORDER BY VenueName");
+        $getStmt->execute();
+        return $getStmt->fetchAll();
+    }
+
+    function getAllEvents($pdo) {
+        $getStmt = $pdo->prepare("SELECT EventID,EventName,DATE_FORMAT(EventStartTime,'%Y-%m-%d %H:%i') AS EventStartTime FROM Venue WHERE VenueID<>'1' ORDER BY EventStartTime");
+        $getStmt->execute();
+        return $getStmt->fetchAll();
+    }
+
+    // https://www.kodingmadesimple.com/2017/05/delete-all-files-and-subfolders-from-folder-php.html
+    // delete all files and sub-folders from a folder
+    function deleteAll($path) {
+        foreach (glob($path . '/*') as $file) {
+            if (is_dir($file)) {
+                deleteAll($file);
+            } else {
+                unlink($file);
+            }
+            rmdir($path);
+        }
+    }
+    //https://stackoverflow.com/questions/3338123/how-do-i-recursively-delete-a-directory-and-its-entire-contents-files-sub-dir
+
+    function rrmdir($dir) {
+        if (is_dir($dir)) {
+            $objects = scandir($dir);
+            foreach ($objects as $object) {
+                if ($object != "." && $object != "..") {
+                    if (is_dir($dir. DIRECTORY_SEPARATOR .$object) && !is_link($dir."/".$object)) {
+                        rrmdir($dir. DIRECTORY_SEPARATOR .$object);
+                    } else {
+                        unlink($dir. DIRECTORY_SEPARATOR .$object);
+                    }
+                }
+            }
+            rmdir($dir);
+        }
+    }
 ?>

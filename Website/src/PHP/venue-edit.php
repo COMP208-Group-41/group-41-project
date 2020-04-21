@@ -201,8 +201,10 @@
       if(verifyVenuePassword($venueUserID,$password,$pdo) === true) {
         $success = deleteVenue($venueID, $pdo, $errorMessage);
         if ($success){
-          header("location: venue-user-dashboard.php" );
-          exit;
+            $directory = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID";
+            rrmdir($directory);
+            header("location: venue-user-dashboard.php" );
+            exit;
         }
       }
     }

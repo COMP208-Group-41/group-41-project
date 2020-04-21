@@ -14,6 +14,8 @@
         exit;
     }
 
+    $allVenues = getAllVenues($pdo);
+
 ?>
 <!DOCTYPE html>
 <html lang='en-GB'>
