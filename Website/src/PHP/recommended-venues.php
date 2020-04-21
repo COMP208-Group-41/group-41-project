@@ -14,7 +14,7 @@
         exit;
     }
 
-    $allVenues = 
+    $allVenues = getAllVenues($pdo);
 
 ?>
 <!DOCTYPE html>
