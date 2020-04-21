@@ -195,6 +195,75 @@
         return true;
     }
 
+    // Delete Venue
+    if (isset($_POST['delete'])) {
+        $success = deleteVenue($venueID, $pdo);
+        if ($success){
+          header("location: venue-user-dashboard.php" );
+          exit;
+        } else {
+
+        }
+    }
+
+    function deleteVenue($venueID, $pdo){
+        $pdo->beginTransaction();
+        $deleteVenueStmt = $pdo->prepare("DELETE FROM Reviews WHERE VenueID=:VenueID");
+        $deleteVenueStmt->bindValue(':VenueID',$VenueID);
+        $success = $deleteVenueStmt->execute();
+        if (!$success){
+          $errorMessage = "Error in deleteing venue reviews!";
+          $pdo->rollBack();
+          return false;
+        }
+        $deleteVenueStmt = $pdo->prepare("DELETE FROM VenueTag WHERE VenueID=:VenueID");
+        $deleteVenueStmt->bindValue(':VenueID',$VenueID);
+        $success = $deleteVenueStmt->execute();
+        if (!$success){
+          $errorMessage = "Error in deleteing venue tags!";
+          $pdo->rollBack();
+          return false;
+        }
+        $events = getEvents($venueID, $pdo);
+        if ($events !== false){
+          foreach($events as $row){
+            $deleteEventStmt = $pdo->prepare("DELETE FROM EventTag WHERE EventID=:EventID");
+            $deleteEventStmt->bindValue(':EventID',$row['EventID']);
+            $success = $deleteEventStmt->execute();
+            if (!$success){
+              $errorMessage = "Error in deleteing event tags! Event=".$row['EventName']."";
+              $pdo->rollBack();
+              return false;
+            }
+            $deleteEventStmt = $pdo->prepare("DELETE FROM InterestedIn WHERE EventID=:EventID");
+            $deleteEventStmt->bindValue(':EventID',$row['EventID']);
+            $success = $deleteEventStmt->execute();
+            if (!$success){
+              $errorMessage = "Error in deleteing event InterestedIn! Event=".$row['EventName']."";
+              $pdo->rollBack();
+              return false;
+            }
+            $deleteEventStmt = $pdo->prepare("DELETE FROM Event WHERE EventID=:EventID");
+            $deleteEventStmt->bindValue(':EventID',$row['EventID']);
+            $success = $deleteEventStmt->execute();
+            if (!$success){
+              $errorMessage = "Error in deleteing event! Event=".$row['EventName']."";
+              $pdo->rollBack();
+              return false;
+            }
+          }
+        }
+        $deleteVenueStmt = $pdo->prepare("DELETE FROM Venue WHERE VenueID=:VenueID");
+        $deleteVenueStmt->bindValue(':VenueID',$VenueID);
+        $success = $deleteVenueStmt->execute();
+        if (!$success){
+          $errorMessage = "Error in deleteing venue!";
+          $pdo->rollBack();
+          return false;
+        }
+        return true;
+    }
+
     function validateTimes($times) {
         if (strlen($times) <= 500) {
             return true;
@@ -387,6 +456,11 @@
                 <div class="seperator" style="margin-top: 4px"></div>
                 <input type='submit' name='delete' value='Delete Venue' class="button" style="width: 100%">
             </div>
+        </form>
+        <form id='DeleteVenue' name='DeleteVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
+          <div class="edit-fields">
+            <input type='submit' name='delete' value='Delete Venue' class="button" style="width: 100%">
+          </div>
         </form>
     </div>
 <?php
