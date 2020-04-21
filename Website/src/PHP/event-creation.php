@@ -10,13 +10,14 @@
 
     // Testing purposes
 
-    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-        header("location: venue-user-login.php");
+    if(isset($_SESSION['UserID'])) {
+        $_SESSION['message'] = "You are not allowed to create an event!";
+        header("location: user-dashboard.php");
         exit;
-        /* If the user is logged in but they are not a venue user then they are
-         * redirected to home page
-         */
-    } else if (!isset($_SESSION["VenueUserID"])) {
+    }
+
+    if (!isset($_SESSION["VenueUserID"])) {
+        $_SESSION['message'] = "You must be logged in as a venue user to create an event!";
         header("location: home.php");
         exit;
     }
@@ -55,17 +56,19 @@
              header("location: venue-user-dashboard.php");
              exit;
         }
-
-        if (checkInputs($venueUserID,$errorMessage,$pdo)) {
-            /* If everything is valid and the event has been added to the
-             * db then the user is redirected
-             * to the edit event page to fill in additional details
-             */
-            $_SESSION['message'] = "Event Created Successfully!";
-            $eventID = $_SESSION['eventID'];
-            header("location: event-edit.php?EventID=$eventID");
-            exit;
+        if (!empty($_POST) && isset($_POST['submit'])) {
+            if (checkInputs($venueUserID,$errorMessage,$pdo)) {
+                /* If everything is valid and the event has been added to the
+                 * db then the user is redirected
+                 * to the edit event page to fill in additional details
+                 */
+                $_SESSION['message'] = "Event Created Successfully!";
+                $eventID = $_SESSION['eventID'];
+                header("location: event-edit.php?EventID=$eventID");
+                exit;
+            }
         }
+
 
 
     } catch (PDOException $e) {
@@ -125,36 +128,37 @@
 
         try {
             // Check times given
-            if (isset($_POST['startTime']) && !empty($_POST['startTime'])) {
-                $phpStartDateTime = new DateTime($_POST['startTime']);
-                if (new DateTime("now") > $phpStartDateTime) {
-                    $errorMessage = "Event cannot be in the past!";
+                if (isset($_POST['startTime']) && !empty($_POST['startTime'])) {
+                    $phpStartDateTime = new DateTime($_POST['startTime']);
+                    if (new DateTime("now") > $phpStartDateTime) {
+                        $errorMessage = "Event cannot be in the past!";
+                        return false;
+                    }
+                } else {
+                    $errorMessage = "You must give a start time!";
                     return false;
                 }
-            } else {
-                $errorMessage = "You must give a start time!";
-                return false;
-            }
-            $startTimestamp = strtotime($_POST['startTime']);
-            $mysqlStartDateTime = date("Y-m-d H:i:s",$startTimestamp);
+                $startTimestamp = strtotime($_POST['startTime']);
+                $mysqlStartDateTime = date("Y-m-d H:i:s",$startTimestamp);
 
-            if (isset($_POST['endTime']) && !empty($_POST['endTime'])) {
-                $phpEndDateTime = new DateTime($_POST['endTime']);
-                if (new DateTime("now") > $phpEndDateTime) {
-                    $errorMessage = "Event cannot be in the past!";
+                if (isset($_POST['endTime']) && !empty($_POST['endTime'])) {
+                    $phpEndDateTime = new DateTime($_POST['endTime']);
+                    if (new DateTime("now") > $phpEndDateTime) {
+                        $errorMessage = "Event cannot be in the past!";
+                        return false;
+                    }
+                    if ($phpStartDateTime > $phpEndDateTime) {
+                        $errorMessage = "end time cannot be before start time!";
+                        return false;
+                    }
+                } else {
+                    $errorMessage = "You must give an end time!";
                     return false;
                 }
-                if ($phpStartDateTime > $phpEndDateTime) {
-                    $errorMessage = "end time cannot be before start time!";
-                    return false;
-                }
-            } else {
-                $errorMessage = "You must give an end time!";
-                return false;
-            }
 
-            $endTimestamp = strtotime($_POST['endTime']);
-            $mysqlEndDateTime = date("Y-m-d H:i:s",$endTimestamp);
+                $endTimestamp = strtotime($_POST['endTime']);
+                $mysqlEndDateTime = date("Y-m-d H:i:s",$endTimestamp);
+
         } catch (Exception $timeException) {
             $errorMessage = "Date and Time in the wrong format! Format (24 hour time) must be: dd-mm-yyyy hh:mm";
             return false;
@@ -253,7 +257,7 @@
             <div class="seperator">
                 <label>Enter current password to allow changes:</label>
                 <input type='password' name='password' required>
-                <input type='submit' value='Create' class="button" style="width: 100%">
+                <input type='submit' name='submit' value='Create' class="button" style="width: 100%">
             </div>
         </form>
     </div>
