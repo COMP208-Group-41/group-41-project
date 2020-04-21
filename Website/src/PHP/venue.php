@@ -115,7 +115,7 @@
             <h2 class='title'>Upcoming Events</h2>
             <?php
             if (isset($venueUserID)){
-              echo '<a href="event-creation.php?venueID='.$venueID.'" class="button" style="width: 100%; margin-bottom: 16px">Add Event</a>';
+              echo '<a href="event-creation.php?venueID='.$venueID.'" class="button" style="width: 100%; margin-bottom: 16px">Add a new Event</a>';
             }
             ?>
             <div class="eventlist" style="margin-bottom: 16px">
@@ -127,9 +127,9 @@
                       echo '<div class="event">';
                       echo '<div class="event-image"></div>';
                       echo '<div class="event-name">'.$row['EventName']."</div>";
-                      echo '<div class="event-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="event-button" style="margin-right: -1px">View Event</a>';
+                      echo '<div class="event-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="event-button" style="margin-right: -1px">View</a>';
                       if (isset($venueUserID)){
-                        echo '<a href="event-edit.php?eventID='.$row['EventID'].'" class="event-button" style="width: 50%">Edit Event</a></div></div>';
+                        echo '<a href="event-edit.php?eventID='.$row['EventID'].'" class="event-button" style="width: 50%">Edit</a></div></div>';
                       }
                     }
                     $counter++;
@@ -139,9 +139,8 @@
                   echo '<div class="event">';
                   echo '<div class="event-name">No events currently listed</div></div></div>';
                 }
-                echo '<a href="upcoming-events.php?venueID='.$venueID.' "class="button" style="width: 100%;">View All Events</a>';
-                echo '<div class="seperator" style="margin-top: 4px">';
-                echo '<a href="past-events.php?venueID='.$venueID.'" class="button" style="width: 100%; margin-bottom: 12px">View Past Events</a>';
+                echo '<div><a href="upcoming-events.php?venueID='.$venueID.' "class="button" style="width: 50%;  margin-bottom: 12px">View All Events</a>';
+                echo '<a href="past-events.php?venueID='.$venueID.'" class="button" style="width: 50%; margin-bottom: 12px">View Past Events</a></div>';
                 ?>
             <div class="seperator"></div>
             <h2 class='title'>Reviews</h2>
