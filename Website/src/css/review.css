@@ -4,8 +4,11 @@
     border: #3B3B3B 2px solid;
     border-radius: 4px;
     padding: 16px;
-    margin-bottom: -4px;
-    width: 75%;
+    margin-bottom: 16px;
+    width: 100%;
+}
+textarea {
+    font-size: 14px;
 }
 
 label {
