@@ -139,6 +139,7 @@
     <div class="container">
         <div style="display: flex; flex-direction: column">
             <h1 class="title"><?php echo $name; ?></h1>
+            <h2><?php echo '<a href="venue.php?venueID='.$venueID.'">'.$venueName.'</a>'; ?></h2>
                 <?php
                     if (isset($following)) {
                         if ($following) {
@@ -159,8 +160,6 @@
                 ?>
             </div>
             <div class="seperator"></div>
-            <label>Venue: <?php echo '<a href="venue.php?venueID='.$venueID.'">'.$venueName.'</a>'; ?></label>
-
             <label>Start Time: <?php echo $startTime; ?></label>
             <label>EndTime: <?php echo $endTime; ?></label>
             <label>Event description:</label>
