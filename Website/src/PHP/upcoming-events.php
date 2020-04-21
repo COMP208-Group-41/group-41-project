@@ -45,22 +45,24 @@
             <div class="seperator"></div>
             <?php
               echo '<div class="venue-buttons"><a href="venue.php?venueID='.$venueID.'" class="venue-button" style="margin-right: -1px">View Venue</a></div>';
-              echo "<table>";
               if ($events !== false){
                 foreach($events as $row){
+                    echo "<table>";
                     echo "<tr>";
                     echo "<td>".$row['EventName']."</td>";
                     echo '<td><div class="venue-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="venue-button" style="margin-right: -1px">View Event</a></td>';
                     echo "</tr><tr>";
                     echo "<td>Event Date: ".$row['EventStartTime']."</td>";
                     echo "</tr>";
+                    echo "</table>";
                 }
               } else {
+                echo "<table>";
                 echo "<tr>";
                 echo "<td>No Upcoming events for this Venue listed</td>";
                 echo "</tr>";
+                echo "</table>";
               }
-              echo "</table>";
               if (sizeof($events) > 5){
                 echo '<div class="venue-buttons"><a href="venue.php?venueID='.$venueID.'" class="venue-button" style="margin-right: -1px">View Venue</a></div>';
               }
