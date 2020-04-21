@@ -198,15 +198,15 @@
                 </div>
                 <div class="review-score">
                     <div class="label">Safety Score:</div>
-                    <div class="score"> <?php echo "$priceScore"; ?></div>
+                    <div class="score"> <?php echo "$safetyScore"; ?></div>
                 </div>
                 <div class="review-score">
                     <div class="label">Atmosphere Score:</div>
-                    <div class="score"> <?php echo "$priceScore"; ?></div>
+                    <div class="score"> <?php echo "$atmosphereScore"; ?></div>
                 </div>
                 <div class="review-score">
                     <div class="label">Queuing Score:</div>
-                    <div class="score"> <?php echo "$priceScore"; ?></div>
+                    <div class="score"> <?php echo "$queueScore"; ?></div>
                 </div>
             </div>
 
