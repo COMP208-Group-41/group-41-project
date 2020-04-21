@@ -89,11 +89,7 @@ if (isset($_SESSION['message'])) {
                 echo '<div class="venue-image"></div>';
                 echo '<div class="venue-name">'.$row['VenueName']."</div>";
                 echo '<div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -1px">View Venue</a>';
-                echo '<a href="venue-edit.php?venueID='.$row['VenueID'].'" class="venue-button" style="width: 33%">Edit Venue</a>';
-                echo '<form id="venueDeleteForm" name="venueDeleteForm" method="post">';
-                echo '<input type="text" name="venueID" value="'.$row['VenueID'].'" hidden>';
-                echo '<input type="submit" name="delete" value="Delete Venue" class="venue-button">';
-                echo '</form></div></div>';
+                echo '<a href="venue-edit.php?venueID='.$row['VenueID'].'" class="venue-button" style="width: 33%">Edit Venue</a></div></div>';
             }
             ?>
           </div>
