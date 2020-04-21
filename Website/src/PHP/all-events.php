@@ -9,7 +9,7 @@
     $allEvents = getAllEvents($pdo);
 
     function getAllEvents($pdo) {
-        $getStmt = $pdo->prepare("SELECT EventID,VenueID,EventName, EventStartTime FROM Event WHERE EventID<>'1' ORDER BY EventStartTime");
+        $getStmt = $pdo->prepare("SELECT EventID,VenueID,EventName, DATE_FORMAT(EventStartTime,'%H:%i %d-%m-%Y') FROM Event WHERE EventID<>'1' ORDER BY EventStartTime");
         $getStmt->execute();
         return $getStmt->fetchAll();
     }
@@ -45,7 +45,6 @@
     <div class="wrapper">
         <div class="container">
             <h1 class='title'>All Events</h1>
-            <div class="seperator"></div>
             <?php
               if (sizeof($allEvents) != 0) {
                   foreach($allEvents as $row) {
