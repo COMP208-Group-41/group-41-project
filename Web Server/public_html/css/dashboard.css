@@ -1,0 +1,106 @@
+:root {
+    --header-background: linear-gradient(90deg, #272727 0%, #202020 100%);
+    --body-background: #202020;
+    --body-highlight: #2E2E2E;
+    --light-body: #D6D6D6;
+    --dark-body: #C4C4C4;
+    --button-border: #3B3B3B;
+    --button-highlight: #ccc;
+    --text: #2E2E2E;
+    --gold: #BE9100;
+    --header-gray: #e9e9e9;
+    --dark-gold: #AF8200;
+}
+
+
+table, td, th {
+    border: 2px solid #3B3B3B;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+th, td {
+    padding: 8px;
+}
+
+th {
+    width: 20%;
+}
+
+.venuelist {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 16px;
+    justify-content: center;
+    width: 100%;
+}
+
+.venue {
+    display: flex;
+    width: 100%;
+    height: 48px;
+    background: var(--body-background);
+    justify-content: center;
+    align-items: center;
+    margin: -2px 0;
+
+}
+.venue-name {
+    width: 50%;
+    font-family: "K2D", sans-serif;
+    box-sizing: border-box;
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: var(--dark-body);
+    padding: 12px 20px 12px 10px;
+    color: var(--text);
+}
+
+.venue-buttons {
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    height: 100%;
+
+}
+
+.venue-button {
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: var(--body-background);
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+    padding: 12px 0px;
+    color: var(--light-body);
+    text-align: center;
+    text-decoration: none;
+    height: 100%;
+    flex-grow: 1;
+}
+
+.venue-button:focus {
+    outline: none;
+    background-color: var(--button-highlight);
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+}
+
+.venue-button:hover {
+    background-color: var(--dark-gold);
+    cursor: pointer;
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+}
+
+.venue-button:active {
+    background-color: var(--gold);
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+}
