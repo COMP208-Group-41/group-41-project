@@ -34,7 +34,7 @@
   $address = $result['VenueAddress'];
   $times = $result['VenueTimes'];
   $events = getEvents($venueID,$pdo);
-  $currentTagIDs = getTagID($venueID,$pdo);
+  $currentTagIDs = getVenueTagID($venueID,$pdo);
   $reviews = getVenueReviews($venueID,$pdo);
   $priceScore = getPriceScore($venueID,1,$pdo);
   $safetyScore = getSafetyScore($venueID,1,$pdo);
@@ -56,13 +56,6 @@
     $userID = $_SESSION["UserID"];
   } else if (isset($_SESSION["VenueUserID"]) && $owner == $_SESSION["VenueUserID"]){
     $venueUserID = $_SESSION["VenueUserID"];
-  }
-
-  function getTagID($venueID,$pdo) {
-      $getVenueTagsStmt = $pdo->prepare("SELECT TagID FROM VenueTag WHERE VenueID=:VenueID");
-      $getVenueTagsStmt->bindValue(":VenueID",$venueID);
-      $getVenueTagsStmt->execute();
-      return $getVenueTagsStmt->fetchAll();
   }
 
   $image = checkVenueImageOnServer($owner,$venueID);

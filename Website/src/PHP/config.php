@@ -571,4 +571,11 @@ function validate255($name) {
           return true;
       }
     }
+
+    function getVenueTagID($venueID,$pdo) {
+        $getVenueTagsStmt = $pdo->prepare("SELECT TagID FROM VenueTag WHERE VenueID=:VenueID");
+        $getVenueTagsStmt->bindValue(":VenueID",$venueID);
+        $getVenueTagsStmt->execute();
+        return $getVenueTagsStmt->fetchAll();
+    }
 ?>
