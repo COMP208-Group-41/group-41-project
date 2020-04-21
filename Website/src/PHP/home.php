@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/home.css">
     <link rel="stylesheet" type="text/css" href="../css/slideshow.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
 </head>
 <body>
 <?php include "navbar.php" ?>
