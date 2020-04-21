@@ -1,9 +1,3 @@
-:root {
-    --gold: #BE9100;
-    --dark-gold: #AF8200;
-    --button-border: #3B3B3B;
-}
-
 .input-file {
     width: 0.1px;
     height: 0.1px;
@@ -66,3 +60,6 @@
     width: 100%;
 }
 
+img {
+    max-height: 300px;
+}
