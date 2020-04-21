@@ -148,7 +148,7 @@
                 ?>
             </div>
             <div class="seperator"></div>
-            <h2>Reviews</h2><br>
+            <h2>Reviews</h2>
             <?php
                 if (isset($userID)) {
                     $checkReview = checkReviewWritten($userID,1,$venueID,$pdo);
