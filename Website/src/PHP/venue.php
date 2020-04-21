@@ -146,7 +146,7 @@
                   echo '<div class="event">';
                   echo '<div class="event-name">No events currently listed</div></div>';
                 }
-                echo '<div class=""><a href="" class="event-button" style="">View All Events</a></div>';
+                echo '<div class=""><a href="upcoming-events.php?venueID='.$venueID.' class="event-button" style="">View All Events</a></div>';
                 ?>
             </div>
             <div class="seperator"></div>
