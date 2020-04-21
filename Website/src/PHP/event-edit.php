@@ -270,6 +270,8 @@
         }
     }
 
+    $image = checkEventImageOnServer($venueUserID,$venueID,$eventID);
+
 ?>
 
 <!DOCTYPE html>
@@ -291,6 +293,12 @@
     ?>
     <div class="container">
         <h1 class='title'>Edit Event</h1>
+        <?php
+            if ($image) {
+                echo '<div class="seperator"></div>';
+                echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$venueUserID.'/'.$venueID.'/'.$eventID.'/event.jpg" alt="Event Image">';
+            }
+        ?>
         <form id='EventForm' name='EventForm' method='post' enctype="multipart/form-data">
             <div class="edit-fields">
                 <input type='text' name='name' placeholder="Event Name" value="<?php echo $name; ?>" required>
