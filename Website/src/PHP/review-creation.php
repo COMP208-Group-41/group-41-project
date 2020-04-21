@@ -3,12 +3,15 @@
 
     session_start();
 
-    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-        header("location: login.php");
+    if (isset($_SESSION['UserID'])) {
+        $userID = $_SESSION['UserID'];
+    }
+
+    if (isset($_SESSION['VenueUserID'])) {
+        // Venue users are not allowed to write reviews
+        $_SESSION['message'] = "Venue users cannot write reviews!";
+        header("location: venue-user-dashboard.php");
         exit;
-        /* If the user is logged in but they are a venue user then they are
-         * redirected to home page
-         */
     }
 
 
@@ -18,15 +21,14 @@
 
     require_once "config.php";
 
-    $userID = $_SESSION['UserID'];
     $errorMessage = "";
 
     // Gets which event or venue the review is for
-    if (isset($_GET['eventID'])){
+    if (isset($_GET['eventID'])) {
         $eventID = $_GET['eventID'];
         $getVenueID = eventIDToVenueID($eventID, $pdo);
         $venueID = $getVenueID['VenueID'];
-    } elseif (isset($_GET['venueID'])){
+    } else if (isset($_GET['venueID'])){
         $venueID = $_GET['venueID'];
         $eventID = 1;
     } else {
