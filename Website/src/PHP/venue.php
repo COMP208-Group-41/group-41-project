@@ -65,10 +65,10 @@
       return $getVenueTagsStmt->fetchAll();
   }
 
-  $image = checkImageOnServer($owner,$venueID);
+  $image = checkVenueImageOnServer($owner,$venueID);
 
   // Check if there is an image for this event
-  function checkImageOnServer($venueUserID,$venueID) {
+  function checkVenueImageOnServer($venueUserID,$venueID) {
     $target = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/venue.jpg";
     if (!file_exists($target)) {
         return false;
@@ -76,19 +76,6 @@
         // If the file exists then return true
         return true;
     }
-  }
-
-  function checkVenueExists($venueID,$pdo) {
-      $getStmt = $pdo->prepare("SELECT VenueID FROM Venue WHERE VenueID=:VenueID");
-      $getStmt->bindValue(":VenueID",$venueID);
-      $getStmt->execute();
-      if ($getStmt->rowCount() == 0) {
-          // Event doesn't exist!
-          return false;
-      } else {
-          // Event exists
-          return true;
-      }
   }
 
 ?>

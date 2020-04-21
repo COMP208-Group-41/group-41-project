@@ -24,6 +24,13 @@
 
     // Handle the GET variable for venueID to display the correct venue
     $venueID = $_GET['venueID'];
+
+    if (!checkVenueExists($venueID,$pdo)) {
+        $_SESSION['message'] = "This venue does not exist!";
+        header("location: 404.php");
+        exit;
+    }
+
     // Now check that the user accessing this venue is allowed to
     if (!checkVenueUserAllowed($venueID,$venueUserID,$pdo)) {
         // User is not allowed to edit!
