@@ -2,14 +2,14 @@
 
     session_start();
 
-    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-        header("location: venue-user-login.php");
-        exit;
-        /* If the user is logged in but they are not a venue user then they are
-         * redirected to home page
-         */
-    } else if (!isset($_SESSION["VenueUserID"])) {
+    if (!isset($_SESSION["VenueUserID"])) {
         header("location: home.php");
+        exit;
+    }
+
+    if (!isset($_GET['venueID'])) {
+        $_SESSION['message'] = "No venueID specified!";
+        header("location: 404.php");
         exit;
     }
 

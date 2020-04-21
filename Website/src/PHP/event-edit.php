@@ -8,6 +8,12 @@
         exit;
     }
 
+    if (!isset($_GET['eventID'])) {
+        $_SESSION['message'] = "No eventID specified!";
+        header("location: 404.php");
+        exit;
+    }
+
     error_reporting( E_ALL );
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
