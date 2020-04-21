@@ -228,12 +228,12 @@
         foreach(glob($dir . '/*') as $file) {
             if(is_dir($file)) {
                 deleteAll($file);
-            } else
+            } else {
                 unlink($file);
             }
+            rmdir($dir);
         }
-    rmdir($dir);
-}
+    }
 
     function deleteEvent($eventID, $pdo, &$errorMessage){
         $pdo->beginTransaction();
