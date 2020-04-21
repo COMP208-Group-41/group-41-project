@@ -50,6 +50,20 @@
       $array=$ret;
     }
 
+    // Back up function in case above sort doesn't work (Found on web)
+    /*
+    usort($myArray, function($a, $b) {
+      $retval = $a['order'] <=> $b['order'];
+      if ($retval == 0) {
+          $retval = $a['suborder'] <=> $b['suborder'];
+          if ($retval == 0) {
+            $retval = $a['details']['subsuborder'] <=> $b['details']['subsuborder'];
+          }
+      }
+      return $retval;
+    });
+    */
+
 ?>
 <!DOCTYPE html>
 <html lang='en-GB'>
