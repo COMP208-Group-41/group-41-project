@@ -186,32 +186,51 @@
                     }
                 }
             ?>
-            <br>
-            <label>Event Score: <?php echo"$totalScore";?></label><br>
-            <label>Price Score: <?php echo"$priceScore";?></label><br>
-            <label>Safety Score: <?php echo"$safetyScore";?></label><br>
-            <label>Atmosphere Score: <?php echo"$atmosphereScore";?></label><br>
-            <label>Queue Times Score: <?php echo"$queueScore";?></label><br>
+            <div class="review-scores">
+                <div class="review-score">
+                    <div class="label">Overall Score: <?php echo "$totalScore"; ?></div>
+                    <div class="score">5</div>
+                </div>
+                <div class="review-score">
+                    <div class="label">Price Score: <?php echo "$priceScore"; ?></div>
+                    <div class="score">3</div>
+                </div>
+                <div class="review-score">
+                    <div class="label">Safety Score: <?php echo "$priceScore"; ?></div>
+                    <div class="score">4</div>
+                </div>
+                <div class="review-score">
+                    <div class="label">Atmosphere Score: <?php echo "$priceScore"; ?></div>
+                    <div class="score">5</div>
+                </div>
+                <div class="review-score">
+                    <div class="label">Queuing Score: <?php echo "$priceScore"; ?></div>
+                    <div class="score">2</div>
+                </div>
+            </div>
 
             <div class="seperator"></div>
             <label>All Reviews</label>
-            <div class="reviewlist">
+
                 <?php
                 if ($reviews !== false){
+                    echo '<div class=\"reviewlist\">';
                   $counter = 0;
                   foreach ($reviews as $row) {
                     if($counter<5){
-                      echo "<label>Review left by: ".userIDtoUserName($row['UserID'],$pdo)."</label><br>";
-                      echo "<textarea readonly>".$row['ReviewText']."</textarea><br>";
-                      echo "<label>Price Score: ".$row['ReviewPrice']."</label><br>";
-                      echo "<label>Safety Score ".$row['ReviewSafety']."</label><br>";
-                      echo "<label>Atmosphere Score ".$row['ReviewAtmosphere']."</label><br>";
-                      echo "<label>Queue Times Score ".$row['ReviewQueue']."</label><br>";
-                      echo "<label>Review posted on: ".$row['ReviewDate']."</label><br>";
-                      echo '<div class="seperator"></div>';
+                        echo "<div class='review'>";
+                        echo "<label>Review left by:<b> " . userIDtoUserName($row['UserID'], $pdo) . "</b></label>";
+                        echo "<textarea readonly onchange='this.style.height = \"\";this.style.height = this.scrollHeight + 3 + \"px\"'>" . $row['ReviewText'] . "</textarea>";
+                        echo "<div class='review-scores'>";
+                        echo "<div class='review-score'><div class='label'>Price Score:</div><div class='score'>" . $row['ReviewPrice'] . "</div></div>";
+                        echo "<div class='review-score'><div class='label'>Safety Score:</div><div class='score'> " . $row['ReviewSafety'] . "</div></div>";
+                        echo "<div class='review-score'><div class='label'>Atmosphere Score:</div><div class='score'> " . $row['ReviewAtmosphere'] . "</div></div>";
+                        echo "<div class='review-score'><div class='label'>Queue Times Score:</div><div class='score'> " . $row['ReviewQueue'] . "</div></div></div>";
+                        echo "<label>Review posted on: " . $row['ReviewDate'] . "</label></div>";
                     }
                     $counter++;
                   }
+                  echo '</div>';
                 } else {
                   echo '<div class="">';
                   echo '<div class="">No reviews currently posted for this event</div></div>';
