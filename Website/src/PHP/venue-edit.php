@@ -209,7 +209,7 @@
     function deleteVenue($venueID, $pdo){
         $pdo->beginTransaction();
         $deleteVenueStmt = $pdo->prepare("DELETE FROM Reviews WHERE VenueID=:VenueID");
-        $deleteVenueStmt->bindValue(':VenueID',$VenueID);
+        $deleteVenueStmt->bindValue(':VenueID',$venueID);
         $success = $deleteVenueStmt->execute();
         if (!$success){
           $errorMessage = "Error in deleteing venue reviews!";
@@ -217,7 +217,7 @@
           return false;
         }
         $deleteVenueStmt = $pdo->prepare("DELETE FROM VenueTag WHERE VenueID=:VenueID");
-        $deleteVenueStmt->bindValue(':VenueID',$VenueID);
+        $deleteVenueStmt->bindValue(':VenueID',$venueID);
         $success = $deleteVenueStmt->execute();
         if (!$success){
           $errorMessage = "Error in deleteing venue tags!";
@@ -254,13 +254,14 @@
           }
         }
         $deleteVenueStmt = $pdo->prepare("DELETE FROM Venue WHERE VenueID=:VenueID");
-        $deleteVenueStmt->bindValue(':VenueID',$VenueID);
+        $deleteVenueStmt->bindValue(':VenueID',$venueID);
         $success = $deleteVenueStmt->execute();
         if (!$success){
           $errorMessage = "Error in deleteing venue!";
           $pdo->rollBack();
           return false;
         }
+        $pdo->commit();
         return true;
     }
 
@@ -453,8 +454,7 @@
                     <input type='password' name='password' required>
                 </div>
                 <input type='submit' name='submit' value='Save changes' class="button" style="width: 100%"><br>
-                <div class="seperator" style="margin-top: 4px"></div>
-                <input type='submit' name='delete' value='Delete Venue' class="button" style="width: 100%">
+                <div class="seperator" style="margin-top: 4px"></div> 
             </div>
         </form>
         <form id='DeleteVenue' name='DeleteVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
