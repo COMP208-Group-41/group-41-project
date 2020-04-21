@@ -73,9 +73,8 @@
 
     if (isset($_POST['unfollowForm'])) {
         if (unfollow($userID,$eventID,$pdo)) {
-            // Unfollow successful!
             $_SESSION['message'] = "You have unfollowed this event!";
-            $following=false;''
+            $following=false;
         }
     }
 
