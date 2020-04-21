@@ -437,9 +437,10 @@ function validate255($name) {
         return $name;
     }
 
-    function getVenuePriceScore($venueID, $pdo){
-      $getStmt = $pdo->prepare("SELECT ReviewPrice FROM Review WHERE VenueID=:VenueID");
+    function getPriceScore($venueID,$eventID,$pdo) {
+      $getStmt = $pdo->prepare("SELECT ReviewPrice FROM Review WHERE VenueID=:VenueID AND EventID=:EventID");
       $getStmt->bindValue(":VenueID",$venueID);
+      $getStmt->bindValue(":EventID",$eventID);
       $getStmt->execute();
       $results = $getStmt->fetchAll();
       $total = 0;
@@ -455,9 +456,10 @@ function validate255($name) {
       }
     }
 
-    function getVenueSafetyScore($venueID, $pdo){
-      $getStmt = $pdo->prepare("SELECT ReviewSafety FROM Review WHERE VenueID=:VenueID");
+    function getSafetyScore($venueID,$eventID,$pdo) {
+      $getStmt = $pdo->prepare("SELECT ReviewSafety FROM Review WHERE VenueID=:VenueID AND EventID=:EventID");
       $getStmt->bindValue(":VenueID",$venueID);
+      $getStmt->bindValue(":EventID",$eventID);
       $getStmt->execute();
       $results = $getStmt->fetchAll();
       $total = 0;
@@ -473,9 +475,10 @@ function validate255($name) {
       }
     }
 
-    function getVenueQueueScore($venueID, $pdo){
-      $getStmt = $pdo->prepare("SELECT ReviewQueue FROM Review WHERE VenueID=:VenueID");
+    function getQueueScore($venueID,$eventID,$pdo) {
+      $getStmt = $pdo->prepare("SELECT ReviewQueue FROM Review WHERE VenueID=:VenueID AND EventID=:EventID");
       $getStmt->bindValue(":VenueID",$venueID);
+      $getStmt->bindValue(":EventID",$eventID);
       $getStmt->execute();
       $results = $getStmt->fetchAll();
       $total = 0;
@@ -491,9 +494,10 @@ function validate255($name) {
       }
     }
 
-    function getVenueAtmosphereScore($venueID, $pdo){
-      $getStmt = $pdo->prepare("SELECT ReviewAtmosphere FROM Review WHERE VenueID=:VenueID");
+    function getAtmosphereScore($venueID,$eventID,$pdo) {
+      $getStmt = $pdo->prepare("SELECT ReviewAtmosphere FROM Review WHERE VenueID=:VenueID AND EventID=:EventID");
       $getStmt->bindValue(":VenueID",$venueID);
+      $getStmt->bindValue(":EventID",$eventID);
       $getStmt->execute();
       $results = $getStmt->fetchAll();
       $total = 0;

@@ -23,12 +23,12 @@
   $address = $result['VenueAddress'];
   $times = $result['VenueTimes'];
   $events = getEvents($venueID,$pdo);
-  $currentTagIDs = getTagID($venueID,$pdo);
-  $reviews = getVenueReviews($venueID,$pdo);
-  $priceScore = getVenuePriceScore($venueID,$pdo);
-  $safetyScore = getVenueSafetyScore($venueID,$pdo);
-  $atmosphereScore = getVenueAtmosphereScore($venueID,$pdo);
-  $queueScore = getVenueQueueScore($venueID,$pdo);
+  $currentTagIDs = getTagID($venueID,1,$pdo);
+  $reviews = getReviews($venueID,1,$pdo);
+  $priceScore = getPriceScore($venueID,1,$pdo);
+  $safetyScore = getSafetyScore($venueID,1,$pdo);
+  $atmosphereScore = getAtmosphereScore($venueID,1,$pdo);
+  $queueScore = getQueueScore($venueID,1,$pdo);
   if ($priceScore === false || $safetyScore === false || $atmosphereScore === false || $queueScore === false) {
       $totalScore = "No Scores";
       $priceScore = "No Scores";
