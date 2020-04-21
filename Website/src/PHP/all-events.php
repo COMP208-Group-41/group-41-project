@@ -19,7 +19,7 @@
       $getStmt->bindValue(":VenueID",$venueID);
       $getStmt->execute();
       $result = $getStmt->fetch();
-      return $result['VenueName']
+      return $result['VenueName'];
 
     }
 
