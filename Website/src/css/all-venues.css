@@ -60,12 +60,13 @@
     border: 2px solid var(--button-border);
     border-radius: 4px;
     align-items: center;
+    justify-content: center;
+    width: 30%;
 }
 
 .venue-tag {
 
     background-color: var(--body-background);
-
     padding: 1px;
     color: var(--light-body);
     text-align: center;
