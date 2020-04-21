@@ -143,7 +143,7 @@
                 echo '<a href="past-events.php?venueID='.$venueID.'" class="button" style="width: 50%; margin-bottom: 12px">View Past Events</a></div>';
                 ?>
             <div class="seperator"></div>
-            <h2 class='title'>Reviews</h2>
+            <h2 class='title'>Venue score</h2>
             <?php
                 if (isset($userID)) {
                     $checkReview = checkReviewWritten($userID,1,$venueID,$pdo);
@@ -154,11 +154,28 @@
                     }
                 }
             ?>
-            <label>Venue Score: <?php echo"$totalScore";?></label>
-            <label>Price Score: <?php echo"$priceScore";?></label>
-            <label>Safety Score: <?php echo"$safetyScore";?></label>
-            <label>Atmosphere Score: <?php echo"$atmosphereScore";?></label>
-            <label>Queue Times Score: <?php echo"$queueScore";?></label>
+            <div class="review-scores">
+                <div class="review-score">
+                    <div class="label">Overall Score: <?php echo"$totalScore";?></div>
+                    <div class="score">5</div>
+                </div>
+                <div class="review-score">
+                    <div class="label">Price Score: <?php echo"$priceScore";?></div>
+                    <div class="score">3</div>
+                </div>
+                <div class="review-score">
+                    <div class="label">Safety Score: <?php echo"$priceScore";?></div>
+                    <div class="score">4</div>
+                </div>
+                <div class="review-score">
+                    <div class="label">Atmosphere Score: <?php echo"$priceScore";?></div>
+                    <div class="score">5</div>
+                </div>
+                <div class="review-score">
+                    <div class="label">Queuing Score: <?php echo"$priceScore";?></div>
+                    <div class="score">2</div>
+                </div>
+            </div>
             <div class="seperator"></div>
             <h3 class="title">All Reviews</h3>
             <div class="reviewlist">
