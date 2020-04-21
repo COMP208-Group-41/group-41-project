@@ -138,8 +138,8 @@
 <div class="wrapper">
     <div class="container">
         <div style="display: flex; flex-direction: column">
-            <h1 class="title"><?php echo $name; ?></h1>
-            <h2>@ <?php echo '<a href="venue.php?venueID='.$venueID.'">'.$venueName.'</a>'; ?></h2>
+            <h1 class="title" style="margin-bottom: 8px"><?php echo $name; ?></h1>
+            <h2 class="title" style="text-decoration: none">@ <?php echo '<a href="venue.php?venueID='.$venueID.'">'.$venueName.'</a>'; ?></h2>
                 <?php
                     if (isset($following)) {
                         if ($following) {
@@ -161,8 +161,8 @@
             </div>
             <div class="seperator"></div>
             <div style="display: flex;">
-                <label class="text">Start Time: <?php echo $startTime; ?></label>
-                <label class="text">EndTime: <?php echo $endTime; ?></label></div>
+                <label class="text">Starts: <?php echo $startTime; ?></label>
+                <label class="text">Ends: <?php echo $endTime; ?></label></div>
             <label>Event description:</label>
             <textarea readonly placeholder="Description of event here"><?php echo $description; ?></textarea>
             <label style="text-align: center; margin-top: 16px;"><b>Event Tags:</b></label>
