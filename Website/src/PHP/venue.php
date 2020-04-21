@@ -178,10 +178,11 @@ $image = checkVenueImageOnServer($owner, $venueID);
                 </div>
                 <div class="seperator"></div>
                 <h2 class="title">All Reviews</h2>
-                <div class="reviewlist">
+
                     <?php
                     if ($reviews !== false) {
                         $counter = 0;
+                        echo '<div class="reviewlist">';
                         foreach ($reviews as $row) {
                             if ($counter < 5) {
                                 echo "<div class='review'>";
@@ -196,6 +197,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
                             }
                             $counter++;
                         }
+                        echo '</div>';
                     } else {
                         echo '<label style="font-size: 20px">No reviews currently posted for this venue</label>';
                     }
