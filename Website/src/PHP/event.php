@@ -94,7 +94,7 @@
                 <?php
                     if ($image) {
                         echo '<div class="seperator"></div>';
-                        echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$owner.'/'.$venueID.'/'.$eventID.'/event.jpg" alt="Venue Image">';
+                        echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$owner.'/'.$venueID.'/'.$eventID.'/event.jpg" alt="Event Image">';
                     }
                 ?>
             </div>
@@ -106,7 +106,7 @@
             <label>Event description:</label>
             <textarea readonly placeholder="Description of event here"><?php echo $description; ?></textarea>
 
-            <label style="text-align: center; margin-top: 16px;"><b>Venue Tags:</b></label>
+            <label style="text-align: center; margin-top: 16px;"><b>Event Tags:</b></label>
             <div style="display: flex; justify-content: center; ">
                 <div class="tag-container" style="text-align: center">
                     <?php getTags($currentTagIDs,$pdo); ?>
@@ -125,7 +125,7 @@
                 }
             ?>
             <br>
-            <label>Venue Score: <?php echo"$totalScore";?></label><br>
+            <label>Event Score: <?php echo"$totalScore";?></label><br>
             <label>Price Score: <?php echo"$priceScore";?></label><br>
             <label>Safety Score: <?php echo"$safetyScore";?></label><br>
             <label>Atmosphere Score: <?php echo"$atmosphereScore";?></label><br>
