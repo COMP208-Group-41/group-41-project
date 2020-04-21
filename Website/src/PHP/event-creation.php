@@ -1,14 +1,6 @@
 <?php
 
-    /* As with venue-creation, won't have tag entry in this page, or image
-     * upload
-     */
-
-     /* This page will not work on safari or firefox, add checks */
-
     session_start();
-
-    // Testing purposes
 
     if(isset($_SESSION['UserID'])) {
         $_SESSION['message'] = "You are not allowed to create an event!";
