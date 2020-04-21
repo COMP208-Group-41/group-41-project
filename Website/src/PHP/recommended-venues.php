@@ -9,8 +9,8 @@
     }
 
     if (!isset($_SESSION['UserID'])) {
-        $_SESSION['message'] = "You must be logged in to view recommended Venues and Events";
-        header("location: venue-user-dashboard.php");
+        $_SESSION['message'] = "You must be logged in to view recommended Venues";
+        header("location: login.php");
         exit;
     }
 
@@ -18,5 +18,20 @@
 <!DOCTYPE html>
 <html lang='en-GB'>
 
+<head>
+    <title>OutOut - Recommended Venues</title>
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+</head>
+<body>
+  <?php include "navbar.php" ?>
+  <div class="wrapper">
 
+
+
+
+
+
+  </div>
+</body>
 </html>
