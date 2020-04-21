@@ -69,6 +69,7 @@
 <head>
     <title>OutOut - <?php echo $name; ?></title>
     <link rel="stylesheet" type="text/css" href="../css/venue.css">
+    <link rel="stylesheet" type="text/css" href="../css/review.css">
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
 </head>
@@ -86,7 +87,6 @@
     <div class="container">
         <div style="display: flex; flex-direction: column">
             <h1 class="title"><?php echo "$name" ?></h1>
-
             <?php
                 if ($image) {
                     echo '<div class="seperator"></div>';
@@ -155,36 +155,34 @@
                     }
                 }
             ?>
-            <br>
-            <label>Venue Score: <?php echo"$totalScore";?></label><br>
-            <label>Price Score: <?php echo"$priceScore";?></label><br>
-            <label>Safety Score: <?php echo"$safetyScore";?></label><br>
-            <label>Atmosphere Score: <?php echo"$atmosphereScore";?></label><br>
-            <label>Queue Times Score: <?php echo"$queueScore";?></label><br>
-
-
+            <label>Venue Score: <?php echo"$totalScore";?></label>
+            <label>Price Score: <?php echo"$priceScore";?></label>
+            <label>Safety Score: <?php echo"$safetyScore";?></label>
+            <label>Atmosphere Score: <?php echo"$atmosphereScore";?></label>
+            <label>Queue Times Score: <?php echo"$queueScore";?></label>
             <div class="seperator"></div>
-            <label>All Reviews</label>
+            <h3 class="title">All Reviews</h3>
             <div class="reviewlist">
                 <?php
                 if ($reviews !== false){
                   $counter = 0;
                   foreach ($reviews as $row) {
                     if($counter<5){
-                      echo "<label>Review left by: ".userIDtoUserName($row['UserID'],$pdo)."</label><br>";
-                      echo "<textarea readonly>".$row['ReviewText']."</textarea><br>";
-                      echo "<label>Price Score: ".$row['ReviewPrice']."</label><br>";
-                      echo "<label>Safety Score: ".$row['ReviewSafety']."</label><br>";
-                      echo "<label>Atmosphere Score: ".$row['ReviewAtmosphere']."</label><br>";
-                      echo "<label>Queue Times Score: ".$row['ReviewQueue']."</label><br>";
-                      echo "<label>Review posted on: ".$row['ReviewDate']."</label><br>";
+                      echo "<div class='review'>";
+                      echo "<label>Review left by: ".userIDtoUserName($row['UserID'],$pdo)."</label>";
+                      echo "<textarea readonly>".$row['ReviewText']."</textarea>";
+                      echo "<div class='review-scores'>";
+                      echo "<div class='review-score'><div class='label'>Price Score:</div><div class='score'>".$row['ReviewPrice']."</div></div>";
+                      echo "<div class='review-score'><div class='label'>Safety Score:</div><div class='score'> ".$row['ReviewSafety']."</div></div>";
+                      echo "<div class='review-score'><div class='label'>Atmosphere Score:</div><div class='score'> ".$row['ReviewAtmosphere']."</div></div>";
+                      echo "<div class='review-score'><div class='label'>Queue Times Score:</div><div class='score'> ".$row['ReviewQueue']."</div></div>";
+                      echo "<label>Review posted on: ".$row['ReviewDate']."</label>";
                       echo '<div class="seperator"></div>';
                     }
                     $counter++;
                   }
                 } else {
-                  echo '<div class="">';
-                  echo '<div class="">No reviews currently posted for this venue</div></div>';
+                  echo '<label style="font-size: 20px">No reviews currently posted for this venue</label>';
                 }
                 ?>
             </div>
