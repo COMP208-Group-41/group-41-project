@@ -140,11 +140,11 @@
                 <?php
                     if (isset($following)) {
                         if ($following) {
-                            echo "<form id='unfollow' name='unfollowForm' method='post'>";
-                            echo "<input type='submit' name='unfollow' value='Unfollow This Event'></form>";
+                            echo '<form id="unfollow" name="unfollowForm" method="post">';
+                            echo '<input type="submit" name="unfollow" value="Unfollow This Event" class="button" style="width: 100%"></form>';
                         } else {
-                            echo "<form id='follow' name='followForm' method='post'>";
-                            echo "<input type='submit' name='follow' value='Follow This Event'></form>";
+                            echo '<form id="follow" name="followForm" method="post">';
+                            echo '<input type="submit" name="follow" value="Follow This Event" class="button" style="width: 100%"></form>';
                         }
                     }
                 ?>
