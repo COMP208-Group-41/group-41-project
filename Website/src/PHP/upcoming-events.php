@@ -15,10 +15,6 @@
       exit;
     }
 
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang='en-GB'>
@@ -44,7 +40,7 @@
             <div class="seperator"></div>
             <?php
               echo '<div class="venue-buttons"><a href="venue.php?venueID='.$venueID.'" class="venue-button" style="margin-right: -1px">View Venue</a></div>';
-              if ($events !== ){
+              if ($events !== false){
                 foreach($events as $row){
                   echo "<table>";
                     echo "<tr>";
