@@ -64,7 +64,7 @@
                  */
                 $_SESSION['message'] = "Event Created Successfully!";
                 $eventID = $_SESSION['eventID'];
-                header("location: event-edit.php?EventID=$eventID");
+                header("location: event-edit.php?eventID=$eventID");
                 exit;
             }
         }
