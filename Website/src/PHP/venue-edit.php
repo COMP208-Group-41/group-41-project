@@ -196,7 +196,7 @@
     }
 
     // Delete Venue
-    if (isset($_POST['delete']){
+    if (isset($_POST['delete'])){
       $password = $_POST['password'];
       if(verifyVenuePassword($venueUserID,$password,$pdo) === true) {
         $success = deleteVenue($venueID, $pdo, $errorMessage);
