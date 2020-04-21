@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/review.css">
+</head>
+<body>
+<div class="container">
+
+
+<div class="review">
+    echo "<label>Review left by: ".userIDtoUserName($row['UserID'],$pdo)."</label>";
+    <div class="review-scores">
+        <div class="review-score">
+            <div class="label">Venue Score: <?php echo"$totalScore";?></div>
+            <div class="score">5</div>
+        </div>
+        <div class="review-score">
+            <div class="label">Price Score: <?php echo"$priceScore";?></div>
+            <div class="score">3</div>
+        </div>
+        <div class="review-score">
+            <div class="label">Safety Score: <?php echo"$priceScore";?></div>
+            <div class="score">4</div>
+        </div>
+        <div class="review-score">
+            <div class="label">Atmosphere Score: <?php echo"$priceScore";?></div>
+            <div class="score">5</div>
+        </div>
+        <div class="review-score">
+            <div class="label">Queuing Score: <?php echo"$priceScore";?></div>
+            <div class="score">2</div>
+        </div>
+    </div>
+    <label>Reviewed - 11:59pm on 20/04/2020</label>
+</div>
+
+</div>
+</body>
