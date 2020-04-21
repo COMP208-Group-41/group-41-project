@@ -214,10 +214,25 @@
       if(verifyVenuePassword($venueUserID,$password,$pdo) === true) {
         $success = deleteEvent($eventID, $pdo, $errorMessage);
         if ($success){
-          header("location: venue-user-dashboard.php" );
-          exit;
+            // Image folder deletion
+            $directory = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID";
+            deleteAll($directory);
+            header("location: venue-user-dashboard.php");
+            exit;
         }
       }
+    }
+
+    // delete all files and sub-folders from a folder
+    function deleteAll($dir) {
+        foreach(glob($dir . '/*') as $file) {
+            if(is_dir($file)) {
+                deleteAll($file);
+            } else {
+                unlink($file);
+            }
+            rmdir($dir);
+        }
     }
 
     function deleteEvent($eventID, $pdo, &$errorMessage){
@@ -254,10 +269,6 @@
           $pdo->rollBack();
           return false;
         }
-
-        // Image folder deletion
-        $directory = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID";
-        deleteEventFiles($directory);
 
         $pdo->commit();
         return true;

@@ -131,19 +131,18 @@
                       if (isset($venueUserID)){
                         echo '<a href="event-edit.php?eventID='.$row['EventID'].'" class="event-button" style="width: 50%">Edit Event</a></div></div>';
                       }
-
                     }
                     $counter++;
                   }
+                  echo '</div>';
                 } else {
                   echo '<div class="event">';
-                  echo '<div class="event-name">No events currently listed</div></div>';
+                  echo '<div class="event-name">No events currently listed</div></div></div>';
                 }
-                echo '<a href="upcoming-events.php?venueID='.$venueID.' "class="button">View All Events</a>';
+                echo '<a href="upcoming-events.php?venueID='.$venueID.' "class="button" style="width: 100%;">View All Events</a>';
                 echo '<div class="seperator" style="margin-top: 4px">';
-                echo '<a href="past-events.php?venueID='.$venueID.'" class="button">View Past Events</a>';
+                echo '<a href="past-events.php?venueID='.$venueID.'" class="button" style="width: 100%;">View Past Events</a>';
                 ?>
-            </div>
             <div class="seperator"></div>
             <h2 class='title'>Reviews</h2>
             <?php
