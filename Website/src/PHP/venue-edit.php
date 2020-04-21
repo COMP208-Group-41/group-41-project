@@ -196,7 +196,9 @@
     }
 
     // Delete Venue
-    if (isset($_POST['delete']) && verifyVenuePassword($VenueUserID,$password,$pdo) === true) {
+    if (isset($_POST['delete']){
+      $password = $_POST['password'];
+      if(verifyVenuePassword($venueUserID,$password,$pdo) === true) {
         $success = deleteVenue($venueID, $pdo, $errorMessage);
         if ($success){
           header("location: venue-user-dashboard.php" );

@@ -209,12 +209,15 @@
     }
 
     // Delete event
-    if (isset($_POST['delete']) && verifyVenuePassword($VenueUserID,$password,$pdo) === true) {
+    if (isset($_POST['delete']){ 
+      $password = $_POST['password'];
+      if(verifyVenuePassword($venueUserID,$password,$pdo) === true) {
         $success = deleteEvent($eventID, $pdo, $errorMessage);
         if ($success){
           header("location: venue-user-dashboard.php" );
           exit;
         }
+      }
     }
 
     function deleteEvent($eventID, $pdo, &$errorMessage){
