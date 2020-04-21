@@ -512,4 +512,15 @@ function validate255($name) {
           return $total/$counter;
       }
     }
+
+    /* If the username is less than 6 characters or more than 20 characters,
+     * then it is not valid!
+     */
+    function validateUserName($username) {
+        if (strlen($username) < 6 || strlen($username) > 20) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 ?>

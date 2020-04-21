@@ -54,9 +54,9 @@
                 } elseif (checkUsernameExists($username, $pdo)) {
                   // Account already exists with username address entered!
                     $errorMessage = 'An Account already exists with that username!';
-                } elseif (!validate255($username)) {
+                } elseif (!validateUserName($username)) {
                   // Account username too long
-                    $errorMessage = 'Username too long!';
+                    $errorMessage = 'Username must be more than 6 characters and less than 20!';
                 } else {
                     // Account does not exist with email, continue with registration
                     $dob = $_POST['DOB'];
