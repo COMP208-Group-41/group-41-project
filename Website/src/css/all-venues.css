@@ -46,6 +46,7 @@
     color: var(--text);
     align-items: center;
     margin-right: -2px;
+    width: 40%;
 }
 
 .venue-tags {
