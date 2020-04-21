@@ -16,17 +16,19 @@
 
 
     function getTagsNoEcho($tagIDs,$pdo) {
+        $allTags = "";
         if (sizeof($tagIDs) > 0) {
             foreach ($tagIDs as $tagID) {
                 $getTagNameStmt = $pdo->prepare("SELECT TagName FROM Tag WHERE TagID=:TagID");
                 $getTagNameStmt->bindValue(":TagID",$tagID['TagID']);
                 $getTagNameStmt->execute();
                 $tag = $getTagNameStmt->fetch();
-                return $tag['TagName']."<br>";
+                $allTags = $allTags.$tag['TagName']."<br>";
             }
         } else {
             return "No Tags";
         }
+        return $allTags;
     }
 
 ?>
