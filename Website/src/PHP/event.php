@@ -160,8 +160,9 @@
                 ?>
             </div>
             <div class="seperator"></div>
-            <label>Start Time: <?php echo $startTime; ?></label>
-            <label>EndTime: <?php echo $endTime; ?></label>
+            <div style="display: flex;">
+                <label class="text">Start Time: <?php echo $startTime; ?></label>
+                <label class="text">EndTime: <?php echo $endTime; ?></label></div>
             <label>Event description:</label>
             <textarea readonly placeholder="Description of event here"><?php echo $description; ?></textarea>
             <label style="text-align: center; margin-top: 16px;"><b>Event Tags:</b></label>
