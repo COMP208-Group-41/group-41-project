@@ -148,7 +148,17 @@
             </div>
             <div class="seperator"></div>
             <h2>Reviews</h2><br><br>
+            <?php
+                if (isset($userID)) {
+                    $checkReview = checkReviewWritten($userID,$eventID,$venueID,$pdo);
+                    if ($checkReview === false) {
+                        echo '<a href="review-creation.php?venueID='.$venueID.'">Write a Review</a>';
+                    } else {
+                        echo '<a href="review-edit.php?reviewID='.$checkReview.'">Edit Review</a>';
+                    }
+                }
 
+            ?>
             <label>Venue Score: <?php echo"$totalScore";?></label><br>
             <label>Price Score: <?php echo"$priceScore";?></label><br>
             <label>Safety Score: <?php echo"$safetyScore";?></label><br>
