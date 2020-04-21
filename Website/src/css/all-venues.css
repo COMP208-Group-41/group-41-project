@@ -1,19 +1,25 @@
+body {
+    overflow-x: hidden;
+}
+
 .list {
     display: inline-flex;
-    flex-direction: column;
+    flex-direction: row;
     padding-bottom: 16px;
-    justify-content: center;
-    width: 100%;
+    justify-content: left;
+    width: 80vw;
+    min-width: 400px;
+    overflow: auto;
+    flex-wrap: wrap;
 }
 
 .venue {
     display: flex;
     background: var(--body-background);
     justify-content: center;
-    flex-grow: 1;
     border-radius: 4px;
     width: 400px;
-    margin-bottom: 16px;
+    margin: 16px;
 }
 
 .rating-square {
@@ -116,4 +122,44 @@
     background-color: var(--gold);
     border: 2px solid var(--button-border);
     border-radius: 4px;
+}
+
+@media screen and (max-width: 450px) {
+    .list {
+        display: inline-flex;
+        flex-direction: column;
+        padding-bottom: 16px;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .venue {
+        display: flex;
+        background: var(--body-background);
+        justify-content: center;
+        flex-grow: 1;
+        border-radius: 4px;
+        max-width: 400px;
+        margin-bottom: 16px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .list {
+        display: inline-flex;
+        flex-direction: column;
+        padding-bottom: 16px;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .venue {
+        display: flex;
+        background: var(--body-background);
+        justify-content: center;
+        flex-grow: 1;
+        border-radius: 4px;
+        max-width: 600px;
+        margin-bottom: 16px;
+    }
 }
