@@ -50,7 +50,6 @@
                     echo "</tr><tr>";
                       echo "<td>Event Date: ".$row['EventStartTime']."</td>";
                     echo "</tr>";
-                  echo "</table>";
                 }
               } else {
                 echo "<tr>";
