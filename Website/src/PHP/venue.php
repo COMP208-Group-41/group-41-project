@@ -143,11 +143,11 @@
                   echo '<div class="event">';
                   echo '<div class="event-name">No events currently listed</div></div>';
                 }
-                echo '<div class=""><a href="" class="event-button" style="">View All Events</a>';
+                echo '<div class=""><a href="" class="event-button" style="">View All Events</a></div>';
                 ?>
             </div>
             <div class="seperator"></div>
-            <h2>Reviews</h2><br><br>
+            <h2>Reviews</h2><br>
             <?php
                 if (isset($userID)) {
                     $checkReview = checkReviewWritten($userID,1,$venueID,$pdo);
@@ -157,8 +157,8 @@
                         echo '<a href="review-edit.php?reviewID='.$checkReview.'">Edit Review</a>';
                     }
                 }
-
             ?>
+            <br>
             <label>Venue Score: <?php echo"$totalScore";?></label><br>
             <label>Price Score: <?php echo"$priceScore";?></label><br>
             <label>Safety Score: <?php echo"$safetyScore";?></label><br>
