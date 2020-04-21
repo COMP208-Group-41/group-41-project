@@ -600,4 +600,17 @@ function validate255($name) {
         $getStmt->execute();
         return $getStmt->fetchAll();
     }
+
+    // https://www.kodingmadesimple.com/2017/05/delete-all-files-and-subfolders-from-folder-php.html
+    // delete all files and sub-folders from a folder
+    function deleteAll($path) {
+        foreach (glob($path . '/*') as $file) {
+            if (is_dir($file)) {
+                deleteAll($file);
+            } else {
+                unlink($file);
+            }
+            rmdir($path);
+        }
+    }
 ?>
