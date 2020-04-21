@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="../css/all-venues.css">
 </head>
 <body>
     <?php include "navbar.php" ?>
@@ -32,29 +32,23 @@
             <h1 class='title'>All Venues</h1>
             <?php
               if (sizeof($allVenues) != 0) {
+                  echo "<div class='list'>";
                   foreach($allVenues as $row) {
-                      echo '<div class="seperator" style="margin-top: 4px">';
                       $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
-                      echo "<table>";
-                      echo "<tr>";
-                      echo "<td>".$row['VenueName']."</td>";
-                      echo '<td><div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-left: -1px">View Venue</a>';
-                      echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -1px">View Upcoming Events</a></div></td>';
-                      echo '<td><div class="tag-container" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div></td>';
-                      echo "</tr>";
-                      echo "</table>";
+                      echo "<div class='venue'>";
+                      echo "<div class='venue-name'>".$row['VenueName'];
+                      echo "<div class='rating-wrapper'>Rating:<div class='rating-square'>5</div></div></div>'";
+                      echo '<div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-bottom: -2px">View Venue</a>';
+                      echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="venue-button">View Upcoming Events</a></div>';
+                      echo '<div class="venue-tags" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
+                      echo "</div>";
                   }
+                  echo "</div>";
               } else {
-                echo "<table>";
-                echo "</tr><tr>";
-                echo "<td>No Upcoming events for this Venue listed</td>";
-                echo "</tr>";
-                echo "</table>";
+                echo "<h2 class='title'>No venues found!</h2>";
+                echo ""
               }
             ?>
-
-
-
         </div>
     </div>
 
