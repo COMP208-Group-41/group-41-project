@@ -59,7 +59,7 @@
     $currentTagIDs = getEventTagID($eventID,$pdo);
 
     try {
-        if (!empty($_POST) && isset($_POST['submit']) && !$editable) {
+        if (!empty($_POST) && isset($_POST['submit']) && $editable) {
 
              if (checkInputs($venueUserID,$eventID,$venueID,$errorMessage,$pdo)) {
                  $_SESSION['message'] = "Event Edited Successfully!";
