@@ -81,7 +81,7 @@
   function checkVenueExists($venueID,$pdo) {
       $getStmt = $pdo->prepare("SELECT VenueID FROM Venue WHERE VenueID=:VenueID");
       $getStmt->bindValue(":VenueID",$venueID);
-      $getStmt->execte();
+      $getStmt->execute();
       if ($getStmt->rowCount() == 0) {
           // Event doesn't exist!
           return false;

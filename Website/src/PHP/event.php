@@ -76,7 +76,7 @@
     function checkEventExists($eventID,$pdo) {
         $getStmt = $pdo->prepare("SELECT EventID FROM Event WHERE EventID=:EventID");
         $getStmt->bindValue(":EventID",$eventID);
-        $getStmt->execte();
+        $getStmt->execute();
         if ($getStmt->rowCount() == 0) {
             // Event doesn't exist!
             return false;
