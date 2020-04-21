@@ -62,6 +62,7 @@
 
     $image = checkEventImageOnServer($owner,$venueID,$eventID);
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en-GB">
@@ -110,11 +111,14 @@
             <h2 class='title'>Reviews</h2>
             <?php
                 if (isset($userID)) {
-                    $checkReview = checkReviewWritten($userID,$eventID,$venueID,$pdo);
-                    if ($checkReview === false) {
-                        echo '<a href="review-creation.php?eventID='.$eventID.'">Write a Review</a>';
-                    } else {
-                        echo '<a href="review-edit.php?reviewID='.$checkReview.'">Edit Review</a>';
+                    $compareDate = new DateTime($result['EventEndTime']);
+                    if (new DateTime("now") > $compareDate) {
+                        $checkReview = checkReviewWritten($userID,$eventID,$venueID,$pdo);
+                        if ($checkReview === false) {
+                            echo '<a href="review-creation.php?eventID='.$eventID.'">Write a Review</a>';
+                        } else {
+                            echo '<a href="review-edit.php?reviewID='.$checkReview.'">Edit Review</a>';
+                        }
                     }
                 }
             ?>
