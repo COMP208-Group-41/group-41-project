@@ -208,6 +208,53 @@
         return true;
     }
 
+    // Delete event
+    if (isset($_POST['delete']) && verifyVenuePassword($VenueUserID,$password,$pdo) === true) {
+        $success = deleteEvent($eventID, $pdo, $errorMessage);
+        if ($success){
+          header("location: venue-user-dashboard.php" );
+          exit;
+        }
+    }
+
+    function deleteEvent($eventID, $pdo, &$errorMessage){
+        $pdo->beginTransaction();
+        $deleteVenueStmt = $pdo->prepare("DELETE FROM Review WHERE EventID=:EventID");
+        $deleteVenueStmt->bindValue(':EventID',$eventID);
+        $success = $deleteVenueStmt->execute();
+        if (!$success){
+          $errorMessage = "Error in deleteing event reviews!";
+          $pdo->rollBack();
+          return false;
+        }
+        $deleteEventStmt = $pdo->prepare("DELETE FROM EventTag WHERE EventID=:EventID");
+        $deleteEventStmt->bindValue(':EventID',$eventID);
+        $success = $deleteEventStmt->execute();
+        if (!$success){
+          $errorMessage = "Error in deleteing event tags!";
+          $pdo->rollBack();
+          return false;
+        }
+        $deleteEventStmt = $pdo->prepare("DELETE FROM InterestedIn WHERE EventID=:EventID");
+        $deleteEventStmt->bindValue(':EventID',$eventID);
+        $success = $deleteEventStmt->execute();
+        if (!$success){
+          $errorMessage = "Error in deleteing event InterestedIn!";
+          $pdo->rollBack();
+          return false;
+        }
+        $deleteEventStmt = $pdo->prepare("DELETE FROM Event WHERE EventID=:EventID");
+        $deleteEventStmt->bindValue(':EventID',$eventID);
+        $success = $deleteEventStmt->execute();
+        if (!$success){
+          $errorMessage = "Error in deleteing event!";
+          $pdo->rollBack();
+          return false;
+        }
+        $pdo->commit();
+        return true;
+    }
+
     function uploadEventImage($venueUserID,$venueID,$eventID,$pdo) {
         // Remove any existing file first
         $directory = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID/event.jpg";
@@ -364,7 +411,13 @@
                 <input type='password' name='password' required>
                 <input type='submit' name='submit' value='Update' class="button" style="width: 100%" <?php if (!$editable) { echo "disabled";} ?>><br>
                 <div class="seperator" style="margin-top: 4px"></div>
-                <input type='submit' name='delete' value='Delete Event' class="button" style="width: 100%">
+        </form>
+        <form id='DeleteVenue' name='DeleteVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
+          <div class="edit-fields">
+            <label>Enter current password to delete event:</label>
+            <input type='password' name='password' required>
+            <input type='submit' name='delete' value='Delete Event' class="button" style="width: 100%">
+          </div>
         </form>
     </div>
 </div>
