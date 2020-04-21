@@ -67,16 +67,7 @@
 
   $image = checkVenueImageOnServer($owner,$venueID);
 
-  // Check if there is an image for this event
-  function checkVenueImageOnServer($venueUserID,$venueID) {
-    $target = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/venue.jpg";
-    if (!file_exists($target)) {
-        return false;
-    } else {
-        // If the file exists then return true
-        return true;
-    }
-  }
+
 
 ?>
 

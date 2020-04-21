@@ -297,6 +297,8 @@
         }
     }
 
+    $image = checkVenueImageOnServer($venueUserID,$venueID);
+
 ?>
 
 <!DOCTYPE html>
@@ -318,6 +320,13 @@
     ?>
     <div class="container">
         <h1 class="title"><?php echo $name; ?></h1>
+        <?php
+            if ($image) {
+                echo '<div class="seperator"></div>';
+                echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$venueUserID.'/'.$venueID.'/venue.jpg" alt="Venue Image">';
+            }
+        ?>
+
         <form id='CreateVenue' name='CreateVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
             <div class="edit-fields">
                 <label for='venueName'>Venue Name:</label>
