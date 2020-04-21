@@ -86,7 +86,7 @@
         }
 
         // Check which venue has been selected
-        if (!(isset($_POST['venue'])) || $_POST['venue'] != 'None') {
+        if (!(isset($_POST['venue'])) || $_POST['venue'] == 'None') {
             // No Venue selected!
             $errorMessage = "Please select a venue!";
             return false;
