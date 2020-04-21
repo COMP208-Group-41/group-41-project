@@ -167,9 +167,9 @@
                       echo "<label>Review left by: ".userIDtoUserName($row['UserID'],$pdo)."</label><br>";
                       echo "<textarea readonly>".$row['ReviewText']."</textarea><br>";
                       echo "<label>Price Score: ".$row['ReviewPrice']."</label><br>";
-                      echo "<label>Safety Score ".$row['ReviewSafety']."</label><br>";
-                      echo "<label>Atmosphere Score ".$row['ReviewAtmosphere']."</label><br>";
-                      echo "<label>Queue Times Score ".$row['ReviewQueue']."</label><br>";
+                      echo "<label>Safety Score: ".$row['ReviewSafety']."</label><br>";
+                      echo "<label>Atmosphere Score: ".$row['ReviewAtmosphere']."</label><br>";
+                      echo "<label>Queue Times Score: ".$row['ReviewQueue']."</label><br>";
                       echo "<label>Review posted on: ".$row['ReviewDate']."</label><br>";
                       echo '<div class="seperator"></div>';
                     }
