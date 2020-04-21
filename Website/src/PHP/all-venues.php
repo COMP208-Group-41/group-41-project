@@ -4,7 +4,16 @@
 
     session_start();
 
+    require_once "config.php";
 
+    $allVenues = getAllVenues($pdo);
+
+
+    function getAllVenues($pdo) {
+        $getStmt = $pdo->prepare("SELECT VenueID,VenueUserID,VenueName FROM Venue");
+        $getStmt->execute();
+        return $getStmt->fetchAll();
+    }
 
 ?>
 <!DOCTYPE html>
