@@ -92,7 +92,8 @@
                     <?php getTags($currentTagIDs,$pdo); ?>
                 </div>
             </div>
-            <h2>Reviews</h2>
+            <div class="seperator"></div>
+            <h2 class='title'>Reviews</h2>
             <?php
                 if (isset($userID)) {
                     $checkReview = checkReviewWritten($userID,$eventID,$venueID,$pdo);
@@ -102,12 +103,15 @@
                         echo '<a href="review-edit.php?reviewID='.$checkReview.'">Edit Review</a>';
                     }
                 }
-
             ?>
-            <label>Overall Review Scores</label>
+            <br>
+            <label>Venue Score: <?php echo"$totalScore";?></label><br>
+            <label>Price Score: <?php echo"$priceScore";?></label><br>
+            <label>Safety Score: <?php echo"$safetyScore";?></label><br>
+            <label>Atmosphere Score: <?php echo"$atmosphereScore";?></label><br>
+            <label>Queue Times Score: <?php echo"$queueScore";?></label><br>
 
-
-
+            <div class="seperator"></div>
             <label>All Reviews</label>
             <div class="reviewlist">
                 <?php
