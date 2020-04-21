@@ -547,4 +547,17 @@ function validate255($name) {
             return true;
         }
     }
+
+    function checkVenueExists($venueID,$pdo) {
+        $getStmt = $pdo->prepare("SELECT VenueID FROM Venue WHERE VenueID=:VenueID");
+        $getStmt->bindValue(":VenueID",$venueID);
+        $getStmt->execute();
+        if ($getStmt->rowCount() == 0) {
+            // Event doesn't exist!
+            return false;
+        } else {
+            // Event exists
+            return true;
+        }
+    }
 ?>
