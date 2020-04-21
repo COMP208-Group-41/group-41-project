@@ -41,6 +41,7 @@ img {
 }
 
 .event-button {
+    font-family: "K2D", sans-serif;
     margin: 0;
     box-sizing: border-box;
     font-size: 16px;

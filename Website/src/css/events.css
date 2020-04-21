@@ -3,6 +3,7 @@ img {
 }
 
 .text {
+    font-family: "K2D", sans-serif;
     margin: 0px 0px 16px;
     box-sizing: border-box;
     border: 2px solid var(--button-border);
