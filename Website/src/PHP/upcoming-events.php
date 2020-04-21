@@ -10,6 +10,7 @@
       $events = getEvents($venueID, $pdo);
       $venueDetails = getVenueInfo($venueID,$pdo);
     } else {
+      $_SESSION['message'] = "Venue ID was not set and page could not be found!";
       header("location: 404.php");
       exit;
     }
