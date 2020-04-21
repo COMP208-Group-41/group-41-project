@@ -156,24 +156,24 @@ $image = checkVenueImageOnServer($owner, $venueID);
                 ?>
                 <div class="review-scores">
                     <div class="review-score">
-                        <div class="label">Overall Score: <?php echo "$totalScore"; ?></div>
-                        <div class="score">5</div>
+                        <div class="label">Overall Score:</div>
+                        <div class="score"> <?php echo "$totalScore"; ?></div>
                     </div>
                     <div class="review-score">
-                        <div class="label">Price Score: <?php echo "$priceScore"; ?></div>
-                        <div class="score">3</div>
+                        <div class="label">Price Score:</div>
+                        <div class="score"><?php echo "$priceScore"; ?></div>
                     </div>
                     <div class="review-score">
-                        <div class="label">Safety Score: <?php echo "$priceScore"; ?></div>
-                        <div class="score">4</div>
+                        <div class="label">Safety Score:</div>
+                        <div class="score"> <?php echo "$priceScore"; ?></div>
                     </div>
                     <div class="review-score">
-                        <div class="label">Atmosphere Score: <?php echo "$priceScore"; ?></div>
-                        <div class="score">5</div>
+                        <div class="label">Atmosphere Score:</div>
+                        <div class="score"> <?php echo "$priceScore"; ?></div>
                     </div>
                     <div class="review-score">
-                        <div class="label">Queuing Score: <?php echo "$priceScore"; ?></div>
-                        <div class="score">2</div>
+                        <div class="label">Queuing Score:</div>
+                        <div class="score"> <?php echo "$priceScore"; ?></div>
                     </div>
                 </div>
                 <div class="seperator"></div>
