@@ -24,7 +24,7 @@
   $times = $result['VenueTimes'];
   $events = getEvents($venueID,$pdo);
   $currentTagIDs = getTagID($venueID,$pdo);
-  $reviews = getReviews($venueID,$pdo);
+  $reviews = getVenueReviews($venueID,$pdo);
   $priceScore = getPriceScore($venueID,1,$pdo);
   $safetyScore = getSafetyScore($venueID,1,$pdo);
   $atmosphereScore = getAtmosphereScore($venueID,1,$pdo);
