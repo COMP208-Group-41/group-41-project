@@ -43,7 +43,7 @@
                   foreach($allVenues as $row) {
                       echo "<tr>";
                       echo "<td>".$row['VenueName']."</td>";
-                      echo '<td><div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -1px">View Event</a></td>';
+                      echo '<td><div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -1px" width=100%>View Event</a></td>';
                       echo "</tr>";
                   }
                   echo "</table>";
@@ -52,7 +52,6 @@
                 echo "<td>No Upcoming events for this Venue listed</td>";
                 echo "</tr>";
               }
-              echo '<div class="venue-buttons"><a href="venue.php?venueID='.$venueID.'" class="venue-button" style="margin-right: -1px">View Venue</a></div>';
             ?>
 
 
