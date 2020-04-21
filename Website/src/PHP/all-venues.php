@@ -39,7 +39,7 @@
                       echo "<div class='venue-name'>".$row['VenueName'];
                       echo "<div class='rating-wrapper'>Rating:<div class='rating-square'>5</div></div></div>'";
                       echo '<div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-bottom: -2px">View Venue</a>';
-                      echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="venue-button">View Upcoming Events</a></div>';
+                      echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="venue-button">Upcoming Events</a></div>';
                       echo '<div class="venue-tags" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
                       echo "</div>";
                   }
