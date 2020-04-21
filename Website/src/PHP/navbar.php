@@ -13,7 +13,7 @@
       $accountLink = "login.php";
     }
     $eventLink = "events.php";
-    $venueLink = "venues.php";
+    $venueLink = "all-venues.php";
     $aboutLink = "about.php";
 
 ?>
