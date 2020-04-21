@@ -86,7 +86,7 @@
         }
 
         // Check which venue has been selected
-        if (!(isset($_POST['venue'])) && $_POST['venue'] != 'None') {
+        if (!(isset($_POST['venue'])) || $_POST['venue'] == 'None') {
             // No Venue selected!
             $errorMessage = "Please select a venue!";
             return false;
@@ -238,7 +238,7 @@
                     <?php echoVenues($venues); ?>
                 </select>
                 <label>Name of event:</label>
-                <input type='text' name='name' placeholder="Bongos Bingo" required>
+                <input type='text' name='name' placeholder="Event Name" required>
                 <label>Description:</label>
                 <textarea id='description' name ='description' form='EventCreation' placeholder="Event Description, max 1000 characters" required></textarea><br>
                 <label for='startTime'>Start Time:</label>
