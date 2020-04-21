@@ -143,7 +143,7 @@
                   echo '<div class="event">';
                   echo '<div class="event-name">No events currently listed</div></div>';
                 }
-                echo '<div class=""><a href="" class="event-button" style="">View All EventS</a>';
+                echo '<div class=""><a href="" class="event-button" style="">View All Events</a>';
                 ?>
             </div>
             <div class="seperator"></div>
