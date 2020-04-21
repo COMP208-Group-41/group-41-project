@@ -177,7 +177,6 @@
                       echo "<div class='review-score'><div class='label'>Atmosphere Score:</div><div class='score'> ".$row['ReviewAtmosphere']."</div></div>";
                       echo "<div class='review-score'><div class='label'>Queue Times Score:</div><div class='score'> ".$row['ReviewQueue']."</div></div>";
                       echo "<label>Review posted on: ".$row['ReviewDate']."</label>";
-                      echo '<div class="seperator"></div>';
                     }
                     $counter++;
                   }
