@@ -204,6 +204,7 @@
           header("location: venue-user-dashboard.php" );
           exit;
         }
+      }
     }
 
     function deleteVenue($venueID, $pdo, &$errorMessage){
