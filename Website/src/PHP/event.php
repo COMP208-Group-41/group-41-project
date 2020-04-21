@@ -28,6 +28,10 @@
     $endTime = str_replace("T"," ",$result['EventEndTime']);
     $currentTagIDs = getEventTagID($eventID,$pdo);
     $reviews = getEventReviews($eventID,$pdo);
+    $priceScore = getPriceScore($venueID,$eventID,$pdo);
+    $safetyScore = getSafetyScore($venueID,$eventID,$pdo);
+    $atmosphereScore = getAtmosphereScore($venueID,$eventID,$pdo);
+    $queueScore = getQueueScore($venueID,$eventID,$pdo);
 
     if (isset($_SESSION['UserID'])) {
         $userID = $_SESSION['UserID'];
