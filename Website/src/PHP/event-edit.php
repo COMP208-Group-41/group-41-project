@@ -286,8 +286,7 @@
             unlink($file);
     }
     rmdir($dir);
-}
-?>
+    }
 
 
     function updateEvent($eventID,$name,$description,$startTime,$endTime,$pdo) {
