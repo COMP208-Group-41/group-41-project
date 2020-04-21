@@ -38,6 +38,16 @@
     $atmosphereScore = getAtmosphereScore($venueID,$eventID,$pdo);
     $queueScore = getQueueScore($venueID,$eventID,$pdo);
 
+    if ($priceScore === false || $safetyScore === false || $atmosphereScore === false || $queueScore === false) {
+        $totalScore = "No Scores";
+        $priceScore = "No Scores";
+        $safetyScore = "No Scores";
+        $atmosphereScore = "No Scores";
+        $queueScore = "No Scores";
+    } else {
+        $totalScore = ($queueScore + $atmosphereScore + $safetyScore + $priceScore) / 4;
+    }
+
     if (isset($_SESSION['UserID'])) {
         $userID = $_SESSION['UserID'];
     } else if (isset($_SESSION['VenueUserID']) && $owner == $_SESSION['VenueUserID']) {

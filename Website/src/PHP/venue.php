@@ -34,6 +34,7 @@
   $safetyScore = getSafetyScore($venueID,1,$pdo);
   $atmosphereScore = getAtmosphereScore($venueID,1,$pdo);
   $queueScore = getQueueScore($venueID,1,$pdo);
+  
   if ($priceScore === false || $safetyScore === false || $atmosphereScore === false || $queueScore === false) {
       $totalScore = "No Scores";
       $priceScore = "No Scores";
