@@ -601,6 +601,12 @@ function validate255($name) {
         return $getStmt->fetchAll();
     }
 
+    function getAllEvents($pdo) {
+        $getStmt = $pdo->prepare("SELECT EventID,EventName,DATE_FORMAT(EventStartTime,'%Y-%m-%d %H:%i') AS EventStartTime FROM Venue WHERE VenueID<>'1' ORDER BY EventStartTime");
+        $getStmt->execute();
+        return $getStmt->fetchAll();
+    }
+
     // https://www.kodingmadesimple.com/2017/05/delete-all-files-and-subfolders-from-folder-php.html
     // delete all files and sub-folders from a folder
     function deleteAll($path) {
