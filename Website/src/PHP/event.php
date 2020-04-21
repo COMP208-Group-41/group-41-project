@@ -63,7 +63,7 @@
 
     $image = checkEventImageOnServer($owner,$venueID,$eventID);
 
-    if (isset($_POST['followForm'])) {
+    if (isset($_POST['follow'])) {
         if (follow($userID,$eventID,$pdo)) {
             // Follow Successful!
             $_SESSION['message'] = "You are now following this event!";
@@ -71,7 +71,7 @@
         }
     }
 
-    if (isset($_POST['unfollowForm'])) {
+    if (isset($_POST['unfollow'])) {
         if (unfollow($userID,$eventID,$pdo)) {
             $_SESSION['message'] = "You have unfollowed this event!";
             $following = false;
