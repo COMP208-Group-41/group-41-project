@@ -10,7 +10,7 @@
 
     require_once "config.php";
 
-    $search = $_GET['search']
+    $search = $_GET['search'];
     $allEvents = getAllEvents($pdo);
     // EXPRESSION TO FILTER NEEDED HERE
 

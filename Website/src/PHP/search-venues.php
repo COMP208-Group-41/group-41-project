@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
-    <title>OutOut - Venues</title>
+    <title>OutOut - Matching Venues</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
@@ -32,7 +32,7 @@
     <div class="wrapper">
         <div class="container">
             <div class="section">
-                <h1 class='title'>All Venues</h1>
+                <h1 class='title'>Matching Venues</h1>
                 <?php
                 if (sizeof($allVenues) != 0) {
                     echo "<div class='list'>";
