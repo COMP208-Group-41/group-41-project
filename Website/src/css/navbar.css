@@ -35,7 +35,10 @@ body {
     margin-bottom: 8px;
 }
 
-.seperator {
+.nav-seperator {
+    display: flex;
+    flex-direction: column;
+    border-top: var(--dark-body) solid 2px;
     width: 85%;
     margin-left: 16px;
     margin-top: 16px;

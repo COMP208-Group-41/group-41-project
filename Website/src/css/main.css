@@ -161,6 +161,7 @@ hr {
     border-top: var(--dark-body) solid 2px;
     padding-top: 20px;
     margin-top: 8px;
+    width: 100%;
 }
 
 
