@@ -24,7 +24,7 @@ th {
     .table-item {
         padding: 6px;
     }
-    table {
+    table, th, td {
         border-collapse: collapse;
         max-width: 250px;
         margin-bottom: 8px;
