@@ -54,29 +54,19 @@
                           echo "<div class='table-item image' style='background-image: url(../Assets/background2.jpg); width: 40%'>Content here</div>";
                           echo "<div style='display: flex' id='row'> ";
                           echo "<div style='display: flex; flex-direction: column'>";
-                          echo "<div class='table-item'>Grid 1</div><div class='table-item'>Grid 2</div></div>";
+                          echo "<div class='table-item'>".getTagsNoEcho($currentTagIDs,$pdo)."</div>";
+                          echo "<div class='table-item'>".$row['EventName']."</div></div>";
                           echo "<div style='display: flex; flex-direction: column'>";
-                          echo "<div class='table-item'>Grid 3</div><div class='table-item'>Grid 4</div></div>";
+                          echo "<div class='table-item'>".$row['EventStartTime']."</div>";
+                          echo "<div class='table-item'>".venueIDtoName($row['VenueID'], $pdo)."</div></div>";
                           echo "</div>";
                           echo "</div></div>";
                           echo '<a href="event.php?eventID='.$row['EventID'].'" class="button" style="margin-left: -1px">View Event</a>';
                           echo '<a href="venue?venueID='.$row['VenueID'].'" class="button" style="margin-right: -1px">View Venue</a>';
-                          echo '<div><div class="tag-container" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div></div>';
-                          echo "</div><div>";
-                          echo "<div><div>Event Date: ".$row['EventStartTime']."</div>\"<div>Hosted By: ".venueIDtoName($row['VenueID'], $pdo)."</div>";
-                          echo "</div>";
-                          echo "</div><div>";
-                          echo "<div>Hosted By: ".venueIDtoName($row['VenueID'], $pdo)."</div>";
-                          echo "</div></div>";
-                          echo "</div>";
                       }
                   }
               } else {
-                echo "<table>";
-                echo "</tr><tr>";
-                echo "<td>No Upcoming events for this Venue listed</td>";
-                echo "</tr>";
-                echo "</table>";
+                echo "<h2 class='title'>No events found!</h2>";
               }
             ?>
 
@@ -88,4 +78,3 @@
 </body>
 </html>
 
-".$row['EventName']."
