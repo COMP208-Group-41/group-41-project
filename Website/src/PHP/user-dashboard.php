@@ -112,7 +112,7 @@ if (isset($_SESSION['message'])) {
             </div>
         </div>
         <div class="section">
-            <h1 class="title">Upcoming Events</h1>
+            <h1 class="title">Followed Events</h1>
                     <?php
                     if (count($interestedIn) > 0) {
                         echo '<div class="table">';
