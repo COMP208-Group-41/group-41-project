@@ -8,13 +8,14 @@
         flex-direction: column;
     }
 
+    .container {
+        padding: 4px;
+    }
+    .section {
+        margin: 8px 8px 0;
+    }
+
     .list {
         flex-direction: column;
-    }
-}
-
-@media only screen and (max-width: 400px) {
-    .container {
-        max-width: 320px;
     }
 }

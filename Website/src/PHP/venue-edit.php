@@ -396,7 +396,7 @@
         <?php
             if ($image) {
                 echo '<div class="seperator"></div>';
-                echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$venueUserID.'/'.$venueID.'/venue.jpg" alt="Venue Image" class="title-img>"';
+                echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$venueUserID.'/'.$venueID.'/venue.jpg" alt="Venue Image" class="title-img">';
             }
         ?>
 
@@ -452,10 +452,9 @@
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select>
-                <div class="seperator">
-                    <label>Enter current password to allow changes:</label>
-                    <input type='password' name='password' required>
-                </div>
+                <div class="seperator"></div>
+                <label>Enter current password to allow changes:</label>
+                <input type='password' name='password' required>
                 <input type='submit' name='submit' value='Save changes' class="button" style="width: 100%"><br>
                 <div class="seperator" style="margin-top: 4px"></div>
             </div>

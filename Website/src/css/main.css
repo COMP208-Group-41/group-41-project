@@ -308,12 +308,9 @@ hr {
     .container{
         min-width: 0px;
         margin: 0 0 16px;
-        max-width: 380px;
+        max-width: 360px;
         width: 100%;
-        padding: 4px;
-    }
-    .section {
-        margin: 8px 8px 0;
+        padding: 16px;
     }
     .message-wrapper {
         margin: 16px 0;
