@@ -55,7 +55,7 @@
                           echo "</div>";
                           echo "<div style='display: flex' id='row'> ";
                           echo "<div style='display: flex; flex-direction: column'>";
-                          echo "<div class='table-item' style='height: 100%;>".getTagsNoEcho($currentTagIDs,$pdo)."</div>";
+                          echo "<div class='table-item' style='height: 100%;'>".getTagsNoEcho($currentTagIDs,$pdo)."</div>";
                           echo "</div>";
                           echo "<div style='display: flex; flex-direction: column'>";
                           echo "<div class='table-item' style='height: 40%; width: 100%'>".$row['EventName']."</div>";
