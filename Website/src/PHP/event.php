@@ -211,31 +211,32 @@
                 }
                 ?>
             </div>
-            <div class="seperator"></div>
-            <h2 class="title">All Reviews</h2>
-                <?php
-                if ($reviews !== false){
-                    echo '<div class="reviewlist">';
-                  $counter = 0;
-                  foreach ($reviews as $row) {
-                    if($counter<5){
-                        echo "<div class='review'>";
-                        echo "<label>Review left by:<b> " . userIDtoUserName($row['UserID'], $pdo) . "</b></label>";
-                        echo "<textarea readonly onchange='this.style.height = \"\";this.style.height = this.scrollHeight + 3 + \"px\"'>" . $row['ReviewText'] . "</textarea>";
-                        echo "<div class='review-scores'>";
-                        echo "<div class='review-score'><div class='label'>Price Score:</div><div class='score'>" . $row['ReviewPrice'] . "</div></div>";
-                        echo "<div class='review-score'><div class='label'>Safety Score:</div><div class='score'> " . $row['ReviewSafety'] . "</div></div>";
-                        echo "<div class='review-score'><div class='label'>Atmosphere Score:</div><div class='score'> " . $row['ReviewAtmosphere'] . "</div></div>";
-                        echo "<div class='review-score'><div class='label'>Queue Times Score:</div><div class='score'> " . $row['ReviewQueue'] . "</div></div></div>";
-                        echo "<label>Review posted on: " . $row['ReviewDate'] . "</label></div>";
+            <div class="section" id="All Reviews" style="flex-grow: 10">
+                <h2 class="title">All Reviews</h2>
+                    <?php
+                    if ($reviews !== false){
+                        echo '<div class="reviewlist">';
+                      $counter = 0;
+                      foreach ($reviews as $row) {
+                        if($counter<5){
+                            echo "<div class='review'>";
+                            echo "<label>Review left by:<b> " . userIDtoUserName($row['UserID'], $pdo) . "</b></label>";
+                            echo "<textarea readonly onchange='this.style.height = \"\";this.style.height = this.scrollHeight + 3 + \"px\"'>" . $row['ReviewText'] . "</textarea>";
+                            echo "<div class='review-scores'>";
+                            echo "<div class='review-score'><div class='label'>Price Score:</div><div class='score'>" . $row['ReviewPrice'] . "</div></div>";
+                            echo "<div class='review-score'><div class='label'>Safety Score:</div><div class='score'> " . $row['ReviewSafety'] . "</div></div>";
+                            echo "<div class='review-score'><div class='label'>Atmosphere Score:</div><div class='score'> " . $row['ReviewAtmosphere'] . "</div></div>";
+                            echo "<div class='review-score'><div class='label'>Queue Times Score:</div><div class='score'> " . $row['ReviewQueue'] . "</div></div></div>";
+                            echo "<label>Review posted on: " . $row['ReviewDate'] . "</label></div>";
+                        }
+                        $counter++;
+                      }
+                      echo '</div>';
+                    } else {
+                      echo '<label>No reviews currently posted for this event</label>';
                     }
-                    $counter++;
-                  }
-                  echo '</div>';
-                } else {
-                  echo '<label>No reviews currently posted for this event</label>';
-                }
-                ?>
+                    ?>
+            </div>
             </div>
         </div>
     </div>
