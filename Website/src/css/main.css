@@ -303,8 +303,7 @@ hr {
     }
 
     .section {
-        width: 80%;
-        margin-bottom: 0;
+        margin: 8px 8px 0;
     }
     .message-wrapper {
         margin: 16px 0;
