@@ -32,6 +32,21 @@ body {
     margin: 20px;
     border-radius: 10px;
     min-width: 400px;
+    width: 80vw;
+}
+
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    border: var(--dark-body) solid 2px;
+    margin: 16px;
+    padding: 16px;
 }
 
 input {
