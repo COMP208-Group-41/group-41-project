@@ -53,7 +53,7 @@
                           echo "<div class='table-row'>";
                           echo "<div class='table-item image' style='background-image: url(../Assets/background2.jpg); width: 40%'>";
                           echo "</div>";
-                          echo "<div style='display: flex; flex-grow: 1' id='row'> ";
+                          echo "<div style='display: flex; width: 40%' id='row'>";
                           echo "<div style='display: flex; flex-direction: column; width: 50%;'>";
                           echo "<div class='table-item' style='height: 100%; width: 100%'>".getTagsNoEcho($currentTagIDs,$pdo)."</div>";
                           echo "</div>";
