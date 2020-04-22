@@ -39,6 +39,7 @@
       }
     }
     sortArray($SortedArray);
+    $sortedArray = array_reverse($sortedArray);
 
     function sortArray (&$array) {
       $temp=array();
@@ -66,13 +67,31 @@
 <body>
   <?php include "navbar.php" ?>
   <div class="wrapper">
-
-
-
-
-
-
-
+    <div class="container">
+        <?php
+          if (sizeof($sortedArray) != 0) {
+              //echo print_r($sortedArray);
+              foreach($sortedArray as $row) {
+                  echo '<div class="seperator" style="margin-top: 4px">';
+                  $currentTagIDs = getEventTagID($row['EventID'],$pdo);
+                  echo $row['Count'];
+                  echo "<table>";
+                  echo "<tr>";
+                  echo "<td>".$row['EventName']."</td>";
+                  echo '<td><div class="venue-buttons"><a href="event.php?venueID='.$row['EventID'].'" class="button" style="margin-left: -1px">View Event</a></div></td>';
+                  echo '<td><div class="tag-container" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div></td>';
+                  echo "</tr>";
+                  echo "</table>";
+              }
+          } else {
+            echo "<table>";
+            echo "<tr>";
+            echo "<td>No upcoming events which match your user preferences</td>";
+            echo "</tr>";
+            echo "</table>";
+          }
+        ?>
+    </div>
   </div>
 </body>
 </html>
