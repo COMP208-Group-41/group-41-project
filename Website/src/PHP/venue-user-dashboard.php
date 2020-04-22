@@ -108,7 +108,7 @@ if (isset($_SESSION['message'])) {
               echo '<div class="table-row">';
               echo '<div class="table-item" style="width: 35%">Venue</div>';
               echo '<div class="table-item" style="width: 35%">Event Name</div>';
-              echo '<div class="table-item" style="width: 30%;">View / Edit Event</div></div>';
+              echo '<div class="table-item" style="width: 30%;">Action</div></div>';
               foreach ($events as $row) {
                 echo '<div class="table-row">';
                 echo '<div class="table-item" style="width: 35%">'.$venueName."</div>";

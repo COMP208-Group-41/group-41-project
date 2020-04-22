@@ -218,6 +218,8 @@ hr {
     padding-bottom: 16px;
     justify-content: center;
     width: 100%;
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
 }
 
 .table-row {
@@ -240,7 +242,6 @@ hr {
     background-color: var(--dark-body);
     color: var(--text);
     border: 1px solid var(--button-border);
-    border-radius: 4px;
     width: 50%;
 }
 
@@ -270,7 +271,6 @@ hr {
     color: var(--light-body);
     text-decoration: none;
     border: 1px solid var(--button-border);
-    border-radius: 4px;
 }
 
 .table-button .table-buttons.column {
@@ -281,20 +281,17 @@ hr {
     outline: none;
     background-color: var(--button-highlight);
     border: 2px solid var(--button-border);
-    border-radius: 4px;
 }
 
 .table-button:hover {
     background-color: var(--dark-gold);
     cursor: pointer;
     border: 2px solid var(--button-border);
-    border-radius: 4px;
 }
 
 .table-button:active {
     background-color: var(--gold);
     border: 2px solid var(--button-border);
-    border-radius: 4px;
 }
 
 @media only screen and (max-width: 440px) {
