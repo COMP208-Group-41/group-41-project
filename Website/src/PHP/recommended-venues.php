@@ -2,6 +2,10 @@
 
     session_start();
 
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+
     if (isset($_SESSION['VenueUserID'])) {
         $_SESSION['message'] = "Venue Users cannot use the recommended page";
         header("location: venue-user-dashboard.php");
