@@ -208,6 +208,7 @@ hr {
         min-width: 0px;
         margin: 0 0 16px;
         max-width: 380px;
+        width: 100%;
     }
 
     .section {
@@ -226,5 +227,6 @@ hr {
 @media only screen and (max-width: 400px) {
     .container {
         max-width: 320px;
+        width: 100%;
     }
 }
