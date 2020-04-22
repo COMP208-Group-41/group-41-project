@@ -38,15 +38,20 @@
 <div class="wrapper">
 <div class="container">
     <div class="form">
-        <form name='search form' method='post'>
+        <form name='search form' method='get'>
             <input type='text' name='search' placeholder="Search for venue.." class="searchbar">
             <input type='submit' value='Search' class='button search-button'>
         </form>
     </div>
-
+    <div class="seperator"></div>
+    <h2 class="title">Our Picks</h1>
     <?php
+        include "slideshow.php";
+
+        echo '<div class="seperator"></div>';
+
         if (isset($userID)) {
-            include "slideshow.php";
+
             echo '<a class="button" href="user-dashboard.php">Your Dashboard</a>';
             echo '<a class="button" href="recommended-venues.php">Recommended Venues for you</a>';
         }
