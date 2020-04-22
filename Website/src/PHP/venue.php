@@ -190,7 +190,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
                 <?php
                 if ($reviews !== false) {
                     $counter = 0;
-                    echo '<div class="list">';
+                    echo '<div class="list" style="flex-direction: row">';
                     foreach ($reviews as $row) {
                         if ($counter < 5) {
                             echo "<div class='review'>";
