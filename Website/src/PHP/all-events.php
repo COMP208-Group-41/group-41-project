@@ -50,7 +50,9 @@
                           $currentTagIDs = getEventTagID($row['EventID'],$pdo);
                           echo '<div class="seperator" style="margin-top: 4px">';
                           echo "<div class='table'>";
-                          echo "<div class='table-row'rowspan='2'>".$row['EventName']."</div>";
+                          echo "<div class='table-row'><div style='display:flex'>";
+                          echo "<div class='table-item image' style='background-image: url(../Assets/background2.jpg); width: 40%'><div class='table-item-wrapper'>".$row['VenueName'];
+echo "</div></div>";
                           echo '<div><div class="venue-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="venue-button" style="margin-left: -1px">View Event</a>';
                           echo '<a href="venue?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -1px">View Venue</a></div></div>';
                           echo '<div><div class="tag-container" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div></div>';
@@ -80,3 +82,4 @@
 </body>
 </html>
 
+".$row['EventName']."
