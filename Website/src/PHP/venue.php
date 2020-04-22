@@ -120,7 +120,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
                     echo '<a href="event-creation.php?venueID=' . $venueID . '" class="button" style="width: 100%; margin-bottom: 16px">Add a new Event</a>';
                 }
                 ?>
-                <div class="list" style="margin-bottom: 16px">
+                <div class="table" style="margin-bottom: 16px">
                     <?php
                     if ($events !== false) {
                         $counter = 0;

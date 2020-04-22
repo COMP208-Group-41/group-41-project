@@ -82,7 +82,7 @@ if (isset($_SESSION['message'])) {
         <button onclick="location.href='venue-user-edit.php';" class="button" style="width: 100%; margin-bottom: 16px">Edit Account Details</button>
         <div class="seperator" style="margin-top: 4px">
           <h2 class="title">Registered Venues</h2>
-          <div class="list">
+          <div class="table">
             <?php
             foreach ($venues as $row) {
                 echo '<div class="table-row">';
