@@ -91,10 +91,6 @@
         flex-direction: column;
     }
 
-    .container{
-        max-width: 320px;
-    }
-
     .event-name {
         min-width: 0;
     }
@@ -105,5 +101,11 @@
 
     body{
         overflow-x: hidden;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .container {
+        max-width: 320px;
     }
 }
