@@ -38,6 +38,7 @@
       if ($count > 0){
         $event['Count'] = $count;
         $event['VenueID'] = $row['VenueID'];
+        $event['VenueName'] = $row['VenueName'];
         array_push($sortedArray,$event);
       }
     }
