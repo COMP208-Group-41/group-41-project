@@ -63,6 +63,7 @@
                 $venueCount = $eventCount = 0;
                 //print_r($allVenues);
                 // echo "<h2 class='title'>No matching events found!</h2>";
+                echo "<h2 class='title'>Venues</h2>";
                 echo "<div class='table'>";
                 foreach($allVenues as $row) {
                     //echo $search;
@@ -102,6 +103,7 @@
 
 
               // Matching Events
+              echo "<h2 class='title'>Events</h2>";
               echo "<div class='table'>";
               foreach($allEvents as $row) {
                   if (strpos(strtolower($row['EventName']),$search) !== false) {
