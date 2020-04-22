@@ -31,6 +31,7 @@
         <div class="container">
             <div class="section">
                 <h1 class='title'>All Venues</h1>
+                <div id="content-wrap" style="flex-wrap: wrap">
                 <?php
                 if (sizeof($allVenues) != 0) {
 
@@ -64,6 +65,7 @@
                     echo "<h2 class='title'>No venues found!</h2>";
                 }
                 ?>
+                </div>
             </div>
         </div>
     </div>
