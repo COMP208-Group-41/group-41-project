@@ -47,10 +47,12 @@
             <input type='submit' name='search' value='Search' class='button search-button'>
         </form>
     </div>
-
+    <div class="seperator"></div>
     <h2 class="title">Our Picks</h1>
     <?php
         include "slideshow.php";
+
+        echo '<div class="seperator"></div>';
 
         if (isset($userID)) {
 
