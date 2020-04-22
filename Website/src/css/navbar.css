@@ -239,4 +239,8 @@ input.searchbar:focus {
     .hvr-grow {
         padding: 0 8px;
     }
+
+    .hvr-grow.outout {
+        display: none;
+    }
 }
