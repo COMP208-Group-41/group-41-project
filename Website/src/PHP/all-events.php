@@ -53,18 +53,19 @@
                           echo "<div class='table-row'>";
                           echo "<div class='table-item image' style='background-image: url(../Assets/background2.jpg); width: 40%'>";
                           echo "</div>";
-                          echo "<div style='display: flex' id='row'> ";
-                          echo "<div style='display: flex; flex-direction: column'>";
-                          echo "<div class='table-item' style='height: 100%;'>".getTagsNoEcho($currentTagIDs,$pdo)."</div>";
+                          echo "<div style='display: flex; flex-grow: 1' id='row'> ";
+                          echo "<div style='display: flex; flex-direction: column; width: 50%;'>";
+                          echo "<div class='table-item' style='height: 100%; width: 100%'>".getTagsNoEcho($currentTagIDs,$pdo)."</div>";
                           echo "</div>";
-                          echo "<div style='display: flex; flex-direction: column'>";
-                          echo "<div class='table-item' style='height: 40%; width: 100%'>".$row['EventName']."</div>";
-                          echo "<div class='table-item' style='height: 40%; width: 100%'>".$row['EventStartTime']."</div>";
-                          echo "<div class='table-item' style='height: 20%;  width: 100%'>".venueIDtoName($row['VenueID'], $pdo)."</div></div>";
+                          echo "<div style='display: flex; flex-direction: column; width: 50%;' >";
+                          echo "<div class='table-item' style='height: 35%; width: 100%'>".$row['EventName']."</div>";
+                          echo "<div class='table-item' style='height: 35%; width: 100%'>".$row['EventStartTime']."</div>";
+                          echo "<div class='table-item' style='height: 30%;  width: 100%'>".venueIDtoName($row['VenueID'], $pdo)."</div></div>";
                           echo "</div>";
                           echo "</div></div>";
+                          echo "<div class='display: flex' style='margin-bottom: 16px'>";
                           echo '<a href="event.php?eventID='.$row['EventID'].'" class="button" style="width: 50%">View Event</a>';
-                          echo '<a href="venue?venueID='.$row['VenueID'].'" class="button" style="width: 50%">View Venue</a>';
+                          echo '<a href="venue?venueID='.$row['VenueID'].'" class="button" style="width: 50%">View Venue</a></div>';
                       }
                   }
               } else {
