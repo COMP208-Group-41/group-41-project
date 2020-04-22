@@ -3,8 +3,6 @@ body {
 }
 
 .rating-square {
-    background: var(--body-background);
-    border: 2px solid var(--button-border);
     color: var(--gold);
     border-radius: 4px;
     padding: 2px 8px;
@@ -32,12 +30,10 @@ body {
     opacity: 0.9;
 }
 
-.table-item-image {
-    object-fit: cover;
-    width: 100%;
-    z-index: -1;
+.table-item-wrapper {
+    background: rgba(32, 32, 32, 0.95);
+    color: var(--light-body);
 }
-
 
 
 @media only screen and (max-width: 600px) {
