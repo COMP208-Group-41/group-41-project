@@ -33,11 +33,11 @@
                 <h1 class='title'>All Venues</h1>
                 <?php
                 if (sizeof($allVenues) != 0) {
-                    echo "<div class='list'>";
+                    echo "<div class='table'>";
                     foreach($allVenues as $row) {
                         $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
-                        echo "<div class='venue'>";
-                        echo "<div class='venue-name'>".$row['VenueName'];
+                        echo "<div class='table-row'>";
+                        echo "<div class='table-item'>".$row['VenueName'];
                         unset($priceScore);
                         unset($safetyScore);
                         unset($atmosphereScore);
@@ -55,8 +55,8 @@
                         }
                         echo "</div>";
                         echo '<div class="venue-tags" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
-                        echo '<div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-bottom: -2px">Venue</a>';
-                        echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="venue-button">Events</a></div>';
+                        echo '<div class="table-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button" style="margin-bottom: -2px">Venue</a>';
+                        echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="table-button">Events</a></div>';
                         echo "</div>";
                     }
                     echo "</div>";

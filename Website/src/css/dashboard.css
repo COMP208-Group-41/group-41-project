@@ -18,119 +18,19 @@ th {
 }
 
 
-
-
-.event {
-    display: flex;
-    width: 100%;
-    background: var(--body-background);
-    justify-content: center;
-    align-items: stretch;
-    margin: -2px 0;
-}
-.event-name {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 35%;
-    padding: 12px 4px 12px 4px;
-    font-family: "K2D", sans-serif;
-    font-size: 16px;
-    box-sizing: border-box;
-    background-color: var(--dark-body);
-    color: var(--text);
-    border: 2px solid var(--button-border);
-    border-radius: 4px;
-}
-
-.event-buttons {
-    display: flex;
-    width: 30%;
-    justify-content: center;
-    align-items: stretch;
-}
-
-.event-button {
-    display: flex;
-    flex-grow: 1;
-    justify-content: center;
-    align-items: center;
-    font-family: "K2D", sans-serif;
-    font-size: 16px;
-    margin: 0;
-    padding: 12px 0px;
-    box-sizing: border-box;
-    background-color: var(--body-background);
-    border: 2px solid var(--button-border);
-    border-radius: 4px;
-    color: var(--light-body);
-}
-
-.event-button:focus {
-    outline: none;
-    background-color: var(--button-highlight);
-    border: 2px solid var(--button-border);
-    border-radius: 4px;
-}
-
-.event-button:hover {
-    background-color: var(--dark-gold);
-    cursor: pointer;
-    border: 2px solid var(--button-border);
-    border-radius: 4px;
-}
-
-.event-button:active {
-    background-color: var(--gold);
-    border: 2px solid var(--button-border);
-    border-radius: 4px;
-}
 @media only screen and (max-width: 600px) {
-    .venue {
-        display: flex;
-        background: var(--body-background);
-        justify-content: center;
-        align-items: stretch;
-        margin: -2px 0;
+    .table-button.reg-event {
+        flex-direction: column;
     }
+
     table {
         border-collapse: collapse;
         max-width: 250px;
         margin-bottom: 8px;
     }
-    .event-buttons {
-        display: flex;
-        width: 30%;
-        justify-content: center;
-        align-items: stretch;
-    }
 
-    .event-button {
-        display: flex;
-        font-family: "K2D", sans-serif;
-        margin: 0;
-        box-sizing: border-box;
-        font-size: 14px;
-        background-color: var(--body-background);
-        border: 2px solid var(--button-border);
-        border-radius: 4px;
-        padding: 12px 0px;
-        color: var(--light-body);
-        justify-content: center;
-        align-items: center;
-        text-decoration: none;
-        height: 100%;
-        flex-grow: 1;
-        min-width: 50%;
-        margin-right: -5px;
-    }
     body{
         overflow-x: hidden;
     }
-    .venue-name {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: -4px;
-    }
+
 }

@@ -120,15 +120,16 @@ $image = checkVenueImageOnServer($owner, $venueID);
                     echo '<a href="event-creation.php?venueID=' . $venueID . '" class="button" style="width: 100%; margin-bottom: 16px">Add a new Event</a>';
                 }
                 ?>
-                <div class="list" style="margin-bottom: 16px">
+                <div class="table" style="margin-bottom: 16px">
                     <?php
                     if ($events !== false) {
                         $counter = 0;
                         foreach ($events as $row) {
-                            if ($counter < 5) {
-                                echo '<div class="table-row">';
-                                echo '<div class="table-item">' . $row['EventName'] . "</div>";
-                                echo '<div class="table-buttons"><a href="event.php?eventID=' . $row['EventID'] . '" class="table-button" style="margin-right: -1px; flex-grow: 1">View</a>';
+                            if ($counter < 10) {
+                                echo '<div class="event">';
+                                echo '<div class="event-image"></div>';
+                                echo '<div class="event-name">' . $row['EventName'] . "</div>";
+                                echo '<div class="event-buttons"><a href="event.php?eventID=' . $row['EventID'] . '" class="event-button" style="margin-right: -1px; flex-grow: 1">View</a>';
                                 if (isset($venueUserID)) {
                                     echo '<a href="event-edit.php?eventID=' . $row['EventID'] . '" class="table-button-button" style="width: 50%">Edit</a></div></div>';
                                 } else {

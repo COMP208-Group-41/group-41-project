@@ -82,7 +82,7 @@ if (isset($_SESSION['message'])) {
         <button onclick="location.href='venue-user-edit.php';" class="button" style="width: 100%; margin-bottom: 16px">Edit Account Details</button>
         <div class="seperator" style="margin-top: 4px">
           <h2 class="title">Registered Venues</h2>
-          <div class="list">
+          <div class="table">
             <?php
             foreach ($venues as $row) {
                 echo '<div class="table-row">';
@@ -113,7 +113,7 @@ if (isset($_SESSION['message'])) {
                 echo '<div class="table-row">';
                 echo '<div class="table-item" style="width: 35%">'.$venueName."</div>";
                 echo '<div class="table-item" style="width: 35%">'.$row['EventName']."</div>";
-                echo '<div class="table-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="table-button" style="margin-right: -1px">View Event</a>';
+                echo '<div class="table-buttons reg-event" style="width: 30%"><a href="event.php?eventID='.$row['EventID'].'" class="table-button" style="margin-right: -1px">View Event</a>';
                 echo '<a href="event-edit.php?eventID='.$row['EventID'].'" class="table-button">Edit Event</a></div></div>';
               }
             }

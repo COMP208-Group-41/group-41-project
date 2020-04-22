@@ -212,6 +212,14 @@ hr {
     width: 100%;
 }
 
+.table {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 16px;
+    justify-content: center;
+    width: 100%;
+}
+
 .table-row {
     display: flex;
     width: 100%;
