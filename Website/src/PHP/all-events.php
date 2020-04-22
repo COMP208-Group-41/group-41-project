@@ -50,7 +50,7 @@
                           $currentTagIDs = getEventTagID($row['EventID'],$pdo);
                           echo '<div class="seperator" style="margin-top: 4px">';
                           echo "<div class='table'>";
-                          echo "<div class='table-row'><div style='display:flex'>";
+                          echo "<div class='table-row'>";
                           echo "<div class='table-item image' style='background-image: url(../Assets/background2.jpg); width: 40%'>Content here</div>";
                           echo "<div style='display: flex'><div style='display: flex; flex-direction: column'>";
                           echo "<div class='table-item'>Grid 1</div><div class='table-item'>Grid 2</div>";
