@@ -241,7 +241,7 @@ input.searchbar:focus {
 
     .search-form .form {
         width: 100%;
-        padding: 32px;
+        padding: 0 32px;
     }
     .hvr-grow {
         padding: 0 8px;
