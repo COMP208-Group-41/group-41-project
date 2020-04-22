@@ -113,7 +113,7 @@ if (isset($_SESSION['message'])) {
                 echo '<div class="table-row">';
                 echo '<div class="table-item" style="width: 35%">'.$venueName."</div>";
                 echo '<div class="table-item" style="width: 35%">'.$row['EventName']."</div>";
-                echo '<div class="table-buttons column" style="width: 30%"><a href="event.php?eventID='.$row['EventID'].'" class="table-button" style="margin-right: -1px">View Event</a>';
+                echo '<div class="table-buttons column" style="width: 30%"><a href="event.php?eventID='.$row['EventID'].'" class="table-button">View Event</a>';
                 echo '<a href="event-edit.php?eventID='.$row['EventID'].'" class="table-button">Edit Event</a></div></div>';
               }
             }
