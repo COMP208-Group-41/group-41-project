@@ -43,6 +43,7 @@
       }
     }
     sortArray($sortedArray);
+    $sortedArray array_reverse($sortedArray);
 
     function sortArray (&$array) {
       $temp=array();
