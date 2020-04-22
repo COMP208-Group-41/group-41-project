@@ -183,7 +183,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
                     </div>
                 </div>
             </div>
-            <div class="section" id="All Reviews">
+            <div class="section" id="All Reviews" style="flex-grow: 10">
                 <h2 class="title">All Reviews</h2>
                 <?php
                 if ($reviews !== false) {
