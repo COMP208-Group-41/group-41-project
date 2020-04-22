@@ -23,6 +23,10 @@ body {
     min-width: 310px;
 }
 
+.table-item {
+    flex-direction: column;
+}
+
 @media only screen and (max-width: 600px) {
     .table {
         width: 100%;
