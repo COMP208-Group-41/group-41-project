@@ -24,7 +24,7 @@
     <img src="../Assets/profile.svg" alt="Profile" width="40" onclick="location.href='<?php echo $dashboardLink;?>';">
 </div>
 <div id="mySidenav" class="sidenav">
-    <div class="sidebar-content">
+    <div class="sidenav-content">
         <div style="display: flex" >
             <img src="../Assets/outout.svg" width="115">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -37,10 +37,10 @@
         <br>
         <?php
             if (!isset($_SESSION['UserID']) && !isset($_SESSION['VenueUserID'])) {
-                echo '<a href="login.php">Log In</a>';
+                echo '<a href="login.php">Login</a>';
                 echo '<a href="register.php">Register</a>';
                 echo '<br>';
-                echo '<a href="venue-user-login.php">Venue Log In</a>';
+                echo '<a href="venue-user-login.php">Venue Login</a>';
                 echo '<a href="venue-user-register.php">Register Venue</a><br>';
             } else {
                 echo '<a href="logout.php">Log Out</a><br>';
