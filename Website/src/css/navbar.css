@@ -223,3 +223,20 @@ input.searchbar:focus {
 .button:active {
     background-color: var(--gold)
 }
+
+@media only screen and (max-width: 600px) {
+    input.searchbar {
+        width: 100%;
+    }
+
+    input.search-button {
+        width: 20%;
+    }
+
+    .search-form .form {
+        width: 100%;
+    }
+    .hvr-grow {
+        padding: 0 8px;
+    }
+}

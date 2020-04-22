@@ -26,7 +26,7 @@
     <a href="#" data-drawer-trigger aria-controls="drawer-name"  class="banner-image" aria-expanded="false"> <img src="../Assets/menu-icon.svg" alt="Menu" width="25" class="menu-image"></a>
     <img src="../Assets/outout.svg" alt="OutOut" width="100" class="hvr-grow" onclick="location.href='home.php';">
     <div class="search-form">
-        <form name='search form' method='post' style="width: 50%;">
+        <form name='search form' method='post' class="form">
             <div class="search-wrapper">
                 <input type='text' name='searchText' placeholder="Search..." class="searchbar">
                 <input type='submit' name='search' value='Search' class='button search-button'>
