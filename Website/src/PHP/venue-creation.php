@@ -192,6 +192,7 @@
         $path = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID";
         if (mkdir($path,0755)) {
             // Folder created successfully
+            copy('https://student.csc.liv.ac.uk/~sgstribe/Images/background2.jpg',$path."/venue.jpg");
             return true;
         } else {
             // Error in folder creation!
