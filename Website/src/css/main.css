@@ -212,6 +212,9 @@ hr {
         width: 80%;
         margin-bottom: 0;
     }
+    .message-wrapper {
+        margin: 16px 0;
+    }
 }
 
 @media only screen and (max-width: 400px) {
