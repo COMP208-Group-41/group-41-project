@@ -5,6 +5,14 @@
 
     require_once "config.php";
 
+    if (isset($_SESSION['UserID'])) {
+        $userID = $_SESSION['UserID'];
+    }
+
+    if (isset($_SESSION['VenueUserID'])) {
+        $venueUserID = $_SESSION['VenueUserID'];
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en-GB">
@@ -64,67 +72,20 @@
     <script src="../js/slideshow.js"></script>
     <br>
 
-    <div class="container2">
-        <section class="cms-boxes">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-4 cms-boxes-outer">
-                        <div class="cms-boxes-items cms-features">
-                            <div class="boxes-align">
-                                <div class="small-box">
-                                    <h3>bars close to you</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 cms-boxes-outer">
-                        <div class="cms-boxes-items cms-security">
-                            <div class="boxes-align">
-                                <div class="small-box">
-                                    <h3>Highly <br> recommended</h3>
-                                    <p>collection of bar favourited by customers.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 cms-boxes-outer">
-                        <div class="cms-boxes-items cms-scalability">
-                            <div class="boxes-align">
-                                <div class="small-box">
-                                    <h3>Trending this Week in liverpool</h3>
-                                    <p>Trending this week in liverpool</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 cms-boxes-outer">
-                        <div class="cms-boxes-items cms-built">
-                            <div class="boxes-align">
-                                <div class="large-box">
-                                    <h3>Pics of the Week !!</h3>
-                                    <p></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 cms-boxes-outer">
-                        <div class="cms-boxes-items cms-documentation">
-                            <div class="boxes-align">
-                                <div class="large-box">
-                                    <h3>Events</h3>
-                                    <p>.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <h1>view all</h1>
+    <?php
+        if (isset($userID)) {
+            echo '<a class="button" href="recommended-venues.php">Recommended Venues for you</a>';
+            echo '<a class="button" href="user-dashboard.php">Your Dashboard</a>';
+        }
 
-        </section>
-    </div>
+        if (isset($venueUserID)) {
+            echo '<a class="button" href="venue-user-dashboard.php">Your Dashboard</a>';
+        }
+
+        echo '<a class="button" href="all-venues.php">All Venues</a>';
+    ?>
+
+
     <!-- Photo Grid  <div class="row">
         <div class="column">
             <img src="../Assets/background.jpg" style="width:100%">
