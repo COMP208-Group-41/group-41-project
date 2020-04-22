@@ -34,16 +34,16 @@
         <a href="<?php echo $accountLink; ?>">Edit Account</a>
         <a href="<?php echo $venueLink; ?>">All Venues</a>
         <a href="<?php echo $eventLink; ?>">Upcoming Events</a>
-        <br>
+        <div class="seperator"></div>
         <?php
             if (!isset($_SESSION['UserID']) && !isset($_SESSION['VenueUserID'])) {
                 echo '<a href="login.php">Login</a>';
                 echo '<a href="register.php">Register</a>';
-                echo '<br>';
+                echo '<div class="seperator"></div>';
                 echo '<a href="venue-user-login.php">Venue Login</a>';
-                echo '<a href="venue-user-register.php">Register Venue</a><br>';
+                echo '<a href="venue-user-register.php">Register Venue</a><div class="seperator"></div>';
             } else {
-                echo '<a href="logout.php">Log Out</a><br>';
+                echo '<a href="logout.php">Log Out</a><div class="seperator"></div>';
             }
         ?>
         <a href="<?php echo $aboutLink; ?>">About Us</a>
