@@ -29,25 +29,27 @@
     ?>
     <div class="wrapper">
         <div class="container">
-            <h1 class='title'>All Venues</h1>
-            <?php
-              if (sizeof($allVenues) != 0) {
-                  echo "<div class='list'>";
-                  foreach($allVenues as $row) {
-                      $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
-                      echo "<div class='venue'>";
-                      echo "<div class='venue-name'>".$row['VenueName'];
-                      echo "<div class='rating-wrapper'>Rating:<div class='rating-square'>5</div></div></div>";
-                      echo '<div class="venue-tags" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
-                      echo '<div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-bottom: -2px">Venue</a>';
-                      echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="venue-button">Events</a></div>';
-                      echo "</div>";
-                  }
-                  echo "</div>";
-              } else {
-                echo "<h2 class='title'>No venues found!</h2>";
-              }
-            ?>
+            <div class="section">
+                <h1 class='title'>All Venues</h1>
+                <?php
+                if (sizeof($allVenues) != 0) {
+                    echo "<div class='list'>";
+                    foreach($allVenues as $row) {
+                        $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
+                        echo "<div class='venue'>";
+                        echo "<div class='venue-name'>".$row['VenueName'];
+                        echo "<div class='rating-wrapper'>Rating:<div class='rating-square'>5</div></div></div>";
+                        echo '<div class="venue-tags" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
+                        echo '<div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-bottom: -2px">Venue</a>';
+                        echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="venue-button">Events</a></div>';
+                        echo "</div>";
+                    }
+                    echo "</div>";
+                } else {
+                    echo "<h2 class='title'>No venues found!</h2>";
+                }
+                ?>
+            </div>
         </div>
     </div>
 
