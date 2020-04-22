@@ -1,5 +1,6 @@
 img {
     max-height: 300px;
+    object-fit: cover;
 }
 
 .list {
@@ -8,8 +9,6 @@ img {
     padding-bottom: 16px;
     justify-content: center;
 }
-
-
 
 .event {
     display: flex;
