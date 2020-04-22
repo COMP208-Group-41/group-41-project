@@ -91,7 +91,7 @@
               }
           } else {
             echo "<table>";
-            echo "</tr><tr>";
+            echo "<tr>";
             echo "<td>There are no venues that match any of your Tags!</td>";
             echo "</tr>";
             echo "</table>";
