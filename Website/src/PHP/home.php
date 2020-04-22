@@ -44,9 +44,12 @@
         </form>
     </div>
 
+    <h2 class="title">Our Picks</h1>
     <?php
+        include "slideshow.php";
+
         if (isset($userID)) {
-            include "slideshow.php";
+
             echo '<a class="button" href="user-dashboard.php">Your Dashboard</a>';
             echo '<a class="button" href="recommended-venues.php">Recommended Venues for you</a>';
         }
