@@ -309,7 +309,7 @@ hr {
     .container{
         min-width: 0px;
         margin: 0 0 16px;
-        max-width: 360px;
+        max-width: 350px;
         width: 100%;
         padding: 16px;
     }
@@ -331,7 +331,7 @@ hr {
 @media only screen and (max-width: 380px) {
     .container {
         width: 100%;
-        max-width: 350px;
-        padding: 4px;
+        max-width: 310px;
+        padding: 16px;
     }
 }
