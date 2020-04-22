@@ -12,9 +12,12 @@
     --dark-gold: #AF8200;
     --gradient: linear-gradient(270deg, rgba(7, 41, 29, 0.92) 0%, rgba(6, 27, 41, 0.92) 100%);
 }
+
+html * {
+    font-family: "K2D", sans-serif;
+}
 body {
     background: var(--gradient);
-    font-family: "K2D", serif;
     text-align: center;
 }
 
@@ -237,7 +240,6 @@ hr {
     align-items: center;
     box-sizing: border-box;
     padding: 12px;
-    font-family: "K2D", sans-serif;
     font-size: 14px;
     background-color: var(--dark-body);
     color: var(--text);
@@ -263,7 +265,6 @@ hr {
     align-items: center;
     box-sizing: border-box;
     min-width: 50%;
-    font-family: "K2D", sans-serif;
     font-size: 14px;
     margin: 0;
     padding: 12px 0px;
@@ -280,18 +281,18 @@ hr {
 .table-button:focus {
     outline: none;
     background-color: var(--button-highlight);
-    border: 2px solid var(--button-border);
+    border: 1px solid var(--button-border);
 }
 
 .table-button:hover {
     background-color: var(--dark-gold);
     cursor: pointer;
-    border: 2px solid var(--button-border);
+    border: 1px solid var(--button-border);
 }
 
 .table-button:active {
     background-color: var(--gold);
-    border: 2px solid var(--button-border);
+    border: 1px solid var(--button-border);
 }
 
 @media only screen and (max-width: 440px) {

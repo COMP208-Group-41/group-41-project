@@ -38,8 +38,7 @@
                         $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
                         echo "<div class='table'>";
                         echo "<div class='table-row'>";
-                        echo "<div class='table-item image'>".$row['VenueName'];
-                        echo "<img src='../Assets/background2.jpg' class='table-item-image'>";
+                        echo "<div class='table-item image' style='background-image: url(../Assets/background2.jpg) '><div class='table-item-wrapper'>".$row['VenueName'];
                         unset($priceScore);
                         unset($safetyScore);
                         unset($atmosphereScore);
@@ -55,7 +54,7 @@
                         } else {
                             echo "<div class='rating-wrapper'>No Ratings</div>";
                         }
-                        echo "</div>";
+                        echo "</div></div>";
                         echo '<div class="table-item" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
                         echo '<div class="table-buttons column"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button">Venue</a>';
                         echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="table-button">Events</a></div>';
