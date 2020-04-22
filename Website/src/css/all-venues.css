@@ -6,7 +6,7 @@ body {
     display: inline-flex;
     flex-direction: row;
     padding-bottom: 16px;
-    justify-content: left;
+    justify-content: center;
     min-width: 400px;
     overflow: auto;
     flex-wrap: wrap;
