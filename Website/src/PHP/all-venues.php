@@ -43,6 +43,8 @@
                         echo "<div class='table'>";
                         echo "<div class='table-row'>";
                         $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$row['VenueUserID']."/".$row['VenueID']."/venue.jpg";
+                        echo $venueImage;
+                        echo file_exists($venueImage);
                         if (file_exists($venueImage)) {
                             echo "<div class='table-item image' style='background-image: url(".$venueImage.") '><div class='table-item-wrapper'>".$row['VenueName'];
                         } else {
