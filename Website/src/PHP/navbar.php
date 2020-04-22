@@ -24,7 +24,7 @@
     <img src="../Assets/profile.svg" alt="Profile" width="40" onclick="location.href='<?php echo $dashboardLink;?>';">
 </div>
 <div id="mySidenav" class="sidenav">
-    <div class="sidebar-content">
+    <div class="sidenav-content">
         <div style="display: flex" >
             <img src="../Assets/outout.svg" width="115">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
