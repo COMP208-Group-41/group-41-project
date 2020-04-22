@@ -15,32 +15,30 @@
     <div class="drawer__overlay" data-drawer-close tabindex="-1"></div>
     <div class="drawer__wrapper">
         <div class="drawer__header">
-            <div class="drawer__title">
-            </div>
+            <img src="../Assets/outout.svg" alt="OutOut" width="100" class="hvr-grow" style="margin-top: 8px" onclick="location.href='home.php';">
             <a href="javascript:void(0)" class="drawer__close" data-drawer-close aria-label="Close Drawer">&times;</a>
         </div>
         <div class="drawer__content">
-            <a href="#">My Account</a><br>
-            <a href="#">Edit Account</a><br>
-            <a href="#">Venues</a><br>
-            <a href="#">Events</a><br>
-            <br>
-            <a href="#">Log Out</a>
-            <br>
-            <a href="#">About Us</a>
+            <a href="<?php echo $dashboardLink; ?>">My Account</a>
+            <a href="<?php echo $accountLink; ?>">Edit Account</a>
+            <a href="<?php echo $venueLink; ?>">All Venues</a>
+            <a href="<?php echo $eventLink; ?>">Upcoming Events</a>
+            <div class="seperator"></div>
+            <?php
+            if (!isset($_SESSION['UserID']) && !isset($_SESSION['VenueUserID'])) {
+                echo '<a href="login.php">Login</a>';
+            echo '<a href="register.php">Register</a>';
+            echo '<div class="seperator"></div>';
+            echo '<a href="venue-user-login.php">Venue Login</a>';
+            echo '<a href="venue-user-register.php">Register Venue</a><div class="seperator"></div>';
+            } else {
+            echo '<a href="logout.php">Log Out</a><div class="eperator"></div>';
+            }
+            ?>
+            <a href="<?php echo $aboutLink; ?>">About Us</a>
         </div>
     </div>
 </section>
-<script>
-    function openNav() {
-        document.getElementById("drawer-name").style.width = "200px";
-
-    }
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-    }
-
-</script>
 <script src="../js/navbartest.js"></script>
 </body>
 </html>
