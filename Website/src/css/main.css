@@ -207,3 +207,9 @@ hr {
         min-width: 0px;
     }
 }
+
+@media only screen and (max-width: 400px) {
+    .section {
+        width: 100%;
+    }
+}

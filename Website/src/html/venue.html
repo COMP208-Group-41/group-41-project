@@ -2,10 +2,11 @@
 <html lang="en-GB">
 <head>
     <title>OutOut - <?php echo $name; ?></title>
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/venue.css">
     <link rel="stylesheet" type="text/css" href="../css/review.css">
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <?php include "navbar.php" ?>
@@ -65,7 +66,7 @@
         <div class="eventlist" style="margin-bottom: 16px">
         <div class="event">
             <div class="event-image"></div>
-            <div class="event-name">' . $row['EventName'] . "</div>
+            <div class="event-name">Barbecue Sunday</div>
             <div class="event-buttons"><a href="event.php?eventID=' . $row['EventID'] . '" class="event-button" style="margin-right: -1px">View</a>
             <a href="event-edit.php?eventID=' . $row['EventID'] . '" class="event-button" style="width: 50%">Edit</a></div></div>
         </div>
@@ -77,14 +78,23 @@
             </div>
             <div class="section">
 <h2 class="title">All Reviews</h2>
-<div class='review'>";
-    <label>Review left by:<b> userIDtoUserName($row['UserID'], $pdo)</b></label>
+<div class='review'>
+    <label>Review left by:<b> Dan</b></label>
     <textarea readonly onchange='this.style.height = "";this.style.height = this.scrollHeight + 3 + "px"'>$row['ReviewText']</textarea>
     <div class='review-scores'><div class='review-score'>
-    <div class='label'>Price Score:</div><div class='score'>$row['ReviewPrice']</div></div>";
-    <div class='review-score'><div class='label'>Safety Score:</div><div class='score'>$row['ReviewSafety']</div></div>
-    <div class='review-score'><div class='label'>Atmosphere Score:</div><div class='score'> $row['ReviewAtmosphere']</div></div>
-    <div class='review-score'><div class='label'>Queue Times Score:</div><div class='score'>$row['ReviewQueue']</div></div></div>
+    <div class='label'>Price Score:</div><div class='score'></div></div>";
+    <div class='review-score'><div class='label'>Safety Score:</div><div class='score'></div></div>
+    <div class='review-score'><div class='label'>Atmosphere Score:</div><div class='score'></div></div>
+    <div class='review-score'><div class='label'>Queue Times Score:</div><div class='score'></div></div></div>
+    <label>Review posted on: $row['ReviewDate']</label></div>
+<div class='review'>
+    <label>Review left by:<b> Dan</b></label>
+    <textarea readonly onchange='this.style.height = "";this.style.height = this.scrollHeight + 3 + "px"'>$row['ReviewText']</textarea>
+    <div class='review-scores'><div class='review-score'>
+    <div class='label'>Price Score:</div><div class='score'></div></div>";
+    <div class='review-score'><div class='label'>Safety Score:</div><div class='score'></div></div>
+    <div class='review-score'><div class='label'>Atmosphere Score:</div><div class='score'></div></div>
+    <div class='review-score'><div class='label'>Queue Times Score:</div><div class='score'></div></div></div>
     <label>Review posted on: $row['ReviewDate']</label></div>
 </div>
         </div>

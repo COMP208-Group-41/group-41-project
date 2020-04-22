@@ -16,10 +16,9 @@
 
 .event {
     display: flex;
-    height: 48px;
     background: var(--body-background);
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     margin: -2px 0;
 }
 
@@ -60,7 +59,6 @@
     text-decoration: none;
     height: 100%;
     min-width: 50%;
-
 }
 
 .event-button:focus {
@@ -81,4 +79,29 @@
     background-color: var(--gold);
     border: 2px solid var(--button-border);
     border-radius: 4px;
+}
+
+@media only screen and (max-width: 400px) {
+    .flex-wrap {
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+
+    .container{
+        max-width: 320px;
+        margin: 0;
+    }
+
+    .event-name {
+        min-width: 0;
+    }
+
+    body{
+        overflow-x: hidden;
+    }
+
+    .section {
+        width: 80%;
+        margin-bottom: 0px;
+    }
 }
