@@ -2,20 +2,20 @@
 <div class="slideshow-container">
     <div class="mySlides fade">
         <div class="numbertext">1 / 3</div>
-        <img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/3/4/venue.jpg" onclick="location.href='venue.php?venueID=6'" alt="Venue Image" class="title-img">
-        <div class="text">EDMidnight</div>
+        <img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/4/5/venue.jpg" onclick="location.href='venue.php?venueID=6'" alt="Venue Image" class="title-img">
+        <div class="text">LEVEL</div>
     </div>
 
     <div class="mySlides fade">
         <div class="numbertext">2 / 3</div>
-        <img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/3/3/venue.jpg" onclick="location.href='venue.php?venueID=3'" alt="Venue Image" class="title-img">
-        <div class="text">Who Dares Gins</div>
+        <img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/3/6/venue.jpg" onclick="location.href='venue.php?venueID=3'" alt="Venue Image" class="title-img">
+        <div class="text">Electrik Warehouse</div>
     </div>
 
     <div class="mySlides fade">
         <div class="numbertext">3 / 3</div>
-        <img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/2/2/venue.jpg" onclick="location.href='venue.php?venueID=2'" alt="Venue Image" class="title-img">
-        <div class="text">Red Lion</div>
+        <img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/2/8/venue.jpg" onclick="location.href='venue.php?venueID=2'" alt="Venue Image" class="title-img">
+        <div class="text">MODO</div>
     </div>
 
     <!-- Next and previous buttons -->
