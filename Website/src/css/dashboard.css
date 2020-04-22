@@ -19,8 +19,10 @@ th {
 
 
 @media only screen and (max-width: 600px) {
-    .table-button.reg-event {
-        flex-direction: column;
+
+
+    .table-item {
+        padding: 6px;
     }
 
     table {
