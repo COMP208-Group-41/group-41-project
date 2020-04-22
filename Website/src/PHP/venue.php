@@ -151,16 +151,6 @@ $image = checkVenueImageOnServer($owner, $venueID);
         <div class="flex-wrap">
             <div class="section" id="Venue Score">
                 <h2 class='title'>Venue score</h2>
-                <?php
-                if (isset($userID)) {
-                    $checkReview = checkReviewWritten($userID, 1, $venueID, $pdo);
-                    if ($checkReview === false) {
-                        echo '<a href="review-creation.php?venueID=' . $venueID . '">Write a Review</a>';
-                    } else {
-                        echo '<a href="review-edit.php?reviewID=' . $checkReview . '">Edit Review</a>';
-                    }
-                }
-                ?>
                 <div class="review-scores">
                     <div class="review-score">
                         <div class="label">Overall Score:</div>
@@ -183,6 +173,17 @@ $image = checkVenueImageOnServer($owner, $venueID);
                         <div class="score"> <?php echo "$queueScore"; ?></div>
                     </div>
                 </div>
+                <div class="seperator"></div>
+                <?php
+                if (isset($userID)) {
+                    $checkReview = checkReviewWritten($userID, 1, $venueID, $pdo);
+                    if ($checkReview === false) {
+                        echo '<a class="button" style="width: 100%;" href="review-creation.php?venueID=' . $venueID . '">Write a Review</a>';
+                    } else {
+                        echo '<a class="button" style="width: 100%;" href="review-edit.php?reviewID=' . $checkReview . '">Edit Review</a>';
+                    }
+                }
+                ?>
             </div>
             <div class="section" id="All Reviews" style="flex-grow: 10">
                 <h2 class="title">All Reviews</h2>
