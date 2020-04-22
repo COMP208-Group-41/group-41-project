@@ -47,36 +47,7 @@
             <h1 class='title'>Matching Results</h1>
             <?php
 
-              // THESE ARE THE MATCHING EVENTS BY NAME
-              if (sizeof($allEvents) != 0) {
-                  $count = 0;
-                  foreach($allEvents as $row) {
-                      if (new DateTime("now") < new DateTime($row['EventEndTime']) && $count < 5) {
-                          $currentTagIDs = getEventTagID($row['EventID'],$pdo);
-                          echo '<div class="seperator" style="margin-top: 4px">';
-                          echo "<table>";
-                          echo "<tr>";
-                          echo "<td>".$row['EventName']."</td>";
-                          echo '<td><div class="venue-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="venue-button" style="margin-left: -1px">View Event</a>';
-                          echo '<a href="venue?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -1px">View Venue</a></div></td>';
-                          echo '<td><div class="tag-container" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div></td>';
-                          echo "</tr><tr>";
-                          echo "<td>Event Date: ".$row['EventStartTime']."</td>";
-                          echo "</tr>";
-                          echo "</tr><tr>";
-                          echo "<td>Hosted By: ".venueIDtoName($row['VenueID'], $pdo)."</td>";
-                          echo "</tr>";
-                          echo "</table>";
-                          $count++;
-                      }
-                  }
-              } else {
-                echo "<table>";
-                echo "<tr>";
-                echo "<td>No matching events for this Venue listed</td>";
-                echo "</tr>";
-                echo "</table>";
-              }
+              
 
 
 
