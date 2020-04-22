@@ -18,6 +18,7 @@ img {
     align-items: center;
     margin: -2px 0;
 }
+
 .event-name {
     flex-grow: 1;
     font-family: "K2D", sans-serif;
