@@ -70,6 +70,7 @@
   <?php include "navbar.php" ?>
   <div class="wrapper">
     <div class="container">
+        <h1 class="title">Recommended Events For You</h1>
         <?php
           if (sizeof($sortedArray) != 0) {
               //echo print_r($sortedArray);
