@@ -91,7 +91,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
                 <?php
                 if ($image) {
                     echo '<div class="seperator"></div>';
-                    echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/' . $owner . '/' . $venueID . '/venue.jpg" alt="Venue Image" class="v-image">';
+                    echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/' . $owner . '/' . $venueID . '/venue.jpg" alt="Venue Image" class="title-img">';
                 }
                 ?>
 

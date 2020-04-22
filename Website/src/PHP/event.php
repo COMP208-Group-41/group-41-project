@@ -156,7 +156,7 @@
                 <?php
                     if ($image) {
                         echo '<div class="seperator"></div>';
-                        echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$owner.'/'.$venueID.'/'.$eventID.'/event.jpg" alt="Event Image" class="v-image">';
+                        echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$owner.'/'.$venueID.'/'.$eventID.'/event.jpg" alt="Event Image" class="title-img">';
                     }
                 ?>
             </div>
