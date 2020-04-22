@@ -85,6 +85,7 @@
     <div class="container">
         <?php
           if (sizeof($sortedArray) != 0) {
+              echo $sortedArray;
               foreach($sortedArray as $row) {
                   echo '<div class="seperator" style="margin-top: 4px">';
                   $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
