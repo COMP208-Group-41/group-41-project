@@ -76,9 +76,6 @@
                     unset($_SESSION['message']);
                 }
             ?>
-            <div class="outout-wrapper">
-                <img src="../Assets/outout.svg" alt="OutOut">
-            </div>
             <div class="form">
                 <div style="padding-bottom: 8px; text-align: center">
                     <b style="color: #e9e9e9; font-size: 24px">Login</b>
