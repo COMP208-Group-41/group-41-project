@@ -1,12 +1,3 @@
-:root {
-    --header-background: linear-gradient(90deg, #272727 0%, #202020 100%);
-    --dark-body: #F7F7F7;
-    --light-body: #D6D6D6;
-    --button-border: #3B3B3B;
-    --button-highlight: #ccc;
-    --text: #2E2E2E;
-}
-
 body {
     margin: 0;
     padding: 0;
