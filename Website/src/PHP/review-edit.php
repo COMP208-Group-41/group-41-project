@@ -204,18 +204,16 @@
               <option <?php if ($reviewQueue == 1) echo 'selected' ?> value="1">1</option>
           </select>
             </div>
-      </div>
-      <div class="seperator" style="margin-top: 20px"></div>
-      <div style= "display: flex">
-          <input type='submit' name='SubmitReview' value='Submit'>
-      </div>
-      <?php
-          if ($errorMessage != "") {
-              echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
-          }
-       ?>
+            <div class="seperator" style="margin-top: 20px"></div>
+            <div style= "display: flex">
+                <input type='submit' name='SubmitReview' value='Submit'>
+            </div>
     </form>
 </div>
-</div>
+    <?php
+    if ($errorMessage != "") {
+        echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
+    }
+    ?>
   </body>
 </html>
