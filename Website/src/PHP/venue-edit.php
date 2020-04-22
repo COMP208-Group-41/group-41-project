@@ -144,7 +144,7 @@
         //Check URL for external webpage
         if (isset($_POST['external'])){
           $website = trim($_POST['external']);
-          if (!externalCheck($venueID,$website,$pdo,&$errorMessage)) {
+          if (!externalCheck($venueID,$website,$pdo,$errorMessage)) {
               return false;
           }
         }
