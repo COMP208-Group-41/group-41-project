@@ -28,5 +28,5 @@
     <span class="dot" onclick="currentSlide(2)"></span>
     <span class="dot" onclick="currentSlide(3)"></span>
 </div>
-<script src="../js/slideshow.js"></script>
+<script src="slideshow.js"></script>
 <br>

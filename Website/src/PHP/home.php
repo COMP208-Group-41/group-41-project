@@ -38,7 +38,7 @@
 <div class="wrapper">
 <div class="container">
     <div class="form">
-        <form name='search form' method='post'>
+        <form name='search form' method='get'>
             <input type='text' name='search' placeholder="Search for venue.." class="searchbar">
             <input type='submit' value='Search' class='button search-button'>
         </form>
