@@ -50,12 +50,12 @@
                           $currentTagIDs = getEventTagID($row['EventID'],$pdo);
                           echo '<div class="seperator" style="margin-top: 4px">';
                           echo "<div class='table'>";
-                          echo "<div class='table-row'>".$row['EventName']."</div>";
+                          echo "<div class='table-row'rowspan='2'>".$row['EventName']."</div>";
                           echo '<div><div class="venue-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="venue-button" style="margin-left: -1px">View Event</a>';
                           echo '<a href="venue?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -1px">View Venue</a></div></div>';
                           echo '<div><div class="tag-container" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div></div>';
                           echo "</div><div>";
-                          echo "<div>Event Date: ".$row['EventStartTime']."</div>";
+                          echo "<div><div>Event Date: ".$row['EventStartTime']."</div>\"<div>Hosted By: ".venueIDtoName($row['VenueID'], $pdo)."</div>";
                           echo "</div>";
                           echo "</div><div>";
                           echo "<div>Hosted By: ".venueIDtoName($row['VenueID'], $pdo)."</div>";
