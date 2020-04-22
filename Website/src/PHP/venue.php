@@ -85,7 +85,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
 <div class="wrapper">
     <div class="container">
         <div class="flex-wrap">
-            <div class="section" id="Venue Details">
+            <div class="section" id="Venue Details" style="flex-grow: 10">
                 <h1 class="title"><?php echo "$name" ?></h1>
                 <?php
                 if ($image) {
