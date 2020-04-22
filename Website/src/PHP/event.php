@@ -173,19 +173,7 @@
             </div>
             <div class="seperator"></div>
             <h2 class='title'>Event score</h2>
-            <?php
-                if (isset($userID)) {
-                    $compareDate = new DateTime($result['EventEndTime']);
-                    if (new DateTime("now") > $compareDate) {
-                        $checkReview = checkReviewWritten($userID,$eventID,$venueID,$pdo);
-                        if ($checkReview === false) {
-                            echo '<a href="review-creation.php?eventID='.$eventID.'">Write a Review</a>';
-                        } else {
-                            echo '<a href="review-edit.php?reviewID='.$checkReview.'">Edit Review</a>';
-                        }
-                    }
-                }
-            ?>
+
             <div class="review-scores">
                 <div class="review-score">
                     <div class="label">Overall Score:</div>
@@ -208,10 +196,22 @@
                     <div class="score"> <?php echo "$queueScore"; ?></div>
                 </div>
             </div>
-
+            <div class="seperator"></div>
+            <?php
+            if (isset($userID)) {
+                $compareDate = new DateTime($result['EventEndTime']);
+                if (new DateTime("now") > $compareDate) {
+                    $checkReview = checkReviewWritten($userID,$eventID,$venueID,$pdo);
+                    if ($checkReview === false) {
+                        echo '<a class="button" href="review-creation.php?eventID='.$eventID.'">Write a Review</a>';
+                    } else {
+                        echo '<a class="button" href="review-edit.php?reviewID='.$checkReview.'">Edit Review</a>';
+                    }
+                }
+            }
+            ?>
             <div class="seperator"></div>
             <h2 class="title">All Reviews</h2>
-
                 <?php
                 if ($reviews !== false){
                     echo '<div class="reviewlist">';
