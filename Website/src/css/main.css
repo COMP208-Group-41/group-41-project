@@ -298,8 +298,9 @@ hr {
     .container{
         min-width: 0px;
         margin: 0 0 16px;
-        max-width: 350px;
+        max-width: 380px;
         width: 100%;
+        padding: 4px;
     }
     .section {
         margin: 8px 8px 0;
@@ -316,6 +317,7 @@ hr {
 @media only screen and (max-width: 380px) {
     .container {
         width: 100%;
-        max-width: 310px;
+        max-width: 350px;
+        padding: 4px;
     }
 }

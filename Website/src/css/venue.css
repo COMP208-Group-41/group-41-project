@@ -20,18 +20,6 @@
     .list {
         flex-direction: column;
     }
-
-    .event-name {
-        min-width: 0;
-    }
-
-    .event-button {
-        width: 74px;
-    }
-
-    body{
-        overflow-x: hidden;
-    }
 }
 
 @media only screen and (max-width: 400px) {

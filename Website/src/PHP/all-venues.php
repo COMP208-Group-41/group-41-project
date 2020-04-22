@@ -55,7 +55,7 @@
                         }
                         echo "</div>";
                         echo '<div class="table-item" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
-                        echo '<div class="table-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button">Venue</a>';
+                        echo '<div class="table-buttons column"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button">Venue</a>';
                         echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="table-button">Events</a></div>';
                         echo "</div>";
                     }
