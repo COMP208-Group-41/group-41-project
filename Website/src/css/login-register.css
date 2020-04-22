@@ -13,7 +13,7 @@
     --gradient: linear-gradient(270deg, rgba(7, 41, 29, 0.92) 0%, rgba(6, 27, 41, 0.92) 100%);
 }
 
-* {
+* html {
     font-family: "K2D", serif !important;
 }
 
