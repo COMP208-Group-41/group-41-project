@@ -57,9 +57,9 @@ function eventIDtoName($eventID, $pdo)
     <title>OutOut - User Dashboard</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 <body>
 <?php include "navbar.php" ?>

@@ -64,8 +64,8 @@
 <html lang='en-GB'>
 <head>
     <title>OutOut - Recommended Events</title>
-    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
