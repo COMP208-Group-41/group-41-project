@@ -147,7 +147,8 @@ body {
     padding-top: 8px;
 }
 
-.nav-seperator {
+
+.seperator {
     display: flex;
     flex-direction: column;
     border-top: var(--dark-body) solid 2px;
