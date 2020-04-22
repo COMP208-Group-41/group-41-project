@@ -189,8 +189,7 @@ hr {
 .message-wrapper {
     display: flex;
     justify-content: center;
-    margin-bottom: 32px;
-    margin: 32px 0px;
+    margin: 0 0 16px;
 }
 
 .success {
