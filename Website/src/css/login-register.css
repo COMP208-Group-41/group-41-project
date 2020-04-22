@@ -1,9 +1,16 @@
 :root {
-    --header-gray: #e9e9e9;
-    --dark-body: #F7F7F7;
+    --header-background: linear-gradient(90deg, #272727 0%, #202020 100%);
+    --body-background: #202020;
+    --body-highlight: #2E2E2E;
+    --light-body: #D6D6D6;
+    --dark-body: #C4C4C4;
     --button-border: #3B3B3B;
     --button-highlight: #ccc;
     --text: #2E2E2E;
+    --gold: #BE9100;
+    --header-gray: #e9e9e9;
+    --dark-gold: #AF8200;
+    --gradient: linear-gradient(270deg, rgba(7, 41, 29, 0.92) 0%, rgba(6, 27, 41, 0.92) 100%);
 }
 
 body {
@@ -17,14 +24,13 @@ body {
     font-family: "K2D", sans-serif;
     color: var(--text);
     height: 90vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .wrapper {
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background: rgba(32, 32, 32, 0.95);
     padding: 16px;
     border-radius: 10px;

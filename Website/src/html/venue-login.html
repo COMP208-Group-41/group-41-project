@@ -2,8 +2,45 @@
 <html lang='en-GB'>
 <head>
     <link rel="stylesheet" type="text/css" href="../css/login-register.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
 </head>
 <body>
+<div class="banner">
+    <img src="../Assets/menu-icon.svg" alt="Menu" width="25" onclick="openNav()" class="menu-image">
+    <img src="../Assets/outout.svg" alt="OutOut" width="115" onclick="location.href='home.php';">
+    <img src="../Assets/profile.svg" alt="Profile" width="40" onclick="location.href='<?php echo $dashboardLink;?>';">
+</div>
+<div id="mySidenav" class="sidenav">
+    <div class="sidebar-content">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="<?php echo $dashboardLink; ?>">My Account</a>
+        <a href="<?php echo $accountLink; ?>">Edit Account</a>
+        <a href="<?php echo $venueLink; ?>">All Venues</a>
+        <a href="<?php echo $eventLink; ?>">Upcoming Events</a>
+        <br>
+        <?php
+            if (!isset($_SESSION['UserID']) && !isset($_SESSION['VenueUserID'])) {
+                echo '<a href="login.php">Log In</a>';
+        echo '<a href="register.php">Register</a>';
+        echo '<br>';
+        echo '<a href="venue-user-login.php">Venue Log In</a>';
+        echo '<a href="venue-user-register.php">Register Venue</a><br>';
+        } else {
+        echo '<a href="logout.php">Log Out</a><br>';
+        }
+        ?>
+        <a href="<?php echo $aboutLink; ?>">About Us</a>
+    </div>
+</div>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "200px";
+    }
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+<div style="display: flex; height: 100%; justify-content: center; align-items: center">
 <div class="wrapper">
     <div class="outout-wrapper" style="padding-bottom: 10px">
         <img src="../Assets/outout.svg" alt="OutOut">
@@ -23,6 +60,7 @@
             </div>
         </form>
     </div>
+</div>
 </div>
 </body>
 </html>

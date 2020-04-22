@@ -129,6 +129,7 @@
 </head>
 <body>
     <?php include "navbar.php" ?>
+<div style="display: flex; height: 100%; justify-content: center; align-items: center">
 <div class="wrapper">
     <?php
         if (isset($_SESSION['message'])) {
@@ -190,6 +191,6 @@ if ($createError != '') {
 }
 
 ?>
-
+</div>
 </body>
 </html>
