@@ -33,6 +33,7 @@ body {
     border-radius: 10px;
     min-width: 400px;
     width: 80vw;
+    max-width: 1000px;
 }
 
 .flex-wrap {
