@@ -33,6 +33,7 @@ CREATE TABLE Venue (
     VenueDescription VARCHAR(1000) NOT NULL,
     VenueAddress VARCHAR(255) NOT NULL,
     VenueTimes VARCHAR(300),
+    ExternalSite VARCHAR (255),
     PRIMARY KEY (VenueID),
     FOREIGN KEY (VenueUserID) REFERENCES VenueUser(VenueUserID)
 );
