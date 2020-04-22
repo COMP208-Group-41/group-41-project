@@ -137,7 +137,7 @@
             // User already has a review for this venue/event!
             $result = $checkExistingReviewStmt->fetch();
             $reviewID = $result['ReviewID'];
-            header("location: review-edit.php?ReviewID=$reviewID");
+            header("location: review-edit.php?reviewID=$reviewID");
             exit;
         }
     }
@@ -186,10 +186,10 @@
             $checkEventExists->bindValue(":EventID",$eventID);
             $checkEventExists->execute();
             if ($checkEventExists->rowcount() == 0) {
-                // Venue does not exist!
+                // Event does not exist!
                 return false;
             } else {
-                // Venue does exist
+                // Event does exist
                 return true;
             }
         }
