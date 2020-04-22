@@ -24,8 +24,12 @@ body {
     transition-duration: 0.3s;
     -webkit-transition-property: transform;
     transition-property: transform;
-    padding: 0 32px;
 }
+
+.hvr-grow.outout {
+    margin-left: 32px;
+}
+
 .hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
@@ -184,6 +188,7 @@ input.searchbar:focus {
     flex-grow: 1;
     align-items: center;
     width: 40%;
+    padding: 0 10px;
 }
 
 .search-form input {
@@ -227,14 +232,16 @@ input.searchbar:focus {
 @media only screen and (max-width: 600px) {
     input.searchbar {
         width: 100%;
+
     }
 
     input.search-button {
-        width: 20%;
+        min-width: 65px;
     }
 
     .search-form .form {
         width: 100%;
+        padding: 32px;
     }
     .hvr-grow {
         padding: 0 8px;
