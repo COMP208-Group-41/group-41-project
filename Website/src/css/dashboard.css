@@ -178,7 +178,6 @@ th {
         margin-bottom: 8px;
     }
     .container{
-        background-color: #4bc54c;
         max-width: 250px;
         margin: 20px 0;
     }
@@ -209,6 +208,17 @@ th {
     }
     body{
         overflow-x: hidden;
+    }
+    .venue-name {
+        flex-grow: 1;
+        font-family: "K2D", sans-serif;
+        box-sizing: border-box;
+        border: 2px solid var(--button-border);
+        border-radius: 4px;
+        font-size: 10px;
+        background-color: var(--dark-body);
+        padding: 12px 20px 12px 10px;
+        color: var(--text);
     }
 }
 
