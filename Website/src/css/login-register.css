@@ -164,7 +164,6 @@ input  {
 @media only screen and (max-width: 600px) {
     .wrapper {
         width: 100%;
-        max-width: 410px;
         margin: 0 0 200px;
     }
 }
