@@ -98,10 +98,10 @@ $image = checkVenueImageOnServer($owner, $venueID);
                 <div class="seperator"></div>
 
                 <label>Venue description:</label>
-                <div class="event-name"><?php echo "$description" ?></div>
+                <div class="event-name" style='margin: 8px 0'><?php echo "$description" ?></div>
 
                 <label>Opening times:</label>
-                <div class="event-name"><?php echo "$times" ?></div>
+                <div class="event-name" style='margin: 8px 0'><?php echo "$times" ?></div>
 
                 <label>Location:</label>
                 <label><?php echo "$address" ?></label>
@@ -196,7 +196,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
                         if ($counter < 5) {
                             echo "<div class='review'>";
                             echo "<label>Review left by:<b> " . userIDtoUserName($row['UserID'], $pdo) . "</b></label>";
-                            echo "<div class='event-name'>" . $row['ReviewText'] . "</div>";
+                            echo "<div class='event-name' >" . $row['ReviewText'] . "</div>";
                             echo "<div class='review-scores'>";
                             echo "<div class='review-score'><div class='label'>Price Score:</div><div class='score'>" . $row['ReviewPrice'] . "</div></div>";
                             echo "<div class='review-score'><div class='label'>Safety Score:</div><div class='score'> " . $row['ReviewSafety'] . "</div></div>";
