@@ -201,3 +201,8 @@ hr {
     color: var(--header-gray);
     width: 400px;
 }
+@media only screen and (max-width: 600px) {
+    .container{
+        min-width: 0px;
+    }
+}
