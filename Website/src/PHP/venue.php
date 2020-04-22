@@ -146,7 +146,6 @@ $image = checkVenueImageOnServer($owner, $venueID);
                     ?>
                 </div>
             </div>
-        </div>
         <div class="flex-wrap">
             <div class="section" id="Venue Score">
                 <h2 class='title'>Venue score</h2>
