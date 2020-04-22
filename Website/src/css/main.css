@@ -215,7 +215,7 @@ hr {
 .table {
     display: flex;
     flex-direction: column;
-    padding-bottom: 16px;
+    margin-bottom: 16px;
     justify-content: center;
     width: 100%;
     border: 2px solid var(--button-border);
@@ -298,10 +298,10 @@ hr {
     .container{
         min-width: 0px;
         margin: 0 0 16px;
-        max-width: 350px;
+        max-width: 380px;
         width: 100%;
+        padding: 4px;
     }
-
     .section {
         margin: 8px 8px 0;
     }
@@ -314,17 +314,10 @@ hr {
     }
 }
 
-@media only screen and (max-width: 600px) {
-    .container {
-        width: 100%;
-        max-width: 410px;
-    }
-}
-
-
 @media only screen and (max-width: 380px) {
     .container {
         width: 100%;
-        max-width: 310px;
+        max-width: 350px;
+        padding: 4px;
     }
 }

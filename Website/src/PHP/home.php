@@ -18,7 +18,8 @@
     }
 
     if (isset($_POST['search'])){
-      header('location search.php?search='.$_POST['searchText'].'');    
+      header("location: search.php?search=".$_POST['searchText']."");
+      exit;
     }
 
 ?>

@@ -67,8 +67,8 @@ $image = checkVenueImageOnServer($owner, $venueID);
 <html lang="en-GB">
 <head>
     <title>OutOut - <?php echo $name; ?></title>
-    <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/venue.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/review.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -126,12 +126,11 @@ $image = checkVenueImageOnServer($owner, $venueID);
                         $counter = 0;
                         foreach ($events as $row) {
                             if ($counter < 10) {
-                                echo '<div class="event">';
-                                echo '<div class="event-image"></div>';
-                                echo '<div class="event-name">' . $row['EventName'] . "</div>";
-                                echo '<div class="event-buttons"><a href="event.php?eventID=' . $row['EventID'] . '" class="event-button" style="margin-right: -1px; flex-grow: 1">View</a>';
+                                echo '<div class="table-row">';
+                                echo '<div class="table-item">' . $row['EventName'] . "</div>";
+                                echo '<div class="table-buttons"><a href="event.php?eventID=' . $row['EventID'] . '" class="table-button">View</a>';
                                 if (isset($venueUserID)) {
-                                    echo '<a href="event-edit.php?eventID=' . $row['EventID'] . '" class="table-button-button" style="width: 50%">Edit</a></div></div>';
+                                    echo '<a href="event-edit.php?eventID=' . $row['EventID'] . '" class="table-button" style="width: 50%">Edit</a></div></div>';
                                 } else {
                                     echo '</div></div>';
                                 }

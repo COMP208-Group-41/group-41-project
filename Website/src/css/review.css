@@ -99,15 +99,10 @@ label {
     .review {
         width: 85%;
         margin: 8px 0;
-        max-width: 0;
     }
 
     .reviews {
         flex-direction: column;
-    }
-
-    textarea {
-        max-width: 220px;
     }
 
     .review-score {
