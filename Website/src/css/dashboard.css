@@ -17,6 +17,7 @@ th {
     width: 20%;
 }
 
+
 .list {
     display: flex;
     flex-direction: column;
@@ -111,7 +112,7 @@ th {
     border-radius: 4px;
     font-size: 16px;
     background-color: var(--dark-body);
-    padding: 12px 20px 12px 10px;
+    padding: 12px 4px 12px 4px;
     color: var(--text);
 }
 
@@ -159,4 +160,30 @@ th {
     background-color: var(--gold);
     border: 2px solid var(--button-border);
     border-radius: 4px;
+}
+@media only screen and (max-width: 600px) {
+    .venue {
+        max-width: 375px;
+        display: flex;
+        height: 48px;
+        background: var(--body-background);
+        justify-content: center;
+        align-items: center;
+        margin: -2px 0;
+
+    }
+    table {
+        border-collapse: collapse;
+        max-width: 375px;
+        margin-bottom: 8px;
+    }
+    .container{
+        background-color: #4bc54c;
+        max-width: 375px;
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+    .example {background: red;}
 }
