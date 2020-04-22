@@ -1,5 +1,5 @@
 .v-image {
-    max-height: 300px;
+    max-width: 40vw;
     object-fit: cover;
 }
 
