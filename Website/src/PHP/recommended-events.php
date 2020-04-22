@@ -24,7 +24,7 @@
 
     $allEvents = getAllEvents($pdo);
     $userPrefs = getUserTags($userID,$pdo);
-    $SortedArray = (array) null;
+    $sortedArray = (array) null;
     foreach($allEvents as $row){
       $event = $emptyArray = (array) null;
       $eventTags = getEventTagID($row['EventID'],$pdo);
@@ -37,10 +37,10 @@
       if ($count > 0){
         $event['Count'] = $count;
         $event['EventID'] = $row['EventID'];
-        array_push($SortedArray,$event);
+        array_push($sortedArray,$event);
       }
     }
-    sortArray($SortedArray);
+    sortArray($sortedArray);
     $sortedArray = array_reverse($sortedArray);
 
     function sortArray (&$array) {
