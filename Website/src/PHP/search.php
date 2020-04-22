@@ -10,19 +10,29 @@
     require_once "config.php";
 
     $search = $_GET['search'];
+    $allEvents = getAllEvents($pdo);
     $allVenues = getAllVenues($pdo);
     // EXPRESSION TO FILTER NEEDED HERE
+
+    function venueIDtoName($venueID, $pdo){
+      $getStmt = $pdo->prepare("SELECT VenueName FROM Venue WHERE VenueID=:VenueID");
+      $getStmt->bindValue(":VenueID",$venueID);
+      $getStmt->execute();
+      $result = $getStmt->fetch();
+      return $result['VenueName'];
+
+    }
 
 ?>
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
-    <title>OutOut - Matching Venues</title>
+    <title>OutOut - Matching Results</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="../css/all-venues.css">
+    <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
 </head>
 <body>
     <?php include "navbar.php" ?>
@@ -34,12 +44,14 @@
     ?>
     <div class="wrapper">
         <div class="container">
-            <div class="section">
-                <h1 class='title'>Matching Venues</h1>
-                <?php
-                
-                ?>
-            </div>
+            <h1 class='title'>Matching Results</h1>
+            <?php
+
+              
+
+
+
+            ?>
         </div>
     </div>
 
