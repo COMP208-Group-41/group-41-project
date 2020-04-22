@@ -76,11 +76,10 @@
         <h1 class="title">Recommended Venues For You</h1>
         <?php
           if (sizeof($sortedArray) != 0) {
-              //echo print_r($sortedArray);
               foreach($sortedArray as $row) {
                   echo '<div class="seperator" style="margin-top: 4px">';
                   $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
-                  echo $row['Count'];
+                  echo "This venue matches: ".$row['Count']." Tags";
                   echo "<table>";
                   echo "<tr>";
                   echo "<td>".$row['VenueName']."</td>";
