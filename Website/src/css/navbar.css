@@ -32,8 +32,16 @@ body {
     font-size: 36px;
     margin-right: 32px;
     text-align: right;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
 
+}
+
+.sidenav .icon-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0 4px 32px;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .sidenav a {
@@ -43,7 +51,8 @@ body {
     display: block;
     transition: 0.3s;
     font-family: "K2D", sans-serif;
-    padding: 0 0 8px;
+    padding: 8px 20px;
+    text-align: left;
 
 }
 
