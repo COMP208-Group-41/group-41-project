@@ -25,7 +25,7 @@
 </div>
 <div id="mySidenav" class="sidenav">
     <div class="sidenav-content">
-        <div style="display: flex" >
+        <div class="icon-wrapper" >
             <img src="../Assets/outout.svg" width="115">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         </div>

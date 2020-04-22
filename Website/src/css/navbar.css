@@ -33,7 +33,13 @@ body {
     margin-right: 32px;
     text-align: right;
     margin-bottom: 8px;
+}
 
+.seperator {
+    width: 85%;
+    margin-left: 16px;
+    margin-top: 16px;
+    padding-top: 16px;
 }
 
 .sidenav .icon-wrapper {
