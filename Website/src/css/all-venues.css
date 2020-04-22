@@ -25,7 +25,19 @@ body {
 
 .table-item {
     flex-direction: column;
+
 }
+
+.table-item.image {
+    opacity: 0.9;
+}
+
+.table-item-image {
+    object-fit: cover;
+    z-index: -1;
+}
+
+
 
 @media only screen and (max-width: 600px) {
     .table {
