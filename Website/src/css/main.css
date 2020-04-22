@@ -12,9 +12,12 @@
     --dark-gold: #AF8200;
     --gradient: linear-gradient(270deg, rgba(7, 41, 29, 0.92) 0%, rgba(6, 27, 41, 0.92) 100%);
 }
+
+* {
+    font-family: "K2D", serif !important;
+}
 body {
     background: var(--gradient);
-    font-family: "K2D", serif;
     text-align: center;
 }
 
@@ -237,7 +240,6 @@ hr {
     align-items: center;
     box-sizing: border-box;
     padding: 12px;
-    font-family: "K2D", sans-serif;
     font-size: 14px;
     background-color: var(--dark-body);
     color: var(--text);
@@ -263,7 +265,6 @@ hr {
     align-items: center;
     box-sizing: border-box;
     min-width: 50%;
-    font-family: "K2D", sans-serif;
     font-size: 14px;
     margin: 0;
     padding: 12px 0px;

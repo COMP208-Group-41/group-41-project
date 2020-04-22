@@ -36,7 +36,6 @@ label {
 }
 
 .review-score .label {
-    font-family: "K2D", sans-serif;
     flex-grow: 1;
     box-sizing: border-box;
     border: 2px solid var(--button-border);
@@ -52,7 +51,6 @@ label {
 
 .review-text {
     flex-grow: 1;
-    font-family: "K2D", sans-serif;
     box-sizing: border-box;
     border: 2px solid var(--button-border);
     border-radius: 4px;
@@ -65,7 +63,6 @@ label {
 }
 
 .review-score .score {
-    font-family: "K2D", sans-serif;
     box-sizing: border-box;
     font-size: 16px;
     background-color: var(--body-background);
