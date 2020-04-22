@@ -235,7 +235,7 @@ hr {
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    padding: 12px 20px 12px 10px;
+    padding: 12px;
     font-family: "K2D", sans-serif;
     font-size: 14px;
     background-color: var(--dark-body);
@@ -252,6 +252,9 @@ hr {
     align-items: stretch;
 }
 
+.table-buttons.column {
+    flex-direction: column;
+}
 
 .table-button {
     display: flex;
