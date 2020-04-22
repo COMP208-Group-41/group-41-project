@@ -215,7 +215,7 @@ hr {
 .table {
     display: flex;
     flex-direction: column;
-    padding-bottom: 16px;
+    margin-bottom: 16px;
     justify-content: center;
     width: 100%;
     border: 2px solid var(--button-border);
