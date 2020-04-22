@@ -255,13 +255,13 @@
             <div style= "display: flex">
                 <input type='submit' value='Submit' class="button" style="width: 100%;">
             </div>
-      <?php
-          if ($errorMessage != "") {
-              echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
-          }
-       ?>
     </form>
 </div>
+<?php
+    if ($errorMessage != "") {
+        echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
+    }
+ ?>
 </div>
   </body>
 </html>
