@@ -48,7 +48,7 @@
                   foreach($allEvents as $row) {
                       if (new DateTime("now") < new DateTime($row['EventEndTime'])) {
                           $currentTagIDs = getEventTagID($row['EventID'],$pdo);
-                          echo '<div class="seperator" style="margin-top: 4px">';
+                          echo '<div class="seperator" style="margin-top: 4px"></div>';
                           echo "<div class='table'>";
                           echo "<div class='table-row'>";
                           echo "<div class='table-item image' style='background-image: url(../Assets/background2.jpg); width: 40%'>Content here</div>";
