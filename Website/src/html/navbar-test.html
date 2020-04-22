@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang='en-GB'>
+<head>
+    <title>TEST</title>
+    <link rel="stylesheet" type="text/css" href="../css/navbar-test.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+</head>
+<body>
+<div class="banner">
+    <a href="#" data-drawer-trigger aria-controls="drawer-name"  class="banner-image" aria-expanded="false"> <img src="../Assets/menu-icon.svg" alt="Menu" width="25" class="menu-image"></a>
+    <img src="../Assets/outout.svg" alt="OutOut" width="100" class="hvr-grow" onclick="location.href='home.php';">
+    <img src="../Assets/profile.svg" alt="Profile" width="40"  class="hvr-grow" onclick="location.href='<?php echo $dashboardLink;?>';">
+</div>
+<section class="drawer drawer--left" id="drawer-name" data-drawer-target>
+    <div class="drawer__overlay" data-drawer-close tabindex="-1"></div>
+    <div class="drawer__wrapper">
+        <div class="drawer__header">
+            <div class="drawer__title">
+            </div>
+            <a href="javascript:void(0)" class="drawer__close" data-drawer-close aria-label="Close Drawer">&times;</a>
+        </div>
+        <div class="drawer__content">
+            <a href="#">My Account</a><br>
+            <a href="#">Edit Account</a><br>
+            <a href="#">Venues</a><br>
+            <a href="#">Events</a><br>
+            <br>
+            <a href="#">Log Out</a>
+            <br>
+            <a href="#">About Us</a>
+        </div>
+    </div>
+</section>
+<script>
+    function openNav() {
+        document.getElementById("drawer-name").style.width = "200px";
+
+    }
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+
+</script>
+<script src="../js/navbartest.js"></script>
+</body>
+</html>
+
