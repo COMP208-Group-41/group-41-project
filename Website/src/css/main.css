@@ -280,18 +280,18 @@ hr {
 .table-button:focus {
     outline: none;
     background-color: var(--button-highlight);
-    border: 2px solid var(--button-border);
+    border: 1px solid var(--button-border);
 }
 
 .table-button:hover {
     background-color: var(--dark-gold);
     cursor: pointer;
-    border: 2px solid var(--button-border);
+    border: 1px solid var(--button-border);
 }
 
 .table-button:active {
     background-color: var(--gold);
-    border: 2px solid var(--button-border);
+    border: 1px solid var(--button-border);
 }
 
 @media only screen and (max-width: 440px) {
