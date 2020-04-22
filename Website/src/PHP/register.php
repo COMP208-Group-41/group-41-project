@@ -184,6 +184,7 @@
                 <input type='text' name='email' placeholder="Email">
                 <input type='password' name='password' placeholder="Password">
                 <input type='password' name='confirmPassword' placeholder="Confirm Password">
+                <label>Date of Birth:</label>
                 <input type='date' name='DOB' placeholder="Select Date of Birth">
             </div>
             <div style="display: flex">
