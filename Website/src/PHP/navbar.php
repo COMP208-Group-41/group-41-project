@@ -56,6 +56,6 @@
         </div>
     </div>
 </section>
-<script src="../js/navbar.js"></script>
+<script src="navbar.js"></script>
 </body>
 
