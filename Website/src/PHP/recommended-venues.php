@@ -23,7 +23,7 @@
     $userID = $_SESSION['UserID'];
 
     $allVenues = getAllVenues($pdo);
-    print_r($allVenues);
+    //print_r($allVenues);
     $userPrefs = getUserTags($userID,$pdo);
     $sortedArray = (array) null;
     foreach($allVenues as $row){
@@ -87,7 +87,7 @@
     <div class="container">
         <?php
           if (sizeof($sortedArray) != 0) {
-              echo print_r($sortedArray);
+              //echo print_r($sortedArray);
               foreach($sortedArray as $row) {
                   echo '<div class="seperator" style="margin-top: 4px">';
                   $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
