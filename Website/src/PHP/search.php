@@ -9,7 +9,21 @@
 
     require_once "config.php";
 
-    $search = $_GET['search'];
+    if (!isset($_GET['search'])) {
+        // search term not provided
+        $_SESSION['message'] = "No Search term given!";
+        header("location: 404.php");
+        exit;
+    }
+
+    if (trim($_GET['search']) == "") {
+        // search term not provided
+        $_SESSION['message'] = "No Search term given!";
+        header("location: 404.php");
+        exit;
+    }
+
+    $search = strtolower(trim($_GET['search']));
     $allEvents = getAllEvents($pdo);
     $allVenues = getAllVenues($pdo);
     // EXPRESSION TO FILTER NEEDED HERE
@@ -48,33 +62,35 @@
             <?php
 
               // Matching Venues
-              if (sizeof($) != 0) {
-                  echo "<h2 class='title'>No matching events found!</h2>";
+              if (sizeof($allVenues) != 0) {
+                  // echo "<h2 class='title'>No matching events found!</h2>";
                   echo "<div class='table'>";
-                  foreach($ as $row) {
-                      $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
-                      echo "<div class='table-row'>";
-                      echo "<div class='table-item'>".$row['VenueName'];
-                      unset($priceScore);
-                      unset($safetyScore);
-                      unset($atmosphereScore);
-                      unset($queueScore);
-                      unset($totalScore);
-                      $priceScore = getPriceScore($row['VenueID'], 1, $pdo);
-                      $safetyScore = getSafetyScore($row['VenueID'], 1, $pdo);
-                      $atmosphereScore = getAtmosphereScore($row['VenueID'], 1, $pdo);
-                      $queueScore = getQueueScore($row['VenueID'], 1, $pdo);
-                      if (!($priceScore === false || $safetyScore === false || $atmosphereScore === false || $queueScore === false)) {
-                          $totalScore = ($queueScore + $atmosphereScore + $safetyScore + $priceScore) / 4;
-                          echo "<div class='rating-wrapper'>Rating:<div class='rating-square'>$totalScore</div></div>";
-                      } else {
-                          echo "<div class='rating-wrapper'>No Ratings</div>";
+                  foreach($alLVenues as $row) {
+                      if (strpos($row['VenueName'],$search)) {
+                          $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
+                          echo "<div class='table-row'>";
+                          echo "<div class='table-item'>".$row['VenueName'];
+                          unset($priceScore);
+                          unset($safetyScore);
+                          unset($atmosphereScore);
+                          unset($queueScore);
+                          unset($totalScore);
+                          $priceScore = getPriceScore($row['VenueID'], 1, $pdo);
+                          $safetyScore = getSafetyScore($row['VenueID'], 1, $pdo);
+                          $atmosphereScore = getAtmosphereScore($row['VenueID'], 1, $pdo);
+                          $queueScore = getQueueScore($row['VenueID'], 1, $pdo);
+                          if (!($priceScore === false || $safetyScore === false || $atmosphereScore === false || $queueScore === false)) {
+                              $totalScore = ($queueScore + $atmosphereScore + $safetyScore + $priceScore) / 4;
+                              echo "<div class='rating-wrapper'>Rating:<div class='rating-square'>$totalScore</div></div>";
+                          } else {
+                              echo "<div class='rating-wrapper'>No Ratings</div>";
+                          }
+                          echo "</div>";
+                          echo '<div class="venue-tags" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
+                          echo '<div class="table-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button" style="margin-bottom: -2px">Venue</a>';
+                          echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="table-button">Events</a></div>';
+                          echo "</div>";
                       }
-                      echo "</div>";
-                      echo '<div class="venue-tags" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
-                      echo '<div class="table-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button" style="margin-bottom: -2px">Venue</a>';
-                      echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="table-button">Events</a></div>';
-                      echo "</div>";
                 }
                 echo "</div>";
             } else {
@@ -82,15 +98,15 @@
             }
 
             // Matching Events
-            if (sizeof($) != 0) {
-                echo "<div class='table'>";
-                foreach($ as $row) {
-
-                }
-                echo "</div>";
-            } else {
-                echo "<h2 class='title'>No matching events found!</h2>";
-            }
+            // if (sizeof($) != 0) {
+            //     echo "<div class='table'>";
+            //     foreach($ as $row) {
+            //
+            //     }
+            //     echo "</div>";
+            // } else {
+            //     echo "<h2 class='title'>No matching events found!</h2>";
+            // }
 
 
             ?>
