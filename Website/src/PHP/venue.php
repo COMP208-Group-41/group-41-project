@@ -84,65 +84,35 @@ $image = checkVenueImageOnServer($owner, $venueID);
 </div>
 <div class="wrapper">
     <div class="container">
-        <div style="display: flex; flex-direction: column">
-            <h1 class="title"><?php echo "$name" ?></h1>
-            <?php
-            if ($image) {
-                echo '<div class="seperator"></div>';
-                echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/' . $owner . '/' . $venueID . '/venue.jpg" alt="Venue Image">';
-            }
-            ?>
+        <div class="flex-wrap">
+            <div class="section" id="Venue Details">
+                <h1 class="title"><?php echo "$name" ?></h1>
+                <?php
+                if ($image) {
+                    echo '<div class="seperator"></div>';
+                    echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/' . $owner . '/' . $venueID . '/venue.jpg" alt="Venue Image">';
+                }
+                ?>
 
-            <div class="seperator"></div>
+                <div class="seperator"></div>
 
-            <label>Venue description:</label>
-            <textarea readonly placeholder="Description of event here"><?php echo "$description" ?></textarea>
+                <label>Venue description:</label>
+                <textarea readonly placeholder="Description of event here"><?php echo "$description" ?></textarea>
 
-            <label>Opening times:</label>
-            <textarea readonly placeholder="Opening times here"><?php echo "$times" ?></textarea>
+                <label>Opening times:</label>
+                <textarea readonly placeholder="Opening times here"><?php echo "$times" ?></textarea>
 
-            <label>Location:</label>
-            <label><?php echo "$address" ?></label>
+                <label>Location:</label>
+                <label><?php echo "$address" ?></label>
 
-            <label style="text-align: center; margin-top: 16px;"><b>Venue Tags:</b></label>
-            <div style="display: flex; justify-content: center; ">
-                <div class="tag-container" style="text-align: center">
-                    <?php getTags($currentTagIDs, $pdo); ?>
+                <label style="text-align: center; margin-top: 16px;"><b>Venue Tags:</b></label>
+                <div style="display: flex; justify-content: center; ">
+                    <div class="tag-container" style="text-align: center">
+                        <?php getTags($currentTagIDs, $pdo); ?>
+                    </div>
                 </div>
             </div>
-            <div class="seperator"></div>
-            <h2 class='title'>Upcoming Events</h2>
-            <?php
-            if (isset($venueUserID)) {
-                echo '<a href="event-creation.php?venueID=' . $venueID . '" class="button" style="width: 100%; margin-bottom: 16px">Add a new Event</a>';
-            }
-            ?>
-            <div class="eventlist" style="margin-bottom: 16px">
-                <?php
-                if ($events !== false) {
-                    $counter = 0;
-                    foreach ($events as $row) {
-                        if ($counter < 5) {
-                            echo '<div class="event">';
-                            echo '<div class="event-image"></div>';
-                            echo '<div class="event-name">' . $row['EventName'] . "</div>";
-                            echo '<div class="event-buttons"><a href="event.php?eventID=' . $row['EventID'] . '" class="event-button" style="margin-right: -1px">View</a>';
-                            if (isset($venueUserID)) {
-                                echo '<a href="event-edit.php?eventID=' . $row['EventID'] . '" class="event-button" style="width: 50%">Edit</a></div></div>';
-                            }
-                        }
-                        $counter++;
-                    }
-                    echo '</div>';
-                } else {
-                    echo '<div class="event">';
-                    echo '<div class="event-name">No events currently listed</div></div></div>';
-                }
-                echo '<div style="display: flex; height: 32px">';
-                echo '<a href="upcoming-events.php?venueID=' . $venueID . ' "class="button" style="width: 50%;  margin-right: -4px">View All Events</a>';
-                echo '<a href="past-events.php?venueID=' . $venueID . '" class="button" style="width: 50%;">View Past Events</a></div>';
-                ?>
-                <div class="seperator"></div>
+            <div class="section" id="Venue Score">
                 <h2 class='title'>Venue score</h2>
                 <?php
                 if (isset($userID)) {
@@ -176,33 +146,70 @@ $image = checkVenueImageOnServer($owner, $venueID);
                         <div class="score"> <?php echo "$queueScore"; ?></div>
                     </div>
                 </div>
-                <h2 class="title">All Reviews</h2>
+            </div>
+            <div class="section" id="Upcoming Events">
+                <h2 class='title'>Upcoming Events</h2>
+                <?php
+                if (isset($venueUserID)) {
+                    echo '<a href="event-creation.php?venueID=' . $venueID . '" class="button" style="width: 100%; margin-bottom: 16px">Add a new Event</a>';
+                }
+                ?>
+                <div class="eventlist" style="margin-bottom: 16px">
                     <?php
-                    if ($reviews !== false) {
+                    if ($events !== false) {
                         $counter = 0;
-                        echo '<div class="reviewlist">';
-                        foreach ($reviews as $row) {
+                        foreach ($events as $row) {
                             if ($counter < 5) {
-                                echo "<div class='review'>";
-                                echo "<label>Review left by:<b> " . userIDtoUserName($row['UserID'], $pdo) . "</b></label>";
-                                echo "<textarea readonly onchange='this.style.height = \"\";this.style.height = this.scrollHeight + 3 + \"px\"'>" . $row['ReviewText'] . "</textarea>";
-                                echo "<div class='review-scores'>";
-                                echo "<div class='review-score'><div class='label'>Price Score:</div><div class='score'>" . $row['ReviewPrice'] . "</div></div>";
-                                echo "<div class='review-score'><div class='label'>Safety Score:</div><div class='score'> " . $row['ReviewSafety'] . "</div></div>";
-                                echo "<div class='review-score'><div class='label'>Atmosphere Score:</div><div class='score'> " . $row['ReviewAtmosphere'] . "</div></div>";
-                                echo "<div class='review-score'><div class='label'>Queue Times Score:</div><div class='score'> " . $row['ReviewQueue'] . "</div></div></div>";
-                                echo "<label>Review posted on: " . $row['ReviewDate'] . "</label></div>";
+                                echo '<div class="event">';
+                                echo '<div class="event-image"></div>';
+                                echo '<div class="event-name">' . $row['EventName'] . "</div>";
+                                echo '<div class="event-buttons"><a href="event.php?eventID=' . $row['EventID'] . '" class="event-button" style="margin-right: -1px">View</a>';
+                                if (isset($venueUserID)) {
+                                    echo '<a href="event-edit.php?eventID=' . $row['EventID'] . '" class="event-button" style="width: 50%">Edit</a></div></div>';
+                                }
                             }
                             $counter++;
                         }
                         echo '</div>';
                     } else {
-                        echo '<label style="font-size: 20px">No reviews currently posted for this venue</label>';
+                        echo '<div class="event">';
+                        echo '<div class="event-name">No events currently listed</div></div></div>';
                     }
+                    echo '<div style="display: flex; height: 32px">';
+                    echo '<a href="upcoming-events.php?venueID=' . $venueID . ' "class="button" style="width: 50%;  margin-right: -4px">View All Events</a>';
+                    echo '<a href="past-events.php?venueID=' . $venueID . '" class="button" style="width: 50%;">View Past Events</a></div>';
                     ?>
                 </div>
             </div>
+            <div class="section" id="All Reviews">
+                <h2 class="title">All Reviews</h2>
+                <?php
+                if ($reviews !== false) {
+                    $counter = 0;
+                    echo '<div class="reviewlist">';
+                    foreach ($reviews as $row) {
+                        if ($counter < 5) {
+                            echo "<div class='review'>";
+                            echo "<label>Review left by:<b> " . userIDtoUserName($row['UserID'], $pdo) . "</b></label>";
+                            echo "<textarea readonly onchange='this.style.height = \"\";this.style.height = this.scrollHeight + 3 + \"px\"'>" . $row['ReviewText'] . "</textarea>";
+                            echo "<div class='review-scores'>";
+                            echo "<div class='review-score'><div class='label'>Price Score:</div><div class='score'>" . $row['ReviewPrice'] . "</div></div>";
+                            echo "<div class='review-score'><div class='label'>Safety Score:</div><div class='score'> " . $row['ReviewSafety'] . "</div></div>";
+                            echo "<div class='review-score'><div class='label'>Atmosphere Score:</div><div class='score'> " . $row['ReviewAtmosphere'] . "</div></div>";
+                            echo "<div class='review-score'><div class='label'>Queue Times Score:</div><div class='score'> " . $row['ReviewQueue'] . "</div></div></div>";
+                            echo "<label>Review posted on: " . $row['ReviewDate'] . "</label></div>";
+                        }
+                        $counter++;
+                    }
+                    echo '</div>';
+                } else {
+                    echo '<label style="font-size: 20px">No reviews currently posted for this venue</label>';
+                }
+                ?>
+            </div>
         </div>
     </div>
+</div>
+</div>
 </body>
 </html>
