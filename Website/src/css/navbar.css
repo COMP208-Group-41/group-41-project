@@ -24,7 +24,7 @@ body {
     background: var(--header-background);
     overflow-x: hidden;
     transition: 0.2s;
-    padding-top: 12px;
+    padding-top: 4px;
     box-shadow: 0px 4px 10px rgba(6, 27, 41, 0.25);
 }
 
@@ -35,7 +35,10 @@ body {
     margin-bottom: 8px;
 }
 
-.seperator {
+.nav-seperator {
+    display: flex;
+    flex-direction: column;
+    border-top: var(--dark-body) solid 2px;
     width: 85%;
     margin-left: 16px;
     margin-top: 16px;

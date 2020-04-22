@@ -369,7 +369,7 @@
         <?php
             if ($image) {
                 echo '<div class="seperator"></div>';
-                echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$venueUserID.'/'.$venueID.'/'.$eventID.'/event.jpg" alt="Event Image" class="v-image">';
+                echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$venueUserID.'/'.$venueID.'/'.$eventID.'/event.jpg" alt="Event Image" class="title-img">';
             }
         ?>
         <form id='EventForm' name='EventForm' method='post' enctype="multipart/form-data">

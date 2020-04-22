@@ -153,7 +153,7 @@
                 <input type="text" name='nameOfCompany' placeholder="Name of Company" required>
             </div>
             <div style="display: flex">
-                <a href="venue-user-login.php" class="login-button">Log In</a>
+                <a href="venue-user-login.php" class="login-button">Go to login</a>
                 <input type='submit' value='Register' class="register-button">
             </div>
         </form>

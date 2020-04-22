@@ -49,6 +49,13 @@ body {
         width: 100%;
     }
 
+    .container {
+        padding: 4px;
+    }
+    .section {
+        margin: 8px 8px 0;
+    }
+
     .table-item {
         padding: 6px;
         flex-direction: column;
