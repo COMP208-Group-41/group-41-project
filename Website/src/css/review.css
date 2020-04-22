@@ -100,5 +100,9 @@ label {
     .review-score {
         max-width: 220px;
     }
+
+    .review-score .label {
+        max-width: 70%;
+    }
 }
 
