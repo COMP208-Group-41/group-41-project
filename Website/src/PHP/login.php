@@ -35,7 +35,7 @@
                      */
                     $_SESSION["loggedin"] = true;
                     $_SESSION['UserID'] = $result;
-                    header("location: user-dashboard.php");
+                    header("location: home.php");
                     exit;
                 } else {
                     // Password doesn't match!

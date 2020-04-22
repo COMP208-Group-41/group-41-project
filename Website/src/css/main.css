@@ -161,6 +161,7 @@ hr {
     border-top: var(--dark-body) solid 2px;
     padding-top: 20px;
     margin-top: 8px;
+    width: 100%;
 }
 
 
@@ -308,15 +309,18 @@ hr {
     .container{
         min-width: 0px;
         margin: 0 0 16px;
-        max-width: 380px;
+        max-width: 360px;
         width: 100%;
-        padding: 4px;
-    }
-    .section {
-        margin: 8px 8px 0;
+        padding: 16px;
     }
     .message-wrapper {
         margin: 16px 0;
+    }
+
+    .table-button:hover {
+        background-color: var(--body-background);
+        cursor: pointer;
+        border: 1px solid var(--button-border);
     }
 
     .tag-container {

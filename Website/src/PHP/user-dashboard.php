@@ -97,10 +97,10 @@ if (isset($_SESSION['message'])) {
                     <?php echo "$userDOB"; ?>
                 </div>
             </div>
-            <button onclick="location.href='user-edit.php';" class="button" style="margin-top: 20px;width: 100%">
-                Edit Account Details
-            </button>
         </div>
+        <button onclick="location.href='user-edit.php';" class="button" style="margin-top: 20px;width: 100%">
+            Edit Account Details
+        </button>
     </div>
     <div class="flex-wrap">
         <div class="section">
