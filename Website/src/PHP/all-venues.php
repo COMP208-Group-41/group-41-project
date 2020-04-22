@@ -39,7 +39,7 @@
                         echo "<div class='table'>";
                         echo "<div class='table-row'>";
                         echo "<div class='table-item image'>".$row['VenueName'];
-                        echo "<img src='../Assets/background1.jpg'>";
+                        echo "<img src='../Assets/background1.jpg' class='table-item-image'>";
                         unset($priceScore);
                         unset($safetyScore);
                         unset($atmosphereScore);

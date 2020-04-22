@@ -34,6 +34,7 @@ body {
 
 .table-item-image {
     object-fit: cover;
+    width: 100%;
     z-index: -1;
 }
 
