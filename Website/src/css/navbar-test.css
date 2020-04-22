@@ -188,7 +188,7 @@ input.searchbar:focus {
     width: 40%;
 }
 
-input {
+.search-form input {
     box-sizing: border-box;
     border: 2px solid var(--button-border);
     border-radius: 4px;
@@ -196,6 +196,7 @@ input {
     background-color: var(--dark-body);
     padding: 12px 20px 12px 10px;
     color: var(--text);
+    margin: 0;
 }
 
 .button {

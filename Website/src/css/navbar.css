@@ -186,7 +186,7 @@ input.searchbar:focus {
     width: 40%;
 }
 
-input {
+.search-form input {
     box-sizing: border-box;
     border: 2px solid var(--button-border);
     border-radius: 4px;
@@ -194,31 +194,5 @@ input {
     background-color: var(--dark-body);
     padding: 12px 20px 12px 10px;
     color: var(--text);
-}
-
-.button {
     margin: 0;
-    box-sizing: border-box;
-    border: 2px solid var(--button-border);
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: var(--body-background);
-    padding: 6px;
-    color: var(--light-body);
-    text-align: center;
-    text-decoration: none;
-}
-
-.button:focus {
-    outline: none;
-    background-color: var(--button-highlight);
-}
-
-.button:hover {
-    background-color: var(--dark-gold);
-    cursor: pointer;
-}
-
-.button:active {
-    background-color: var(--gold)
 }
