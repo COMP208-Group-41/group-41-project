@@ -80,7 +80,7 @@
                   echo "<table>";
                   echo "<tr>";
                   echo "<td>".$row['EventName']."</td>";
-                  echo '<td><div class="venue-buttons"><a href="event.php?venueID='.$row['EventID'].'" class="button" style="margin-left: -1px">View Event</a></div></td>';
+                  echo '<td><div class="venue-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="button" style="margin-left: -1px">View Event</a></div></td>';
                   echo '<td><div class="tag-container" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div></td>';
                   echo "</tr>";
                   echo "</table>";
