@@ -37,6 +37,7 @@
       if ($count > 0){
         $event['Count'] = $count;
         $event['EventID'] = $row['EventID'];
+        $event['EventName'] = $row['EventName'];
         array_push($sortedArray,$event);
       }
     }
@@ -77,7 +78,7 @@
               foreach($sortedArray as $row) {
                   echo '<div class="seperator" style="margin-top: 4px">';
                   $currentTagIDs = getEventTagID($row['EventID'],$pdo);
-                  echo $row['Count'];
+                  echo "This venue matches ".$row['Count']." of your preferred tags";
                   echo "<table>";
                   echo "<tr>";
                   echo "<td>".$row['EventName']."</td>";
