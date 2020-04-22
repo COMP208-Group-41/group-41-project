@@ -23,6 +23,7 @@
     $userID = $_SESSION['UserID'];
 
     $allVenues = getAllVenues($pdo);
+    print_r($allVenues);
     $userPrefs = getUserTags($userID,$pdo);
     $sortedArray = (array) null;
     foreach($allVenues as $row){
@@ -37,6 +38,7 @@
       if ($count > 0){
         $event['Count'] = $count;
         $event['VenueID'] = $row['VenueID'];
+        $event['VenueName'] = $row['VenueName'];
         array_push($sortedArray,$event);
       }
     }
