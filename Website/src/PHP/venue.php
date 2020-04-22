@@ -128,7 +128,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
                                 echo '<div class="event">';
                                 echo '<div class="event-image"></div>';
                                 echo '<div class="event-name">' . $row['EventName'] . "</div>";
-                                echo '<div class="event-buttons"><a href="event.php?eventID=' . $row['EventID'] . '" class="event-button" style="margin-right: -1px">View</a>';
+                                echo '<div class="event-buttons"><a href="event.php?eventID=' . $row['EventID'] . '" class="event-button" style="margin-right: -1px; flex-grow: 1">View</a>';
                                 if (isset($venueUserID)) {
                                     echo '<a href="event-edit.php?eventID=' . $row['EventID'] . '" class="event-button" style="width: 50%">Edit</a></div></div>';
                                 } else {
