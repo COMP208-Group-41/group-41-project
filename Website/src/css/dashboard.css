@@ -160,3 +160,24 @@ th {
     border: 2px solid var(--button-border);
     border-radius: 4px;
 }
+@media only screen and (max-width: 600px) {
+    .venue {
+        max-width: 375px;
+        display: flex;
+        height: 48px;
+        background: var(--body-background);
+        justify-content: center;
+        align-items: center;
+        margin: -2px 0;
+
+    }
+    table {
+        border-collapse: collapse;
+        max-width: 375px;
+        margin-bottom: 8px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .example {background: red;}
+}
