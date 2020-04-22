@@ -86,15 +86,15 @@ if (isset($_SESSION['message'])) {
                     Email
                 </div>
                 <div class="venue-name" style="width: 70%">
-                    <?php echo "$name"; ?>
+                    <?php echo "$email"; ?>
                 </div>
             </div>
             <div class="venue">
                 <div class="venue-name" style="width: 30%">
-                    User Name
+                    Date of Birth
                 </div>
                 <div class="venue-name" style="width: 70%">
-                    <?php echo "$name"; ?>
+                    <?php echo "$userDOB"; ?>
                 </div>
             </div>
             <button onclick="location.href='user-edit.php';" class="button" style="margin-top: 20px;width: 100%">
@@ -114,10 +114,14 @@ if (isset($_SESSION['message'])) {
             <div class="list">
                 <div class="venue">
                     <?php
-                    foreach ($interestedIn as $row) {
-                        echo "<div class='venue-name'>" . eventIDtoName($row['EventID'], $pdo) . "</div>";
-                        echo '<div class="venue-buttons"><a href="event.php?eventID=' . $row['EventID'] . '" class="venue-button">View Event</a>';
-                        echo "</div></div>";
+                    if ($interestedIn !== false) {
+                        foreach ($interestedIn as $row) {
+                            echo "<div class='venue-name'>" . eventIDtoName($row['EventID'], $pdo) . "</div>";
+                            echo '<div class="venue-buttons"><a href="event.php?eventID=' . $row['EventID'] . '" class="venue-button">View Event</a>';
+                            echo "</div></div>";
+                        }
+                    } else {
+                        echo "<h3 class='title'>No upcoming events found</h3>";
                     }
                     ?>
                 </div>
