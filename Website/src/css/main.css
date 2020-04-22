@@ -25,7 +25,9 @@ body {
     display: inline-flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     flex: 1;
+    width: 100%;
 }
 
 .container {
