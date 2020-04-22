@@ -105,8 +105,10 @@ if (isset($_SESSION['message'])) {
     <div class="flex-wrap">
         <div class="section">
             <h1 class="title">Favourite Tags</h1>
+            <div style="display: flex; justify-content: center">
             <div class="tag-container" style="text-align: center">
                 <?php getTags($userPrefs, $pdo); ?>
+            </div>
             </div>
         </div>
         <div class="section">
