@@ -151,7 +151,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
             </div>
         <div class="flex-wrap">
             <div class="section" id="Venue Score">
-                <h2 class='title'>Venue score</h2>
+                <h2 class='title'>Overall Venue Scores</h2>
                 <div class="review-scores">
                     <div class="review-score">
                         <div class="label">Overall Score:</div>
@@ -170,7 +170,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
                         <div class="score"> <?php echo "$atmosphereScore"; ?></div>
                     </div>
                     <div class="review-score">
-                        <div class="label">Queuing Score:</div>
+                        <div class="label">Queue Times Score:</div>
                         <div class="score"> <?php echo "$queueScore"; ?></div>
                     </div>
                 </div>
