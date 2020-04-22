@@ -43,6 +43,7 @@
       }
     }
     sortArray($sortedArray);
+    $sortedArray = array_reverse($sortedArray);
 
     function sortArray (&$array) {
       $temp=array();
@@ -58,19 +59,6 @@
       $array=$ret;
     }
 
-    // Back up function in case above sort doesn't work (Found on web)
-    /*
-    usort($myArray, function($a, $b) {
-      $retval = $a['order'] <=> $b['order'];
-      if ($retval == 0) {
-          $retval = $a['suborder'] <=> $b['suborder'];
-          if ($retval == 0) {
-            $retval = $a['details']['subsuborder'] <=> $b['details']['subsuborder'];
-          }
-      }
-      return $retval;
-    });
-    */
 
 ?>
 <!DOCTYPE html>
@@ -80,17 +68,19 @@
     <title>OutOut - Recommended Venues</title>
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
   <?php include "navbar.php" ?>
   <div class="wrapper">
     <div class="container">
+        <h1 class="title">Recommended Venues For You</h1>
         <?php
           if (sizeof($sortedArray) != 0) {
-              //echo print_r($sortedArray);
               foreach($sortedArray as $row) {
                   echo '<div class="seperator" style="margin-top: 4px">';
                   $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
+                  echo "This venue matches ".$row['Count']." of your preferred tags";
                   echo "<table>";
                   echo "<tr>";
                   echo "<td>".$row['VenueName']."</td>";
@@ -102,8 +92,8 @@
               }
           } else {
             echo "<table>";
-            echo "</tr><tr>";
-            echo "<td>No Upcoming events for this Venue listed</td>";
+            echo "<tr>";
+            echo "<td>There are no venues that match any of your Tags!</td>";
             echo "</tr>";
             echo "</table>";
           }

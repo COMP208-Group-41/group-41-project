@@ -82,14 +82,13 @@ if (isset($_SESSION['message'])) {
         <button onclick="location.href='venue-user-edit.php';" class="button" style="width: 100%; margin-bottom: 16px">Edit Account Details</button>
         <div class="seperator" style="margin-top: 4px">
           <h2 class="title">Registered Venues</h2>
-          <div class="list">
+          <div class="table">
             <?php
             foreach ($venues as $row) {
-                echo '<div class="venue">';
-                echo '<div class="venue-image"></div>';
-                echo '<div class="venue-name">'.$row['VenueName']."</div>";
-                echo '<div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -1px">View Venue</a>';
-                echo '<a href="venue-edit.php?venueID='.$row['VenueID'].'" class="venue-button" style="width: 33%">Edit Venue</a></div></div>';
+                echo '<div class="table-row">';
+                echo '<div class="table-item">'.$row['VenueName']."</div>";
+                echo '<div class="table-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button" style="margin-right: -1px">View Venue</a>';
+                echo '<a href="venue-edit.php?venueID='.$row['VenueID'].'" class="table-button" style="width: 33%">Edit Venue</a></div></div>';
             }
             ?>
           </div>
@@ -106,16 +105,16 @@ if (isset($_SESSION['message'])) {
               </form>
             <?php
             if ($events !== false){
-              echo '<div class="venue">';
-              echo '<div class="venue-name" style="width: 35%">Venue</div>';
-              echo '<div class="venue-name" style="width: 35%">Event Name</div>';
-              echo '<div class="venue-name" style="width: 30%;">View / Edit Event</div></div>';
+              echo '<div class="table-row">';
+              echo '<div class="table-item" style="width: 35%">Venue</div>';
+              echo '<div class="table-item" style="width: 35%">Event Name</div>';
+              echo '<div class="table-item" style="width: 30%;">Action</div></div>';
               foreach ($events as $row) {
-                echo '<div class="event">';
-                echo '<div class="event-name" style="width: 35%">'.$venueName."</div>";
-                echo '<div class="event-name" style="width: 35%">'.$row['EventName']."</div>";
-                echo '<div class="event-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="event-button" style="margin-right: -1px">View Event</a>';
-                echo '<a href="event-edit.php?eventID='.$row['EventID'].'" class="event-button">Edit Event</a></div></div>';
+                echo '<div class="table-row">';
+                echo '<div class="table-item" style="width: 35%">'.$venueName."</div>";
+                echo '<div class="table-item" style="width: 35%">'.$row['EventName']."</div>";
+                echo '<div class="table-buttons column" style="width: 30%"><a href="event.php?eventID='.$row['EventID'].'" class="table-button">View Event</a>';
+                echo '<a href="event-edit.php?eventID='.$row['EventID'].'" class="table-button">Edit Event</a></div></div>';
               }
             }
             ?>

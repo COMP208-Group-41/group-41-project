@@ -90,6 +90,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../css/login-register.css">
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>OutOut - Venue User Login</title>
 </head>
 <body>
@@ -116,7 +117,7 @@
             </div>
             <div style="display: flex">
                 <input type='submit' value='Login' class="login-button">
-                <a class="register-button" href="venue-user-register.php">Register</a>
+                <a class="register-button" href="venue-user-register.php">Go to register</a>
             </div>
         </form>
     </div>

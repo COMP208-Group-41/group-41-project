@@ -192,6 +192,7 @@
         $path = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID";
         if (mkdir($path,0755)) {
             // Folder created successfully
+            copy('https://student.csc.liv.ac.uk/~sgstribe/Images/background2.jpg',$path."/venue.jpg");
             return true;
         } else {
             // Error in folder creation!
@@ -216,6 +217,7 @@
     <title>OutOut - Edit Venue User Account</title>
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <?php include "navbar.php" ?>

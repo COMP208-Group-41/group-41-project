@@ -1,7 +1,6 @@
 body {
     margin: 0;
     padding: 0;
-
 }
 
 .banner {
@@ -24,7 +23,7 @@ body {
     background: var(--header-background);
     overflow-x: hidden;
     transition: 0.2s;
-    padding-top: 16px;
+    padding-top: 4px;
     box-shadow: 0px 4px 10px rgba(6, 27, 41, 0.25);
 }
 
@@ -32,6 +31,25 @@ body {
     font-size: 36px;
     margin-right: 32px;
     text-align: right;
+    margin-bottom: 8px;
+    padding: 0;
+}
+
+.nav-seperator {
+    display: flex;
+    flex-direction: column;
+    border-top: var(--dark-body) solid 2px;
+    width: 85%;
+    margin-left: 16px;
+    margin-top: 16px;
+    padding-top: 16px;
+}
+
+.sidenav .icon-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0 4px 32px;
+    align-items: center;
     margin-bottom: 20px;
 }
 
@@ -42,7 +60,9 @@ body {
     display: block;
     transition: 0.3s;
     font-family: "K2D", sans-serif;
-    padding-bottom: 8px;
+    padding: 8px 20px;
+    text-align: left;
+
 }
 
 .sidenav a:hover {
@@ -54,8 +74,10 @@ body {
     flex-direction: column;
 }
 
-img:hover {
+.banner img:hover,.banner img:focus,.banner img:active, .sidenav-content img:hover, .sidenav-content img:focus, .sidenav-content img:active {
     cursor: pointer;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 @media screen and (max-height: 450px) {
@@ -71,5 +93,10 @@ img:hover {
         justify-content: space-between;
         padding: 16px;
         max-width: 100%;
+    }
+    .banner img:hover, .banner img:focus, .sidenav-content img:hover, .sidenav-content img:focus {
+        cursor: pointer;
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
     }
 }

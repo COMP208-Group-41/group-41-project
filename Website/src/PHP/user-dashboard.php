@@ -72,35 +72,35 @@ if (isset($_SESSION['message'])) {
 <div class='container'>
     <div class="section">
         <h1 class="title">Account Details</h1>
-        <div class="list">
-            <div class="venue">
-                <div class="venue-name" style="width: 30%">
+        <div class="table">
+            <div class="table-row">
+                <div class="table-item" style="width: 30%">
                     User Name
                 </div>
-                <div class="venue-name" style="width: 70%">
+                <div class="table-item" style="width: 70%">
                     <?php echo "$name"; ?>
                 </div>
             </div>
-            <div class="venue">
-                <div class="venue-name" style="width: 30%">
+            <div class="table-row">
+                <div class="table-item" style="width: 30%">
                     Email
                 </div>
-                <div class="venue-name" style="width: 70%">
+                <div class="table-item" style="width: 70%">
                     <?php echo "$email"; ?>
                 </div>
             </div>
-            <div class="venue">
-                <div class="venue-name" style="width: 30%">
+            <div class="table-row">
+                <div class="table-item" style="width: 30%">
                     Date of Birth
                 </div>
-                <div class="venue-name" style="width: 70%">
+                <div class="table-item" style="width: 70%">
                     <?php echo "$userDOB"; ?>
                 </div>
             </div>
-            <button onclick="location.href='user-edit.php';" class="button" style="margin-top: 20px;width: 100%">
-                Edit Account Details
-            </button>
         </div>
+        <button onclick="location.href='user-edit.php';" class="button" style="margin-top: 20px;width: 100%">
+            Edit Account Details
+        </button>
     </div>
     <div class="flex-wrap">
         <div class="section">
@@ -115,11 +115,11 @@ if (isset($_SESSION['message'])) {
             <h1 class="title">Upcoming Events</h1>
                     <?php
                     if (count($interestedIn) > 0) {
-                        echo '<div class="list">';
+                        echo '<div class="table">';
                         foreach ($interestedIn as $row) {
-                            echo '<div class="venue">';
-                            echo '<div class="venue-name">' . eventIDtoName($row['EventID'], $pdo) . '</div>';
-                            echo '<div class="venue-buttons"><a href="event.php?eventID=' . $row['EventID'] . '" class="venue-button">View Event</a>';
+                            echo '<div class="table-row">';
+                            echo '<div class="table-item">' . eventIDtoName($row['EventID'], $pdo) . '</div>';
+                            echo '<div class="table-buttons"><a href="event.php?eventID=' . $row['EventID'] . '" class="table-button">View Event</a>';
                             echo "</div></div>";
                         }
                         echo '</div></div>';

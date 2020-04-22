@@ -1,7 +1,3 @@
-v-image {
-    max-width: 100%;
-}
-
 .text {
     font-family: "K2D", sans-serif;
     margin: 0px 0px 16px;
@@ -14,3 +10,4 @@ v-image {
     color: var(--text);
     width: 50%;
 }
+

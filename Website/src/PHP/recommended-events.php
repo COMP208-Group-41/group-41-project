@@ -20,9 +20,11 @@
 
     require_once "config.php";
 
+    $userID = $_SESSION['UserID'];
+
     $allEvents = getAllEvents($pdo);
     $userPrefs = getUserTags($userID,$pdo);
-    $SortedArray = (array) null;
+    $sortedArray = (array) null;
     foreach($allEvents as $row){
       $event = $emptyArray = (array) null;
       $eventTags = getEventTagID($row['EventID'],$pdo);
@@ -35,10 +37,12 @@
       if ($count > 0){
         $event['Count'] = $count;
         $event['EventID'] = $row['EventID'];
-        array_push($SortedArray,$event);
+        $event['EventName'] = $row['EventName'];
+        array_push($sortedArray,$event);
       }
     }
-    sortArray($SortedArray);
+    sortArray($sortedArray);
+    $sortedArray = array_reverse($sortedArray);
 
     function sortArray (&$array) {
       $temp=array();
@@ -62,17 +66,37 @@
     <title>OutOut - Recommended Events</title>
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
   <?php include "navbar.php" ?>
   <div class="wrapper">
-
-
-
-
-
-
-
+    <div class="container">
+        <h1 class="title">Recommended Events For You</h1>
+        <?php
+          if (sizeof($sortedArray) != 0) {
+              //echo print_r($sortedArray);
+              foreach($sortedArray as $row) {
+                  echo '<div class="seperator" style="margin-top: 4px">';
+                  $currentTagIDs = getEventTagID($row['EventID'],$pdo);
+                  echo "This venue matches ".$row['Count']." of your preferred tags";
+                  echo "<table>";
+                  echo "<tr>";
+                  echo "<td>".$row['EventName']."</td>";
+                  echo '<td><div class="venue-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="button" style="margin-left: -1px">View Event</a></div></td>';
+                  echo '<td><div class="tag-container" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div></td>';
+                  echo "</tr>";
+                  echo "</table>";
+              }
+          } else {
+            echo "<table>";
+            echo "<tr>";
+            echo "<td>No upcoming events which match your user preferences</td>";
+            echo "</tr>";
+            echo "</table>";
+          }
+        ?>
+    </div>
   </div>
 </body>
 </html>

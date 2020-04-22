@@ -4,6 +4,10 @@
 
     session_start();
 
+    error_reporting( E_ALL );
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+
     require_once "config.php";
 
     $allVenues = getAllVenues($pdo);
@@ -33,11 +37,13 @@
                 <h1 class='title'>All Venues</h1>
                 <?php
                 if (sizeof($allVenues) != 0) {
-                    echo "<div class='list'>";
+
                     foreach($allVenues as $row) {
                         $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
-                        echo "<div class='venue'>";
-                        echo "<div class='venue-name'>".$row['VenueName'];
+                        echo "<div class='table'>";
+                        echo "<div class='table-row'>";
+                        $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$row['VenueUserID']."/".$row['VenueID']."/venue.jpg";
+                        echo "<div class='table-item image' style='background-image: url(".$venueImage.") '><div class='table-item-wrapper'>".$row['VenueName'];
                         unset($priceScore);
                         unset($safetyScore);
                         unset($atmosphereScore);
@@ -53,18 +59,17 @@
                         } else {
                             echo "<div class='rating-wrapper'>No Ratings</div>";
                         }
-                        echo "</div>";
-                        echo '<div class="venue-tags" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
-                        echo '<div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-bottom: -2px">Venue</a>';
-                        echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="venue-button">Events</a></div>';
-                        echo "</div>";
+                        echo "</div></div>";
+                        echo '<div class="table-item" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
+                        echo '<div class="table-buttons column"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button">Venue</a>';
+                        echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="table-button">Events</a></div>';
+                        echo "</div></div>";
                     }
-                    echo "</div>";
                 } else {
                     echo "<h2 class='title'>No venues found!</h2>";
                 }
                 ?>
-            </div>
+                </div>
         </div>
     </div>
 

@@ -45,6 +45,7 @@
     $description = $result['VenueDescription'];
     $address = $result['VenueAddress'];
     $times = $result['VenueTimes'];
+    $website = $result['ExternalSite'];
 
     // Current tags for this event are pulled here
     $currentTagIDs = getTagID($venueID,$pdo);
@@ -140,6 +141,15 @@
             }
         }
 
+        //Check URL for external webpage
+        if (isset($_POST['external'])){
+          $website = trim($_POST['external']);
+          if (!externalCheck($venueID,$website,$pdo,&$errorMessage)) {
+              return false;
+          }
+        }
+
+
         // Need to do tags
         /* Unsetting the tags array so the values are definitely
          * up to date
@@ -160,7 +170,7 @@
 
         $pdo->beginTransaction();
 
-        if (!updateVenue($venueUserID,$venueID,$name,$description,$address,$times,$pdo,$errorMessage)) {
+        if (!updateVenue($venueUserID,$venueID,$name,$description,$address,$times,$website,$pdo)) {
             $errorMessage = "Error in inserting new venue!";
             $pdo-rollBack();
             return false;
@@ -207,6 +217,30 @@
             exit;
         }
       }
+    }
+
+    /* Check if the external link has been changed, if so then validate and
+     * update in database, if all successful then return true, otherwise return
+     * false and show error message
+     */
+    function externalCheck($venueID,$external,$pdo,&$errorMessage) {
+        if (isset($_POST['external']) && !empty(trim($_POST['external'])) && trim($_POST['external']) != $external) {
+            $newExternal = trim($_POST['external']);
+            if (!filter_var($newExternal, FILTER_VALIDATE_URL)) {
+                // The URL given is not valid!
+                $errorMessage = "The URL given is not valid!";
+                return false;
+            }
+
+            if (changeExternal($newExternal,$venueUserID,$pdo)) {
+                return true;
+            } else {
+                $errorMessage = "Error in trying to update external URL!";
+                return false;
+            }
+        } else {
+            return true;
+        }
     }
 
     function deleteVenue($venueID, $pdo, &$errorMessage){
@@ -313,13 +347,14 @@
         }
     }
 
-    function updateVenue($venueUserID,$venueID,$name,$description,$address,$times,$pdo) {
-        $updateVenueStmt = $pdo->prepare("UPDATE Venue SET VenueUserID=:VenueUserID, VenueName=:VenueName, VenueDescription=:VenueDescription, VenueAddress=:VenueAddress, VenueTimes=:VenueTimes WHERE VenueID=:VenueID");
+    function updateVenue($venueUserID,$venueID,$name,$description,$address,$times,$website,$pdo) {
+        $updateVenueStmt = $pdo->prepare("UPDATE Venue SET VenueUserID=:VenueUserID, VenueName=:VenueName, VenueDescription=:VenueDescription, VenueAddress=:VenueAddress, VenueTimes=:VenueTimes, ExternalSite=:ExternalSite WHERE VenueID=:VenueID");
         $updateVenueStmt->bindValue(":VenueUserID",$venueUserID);
         $updateVenueStmt->bindValue(":VenueName",$name);
         $updateVenueStmt->bindValue(":VenueDescription",$description);
         $updateVenueStmt->bindValue(":VenueAddress",$address);
         $updateVenueStmt->bindValue(":VenueTimes",$times);
+        $updateVenueStmt->bindValue(":ExternalSite",$website);
         $updateVenueStmt->bindValue(":VenueID",$venueID);
         if (!$updateVenueStmt->execute()) {
             // Error in update
@@ -380,7 +415,7 @@
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/events.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <?php include "navbar.php" ?>
@@ -396,7 +431,7 @@
         <?php
             if ($image) {
                 echo '<div class="seperator"></div>';
-                echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$venueUserID.'/'.$venueID.'/venue.jpg" alt="Venue Image">';
+                echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$venueUserID.'/'.$venueID.'/venue.jpg" alt="Venue Image" class="title-img">';
             }
         ?>
 
@@ -415,6 +450,9 @@
                 <label for='description'>Venue Description:</label>
                 <textarea id='description' name='description' form='CreateVenue'
                           placeholder="Venue Description"><?php echo $description; ?></textarea>
+                <label for='description'>Venue Description:</label>
+                <textarea id='external' name='external' form='CreateVenue'
+                          placeholder="https://website.com"><?php echo $website; ?></textarea>
                 <div class="seperator">
                     <h2 class="title">Additional Information</h2>
                 </div>
@@ -452,10 +490,9 @@
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select>
-                <div class="seperator">
-                    <label>Enter current password to allow changes:</label>
-                    <input type='password' name='password' required>
-                </div>
+                <div class="seperator"></div>
+                <label>Enter current password to allow changes:</label>
+                <input type='password' name='password' required>
                 <input type='submit' name='submit' value='Save changes' class="button" style="width: 100%"><br>
                 <div class="seperator" style="margin-top: 4px"></div>
             </div>

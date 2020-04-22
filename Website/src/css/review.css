@@ -1,8 +1,9 @@
 .reviews {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding-bottom: 16px;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .review {
@@ -12,8 +13,7 @@
     border-radius: 4px;
     padding: 16px;
     margin: 16px;
-    width: 100%;
-    max-width: 400px;
+    min-width: 240px;
 }
 textarea {
     font-size: 14px;
@@ -36,7 +36,6 @@ label {
 }
 
 .review-score .label {
-    font-family: "K2D", sans-serif;
     flex-grow: 1;
     box-sizing: border-box;
     border: 2px solid var(--button-border);
@@ -52,7 +51,6 @@ label {
 
 .review-text {
     flex-grow: 1;
-    font-family: "K2D", sans-serif;
     box-sizing: border-box;
     border: 2px solid var(--button-border);
     border-radius: 4px;
@@ -61,11 +59,10 @@ label {
     padding: 12px 20px 12px 10px;
     color: var(--text);
     max-width: 100%;
-    margin: 16px;
+    margin: 16px 0;
 }
 
 .review-score .score {
-    font-family: "K2D", sans-serif;
     box-sizing: border-box;
     font-size: 16px;
     background-color: var(--body-background);
@@ -103,10 +100,7 @@ label {
 
     .reviews {
         flex-direction: column;
-    }
-
-    textarea {
-        max-width: 220px;
+        flex-wrap: nowrap;
     }
 
     .review-score {
