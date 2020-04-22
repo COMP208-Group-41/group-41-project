@@ -59,20 +59,6 @@
       $array=$ret;
     }
 
-    // Back up function in case above sort doesn't work (Found on web)
-    /*
-    usort($myArray, function($a, $b) {
-      $retval = $a['order'] <=> $b['order'];
-      if ($retval == 0) {
-          $retval = $a['suborder'] <=> $b['suborder'];
-          if ($retval == 0) {
-            $retval = $a['details']['subsuborder'] <=> $b['details']['subsuborder'];
-          }
-      }
-      return $retval;
-    });
-    */
-
 ?>
 <!DOCTYPE html>
 <html lang='en-GB'>
@@ -86,6 +72,7 @@
   <?php include "navbar.php" ?>
   <div class="wrapper">
     <div class="container">
+        <h1 class="title">Recommended Venues For You</h1>
         <?php
           if (sizeof($sortedArray) != 0) {
               //echo print_r($sortedArray);
@@ -105,7 +92,7 @@
           } else {
             echo "<table>";
             echo "</tr><tr>";
-            echo "<td>No Upcoming events for this Venue listed</td>";
+            echo "<td>There are no venues that match any of your Tags!</td>";
             echo "</tr>";
             echo "</table>";
           }
