@@ -64,7 +64,7 @@
      checkExistingReview($userID,$venueID,$eventID,$pdo);
 
     try{
-        if (isset($_POST['SubmitReview'])){
+        if (isset($_POST['Submit'])){
             if (checkInputs($userID,$eventID,$venueID,$errorMessage,$pdo)) {
 
               $_SESSION['message'] = "Review Created Successfully!";
