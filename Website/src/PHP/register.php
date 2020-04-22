@@ -190,7 +190,7 @@
                 <input type='date' name='DOB' placeholder="Select Date of Birth">
             </div>
             <div style="display: flex">
-                <a href="login.php" class="login-button">Log In</a>
+                <a href="login.php" class="login-button">Go to login</a>
                 <input type='submit' value='Register' class="register-button">
             </div>
         </form>

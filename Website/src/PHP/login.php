@@ -90,7 +90,7 @@
                     </div>
                     <div style="display: flex">
                         <input type='submit' value='Login' class="login-button">
-                        <a class="register-button" href="register.php">Register</a>
+                        <a class="register-button" href="register.php">Go to register</a>
                     </div>
                 </form>
             </div>
