@@ -63,14 +63,14 @@
 
               // Matching Venues
               if (sizeof($allVenues) != 0) {
-                  print_r($allVenues);
+                  //print_r($allVenues);
                   // echo "<h2 class='title'>No matching events found!</h2>";
                   echo "<div class='table'>";
                   foreach($allVenues as $row) {
-                      echo $search;
-                      echo $row['VenueName'];
-                      if (strpos($row['VenueName'],$search) !== false) {
-                          print_r($row);
+                      //echo $search;
+                      //echo $row['VenueName'];
+                      if (strpos(strtolower($row['VenueName']),$search) !== false) {
+                          //print_r($row);
                           $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
                           echo "<div class='table-row'>";
                           echo "<div class='table-item'>".$row['VenueName'];
