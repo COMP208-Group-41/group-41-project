@@ -68,6 +68,7 @@
                   echo "<div class='table'>";
                   foreach($allVenues as $row) {
                       echo $search;
+                      echo $row['VenueName'];
                       if (strpos($row['VenueName'],$search) !== false) {
                           print_r($row);
                           $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
