@@ -43,12 +43,7 @@
 ?>
 <div class="wrapper">
 <div class="container">
-    <div class="form">
-        <form name='search form' method='post'>
-            <input type='text' name='searchText' placeholder="Search for venue.." class="searchbar">
-            <input type='submit' name='search' value='Search' class='button search-button'>
-        </form>
-    </div>
+
     <div class="seperator"></div>
     <h2 class="title">Our Picks</h1>
     <?php
