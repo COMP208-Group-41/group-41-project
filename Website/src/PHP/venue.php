@@ -33,6 +33,7 @@ $name = $result['VenueName'];
 $description = $result['VenueDescription'];
 $address = $result['VenueAddress'];
 $times = $result['VenueTimes'];
+$website = $result['ExternalSite'];
 $events = getEvents($venueID, $pdo);
 $currentTagIDs = getVenueTagID($venueID, $pdo);
 $reviews = getVenueReviews($venueID, $pdo);
@@ -67,6 +68,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
 <html lang="en-GB">
 <head>
     <title>OutOut - <?php echo $name; ?></title>
+    <h2 class="title" style="text-decoration: none"> <?php echo '<a href="'.$website.'">'.$website.'</a>'; ?></h2>
     <link rel="stylesheet" type="text/css" href="../css/venue.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
