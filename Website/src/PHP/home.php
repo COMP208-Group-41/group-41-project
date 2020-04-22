@@ -17,6 +17,10 @@
         $venueUserID = $_SESSION['VenueUserID'];
     }
 
+    if (isset($_POST['search'])){
+      header('location search.php?search='.$_POST['searchText'].'');    
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en-GB">
@@ -38,9 +42,9 @@
 <div class="wrapper">
 <div class="container">
     <div class="form">
-        <form name='search form' method='get'>
-            <input type='text' name='search' placeholder="Search for venue.." class="searchbar">
-            <input type='submit' value='Search' class='button search-button'>
+        <form name='search form' method='post'>
+            <input type='text' name='searchText' placeholder="Search for venue.." class="searchbar">
+            <input type='submit' name='search' value='Search' class='button search-button'>
         </form>
     </div>
 
