@@ -13,6 +13,8 @@
         header("location: login.php");
         exit;
     }
+    
+    require_once "config.php";
 
     $allEvents = getAllEvents($pdo);
     $userPrefs = getUserTags($userID,$pdo);

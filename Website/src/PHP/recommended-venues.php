@@ -8,13 +8,15 @@
         exit;
     }
 
-    // if (!isset($_SESSION['UserID'])) {
-    //     $_SESSION['message'] = "You must be logged in to view recommended Venues";
-    //     header("location: login.php");
-    //     exit;
-    // }
-    //
-    // $userID = $_SESSION['UserID'];
+    require_once "config.php";
+
+    if (!isset($_SESSION['UserID'])) {
+        $_SESSION['message'] = "You must be logged in to view recommended Venues";
+        header("location: login.php");
+        exit;
+    }
+
+    $userID = $_SESSION['UserID'];
 
     $allVenues = getAllVenues($pdo);
     //$userPrefs = getUserTags($userID,$pdo);
@@ -23,11 +25,11 @@
       $venue = $emptyArray = (array) null;
       $venueTags = getVenueTagID($row['VenueID'],$pdo);
       $count = 0;
-      // foreach($userPrefs as $pref){
-      //   if(in_array($pref, $venueTags)){
-      //     $count++;
-      //   }
-      // }
+      foreach($userPrefs as $pref){
+        if(in_array($pref, $venueTags)){
+          $count++;
+        }
+      }
       if ($count > 0){
         $event['Count'] = $count;
         $event['VenueID'] = $row['VenueID'];
