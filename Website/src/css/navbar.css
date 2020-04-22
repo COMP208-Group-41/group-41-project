@@ -69,6 +69,6 @@ img:hover {
         display: flex;
         justify-content: space-between;
         padding: 16px;
-        max-width: 375px;
+        max-width: 280px;
     }
 }
