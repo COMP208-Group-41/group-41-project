@@ -71,6 +71,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
     <h2 class="title" style="text-decoration: none"> <?php echo '<a href="'.$website.'">'.$website.'</a>'; ?></h2>
     <link rel="stylesheet" type="text/css" href="../css/venue.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/venue.css">
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/review.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
