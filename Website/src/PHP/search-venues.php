@@ -1,6 +1,5 @@
 <?php
 
-    /* This will list all venues in the system */
 
     session_start();
 
