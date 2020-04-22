@@ -131,6 +131,8 @@ $image = checkVenueImageOnServer($owner, $venueID);
                                 echo '<div class="event-buttons"><a href="event.php?eventID=' . $row['EventID'] . '" class="event-button" style="margin-right: -1px">View</a>';
                                 if (isset($venueUserID)) {
                                     echo '<a href="event-edit.php?eventID=' . $row['EventID'] . '" class="event-button" style="width: 50%">Edit</a></div></div>';
+                                } else {
+                                    echo '</div></div>';
                                 }
                             }
                             $counter++;
