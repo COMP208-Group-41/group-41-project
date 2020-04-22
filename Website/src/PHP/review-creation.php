@@ -64,7 +64,7 @@
      checkExistingReview($userID,$venueID,$eventID,$pdo);
 
     try{
-        if (isset($_POST['Submit'])){
+        if (isset($_POST['submit'])){
             if (checkInputs($userID,$eventID,$venueID,$errorMessage,$pdo)) {
 
               $_SESSION['message'] = "Review Created Successfully!";
@@ -253,7 +253,7 @@
             </div>
             <div class="seperator" style="margin-top: 20px"></div>
             <div style= "display: flex">
-                <input type='submit' value='Submit' class="button" style="width: 100%;">
+                <input type='submit' name='submit' value='submit' class="button" style="width: 100%;">
             </div>
     </form>
 </div>
