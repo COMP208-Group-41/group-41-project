@@ -112,15 +112,15 @@ if (isset($_SESSION['message'])) {
         <div class="section">
             <h1 class="title">Upcoming Events</h1>
                     <?php
-                    if ($interestedIn !== false) {
+                    if (count($interestedIn) > 0) {
                         echo '<div class="list">';
                         foreach ($interestedIn as $row) {
                             echo '<div class="venue">';
-                            echo "<div class='venue-name'>" . eventIDtoName($row['EventID'], $pdo) . "</div>";
+                            echo '<div class="venue-name">' . eventIDtoName($row['EventID'], $pdo) . '</div>';
                             echo '<div class="venue-buttons"><a href="event.php?eventID=' . $row['EventID'] . '" class="venue-button">View Event</a>';
                             echo "</div></div>";
                         }
-                        echo '</div>';
+                        echo '</div></div>';
                     } else {
                         echo "<h3 class='title'>No upcoming events found</h3>";
                     }
