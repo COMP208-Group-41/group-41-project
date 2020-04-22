@@ -152,7 +152,6 @@ body {
     display: flex;
     flex-direction: column;
     border-top: var(--dark-body) solid 2px;
-    margin-left: 16px;
     margin-top: 16px;
     padding-top: 16px;
 }
