@@ -301,6 +301,7 @@ hr {
 
 .title-img {
     max-width: 100%;
+    max-height: 500px;
     object-fit: cover;
 }
 
