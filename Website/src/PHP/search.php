@@ -66,7 +66,7 @@
                   // echo "<h2 class='title'>No matching events found!</h2>";
                   echo "<div class='table'>";
                   foreach($allVenues as $row) {
-                      print_r($allVenues);
+                      //print_r($allVenues);
                       if (strpos($row['VenueName'],$search)) {
                           print_r($row);
                           $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
