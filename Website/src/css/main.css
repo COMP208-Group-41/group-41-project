@@ -203,7 +203,7 @@ hr {
     color: var(--header-gray);
     width: 400px;
 }
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 440px) {
     .container{
         min-width: 0px;
         margin: 0 0 16px;
