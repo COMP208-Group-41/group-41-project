@@ -165,6 +165,7 @@
 </head>
 <body>
     <?php include "navbar.php" ?>
+    <div style="display: flex; height: 100%; justify-content: center; align-items: center">
 <div class="wrapper">
     <?php
         if (isset($_SESSION['message'])) {
@@ -199,5 +200,6 @@
             echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
         }
         ?>
+    </div>
     </body>
 </html>
