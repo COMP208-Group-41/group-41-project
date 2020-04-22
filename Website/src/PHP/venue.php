@@ -107,7 +107,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
 
                 <label>Location:</label>
                 <label><?php echo "$address" ?></label>
-
+                <br>
                 <?php
                   if ($website != ""){
                     echo '<label>External Site:</label>';
