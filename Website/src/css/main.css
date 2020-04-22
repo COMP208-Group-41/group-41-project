@@ -226,7 +226,6 @@ hr {
     background: var(--body-background);
     justify-content: center;
     align-items: stretch;
-    margin: -2px 0;
 }
 
 .table-item {
@@ -240,7 +239,7 @@ hr {
     font-size: 14px;
     background-color: var(--dark-body);
     color: var(--text);
-    border: 2px solid var(--button-border);
+    border: 1px solid var(--button-border);
     border-radius: 4px;
     width: 50%;
 }
@@ -270,9 +269,12 @@ hr {
     background-color: var(--body-background);
     color: var(--light-body);
     text-decoration: none;
-    border: 2px solid var(--button-border);
+    border: 1px solid var(--button-border);
     border-radius: 4px;
+}
 
+.table-button .table-buttons.column {
+    padding: 6px 0;
 }
 
 .table-button:focus {
