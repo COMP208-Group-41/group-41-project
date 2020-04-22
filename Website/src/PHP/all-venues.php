@@ -49,7 +49,7 @@
                         $queueScore = getQueueScore($row['VenueID'], 1, $pdo);
                         if (!($priceScore === false || $safetyScore === false || $atmosphereScore === false || $queueScore === false)) {
                             $totalScore = ($queueScore + $atmosphereScore + $safetyScore + $priceScore) / 4;
-                            echo "<div class='rating-wrapper'>Rating:<div class='rating-square'>$totalScore</div>   / 5</div>";
+                            echo "<div class='rating-wrapper'>Rating:<div class='rating-square'>$totalScore</div></div>";
                         } else {
                             echo "<div class='rating-wrapper'>No Ratings</div>";
                         }
