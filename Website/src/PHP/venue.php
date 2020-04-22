@@ -85,7 +85,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
 <div class="wrapper">
     <div class="container">
         <div class="flex-wrap">
-            <div class="section" id="Venue Details">
+            <div class="section" id="Venue Details" style="flex-grow: 10">
                 <h1 class="title"><?php echo "$name" ?></h1>
                 <?php
                 if ($image) {
@@ -195,7 +195,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
                         if ($counter < 5) {
                             echo "<div class='review'>";
                             echo "<label>Review left by:<b> " . userIDtoUserName($row['UserID'], $pdo) . "</b></label>";
-                            echo "<textarea readonly onchange='this.style.height = \"\";this.style.height = this.scrollHeight + 3 + \"px\"'>" . $row['ReviewText'] . "</textarea>";
+                            echo "<textarea readonly>" . $row['ReviewText'] . "</textarea>";
                             echo "<div class='review-scores'>";
                             echo "<div class='review-score'><div class='label'>Price Score:</div><div class='score'>" . $row['ReviewPrice'] . "</div></div>";
                             echo "<div class='review-score'><div class='label'>Safety Score:</div><div class='score'> " . $row['ReviewSafety'] . "</div></div>";
