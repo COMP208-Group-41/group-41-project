@@ -43,7 +43,8 @@ body {
     display: block;
     transition: 0.3s;
     font-family: "K2D", sans-serif;
-    padding: 0 0 8px;
+    padding: 8px 20px;
+    text-align: left;
 
 }
 
