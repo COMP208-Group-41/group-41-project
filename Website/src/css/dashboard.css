@@ -48,14 +48,13 @@ th {
     color: var(--text);
     border: 2px solid var(--button-border);
     border-radius: 4px;
+    width: 50%;
 }
 .venue-buttons {
     display: flex;
     width: 50%;
     justify-content: center;
     align-items: stretch;
-    height: 100%;
-
 }
 
 
