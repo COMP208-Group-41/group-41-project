@@ -86,7 +86,7 @@
         $reviewDate = date("Y-m-d");
 
         // Check review text
-        $reviewText= trim($_POST['Review']);
+        $reviewText= trim($_POST['review-textarea']);
         if (!validateDescription($reviewText)) {
             $errorMessage = "The review cannot be longer than 1000 characters!";
             return false;
@@ -219,7 +219,7 @@
                 <textarea name='review-textarea' id='review-textarea' placeholder="Leave a note..." rows="4" cols="50" required></textarea>
                 <div class="seperator"></div>
                 <label style="">Price</label>
-                <select class="rating-price" data-options='{"clearable":false, "showText":false, "maxStars":5}'>
+                <select class="rating-price" name='RatingPrice' data-options='{"clearable":false, "showText":false, "maxStars":5}'>
                     <option value="5">5</option>
                     <option value="4">4</option>
                     <option value="3">3</option>
@@ -227,7 +227,7 @@
                     <option value="1">1</option>
                 </select>
                 <label>Atmosphere</label>
-                <select class="rating-atmosphere" data-options='{"clearable":false, "showText":false, "maxStars":5}'>
+                <select class="rating-atmosphere" name='RatingAtmosphere' data-options='{"clearable":false, "showText":false, "maxStars":5}'>
                     <option value="5">5</option>
                     <option value="4">4</option>
                     <option value="3">3</option>
@@ -235,7 +235,7 @@
                     <option value="1">1</option>
                 </select>
                 <label>Safety</label>
-                <select class="rating-safety" data-options='{"clearable":false, "showText":false, "maxStars":5}'>
+                <select class="rating-safety" name='RatingSafety' data-options='{"clearable":false, "showText":false, "maxStars":5}'>
                     <option value="5">5</option>
                     <option value="4">4</option>
                     <option value="3">3</option>
@@ -243,7 +243,7 @@
                     <option value="1">1</option>
                 </select>
                 <label>Queue Times</label>
-                <select class="rating-queue" data-options='{"clearable":false, "showText":false, "maxStars":5}'>
+                <select class="rating-queue" name='RatingQueue' data-options='{"clearable":false, "showText":false, "maxStars":5}'>
                     <option value="5">5</option>
                     <option value="4">4</option>
                     <option value="3">3</option>
