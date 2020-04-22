@@ -20,6 +20,8 @@
 
     require_once "config.php";
 
+    $userID = $_SESSION['UserID'];
+
     $allEvents = getAllEvents($pdo);
     $userPrefs = getUserTags($userID,$pdo);
     $SortedArray = (array) null;
