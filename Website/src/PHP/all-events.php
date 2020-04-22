@@ -67,7 +67,7 @@
                           echo "</div>";
                           echo "</div><div>";
                           echo "<div>Hosted By: ".venueIDtoName($row['VenueID'], $pdo)."</div>";
-                          echo "</div>";
+                          echo "</div></div>";
                           echo "</div>";
                       }
                   }
