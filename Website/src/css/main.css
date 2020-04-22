@@ -203,6 +203,87 @@ hr {
     color: var(--header-gray);
     width: 400px;
 }
+
+.list {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 16px;
+    justify-content: center;
+    width: 100%;
+}
+
+.table-row {
+    display: flex;
+    width: 100%;
+    background: var(--body-background);
+    justify-content: center;
+    align-items: stretch;
+    margin: -2px 0;
+}
+
+.table-item {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 12px 20px 12px 10px;
+    font-family: "K2D", sans-serif;
+    font-size: 14px;
+    background-color: var(--dark-body);
+    color: var(--text);
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+    width: 50%;
+}
+
+.table-buttons {
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    align-items: stretch;
+}
+
+
+.table-button {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    min-width: 50%;
+    font-family: "K2D", sans-serif;
+    font-size: 14px;
+    margin: 0;
+    padding: 12px 0px;
+    background-color: var(--body-background);
+    color: var(--light-body);
+    text-decoration: none;
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+
+}
+
+.table-button:focus {
+    outline: none;
+    background-color: var(--button-highlight);
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+}
+
+.table-button:hover {
+    background-color: var(--dark-gold);
+    cursor: pointer;
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+}
+
+.table-button:active {
+    background-color: var(--gold);
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+}
+
 @media only screen and (max-width: 440px) {
     .container{
         min-width: 0px;
