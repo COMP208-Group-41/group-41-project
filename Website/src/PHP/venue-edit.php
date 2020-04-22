@@ -450,7 +450,7 @@
                 <label for='description'>Venue Description:</label>
                 <textarea id='description' name='description' form='CreateVenue'
                           placeholder="Venue Description"><?php echo $description; ?></textarea>
-                <label for='description'>Venue Description:</label>
+                <label for='external'>External Site</label>
                 <textarea id='external' name='external' form='CreateVenue'
                           placeholder="https://website.com"><?php echo $website; ?></textarea>
                 <div class="seperator">
