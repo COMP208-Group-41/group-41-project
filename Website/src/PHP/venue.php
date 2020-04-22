@@ -182,7 +182,6 @@ $image = checkVenueImageOnServer($owner, $venueID);
                         <div class="score"> <?php echo "$queueScore"; ?></div>
                     </div>
                 </div>
-                <div class="seperator"></div>
                 <?php
                 if (isset($userID)) {
                     $checkReview = checkReviewWritten($userID, 1, $venueID, $pdo);

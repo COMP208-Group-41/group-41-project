@@ -162,8 +162,8 @@ hr {
     display: flex;
     flex-direction: column;
     border-top: var(--dark-body) solid 2px;
-    padding-top: 20px;
-    margin-top: 8px;
+    padding-top: 16px;
+    margin-top: 16px;
     width: 100%;
 }
 
@@ -307,6 +307,10 @@ hr {
 
 .title-img:hover {
     cursor: default;
+}
+
+h1 {
+    margin: 0;
 }
 
 @media only screen and (max-width: 440px) {
