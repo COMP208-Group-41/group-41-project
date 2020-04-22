@@ -139,8 +139,6 @@
                 echo "<h2 class='title'>No matching venues found!</h2>";
             }
             echo "</div>";
-              }
-              echo "</div>";
 
             ?>
         </div>
