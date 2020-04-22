@@ -156,7 +156,6 @@ input  {
 @media only screen and (max-width: 420px) {
     .wrapper{
         min-width: 0px;
-        margin: 0 0 16px;
         max-width: 350px;
         width: 100%;
     }
@@ -166,6 +165,7 @@ input  {
     .wrapper {
         width: 100%;
         max-width: 410px;
+        margin: 0 0 60px;
     }
 }
 
