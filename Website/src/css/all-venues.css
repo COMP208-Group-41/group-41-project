@@ -28,13 +28,17 @@ body {
 
 .table-item.image {
     background-size: cover;
+    align-items: stretch;
+    padding: 0;
 }
 
 .table-item-wrapper {
     background: rgba(32, 32, 32, 0.90);
     color: var(--light-body);
     padding: 16px;
-    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 
