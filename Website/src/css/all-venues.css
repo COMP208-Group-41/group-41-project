@@ -14,7 +14,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    width: 100%; flex-grow: 1;
+    width: 100%;
+    flex-grow: 1;
+    flex-wrap: wrap;
 }
 
 .table {
@@ -33,7 +35,7 @@ body {
 }
 
 .table-item-wrapper {
-    background: rgba(32, 32, 32, 0.90);
+    background: rgba(32, 32, 32, 0.80);
     color: var(--light-body);
     padding: 16px;
     display: flex;
