@@ -105,10 +105,6 @@ label {
         flex-direction: column;
     }
 
-    textarea {
-        max-width: 220px;
-    }
-
     .review-score {
         max-width: 100%;
     }

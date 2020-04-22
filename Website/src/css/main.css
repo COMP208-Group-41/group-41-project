@@ -301,7 +301,6 @@ hr {
         max-width: 350px;
         width: 100%;
     }
-
     .section {
         margin: 8px 8px 0;
     }
@@ -313,14 +312,6 @@ hr {
         width: 100%;
     }
 }
-
-@media only screen and (max-width: 600px) {
-    .container {
-        width: 100%;
-        max-width: 410px;
-    }
-}
-
 
 @media only screen and (max-width: 380px) {
     .container {
