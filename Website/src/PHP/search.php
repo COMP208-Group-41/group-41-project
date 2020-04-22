@@ -9,7 +9,14 @@
 
     require_once "config.php";
 
-    if (!isset(trim($_GET['search']))) {
+    if (!isset($_GET['search'])) {
+        // search term not provided
+        $_SESSION['message'] = "No Search term given!";
+        header("location: 404.php");
+        exit;
+    }
+
+    if (trim($_GET['search']) == "") {
         // search term not provided
         $_SESSION['message'] = "No Search term given!";
         header("location: 404.php");
