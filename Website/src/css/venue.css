@@ -1,6 +1,10 @@
-img {
+.v-image {
     max-height: 300px;
     object-fit: cover;
+}
+
+.v-image:hover {
+    cursor: default;
 }
 
 .list {
