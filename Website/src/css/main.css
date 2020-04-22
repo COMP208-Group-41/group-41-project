@@ -330,6 +330,9 @@ hr {
         min-width: 0;
     }
 
+    .table-item {
+    }
+
     .tag-container {
         width: 100%;
     }

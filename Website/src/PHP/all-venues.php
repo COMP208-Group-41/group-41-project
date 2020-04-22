@@ -43,7 +43,7 @@
                         echo "<div class='table'>";
                         echo "<div class='table-row'>";
                         $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$row['VenueUserID']."/".$row['VenueID']."/venue.jpg";
-                        echo "<div class='table-item image' style='background-image: url(".$venueImage.") '><div class='table-item-wrapper'>".$row['VenueName'];
+                        echo "<div class='table-item image' style='background-image: url(".$venueImage."); width: 35%'><div class='table-item-wrapper'>".$row['VenueName'];
                         unset($priceScore);
                         unset($safetyScore);
                         unset($atmosphereScore);
@@ -60,7 +60,7 @@
                             echo "<div class='rating-wrapper'>No Ratings</div>";
                         }
                         echo "</div></div>";
-                        echo '<div class="table-item" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
+                        echo '<div class="table-item" style="text-align: center; width: 35%">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
                         echo '<div class="table-buttons column"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button">Venue</a>';
                         echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="table-button">Events</a></div>';
                         echo "</div></div>";
