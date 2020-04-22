@@ -149,3 +149,27 @@ input  {
     color: var(--header-gray);
     width: 400px;
 }
+
+@media only screen and (max-width: 420px) {
+    .wrapper{
+        min-width: 0px;
+        margin: 0 0 16px;
+        max-width: 350px;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .wrapper {
+        width: 100%;
+        max-width: 410px;
+    }
+}
+
+
+@media only screen and (max-width: 380px) {
+    .wrapper {
+        width: 100%;
+        max-width: 310px;
+    }
+}

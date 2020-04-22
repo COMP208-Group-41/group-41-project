@@ -11,7 +11,7 @@
     border: #3B3B3B 2px solid;
     border-radius: 4px;
     padding: 16px;
-    margin: 0 16px;
+    margin: 16px;
     width: 100%;
     max-width: 400px;
 }
@@ -50,6 +50,20 @@ label {
     min-width: 160px;
 }
 
+.review-text {
+    flex-grow: 1;
+    font-family: "K2D", sans-serif;
+    box-sizing: border-box;
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: var(--dark-body);
+    padding: 12px 20px 12px 10px;
+    color: var(--text);
+    max-width: 100%;
+    margin: 16px;
+}
+
 .review-score .score {
     font-family: "K2D", sans-serif;
     box-sizing: border-box;
@@ -69,7 +83,19 @@ label {
     margin: 0 0 -4px;
 }
 
+.review-section {
+
+}
+
 @media only screen and (max-width: 600px) {
+    .review-section {
+        padding: 0;
+    }
+
+    .title {
+        margin: 16px 16px 28px;
+    }
+
     .review {
         width: 85%;
         margin: 8px 0;
@@ -84,7 +110,11 @@ label {
     }
 
     .review-score {
-        max-width: 220px;
+        max-width: 100%;
+    }
+
+    .review-score .label {
+        max-width: 70%;
     }
 }
 

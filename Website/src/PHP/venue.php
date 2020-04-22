@@ -98,10 +98,10 @@ $image = checkVenueImageOnServer($owner, $venueID);
                 <div class="seperator"></div>
 
                 <label>Venue description:</label>
-                <div class="event-name" style='margin: 8px 0'><?php echo "$description" ?></div>
+                <div class="review-text" style='margin: 8px 0'><?php echo "$description" ?></div>
 
                 <label>Opening times:</label>
-                <div class="event-name" style='margin: 8px 0'><?php echo "$times" ?></div>
+                <div class="review-text" style='margin: 8px 0'><?php echo "$times" ?></div>
 
                 <label>Location:</label>
                 <label><?php echo "$address" ?></label>

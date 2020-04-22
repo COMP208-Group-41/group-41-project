@@ -63,6 +63,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/login-register.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>OutOut - Login</title>
 </head>
 <body>
