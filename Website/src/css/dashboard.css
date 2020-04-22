@@ -17,6 +17,7 @@ th {
     width: 20%;
 }
 
+
 .list {
     display: flex;
     flex-direction: column;
@@ -111,7 +112,7 @@ th {
     border-radius: 4px;
     font-size: 16px;
     background-color: var(--dark-body);
-    padding: 12px 20px 12px 10px;
+    padding: 12px 4px 12px 4px;
     color: var(--text);
 }
 
@@ -176,6 +177,11 @@ th {
         max-width: 375px;
         margin-bottom: 8px;
     }
+    .container{
+        background-color: #4bc54c;
+        max-width: 375px;
+    }
+
 }
 
 @media only screen and (max-width: 600px) {
