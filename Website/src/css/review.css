@@ -69,7 +69,7 @@ label {
     margin: 0 0 -4px;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 600px) {
     .review {
         width: 85%;
         margin: 8px 0;
