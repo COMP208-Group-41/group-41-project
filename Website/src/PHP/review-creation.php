@@ -200,6 +200,7 @@
 <head>
     <title>OutOut - Submit Review</title>
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" title="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/review.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
