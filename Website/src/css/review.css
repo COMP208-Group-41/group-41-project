@@ -13,8 +13,7 @@
     border-radius: 4px;
     padding: 16px;
     margin: 16px;
-    width: 100%;
-    max-width: 250px;
+    min-width: 240px;
 }
 textarea {
     font-size: 14px;
@@ -101,6 +100,7 @@ label {
 
     .reviews {
         flex-direction: column;
+        flex-wrap: nowrap;
     }
 
     .review-score {
