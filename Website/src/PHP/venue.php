@@ -91,7 +91,6 @@ $image = checkVenueImageOnServer($owner, $venueID);
             <div class="section" id="Venue Details" style="flex-grow: 10">
                 <h1 class="title"><?php echo "$name" ?></h1>
                 <?php
-                echo '<h2 class="title" style="text-decoration: none"><a href="'.$website.'">External Site</a></h2>';
                 if ($image) {
                     echo '<div class="seperator"></div>';
                     echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/' . $owner . '/' . $venueID . '/venue.jpg" alt="Venue Image" class="title-img">';
@@ -108,6 +107,13 @@ $image = checkVenueImageOnServer($owner, $venueID);
 
                 <label>Location:</label>
                 <label><?php echo "$address" ?></label>
+
+                <?php
+                  if ($website != ""){
+                    echo '<label>External Site:</label>';
+                    echo '<label><a href="'.$website.'">Link</a></label>';
+                  }
+                ?>
 
                 <label style="text-align: center; margin-top: 16px;"><b>Venue Tags:</b></label>
                 <div style="display: flex; justify-content: center; ">
