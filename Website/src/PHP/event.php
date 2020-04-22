@@ -205,9 +205,9 @@
                         if (new DateTime("now") > $compareDate) {
                             $checkReview = checkReviewWritten($userID,$eventID,$venueID,$pdo);
                             if ($checkReview === false) {
-                                echo '<a class="button" href="review-creation.php?eventID='.$eventID.'">Write a Review</a>';
+                                echo '<a class="button" style="width: 100%;" href="review-creation.php?eventID='.$eventID.'">Write a Review</a>';
                             } else {
-                                echo '<a class="button" href="review-edit.php?reviewID='.$checkReview.'">Edit Review</a>';
+                                echo '<a class="button" style="width: 100%;" href="review-edit.php?reviewID='.$checkReview.'">Edit Review</a>';
                             }
                         }
                     }
