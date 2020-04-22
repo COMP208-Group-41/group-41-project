@@ -25,7 +25,7 @@
     }
 }
 
-@media only screen and (max-width: 4400px) {
+@media only screen and (max-width: 440px) {
     .container {
         max-width: 370px;
     }
