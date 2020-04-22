@@ -25,7 +25,7 @@ body {
         flex-direction: column;
     }
 
-    .table-button {
-        width: 20%;
+    .table-button .table-buttons.column{
+        width: 100%;
     }
 }
