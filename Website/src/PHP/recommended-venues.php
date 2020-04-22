@@ -19,7 +19,7 @@
     $userID = $_SESSION['UserID'];
 
     $allVenues = getAllVenues($pdo);
-    //$userPrefs = getUserTags($userID,$pdo);
+    $userPrefs = getUserTags($userID,$pdo);
     $sortedArray = (array) null;
     foreach($allVenues as $row){
       $venue = $emptyArray = (array) null;
