@@ -98,9 +98,4 @@
     body{
         overflow-x: hidden;
     }
-
-    .section {
-        width: 80%;
-        margin-bottom: 0px;
-    }
 }
