@@ -27,12 +27,14 @@ body {
 }
 
 .table-item.image {
-    opacity: 0.9;
+    background-size: cover;
 }
 
 .table-item-wrapper {
-    background: rgba(32, 32, 32, 0.95);
+    background: rgba(32, 32, 32, 0.90);
     color: var(--light-body);
+    padding: 16px;
+    border-radius: 4px;
 }
 
 
