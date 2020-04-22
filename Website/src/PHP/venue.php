@@ -33,6 +33,7 @@ $name = $result['VenueName'];
 $description = $result['VenueDescription'];
 $address = $result['VenueAddress'];
 $times = $result['VenueTimes'];
+$website = $result['ExternalSite'];
 $events = getEvents($venueID, $pdo);
 $currentTagIDs = getVenueTagID($venueID, $pdo);
 $reviews = getVenueReviews($venueID, $pdo);
@@ -67,6 +68,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
 <html lang="en-GB">
 <head>
     <title>OutOut - <?php echo $name; ?></title>
+    <link rel="stylesheet" type="text/css" href="../css/venue.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/venue.css">
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
@@ -89,6 +91,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
             <div class="section" id="Venue Details" style="flex-grow: 10">
                 <h1 class="title"><?php echo "$name" ?></h1>
                 <?php
+                echo '<h2 class="title" style="text-decoration: none"><a href="'.$website.'">External Site</a></h2>';
                 if ($image) {
                     echo '<div class="seperator"></div>';
                     echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/' . $owner . '/' . $venueID . '/venue.jpg" alt="Venue Image" class="title-img">';
