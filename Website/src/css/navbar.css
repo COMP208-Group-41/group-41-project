@@ -33,6 +33,7 @@ body {
     margin-right: 32px;
     text-align: right;
     margin-bottom: 8px;
+    padding: 0;
 }
 
 .nav-seperator {
@@ -48,7 +49,7 @@ body {
 .sidenav .icon-wrapper {
     display: flex;
     justify-content: space-between;
-    padding: 4px 0 4px 32px;
+    padding: 8px 0 4px 32px;
     align-items: center;
     margin-bottom: 20px;
 }
