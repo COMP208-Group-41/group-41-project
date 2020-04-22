@@ -1,0 +1,163 @@
+body {
+    overflow-x: hidden;
+}
+
+.list {
+    display: inline-flex;
+    flex-direction: row;
+    padding-bottom: 16px;
+    justify-content: center;
+    min-width: 400px;
+    overflow: auto;
+    flex-wrap: wrap;
+}
+
+.venue {
+    display: flex;
+    background: var(--body-background);
+    justify-content: center;
+    border-radius: 4px;
+    width: 400px;
+    margin: 16px;
+}
+
+.rating-square {
+    background: var(--body-background);
+    border: 2px solid var(--button-border);
+    color: var(--gold);
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-bottom: -4px;
+    margin-left: 4px;
+}
+
+.rating-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%; flex-grow: 1;
+}
+
+.venue-name {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    font-family: "K2D", sans-serif;
+    box-sizing: border-box;
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: var(--dark-body);
+    padding: 12px 20px 12px 10px;
+    color: var(--text);
+    align-items: center;
+    margin-right: -4px;
+    width: 40%;
+}
+
+.venue-tags {
+    display: flex;
+    padding: 4px;
+    color: var(--body-background);
+    background-color: var(--dark-body);
+    font-family: "K2D", sans-serif;
+    font-size: 16px;
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+}
+
+.venue-tag {
+    background-color: var(--body-background);
+    padding: 1px;
+    color: var(--light-body);
+    text-align: center;
+    text-decoration: none;
+}
+
+.venue-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    justify-content: center;
+    margin-right: -4px;
+}
+
+.venue-button {
+    display: flex;
+    font-family: "K2D", sans-serif;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: var(--body-background);
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+    padding: 8px 0;
+    color: var(--light-body);
+    text-decoration: none;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.venue-button:focus {
+    outline: none;
+    background-color: var(--button-highlight);
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+}
+
+.venue-button:hover {
+    background-color: var(--dark-gold);
+    cursor: pointer;
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+}
+
+.venue-button:active {
+    background-color: var(--gold);
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+}
+
+@media screen and (max-width: 450px) {
+    .list {
+        display: inline-flex;
+        flex-direction: column;
+        padding-bottom: 16px;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .venue {
+        display: flex;
+        background: var(--body-background);
+        justify-content: center;
+        flex-grow: 1;
+        border-radius: 4px;
+        max-width: 400px;
+        margin-bottom: 16px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .list {
+        display: inline-flex;
+        flex-direction: column;
+        padding-bottom: 16px;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .venue {
+        display: flex;
+        background: var(--body-background);
+        justify-content: center;
+        flex-grow: 1;
+        border-radius: 4px;
+        max-width: 600px;
+        margin-bottom: 16px;
+    }
+}

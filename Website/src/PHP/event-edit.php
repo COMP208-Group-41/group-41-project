@@ -352,7 +352,7 @@
     <title>OutOut - Edit <?php echo $name; ?></title>
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
-    <link rel="stylesheet" type="text/css" href="../css/events.css">
+    <link rel="stylesheet" type="text/css" href="../css/event-creation.css">
 </head>
 <body>
 <?php include "navbar.php" ?>

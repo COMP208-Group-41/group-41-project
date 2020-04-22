@@ -32,6 +32,22 @@ body {
     margin: 20px;
     border-radius: 10px;
     min-width: 400px;
+    width: 80vw;
+    max-width: 1000px;
+}
+
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    border: var(--dark-body) solid 2px;
+    margin: 16px;
+    padding: 16px;
 }
 
 input {
@@ -173,6 +189,7 @@ hr {
     display: flex;
     justify-content: center;
     margin-bottom: 32px;
+    margin: 32px 0px;
 }
 
 .success {
@@ -185,4 +202,25 @@ hr {
     padding: 16px;
     color: var(--header-gray);
     width: 400px;
+}
+@media only screen and (max-width: 600px) {
+    .container{
+        min-width: 0px;
+        margin: 0 0 16px;
+        max-width: 380px;
+    }
+
+    .section {
+        width: 80%;
+        margin-bottom: 0;
+    }
+    .message-wrapper {
+        margin: 16px 0;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .container {
+        max-width: 320px;
+    }
 }

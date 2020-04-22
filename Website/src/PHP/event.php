@@ -120,10 +120,11 @@
 <html lang="en-GB">
 <head>
     <title>OutOut - <?php echo $name; ?></title>
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/events.css">
     <link rel="stylesheet" type="text/css" href="../css/review.css">
-    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <?php include "navbar.php" ?>
@@ -138,7 +139,8 @@
 <div class="wrapper">
     <div class="container">
         <div style="display: flex; flex-direction: column">
-            <h1 class="title"><?php echo $name; ?></h1>
+            <h1 class="title" style="margin-bottom: 8px"><?php echo $name; ?></h1>
+            <h2 class="title" style="text-decoration: none">@ <?php echo '<a href="venue.php?venueID='.$venueID.'">'.$venueName.'</a>'; ?></h2>
                 <?php
                     if (isset($following)) {
                         if ($following) {
@@ -154,18 +156,16 @@
                 <?php
                     if ($image) {
                         echo '<div class="seperator"></div>';
-                        echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$owner.'/'.$venueID.'/'.$eventID.'/event.jpg" alt="Event Image">';
+                        echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$owner.'/'.$venueID.'/'.$eventID.'/event.jpg" alt="Event Image" class="v-image">';
                     }
                 ?>
             </div>
             <div class="seperator"></div>
-            <label>Venue: <?php echo '<a href="venue.php?venueID='.$venueID.'">'.$venueName.'</a>'; ?></label>
-
-            <label>Start Time: <?php echo $startTime; ?></label>
-            <label>EndTime: <?php echo $endTime; ?></label>
+            <div style="display: flex;">
+                <label class="text">Starts: <?php echo $startTime; ?></label>
+                <label class="text">Ends: <?php echo $endTime; ?></label></div>
             <label>Event description:</label>
             <textarea readonly placeholder="Description of event here"><?php echo $description; ?></textarea>
-
             <label style="text-align: center; margin-top: 16px;"><b>Event Tags:</b></label>
             <div style="display: flex; justify-content: center; ">
                 <div class="tag-container" style="text-align: center">
@@ -173,69 +173,72 @@
                 </div>
             </div>
             <div class="seperator"></div>
-            <h2 class='title'>Event score</h2>
-            <?php
-                if (isset($userID)) {
-                    $compareDate = new DateTime($result['EventEndTime']);
-                    if (new DateTime("now") > $compareDate) {
-                        $checkReview = checkReviewWritten($userID,$eventID,$venueID,$pdo);
-                        if ($checkReview === false) {
-                            echo '<a href="review-creation.php?eventID='.$eventID.'">Write a Review</a>';
-                        } else {
-                            echo '<a href="review-edit.php?reviewID='.$checkReview.'">Edit Review</a>';
+            <h2 class='title'>Overall Event Scores</h2>
+            <div class="flex-wrap">
+                <div class="section" id="Venue Score">
+                    <div class="review-scores">
+                        <div class="review-score">
+                            <div class="label">Overall Score:</div>
+                            <div class="score"> <?php echo "$totalScore"; ?></div>
+                        </div>
+                        <div class="review-score">
+                            <div class="label">Price Score:</div>
+                            <div class="score"><?php echo "$priceScore"; ?></div>
+                        </div>
+                        <div class="review-score">
+                            <div class="label">Safety Score:</div>
+                            <div class="score"> <?php echo "$safetyScore"; ?></div>
+                        </div>
+                        <div class="review-score">
+                            <div class="label">Atmosphere Score:</div>
+                            <div class="score"> <?php echo "$atmosphereScore"; ?></div>
+                        </div>
+                        <div class="review-score">
+                            <div class="label">Queuing Score:</div>
+                            <div class="score"> <?php echo "$queueScore"; ?></div>
+                        </div>
+                    </div>
+                    <div class="seperator"></div>
+                    <?php
+                    if (isset($userID)) {
+                        $compareDate = new DateTime($result['EventEndTime']);
+                        if (new DateTime("now") > $compareDate) {
+                            $checkReview = checkReviewWritten($userID,$eventID,$venueID,$pdo);
+                            if ($checkReview === false) {
+                                echo '<a class="button" style="width: 100%;" href="review-creation.php?eventID='.$eventID.'">Write a Review</a>';
+                            } else {
+                                echo '<a class="button" style="width: 100%;" href="review-edit.php?reviewID='.$checkReview.'">Edit Review</a>';
+                            }
                         }
                     }
-                }
-            ?>
-            <div class="review-scores">
-                <div class="review-score">
-                    <div class="label">Overall Score: <?php echo "$totalScore"; ?></div>
-                    <div class="score">5</div>
+                    ?>
                 </div>
-                <div class="review-score">
-                    <div class="label">Price Score: <?php echo "$priceScore"; ?></div>
-                    <div class="score">3</div>
+                <div class="section" id="All Reviews" style="flex-grow: 10">
+                    <h2 class="title">All Reviews</h2>
+                        <?php
+                        if ($reviews !== false){
+                            echo '<div class="reviewlist">';
+                          $counter = 0;
+                          foreach ($reviews as $row) {
+                            if($counter<5){
+                                echo "<div class='review'>";
+                                echo "<label>Review left by:<b> " . userIDtoUserName($row['UserID'], $pdo) . "</b></label>";
+                                echo "<textarea readonly onchange='this.style.height = \"\";this.style.height = this.scrollHeight + 3 + \"px\"'>" . $row['ReviewText'] . "</textarea>";
+                                echo "<div class='review-scores'>";
+                                echo "<div class='review-score'><div class='label'>Price Score:</div><div class='score'>" . $row['ReviewPrice'] . "</div></div>";
+                                echo "<div class='review-score'><div class='label'>Safety Score:</div><div class='score'> " . $row['ReviewSafety'] . "</div></div>";
+                                echo "<div class='review-score'><div class='label'>Atmosphere Score:</div><div class='score'> " . $row['ReviewAtmosphere'] . "</div></div>";
+                                echo "<div class='review-score'><div class='label'>Queue Times Score:</div><div class='score'> " . $row['ReviewQueue'] . "</div></div></div>";
+                                echo "<label>Review posted on: " . $row['ReviewDate'] . "</label></div>";
+                            }
+                            $counter++;
+                          }
+                          echo '</div>';
+                        } else {
+                          echo '<label>No reviews currently posted for this event</label>';
+                        }
+                        ?>
                 </div>
-                <div class="review-score">
-                    <div class="label">Safety Score: <?php echo "$priceScore"; ?></div>
-                    <div class="score">4</div>
-                </div>
-                <div class="review-score">
-                    <div class="label">Atmosphere Score: <?php echo "$priceScore"; ?></div>
-                    <div class="score">5</div>
-                </div>
-                <div class="review-score">
-                    <div class="label">Queuing Score: <?php echo "$priceScore"; ?></div>
-                    <div class="score">2</div>
-                </div>
-            </div>
-
-            <div class="seperator"></div>
-            <h2 class="title">All Reviews</h2>
-
-                <?php
-                if ($reviews !== false){
-                    echo '<div class="reviewlist">';
-                  $counter = 0;
-                  foreach ($reviews as $row) {
-                    if($counter<5){
-                        echo "<div class='review'>";
-                        echo "<label>Review left by:<b> " . userIDtoUserName($row['UserID'], $pdo) . "</b></label>";
-                        echo "<textarea readonly onchange='this.style.height = \"\";this.style.height = this.scrollHeight + 3 + \"px\"'>" . $row['ReviewText'] . "</textarea>";
-                        echo "<div class='review-scores'>";
-                        echo "<div class='review-score'><div class='label'>Price Score:</div><div class='score'>" . $row['ReviewPrice'] . "</div></div>";
-                        echo "<div class='review-score'><div class='label'>Safety Score:</div><div class='score'> " . $row['ReviewSafety'] . "</div></div>";
-                        echo "<div class='review-score'><div class='label'>Atmosphere Score:</div><div class='score'> " . $row['ReviewAtmosphere'] . "</div></div>";
-                        echo "<div class='review-score'><div class='label'>Queue Times Score:</div><div class='score'> " . $row['ReviewQueue'] . "</div></div></div>";
-                        echo "<label>Review posted on: " . $row['ReviewDate'] . "</label></div>";
-                    }
-                    $counter++;
-                  }
-                  echo '</div>';
-                } else {
-                  echo '<label>No reviews currently posted for this event</label>';
-                }
-                ?>
             </div>
         </div>
     </div>

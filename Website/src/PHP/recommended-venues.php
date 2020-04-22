@@ -2,11 +2,17 @@
 
     session_start();
 
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+
     if (isset($_SESSION['VenueUserID'])) {
         $_SESSION['message'] = "Venue Users cannot use the recommended page";
         header("location: venue-user-dashboard.php");
         exit;
     }
+
+    require_once "config.php";
 
     if (!isset($_SESSION['UserID'])) {
         $_SESSION['message'] = "You must be logged in to view recommended Venues";
@@ -17,6 +23,7 @@
     $userID = $_SESSION['UserID'];
 
     $allVenues = getAllVenues($pdo);
+    //print_r($allVenues);
     $userPrefs = getUserTags($userID,$pdo);
     $sortedArray = (array) null;
     foreach($allVenues as $row){
@@ -31,10 +38,12 @@
       if ($count > 0){
         $event['Count'] = $count;
         $event['VenueID'] = $row['VenueID'];
+        $event['VenueName'] = $row['VenueName'];
         array_push($sortedArray,$event);
       }
     }
     sortArray($sortedArray);
+    $sortedArray = array_reverse($sortedArray);
 
     function sortArray (&$array) {
       $temp=array();
@@ -79,14 +88,16 @@
     <div class="container">
         <?php
           if (sizeof($sortedArray) != 0) {
+              //echo print_r($sortedArray);
               foreach($sortedArray as $row) {
                   echo '<div class="seperator" style="margin-top: 4px">';
                   $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
+                  echo $row['Count'];
                   echo "<table>";
                   echo "<tr>";
                   echo "<td>".$row['VenueName']."</td>";
-                  echo '<td><div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-left: -1px">View Venue</a>';
-                  echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -1px">View Upcoming Events</a></div></td>';
+                  echo '<td><div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="button" style="margin-left: -1px">View Venue</a>';
+                  echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="button" style="margin-right: -1px">View Upcoming Events</a></div></td>';
                   echo '<td><div class="tag-container" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div></td>';
                   echo "</tr>";
                   echo "</table>";
