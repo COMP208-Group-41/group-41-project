@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OutOut - User Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+</head>
+<body>
+<div class="container" style="width: 40%;">
+    <div class="section">
+    <h1 class="title">Account Details</h1>
+    <div class="list" >
+        <div class="venue">
+            <div class="venue-name" style="width: 30%">
+                User Name
+            </div>
+            <div class="venue-name" style="width: 70%">
+                Test
+                <?php echo "$name"; ?>
+            </div>
+        </div>
+        <div class="venue">
+            <div class="venue-name" style="width: 30%">
+                Email
+            </div>
+            <div class="venue-name" style="width: 70%">
+                Test
+                <?php echo "$name"; ?>
+            </div>
+        </div>
+        <div class="venue">
+            <div class="venue-name" style="width: 30%">
+                User Name
+            </div>
+            <div class="venue-name" style="width: 70%">
+                Test
+                <?php echo "$name"; ?>
+            </div>
+        </div>
+        <button onclick="location.href='user-edit.php';" class="button" style="margin-top: 20px;width: 100%">Edit Account Details</button>
+    </div></div>
+        <div class="flex-wrap">
+            <div class="section">
+                <h1 class="title">Favourite Tags</h1>
+                <div class="tag-container" style="text-align: center">
+                    <?php getTags($userPrefs, $pdo); ?>
+                </div>
+            <div class="section">
+                <h1 class="title">Upcoming Events</h1>
+                <div class="list">
+                    <div class="venue">
+                        <?php
+              foreach ($interestedIn as $row) {
+                        echo "<div class='venue-name'>".eventIDtoName($row['EventID'],$pdo)."</label>";
+                        echo '<><a href="event.php?eventID='.$row['EventID'].'" class="button">View Event</a>';
+                        echo "</tr>";
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</body>
+</html>
