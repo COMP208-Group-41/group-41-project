@@ -163,6 +163,7 @@ body {
 .search-wrapper {
     display: flex;
     align-items: center;
+    width: 50%;
 }
 
 input.searchbar {
@@ -245,6 +246,10 @@ input.searchbar:focus {
     }
     .hvr-grow {
         padding: 0 8px;
+    }
+
+    .search-wrapper {
+        width: 100%;
     }
 
     .hvr-grow.outout {
