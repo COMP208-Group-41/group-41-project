@@ -19,7 +19,16 @@ body {
     width: 100%; flex-grow: 1;
 }
 
+.table {
+    min-width: 310px;
+    width: 50%;
+}
+
 @media only screen and (max-width: 600px) {
+    .table {
+        width: 100%;
+    }
+
     .table-item {
         padding: 6px;
         flex-direction: column;
