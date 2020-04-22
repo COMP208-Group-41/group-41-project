@@ -241,7 +241,7 @@
             unset($_SESSION['message']);
         }
     ?>
-    <div class="container" style="width: 40vw">
+    <div class="container">
         <h1 class="title">Account Settings</h1>
         <form name='EditVenueUserDetails' method='post' style="margin-top: 10px">
             <div class="edit-fields">
