@@ -197,12 +197,12 @@
 ?>
 
 <!DOCTYPE html>
-<html>
-  <head>
+<head>
     <title>OutOut - Submit Review</title>
-    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="../css/venue.css">
-  </head>
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/review.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
   <body>
     <?php include "navbar.php" ?>
     <?php
@@ -211,49 +211,49 @@
             unset($_SESSION['message']);
         }
     ?>
-    <div class="wrapper">
-        <div class="container">
-    <form name='ReviewVenue' method='post'>
-      <div>
-          <label for='Review'>Review:</label>
-          <textarea name='Review' id='Review' placeholder="Write your review here..." rows="4" cols="50"></textarea><br>
-          <label for='RatingPrice'>Price:</label>
-          <select name="RatingPrice" id="RatingPrice" required>
-              <option value="5">5</option>
-              <option value="4">4</option>
-              <option value="3">3</option>
-              <option value="2">2</option>
-              <option value="1">1</option>
-          </select><br>
-          <label for='RatingAtmosphere'>Atmosphere:</label>
-          <select name="RatingAtmosphere" id="RatingAtmosphere" required>
-              <option value="5">5</option>
-              <option value="4">4</option>
-              <option value="3">3</option>
-              <option value="2">2</option>
-              <option value="1">1</option>
-          </select><br>
-          <label for='RatingSafety'>Safety:</label>
-          <select name="RatingSafety" id="RatingSafety" required>
-              <option value="5">5</option>
-              <option value="4">4</option>
-              <option value="3">3</option>
-              <option value="2">2</option>
-              <option value="1">1</option>
-          </select><br>
-          <label for='RatingQueue'>Queue Times:</label>
-          <select name="RatingQueue" id="RatingQueue" required>
-              <option value="5">5</option>
-              <option value="4">4</option>
-              <option value="3">3</option>
-              <option value="2">2</option>
-              <option value="1">1</option>
-          </select><br>
-      </div>
-
-      <div style= "display: flex">
-          <input type='submit' name='SubmitReview' value='Submit'>
-      </div>
+    <div class="container" style="width: 20vw">
+        <h2 class="title">Write a review</h2>
+        <form name='ReviewVenue' method='post'>
+            <div style="display: flex; justify-content: center; flex-direction: column">
+                <textarea name='review-textarea' id='review-textarea' placeholder="Leave a note..." rows="4" cols="50" required></textarea>
+                <div class="seperator"></div>
+                <label style="">Price</label>
+                <select class="rating-price" data-options='{"clearable":false, "showText":false, "maxStars":5}'>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                </select>
+                <label>Atmosphere</label>
+                <select class="rating-atmosphere" data-options='{"clearable":false, "showText":false, "maxStars":5}'>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                </select>
+                <label>Safety</label>
+                <select class="rating-safety" data-options='{"clearable":false, "showText":false, "maxStars":5}'>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                </select>
+                <label>Queue Times</label>
+                <select class="rating-queue" data-options='{"clearable":false, "showText":false, "maxStars":5}'>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                </select>
+            </div>
+            <div class="seperator" style="margin-top: 20px"></div>
+            <div style= "display: flex">
+                <input type='submit' value='Submit' class="button" style="width: 100%;">
+            </div>
       <?php
           if ($errorMessage != "") {
               echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
