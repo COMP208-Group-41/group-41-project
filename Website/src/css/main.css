@@ -313,7 +313,7 @@ hr {
         margin: 0 0 16px;
         max-width: 350px;
         width: 100%;
-        padding: 16px;
+        padding: 8px;
     }
     .message-wrapper {
         margin: 16px 0;
@@ -323,6 +323,14 @@ hr {
         background-color: var(--body-background);
         cursor: pointer;
         border: 1px solid var(--button-border);
+    }
+
+    .table {
+        max-width: 300px;
+        min-width: 0;
+    }
+
+    .table-item {
     }
 
     .tag-container {

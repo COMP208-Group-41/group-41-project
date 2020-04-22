@@ -68,7 +68,6 @@ $image = checkVenueImageOnServer($owner, $venueID);
 <html lang="en-GB">
 <head>
     <title>OutOut - <?php echo $name; ?></title>
-    <h2 class="title" style="text-decoration: none"> <?php echo '<a href="'.$website.'">'.$website.'</a>'; ?></h2>
     <link rel="stylesheet" type="text/css" href="../css/venue.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/venue.css">
@@ -108,6 +107,13 @@ $image = checkVenueImageOnServer($owner, $venueID);
 
                 <label>Location:</label>
                 <label><?php echo "$address" ?></label>
+                <br>
+                <?php
+                  if ($website != ""){
+                    echo '<label>External Site:</label>';
+                    echo '<label><a href="'.$website.'">Link</a></label>';
+                  }
+                ?>
 
                 <label style="text-align: center; margin-top: 16px;"><b>Venue Tags:</b></label>
                 <div style="display: flex; justify-content: center; ">
