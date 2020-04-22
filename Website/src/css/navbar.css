@@ -196,3 +196,30 @@ input.searchbar:focus {
     color: var(--text);
     margin: 0;
 }
+
+.search-form .button {
+    margin: 0;
+    box-sizing: border-box;
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: var(--body-background);
+    padding: 6px;
+    color: var(--light-body);
+    text-align: center;
+    text-decoration: none;
+}
+
+.search-form .button:focus {
+    outline: none;
+    background-color: var(--button-highlight);
+}
+
+.search-form .button:hover {
+    background-color: var(--dark-gold);
+    cursor: pointer;
+}
+
+.button:active {
+    background-color: var(--gold)
+}
