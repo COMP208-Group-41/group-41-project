@@ -25,7 +25,11 @@
 </div>
 <div id="mySidenav" class="sidenav">
     <div class="sidebar-content">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div style="display: flex" >
+            <img src="../Assets/outout.svg" width="115">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        </div>
+
         <a href="<?php echo $dashboardLink; ?>">My Account</a>
         <a href="<?php echo $accountLink; ?>">Edit Account</a>
         <a href="<?php echo $venueLink; ?>">All Venues</a>
@@ -47,7 +51,7 @@
 </div>
 <script>
     function openNav() {
-        document.getElementById("mySidenav").style.width = "200px";
+        document.getElementById("mySidenav").style.width = "250px";
     }
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
