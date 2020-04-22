@@ -78,7 +78,7 @@
         <?php
           if (sizeof($sortedArray) != 0) {
               foreach($sortedArray as $row) {
-                  echo '<div class="seperator" style="margin-top: 4px">';
+                  echo '<div class="seperator" style="margin-top: 4px"></div>';
                   $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
                   echo "This venue matches ".$row['Count']." of your preferred tags";
                   echo "<table>";
