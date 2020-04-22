@@ -94,8 +94,8 @@
                   echo "<table>";
                   echo "<tr>";
                   echo "<td>".$row['VenueName']."</td>";
-                  echo '<td><div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-left: -1px">View Venue</a>';
-                  echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -1px">View Upcoming Events</a></div></td>';
+                  echo '<td><div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="button" style="margin-left: -1px">View Venue</a>';
+                  echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="button" style="margin-right: -1px">View Upcoming Events</a></div></td>';
                   echo '<td><div class="tag-container" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div></td>';
                   echo "</tr>";
                   echo "</table>";
