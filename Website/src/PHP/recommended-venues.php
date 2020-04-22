@@ -23,6 +23,7 @@
     $userID = $_SESSION['UserID'];
 
     $allVenues = getAllVenues($pdo);
+    print_r($allVenues);
     $userPrefs = getUserTags($userID,$pdo);
     $sortedArray = (array) null;
     foreach($allVenues as $row){
