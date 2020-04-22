@@ -125,7 +125,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
                     if ($events !== false) {
                         $counter = 0;
                         foreach ($events as $row) {
-                            if ($counter < 5) {
+                            if ($counter < 10) {
                                 echo '<div class="event">';
                                 echo '<div class="event-image"></div>';
                                 echo '<div class="event-name">' . $row['EventName'] . "</div>";
