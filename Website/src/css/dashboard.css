@@ -41,7 +41,7 @@ th {
     box-sizing: border-box;
     border: 2px solid var(--button-border);
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 14px;
     background-color: var(--dark-body);
     padding: 12px 20px 12px 10px;
     color: var(--text);
@@ -59,7 +59,7 @@ th {
     font-family: "K2D", sans-serif;
     margin: 0;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 14px;
     background-color: var(--body-background);
     border: 2px solid var(--button-border);
     border-radius: 4px;
@@ -167,7 +167,7 @@ th {
         height: 48px;
         background: var(--body-background);
         justify-content: center;
-        align-items: center;
+        align-items: stretch;
         margin: -2px 0;
 
     }
@@ -192,7 +192,7 @@ th {
         font-family: "K2D", sans-serif;
         margin: 0;
         box-sizing: border-box;
-        font-size: 10px;
+        font-size: 14px;
         background-color: var(--body-background);
         border: 2px solid var(--button-border);
         border-radius: 4px;
@@ -204,6 +204,8 @@ th {
         height: 100%;
         flex-grow: 1;
         min-width: 50%;
+        margin-right: -5px;
+
     }
     body{
         overflow-x: hidden;
@@ -214,10 +216,14 @@ th {
         box-sizing: border-box;
         border: 2px solid var(--button-border);
         border-radius: 4px;
-        font-size: 10px;
+        font-size: 14px;
         background-color: var(--dark-body);
         padding: 12px 20px 12px 10px;
         color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: -4px;
     }
 }
 
