@@ -87,12 +87,20 @@
         flex-direction: column;
     }
 
+    .list {
+        flex-direction: column;
+    }
+
     .container{
         max-width: 320px;
     }
 
     .event-name {
         min-width: 0;
+    }
+
+    .event-button {
+        width: 74px;
     }
 
     body{

@@ -143,7 +143,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
                         echo '<div class="event">';
                         echo '<div class="event-name">No events currently listed</div></div></div>';
                     }
-                    echo '<div style="display: flex; height: 32px">';
+                    echo '<div style="display: flex">';
                     echo '<a href="upcoming-events.php?venueID=' . $venueID . ' "class="button" style="width: 50%;  margin-right: -4px">View All Events</a>';
                     echo '<a href="past-events.php?venueID=' . $venueID . '" class="button" style="width: 50%;">View Past Events</a></div>';
                     ?>
@@ -191,7 +191,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
                 <?php
                 if ($reviews !== false) {
                     $counter = 0;
-                    echo '<div class="list" style="flex-direction: row">';
+                    echo '<div class="reviews">';
                     foreach ($reviews as $row) {
                         if ($counter < 5) {
                             echo "<div class='review'>";
