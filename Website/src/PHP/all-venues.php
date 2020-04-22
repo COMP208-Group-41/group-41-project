@@ -4,6 +4,10 @@
 
     session_start();
 
+    error_reporting( E_ALL );
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+
     require_once "config.php";
 
     $allVenues = getAllVenues($pdo);
@@ -39,8 +43,10 @@
                         echo "<div class='table'>";
                         echo "<div class='table-row'>";
                         $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$row['VenueUserID']."/".$row['VenueID']."/venue.jpg";
+                        echo $venueImage;
+                        echo file_exists($venueImage);
                         if (file_exists($venueImage)) {
-                            echo "<div class='table-item image' style='background-image: url(https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$row['VenueUserID']."/".$row['VenueID']."/venue.jpg) '><div class='table-item-wrapper'>".$row['VenueName'];
+                            echo "<div class='table-item image' style='background-image: url(".$venueImage.") '><div class='table-item-wrapper'>".$row['VenueName'];
                         } else {
                             echo "<div class='table-item image' style='background-image: url(../Assets/background2.jpg) '><div class='table-item-wrapper'>".$row['VenueName'];
                         }
