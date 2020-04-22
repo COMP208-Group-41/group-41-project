@@ -14,7 +14,7 @@
 }
 
 html * {
-    font-family: "K2D", serif !important;
+    font-family: "K2D", sans-serif;
 }
 body {
     background: var(--gradient);
