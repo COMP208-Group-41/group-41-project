@@ -50,6 +50,7 @@
 
             echo '<a class="button" href="user-dashboard.php">Your Dashboard</a>';
             echo '<a class="button" href="recommended-venues.php">Recommended Venues for you</a>';
+            echo '<a class="button" href="recommended-events.php">Recommended Events for you</a>';
         }
 
         if (isset($venueUserID)) {
@@ -59,35 +60,6 @@
         echo '<a class="button" href="all-venues.php">All Venues</a>';
         echo '<a class="button" href="all-events.php">All Upcoming Events</a>';
     ?>
-
-
-    <!-- Photo Grid  <div class="row">
-        <div class="column">
-            <img src="../Assets/background.jpg" style="width:100%">
-            <img src="../Assets/background.jpg" style="width:100%">
-            <img src="../Assets/background.jpg" style="width:100%">
-            <img src="../Assets/background.jpg" style="width:100%">
-        </div>
-        <div class="column">
-            <img src="../Assets/background.jpg" style="width:100%">
-            <img src="../Assets/background.jpg" style="width:100%">
-            <img src="../Assets/background.jpg" style="width:100%">
-            <img src="../Assets/background.jpg" style="width:100%">
-        </div>
-        <div class="column">
-            <img src="../Assets/background.jpg" style="width:100%">
-            <img src="../Assets/background.jpg" style="width:100%">
-            <img src="../Assets/background.jpg" style="width:100%">
-            <img src="../Assets/background.jpg" style="width:100%">
-        </div>
-        <div class="column">
-            <img src="../Assets/background.jpg" style="width:100%">
-            <img src="../Assets/background.jpg" style="width:100%">
-            <img src="../Assets/background.jpg" style="width:100%">
-            <img src="../Assets/background.jpg" style="width:100%">
-        </div>
-    </div>-->
-
 
 </div>
 </div>
