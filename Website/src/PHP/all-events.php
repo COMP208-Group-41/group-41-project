@@ -51,14 +51,13 @@
                           echo "<div class='table-items' id='row'>";
                           echo "<div class='table-items column'>";
                           echo "<div class='table-item max' style='height: 100%; width: 100%'>".getTagsNoEcho($currentTagIDs,$pdo)."</div>";
+                          echo '<a href="event.php?eventID='.$row['EventID'].'" class="button left">View Event</a>';
                           echo "</div>";
                           echo "<div class='table-items column' ' >";
                           echo "<div class='table-item column'>".$row['EventName']."</div>";
                           echo "<div class='table-item column'>".$row['EventStartTime']."</div>";
+                          echo '<a href="venue?venueID='.$row['VenueID'].'" class="button right" >View Venue</a>';
                           echo "</div></div></div></div>";
-                          echo "<div class='button-wrapper'>";
-                          echo '<a href="event.php?eventID='.$row['EventID'].'" class="button left" style="width: 50%">View Event</a>';
-                          echo '<a href="venue?venueID='.$row['VenueID'].'" class="button right" style="width: 50%">View Venue</a></div>';
                       }
                   }
               } else {
