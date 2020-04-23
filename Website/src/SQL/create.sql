@@ -33,6 +33,7 @@ CREATE TABLE Venue (
     VenueDescription VARCHAR(1000) NOT NULL,
     VenueAddress VARCHAR(255) NOT NULL,
     VenueTimes VARCHAR(300),
+    ExternalSite VARCHAR (255),
     PRIMARY KEY (VenueID),
     FOREIGN KEY (VenueUserID) REFERENCES VenueUser(VenueUserID)
 );
@@ -140,10 +141,34 @@ INSERT INTO Venue (VenueUserID,VenueName,VenueDescription,VenueAddress,VenueTime
 INSERT INTO Event (VenueID,EventName,EventDescription,EventStartTime,EventEndTime) VALUES ('1','AdminEvent','AdminDescription','2030-02-02 10:00:00','2030-02-03 11:00:00');
 INSERT INTO Tag (TagName) VALUES ('Bar');
 INSERT INTO Tag (TagName) VALUES ('Club');
-INSERT INTO Tag (TagName) VALUES ('EDM');
+INSERT INTO Tag (TagName) VALUES ('House');
 INSERT INTO Tag (TagName) VALUES ('Pop');
-INSERT INTO Tag (TagName) VALUES ('Budget');
+INSERT INTO Tag (TagName) VALUES ('Budget conscious');
 INSERT INTO Tag (TagName) VALUES ('Premium');
 INSERT INTO Tag (TagName) VALUES ('Rock');
 INSERT INTO Tag (TagName) VALUES ('Disabled-access');
 INSERT INTO Tag (TagName) VALUES ('Cocktails');
+INSERT INTO Tag (TagName) VALUES ('Gin bar');
+INSERT INTO Tag (TagName) VALUES ('Vodka bar');
+INSERT INTO Tag (TagName) VALUES ('Tequila bar');
+INSERT INTO Tag (TagName) VALUES ('Craft beer/ale');
+INSERT INTO Tag (TagName) VALUES ('Local ales');
+INSERT INTO Tag (TagName) VALUES ('Students');
+INSERT INTO Tag (TagName) VALUES ('Traditional pub');
+INSERT INTO Tag (TagName) VALUES ('Sports bar');
+INSERT INTO Tag (TagName) VALUES ('Food');
+INSERT INTO Tag (TagName) VALUES ('Live music');
+INSERT INTO Tag (TagName) VALUES ('Karaoke');
+INSERT INTO Tag (TagName) VALUES ('Wine bar');
+INSERT INTO Tag (TagName) VALUES ('Whiskey bar');
+INSERT INTO Tag (TagName) VALUES ('Nightclub');
+INSERT INTO Tag (TagName) VALUES ('LGBT');
+INSERT INTO Tag (TagName) VALUES ('Drag queens');
+INSERT INTO Tag (TagName) VALUES ('Strip club');
+INSERT INTO Tag (TagName) VALUES ('Luxury');
+INSERT INTO Tag (TagName) VALUES ('Multi-floor');
+INSERT INTO Tag (TagName) VALUES ('RnB/Hip-Hop');
+INSERT INTO Tag (TagName) VALUES ('Bass music');
+INSERT INTO Tag (TagName) VALUES ('Free entry');
+INSERT INTO Tag (TagName) VALUES ('Relaxing');
+INSERT INTO Tag (TagName) VALUES ('Open late');

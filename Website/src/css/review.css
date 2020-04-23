@@ -1,0 +1,115 @@
+.reviews {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.review {
+    display: flex;
+    flex-direction: column;
+    border: #3B3B3B 2px solid;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 16px;
+    min-width: 240px;
+    max-width: 25%;
+}
+textarea {
+    font-size: 14px;
+    width: 100%;
+}
+
+label {
+    font-size: 16px;
+}
+
+.review-scores {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.review-score {
+    display: flex;
+    align-items: stretch;
+}
+
+.review-score .label {
+    flex-grow: 1;
+    box-sizing: border-box;
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: var(--dark-body);
+    padding: 6px;
+    color: var(--text);
+    margin-right: -4px;
+    margin-bottom: -4px;
+    min-width: 160px;
+}
+
+.review-text {
+    flex-grow: 1;
+    box-sizing: border-box;
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: var(--dark-body);
+    padding: 12px 20px 12px 10px;
+    color: var(--text);
+    max-width: 100%;
+    margin: 16px 0;
+}
+
+.review-score .score {
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: var(--body-background);
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+    padding: 6px;
+    color: var(--gold);
+    text-align: center;
+    text-decoration: none;
+    width: 25%;
+    min-width: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 -4px;
+}
+
+.review-section {
+
+}
+
+@media only screen and (max-width: 600px) {
+    .review-section {
+        padding: 0;
+    }
+
+    .title {
+        margin: 16px 16px 28px;
+    }
+
+    .review {
+        margin: 8px 0;
+        max-width: 100%;
+    }
+
+    .reviews {
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    .review-score {
+        max-width: 100%;
+    }
+
+    .review-score .label {
+        max-width: 70%;
+    }
+}
+

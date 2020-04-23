@@ -228,12 +228,12 @@
 <html lang='en-GB'>
 <head>
     <title>OutOut - Edit Venue User Account</title>
-    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <?php include "navbar.php" ?>
-<div class="wrapper">
     <?php
         if (isset($_SESSION['message'])) {
             echo "<div class='message-wrapper'><div class='success'>".$_SESSION['message']."</div></div>";
@@ -295,7 +295,6 @@
             </div>
         </form>
     </div>
-</div>
 <?php
     if ($errorMessage != "") {
          echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";

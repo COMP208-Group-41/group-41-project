@@ -149,12 +149,13 @@
 ?>
 
 <!DOCTYPE html>
-<html>
-  <head>
+<head>
     <title>OutOut - Edit Review</title>
-    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="../css/venue.css">
-  </head>
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" title="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/review.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
   <body>
     <?php include "navbar.php" ?>
     <?php
@@ -163,56 +164,56 @@
             unset($_SESSION['message']);
         }
     ?>
-    <div class="wrapper">
-        <div class="container">
-    <form name='ReviewVenue' method='post'>
-      <div>
+    <div class="container" style="width: 20vw">
+        <h2 class="title">Write a review</h2>
+        <form name='ReviewVenue' method='post'>
+            <div style="display: flex; justify-content: center; flex-direction: column">
           <label for='Review'>Review:</label>
-          <textarea name='Review' id='Review' placeholder="Write your review here..." rows="4" cols="50"><?php echo $reviewText; ?></textarea><br>
+          <textarea name='Review' id='Review' placeholder="Write your review here..." rows="4" cols="50"><?php echo $reviewText; ?></textarea>
+                <div class="seperator"></div>
           <label for='RatingPrice'>Price:</label>
-          <select name="RatingPrice" id="RatingPrice" required>
+          <select class="rating-price" name='RatingPrice' data-options='{"clearable":false, "showText":false, "maxStars":5}' required>
               <option <?php if ($reviewPrice == 5) echo 'selected' ?> value="5">5</option>
               <option <?php if ($reviewPrice == 4) echo 'selected' ?> value="4">4</option>
               <option <?php if ($reviewPrice == 3) echo 'selected' ?> value="3">3</option>
               <option <?php if ($reviewPrice == 2) echo 'selected' ?> value="2">2</option>
               <option <?php if ($reviewPrice == 1) echo 'selected' ?> value="1">1</option>
-          </select><br>
+          </select>
           <label for='RatingAtmosphere'>Atmosphere:</label>
-          <select name="RatingAtmosphere" id="RatingAtmosphere" required>
+          <select class="rating-atmosphere" name='RatingAtmosphere' data-options='{"clearable":false, "showText":false, "maxStars":5}' required>
               <option <?php if ($reviewAtmosphere == 5) echo 'selected' ?> value="5">5</option>
               <option <?php if ($reviewAtmosphere == 4) echo 'selected' ?> value="4">4</option>
               <option <?php if ($reviewAtmosphere == 3) echo 'selected' ?> value="3">3</option>
               <option <?php if ($reviewAtmosphere == 2) echo 'selected' ?> value="2">2</option>
               <option <?php if ($reviewAtmosphere == 1) echo 'selected' ?> value="1">1</option>
-          </select><br>
+          </select>
           <label for='RatingSafety'>Safety:</label>
-          <select name="RatingSafety" id="RatingSafety" required>
+          <select class="rating-safety" name='RatingSafety' data-options='{"clearable":false, "showText":false, "maxStars":5}' required>
               <option <?php if ($reviewSafety == 5) echo 'selected' ?> value="5">5</option>
               <option <?php if ($reviewSafety == 4) echo 'selected' ?> value="4">4</option>
               <option <?php if ($reviewSafety == 3) echo 'selected' ?> value="3">3</option>
               <option <?php if ($reviewSafety == 2) echo 'selected' ?> value="2">2</option>
               <option <?php if ($reviewSafety == 1) echo 'selected' ?> value="1">1</option>
-          </select><br>
+          </select>
           <label for='RatingQueue'>Queue Times:</label>
-          <select name="RatingQueue" id="RatingQueue" required>
+          <select class="rating-queue" name='RatingQueue' data-options='{"clearable":false, "showText":false, "maxStars":5}' required>
               <option <?php if ($reviewQueue == 5) echo 'selected' ?> value="5">5</option>
               <option <?php if ($reviewQueue == 4) echo 'selected' ?> value="4">4</option>
               <option <?php if ($reviewQueue == 3) echo 'selected' ?> value="3">3</option>
               <option <?php if ($reviewQueue == 2) echo 'selected' ?> value="2">2</option>
               <option <?php if ($reviewQueue == 1) echo 'selected' ?> value="1">1</option>
-          </select><br>
-      </div>
-
-      <div style= "display: flex">
-          <input type='submit' name='SubmitReview' value='Submit'>
-      </div>
-      <?php
-          if ($errorMessage != "") {
-              echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
-          }
-       ?>
+          </select>
+            </div>
+            <div class="seperator" style="margin-top: 20px"></div>
+            <div style= "display: flex">
+                <input type='submit' name='SubmitReview' value='Submit' class="button" style="width: 100%;">
+            </div>
     </form>
 </div>
-</div>
+    <?php
+    if ($errorMessage != "") {
+        echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
+    }
+    ?>
   </body>
 </html>

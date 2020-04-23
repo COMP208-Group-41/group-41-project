@@ -110,7 +110,7 @@ function validate255($name) {
     }
 
     function getEvents($venueID,$pdo) {
-        $getVenuesStmt = $pdo->prepare("SELECT EventID,EventName FROM Event WHERE VenueID=:VenueID");
+        $getVenuesStmt = $pdo->prepare("SELECT VenueID,EventID,EventName,DATE_FORMAT(EventStartTime,'%Y-%m-%d %H:%i') AS EventStartTime, DATE_FORMAT(EventEndTime,'%Y-%m-%d %H:%i') AS EventEndTime FROM Event WHERE VenueID=:VenueID ORDER BY EventStartTime");
         $getVenuesStmt->bindValue(":VenueID",$venueID);
         $getVenuesStmt->execute();
         $results = $getVenuesStmt->fetchAll();
@@ -379,7 +379,7 @@ function validate255($name) {
     }
 
     function getVenueInfo($venueID,$pdo) {
-        $getVenueStmt = $pdo->prepare("SELECT VenueUserID,VenueName,VenueDescription,VenueAddress,VenueTimes FROM Venue WHERE VenueID=:VenueID");
+        $getVenueStmt = $pdo->prepare("SELECT VenueUserID,VenueName,VenueDescription,VenueAddress,VenueTimes,ExternalSite FROM Venue WHERE VenueID=:VenueID");
         $getVenueStmt->bindValue(":VenueID",$venueID);
         $getVenueStmt->execute();
         return $getVenueStmt->fetch();
@@ -522,5 +522,148 @@ function validate255($name) {
         } else {
             return true;
         }
+    }
+
+    // Check if there is an image for this event
+    function checkEventImageOnServer($venueUserID,$venueID,$eventID) {
+        $target = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID/event.jpg";
+        if (!file_exists($target)) {
+            return false;
+        } else {
+            // If the file exists then return true
+            return true;
+        }
+    }
+
+    function checkEventExists($eventID,$pdo) {
+        $getStmt = $pdo->prepare("SELECT EventID FROM Event WHERE EventID=:EventID");
+        $getStmt->bindValue(":EventID",$eventID);
+        $getStmt->execute();
+        if ($getStmt->rowCount() == 0) {
+            // Event doesn't exist!
+            return false;
+        } else {
+            // Event exists
+            return true;
+        }
+    }
+
+    function checkVenueExists($venueID,$pdo) {
+        $getStmt = $pdo->prepare("SELECT VenueID FROM Venue WHERE VenueID=:VenueID");
+        $getStmt->bindValue(":VenueID",$venueID);
+        $getStmt->execute();
+        if ($getStmt->rowCount() == 0) {
+            // Event doesn't exist!
+            return false;
+        } else {
+            // Event exists
+            return true;
+        }
+    }
+
+    // Check if there is an image for this event
+    function checkVenueImageOnServer($venueUserID,$venueID) {
+      $target = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/venue.jpg";
+      if (!file_exists($target)) {
+          return false;
+      } else {
+          // If the file exists then return true
+          return true;
+      }
+    }
+
+    function getVenueTagID($venueID,$pdo) {
+        $getVenueTagsStmt = $pdo->prepare("SELECT TagID FROM VenueTag WHERE VenueID=:VenueID");
+        $getVenueTagsStmt->bindValue(":VenueID",$venueID);
+        $getVenueTagsStmt->execute();
+        return $getVenueTagsStmt->fetchAll();
+    }
+
+    function getTagsNoEcho($tagIDs,$pdo) {
+        $allTags = "";
+        if (sizeof($tagIDs) > 0) {
+            foreach ($tagIDs as $tagID) {
+                $getTagNameStmt = $pdo->prepare("SELECT TagName FROM Tag WHERE TagID=:TagID");
+                $getTagNameStmt->bindValue(":TagID",$tagID['TagID']);
+                $getTagNameStmt->execute();
+                $tag = $getTagNameStmt->fetch();
+                $allTags = $allTags.$tag['TagName']."<br>";
+            }
+        } else {
+            return "No Tags";
+        }
+        return $allTags;
+    }
+
+    function getAllVenues($pdo) {
+        $getStmt = $pdo->prepare("SELECT VenueID,VenueUserID,VenueName FROM Venue WHERE VenueID<>'1' ORDER BY VenueName");
+        $getStmt->execute();
+        return $getStmt->fetchAll();
+    }
+
+    function getAllEvents($pdo) {
+        $getStmt = $pdo->prepare("SELECT EventID,VenueID,EventName,DATE_FORMAT(EventStartTime,'%Y-%m-%d %H:%i') AS EventStartTime, DATE_FORMAT(EventEndTime,'%Y-%m-%d %H:%i') AS EventEndTime FROM Event WHERE EventID<>'1' ORDER BY EventStartTime");
+        $getStmt->execute();
+        return $getStmt->fetchAll();
+    }
+
+    // https://www.kodingmadesimple.com/2017/05/delete-all-files-and-subfolders-from-folder-php.html
+    // delete all files and sub-folders from a folder
+    function deleteAll($path) {
+        foreach (glob($path . '/*') as $file) {
+            if (is_dir($file)) {
+                deleteAll($file);
+            } else {
+                unlink($file);
+            }
+            rmdir($path);
+        }
+    }
+    //https://stackoverflow.com/questions/3338123/how-do-i-recursively-delete-a-directory-and-its-entire-contents-files-sub-dir
+
+    function rrmdir($dir) {
+        if (is_dir($dir)) {
+            $objects = scandir($dir);
+            foreach ($objects as $object) {
+                if ($object != "." && $object != "..") {
+                    if (is_dir($dir. DIRECTORY_SEPARATOR .$object) && !is_link($dir."/".$object)) {
+                        rrmdir($dir. DIRECTORY_SEPARATOR .$object);
+                    } else {
+                        unlink($dir. DIRECTORY_SEPARATOR .$object);
+                    }
+                }
+            }
+            rmdir($dir);
+        }
+    }
+
+    function venueIDtoVenueUserID($venueID,$pdo) {
+        $getStmt = $pdo->prepare("SELECT VenueUserID FROM Venue WHERE VenueID=:VenueID");
+        $getStmt->bindValue(":VenueID",$venueID);
+        $getStmt->execute();
+        $result = $getStmt->fetch();
+        return $result['VenueUserID'];
+    }
+
+    function venueIDtoName($venueID, $pdo){
+      $getStmt = $pdo->prepare("SELECT VenueName FROM Venue WHERE VenueID=:VenueID");
+      $getStmt->bindValue(":VenueID",$venueID);
+      $getStmt->execute();
+      $result = $getStmt->fetch();
+      return $result['VenueName'];
+    }
+
+    function sortArray (&$array) {
+      $temp=array();
+      $ret=array();
+      reset($array);
+      foreach ($array as $index=> $value) {
+          $temp[$index]=$value["Count"];
+      }
+      asort($temp);
+      foreach ($temp as $index => $value) {
+          $ret[$index]=$array[$index];
+      }
+      $array=$ret;
     }
 ?>

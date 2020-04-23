@@ -2,9 +2,14 @@
 
     session_start();
 
-
     if (!isset($_SESSION['VenueUserID'])) {
         header("location: home.php");
+        exit;
+    }
+
+    if (!isset($_GET['eventID'])) {
+        $_SESSION['message'] = "No eventID specified!";
+        header("location: 404.php");
         exit;
     }
 
@@ -17,6 +22,13 @@
     $venueUserID = $_SESSION['VenueUserID'];
     $eventID = $_GET['eventID'];
     $errorMessage = "";
+
+    if (!checkEventExists($eventID,$pdo)) {
+        // Event does not exist!
+        $_SESSION['message'] = "Event does not exist!";
+        header("location: 404.php");
+        exit;
+    }
 
     $eventToVenueUser = eventToVenueUser($eventID,$pdo);
     $eventToVenueUser = $eventToVenueUser['VenueUserID'];
@@ -36,11 +48,18 @@
     $startTime = $result['EventStartTime'];
     $endTime = $result['EventEndTime'];
 
+    if (new DateTime("now") > new DateTime($endTime)) {
+        $editable = false;
+        $errorMessage = "You cannot edit an event that has happened already!";
+    } else {
+        $editable = true;
+    }
+
     // Current tags for this event are pulled here
     $currentTagIDs = getEventTagID($eventID,$pdo);
 
     try {
-        if (!empty($_POST) && isset($_POST['submit'])) {
+        if (!empty($_POST) && isset($_POST['submit']) && $editable) {
 
              if (checkInputs($venueUserID,$eventID,$venueID,$errorMessage,$pdo)) {
                  $_SESSION['message'] = "Event Edited Successfully!";
@@ -189,6 +208,60 @@
         return true;
     }
 
+    // Delete event
+    if (isset($_POST['delete'])){
+      $password = $_POST['password'];
+      if(verifyVenuePassword($venueUserID,$password,$pdo) === true) {
+        $success = deleteEvent($eventID, $pdo, $errorMessage);
+        if ($success){
+            // Image folder deletion
+            $directory = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID";
+            deleteAll($directory);
+            header("location: venue-user-dashboard.php");
+            exit;
+        }
+      }
+    }
+
+    function deleteEvent($eventID, $pdo, &$errorMessage){
+        $pdo->beginTransaction();
+        $deleteVenueStmt = $pdo->prepare("DELETE FROM Review WHERE EventID=:EventID");
+        $deleteVenueStmt->bindValue(':EventID',$eventID);
+        $success = $deleteVenueStmt->execute();
+        if (!$success){
+          $errorMessage = "Error in deleteing event reviews!";
+          $pdo->rollBack();
+          return false;
+        }
+        $deleteEventStmt = $pdo->prepare("DELETE FROM EventTag WHERE EventID=:EventID");
+        $deleteEventStmt->bindValue(':EventID',$eventID);
+        $success = $deleteEventStmt->execute();
+        if (!$success){
+          $errorMessage = "Error in deleteing event tags!";
+          $pdo->rollBack();
+          return false;
+        }
+        $deleteEventStmt = $pdo->prepare("DELETE FROM InterestedIn WHERE EventID=:EventID");
+        $deleteEventStmt->bindValue(':EventID',$eventID);
+        $success = $deleteEventStmt->execute();
+        if (!$success){
+          $errorMessage = "Error in deleteing event InterestedIn!";
+          $pdo->rollBack();
+          return false;
+        }
+        $deleteEventStmt = $pdo->prepare("DELETE FROM Event WHERE EventID=:EventID");
+        $deleteEventStmt->bindValue(':EventID',$eventID);
+        $success = $deleteEventStmt->execute();
+        if (!$success){
+          $errorMessage = "Error in deleteing event!";
+          $pdo->rollBack();
+          return false;
+        }
+
+        $pdo->commit();
+        return true;
+    }
+
     function uploadEventImage($venueUserID,$venueID,$eventID,$pdo) {
         // Remove any existing file first
         $directory = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID/event.jpg";
@@ -204,6 +277,12 @@
         }
     }
 
+    function deleteEventFiles($path) {
+        if (file_exists("$path/event.jpg")) {
+            unlink($path);
+        }
+        rmdir($path);
+    }
 
     function updateEvent($eventID,$name,$description,$startTime,$endTime,$pdo) {
         $updateEventStmt = $pdo->prepare("UPDATE Event SET EventName=:EventName, EventDescription=:EventDescription, EventStartTime=:EventStartTime, EventEndTime=:EventEndTime WHERE EventID=:EventID");
@@ -263,15 +342,18 @@
         }
     }
 
+    $image = checkEventImageOnServer($venueUserID,$venueID,$eventID);
+
 ?>
 
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
     <title>OutOut - Edit <?php echo $name; ?></title>
-    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
-    <link rel="stylesheet" type="text/css" href="../css/events.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/event-creation.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <?php include "navbar.php" ?>
@@ -284,6 +366,12 @@
     ?>
     <div class="container">
         <h1 class='title'>Edit Event</h1>
+        <?php
+            if ($image) {
+                echo '<div class="seperator"></div>';
+                echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$venueUserID.'/'.$venueID.'/'.$eventID.'/event.jpg" alt="Event Image" class="title-img">';
+            }
+        ?>
         <form id='EventForm' name='EventForm' method='post' enctype="multipart/form-data">
             <div class="edit-fields">
                 <input type='text' name='name' placeholder="Event Name" value="<?php echo $name; ?>" required>
@@ -335,7 +423,15 @@
             <div class="seperator">
                 <label>Enter current password to allow changes:</label>
                 <input type='password' name='password' required>
-                <input type='submit' name='submit' value='Update' class="button" style="width: 100%">
+                <input type='submit' name='submit' value='Update' class="button" style="width: 100%" <?php if (!$editable) { echo 'disabled'; } ?> ><br>
+                <div class="seperator" style="margin-top: 4px"></div>
+        </form>
+        <form id='DeleteVenue' name='DeleteVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
+          <div class="edit-fields">
+            <label>Enter current password to delete event:</label>
+            <input type='password' name='password' required>
+            <input type='submit' name='delete' value='Delete Event' class="button" style="width: 100%">
+          </div>
         </form>
     </div>
 </div>
