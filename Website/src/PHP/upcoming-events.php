@@ -41,10 +41,9 @@
     ?>
     <div class="wrapper">
         <div class="container">
-            <h1 class='title'>Upcoming Events for <?php echo "$venueName"; ?></h1>
+            <h1 class='title'>Upcoming Events for <?php '<a href="venue.php?venueID='.$venueID.'">'.$venueName.'</a>'; ?></h1>
             <div class="seperator"></div>
             <?php
-              echo '<div class="venue-buttons"><a href="venue.php?venueID='.$venueID.'" class="venue-button" style="margin-right: -1px">View Venue</a></div>';
               if ($events !== false){
                 foreach($events as $row){
                     if (new DateTime("now") < new DateTime($row['EventEndTime'])) {
