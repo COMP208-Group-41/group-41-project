@@ -109,7 +109,7 @@
                           echo "<div class='table-item image' style='background-image: url($venueImage);'>";
                           echo "<div class='table-item-wrapper' style='font-size: 20px; justify-content: center; align-items: center'>".$row['EventName'];
                           echo "<div class='rating-wrapper'>Rating:<div class='rating-square'>".$row['EventStartTime']."</div></div></div></div>";
-                          echo '<div class="table-item" style="text-align: center; width: 20%" >'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
+                          echo '<div class="table-item" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
                           echo '<div class="table-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="table-button">Event</a>';
                           echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="table-button">View Venue</a></div>';
                           echo "</div></div>";
