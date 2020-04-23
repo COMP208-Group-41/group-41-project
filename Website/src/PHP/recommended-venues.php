@@ -68,7 +68,8 @@
                   echo "This venue matches ".$row['Count']." of your preferred tags";
                   echo "<div class='table'>";
                   echo "<div class='table-row'>";
-                  echo "<div class='table-item'>".$row['VenueName']."</div>";
+                  $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$row['VenueUserID']."/".$row['VenueID']."/venue.jpg";
+                  echo "<div class='table-item image' style='background-image: url(".$venueImage.")'><div class='table-item-wrapper'>".$row['VenueName'];
                   echo '<div class="table-item">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
                   echo '<div class="table-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button" style="margin-left: -1px">Venue</a>';
                   echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="table-button" style="margin-right: -1px">Events</a></div>';
