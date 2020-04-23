@@ -196,7 +196,7 @@
                         echo '<div class="review-score">';
                             echo '<div class="label">Safety Score:</div>';
                             echo '<div class="score">'.$safetyScore.'</div>';
-                        echo 'echo "</div>';
+                        echo '</div>';
                         echo '<div class="review-score">';
                             echo '<div class="label">Atmosphere Score:</div>';
                             echo '<div class="score">'.$atmosphereScore.'</div>';
@@ -229,7 +229,7 @@
                                   echo "<textarea readonly onchange='this.style.height = \"\";this.style.height = this.scrollHeight + 3 + \"px\"'>" . $row['ReviewText'] . "</textarea>";
                                   echo "<div class='review-scores'>";
                                   echo "<div class='review-score'><div class='label'>Price Score:</div><div class='score'>" . $row['ReviewPrice'] . "</div></div>";
-                                  echo "<div class='review-score'><div class='label'>Safety Score:</div><div class='score'> " . $row['ReviewSafety'] . "</div></div>";
+                                  echo "<div class='review-score'><div class='label'>Safety Score:</div><div class='score'>" . $row['ReviewSafety'] . "</div></div>";
                                   echo "<div class='review-score'><div class='label'>Atmosphere Score:</div><div class='score'> " . $row['ReviewAtmosphere'] . "</div></div>";
                                   echo "<div class='review-score'><div class='label'>Queue Times Score:</div><div class='score'> " . $row['ReviewQueue'] . "</div></div></div>";
                                   echo "<label>Review posted on: " . $row['ReviewDate'] . "</label></div>";
