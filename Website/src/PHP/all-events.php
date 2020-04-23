@@ -18,7 +18,14 @@
       $getStmt->execute();
       $result = $getStmt->fetch();
       return $result['VenueName'];
+    }
 
+    function venueIDtoVenueUserID($venueID,$pdo) {
+        $getStmt = $pdo->prepare("SELECT VenueUserID FROM Venue WHERE VenueID=:VenueID");
+        $getStmt->bindValue(":VenueID",$venueID);
+        $getStmt->execute();
+        $result = $getStmt->fetch();
+        return $result['VenueUserID'];
     }
 
 ?>
@@ -51,7 +58,9 @@
                           echo '<div class="seperator" style="margin-top: 4px"></div>';
                           echo "<div class='table'>";
                           echo "<div class='table-row'>";
-                          echo "<div class='table-item image' style='background-image: url(../Assets/background2.jpg); width: 40%'>";
+                          $venueUserID = venueIDtoVenueUserID($row['VenueID'],$pdo);
+                          $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$venueUserID."/".$row['VenueID']"/".$row['EventID']."/event.jpg";
+                          echo "<div class='table-item image' style='background-image: url($venueImage); width: 40%'>";
                           echo "</div>";
                           echo "<div style='display: flex; width: 40%' id='row'>";
                           echo "<div style='display: flex; flex-direction: column; width: 50%;'>";
@@ -80,4 +89,3 @@
 
 </body>
 </html>
-
