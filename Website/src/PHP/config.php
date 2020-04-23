@@ -110,7 +110,7 @@ function validate255($name) {
     }
 
     function getEvents($venueID,$pdo) {
-        $getVenuesStmt = $pdo->prepare("SELECT EventID,EventName,DATE_FORMAT(EventStartTime,'%Y-%m-%d %H:%i') AS EventStartTime, DATE_FORMAT(EventEndTime,'%Y-%m-%d %H:%i') AS EventEndTime FROM Event WHERE VenueID=:VenueID ORDER BY EventStartTime");
+        $getVenuesStmt = $pdo->prepare("SELECT VenueID,EventID,EventName,DATE_FORMAT(EventStartTime,'%Y-%m-%d %H:%i') AS EventStartTime, DATE_FORMAT(EventEndTime,'%Y-%m-%d %H:%i') AS EventEndTime FROM Event WHERE VenueID=:VenueID ORDER BY EventStartTime");
         $getVenuesStmt->bindValue(":VenueID",$venueID);
         $getVenuesStmt->execute();
         $results = $getVenuesStmt->fetchAll();
@@ -643,5 +643,13 @@ function validate255($name) {
         $getStmt->execute();
         $result = $getStmt->fetch();
         return $result['VenueUserID'];
+    }
+
+    function venueIDtoName($venueID, $pdo){
+      $getStmt = $pdo->prepare("SELECT VenueName FROM Venue WHERE VenueID=:VenueID");
+      $getStmt->bindValue(":VenueID",$venueID);
+      $getStmt->execute();
+      $result = $getStmt->fetch();
+      return $result['VenueName'];
     }
 ?>
