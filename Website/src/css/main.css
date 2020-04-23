@@ -33,7 +33,7 @@ body {
 
 .container {
     background: var(--light-body);
-    padding: 20px;
+    padding: 32px;
     margin: 20px;
     border-radius: 10px;
     min-width: 400px;
