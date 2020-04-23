@@ -324,10 +324,10 @@ h1 {
     margin: 0;
 }
 
-@media only screen and (max-width: 440px) {
+@media only screen and (max-width: 600px) {
     .container{
         min-width: 0;
-        max-width: 350px;
+        max-width: 85%;
         width: 100%;
         padding: 8px;
     }
@@ -359,13 +359,5 @@ h1 {
 
     .tag-container {
         width: 100%;
-    }
-}
-
-@media only screen and (max-width: 380px) {
-    .container {
-        width: 100%;
-        max-width: 310px;
-        padding: 16px;
     }
 }
