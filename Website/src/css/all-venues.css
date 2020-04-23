@@ -78,3 +78,20 @@ body {
         width: 100%;
     }
 }
+
+@media only screen and (max-width: 440px) {
+    .container {
+        min-width: 0;
+        max-width: 350px;
+        width: 100%;
+        padding: 8px;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+    .container {
+        width: 100%;
+        max-width: 310px;
+        padding: 16px;
+    }
+}
