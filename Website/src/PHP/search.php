@@ -63,8 +63,12 @@
                         $venueCount++;
                         //print_r($row);
                         $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
+
+                        echo "<div class='table'>";
                         echo "<div class='table-row'>";
-                        echo "<div class='table-item'>".$row['VenueName'];
+                        $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$row['VenueUserID']."/".$row['VenueID']."/venue.jpg";
+                        echo "<div class='table-item image' style='background-image: url(".$venueImage."); width: 35%'><div class='table-item-wrapper'>".$row['VenueName'];
+
                         unset($priceScore);
                         unset($safetyScore);
                         unset($atmosphereScore);
@@ -80,11 +84,11 @@
                         } else {
                             echo "<div class='rating-wrapper'>No Ratings</div>";
                         }
-                        echo "</div>";
-                        echo '<div class="venue-tags" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
-                        echo '<div class="table-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button" style="margin-bottom: -2px">Venue</a>';
+                        echo "</div></div>";
+                        echo '<div class="table-item" style="text-align: center; width: 35%">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
+                        echo '<div class="table-buttons column"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button">Venue</a>';
                         echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="table-button">Events</a></div>';
-                        echo "</div>";
+                        echo "</div></div>";
 
                     }
               }
