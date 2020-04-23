@@ -73,11 +73,12 @@
             echo '<div class="seperator"></div>';
 
             echo '<h2 class="title">Recommended venues for you</h2>';
-            if (!sizeof($sortedArray) == 0) {
+            if (sizeof($sortedArray) != 0) {
                 $mostRecommended = $sortedArray[0];
                 $venueUserIDforPic = $mostRecommended['VenueUserID'];
                 $venueIDforPic = $mostRecommended['VenueID'];
                 $path = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$venueUserIDforPic."/".$venueIDforPic."/venue.jpg";
+                // $mostRecommended['VenueName'] - This gives the venue name
                 /* INCLUDE IMAGE ECHO HERE */
             } else {
                 /* NO RECOMMENDATIONS FOUND */
@@ -107,7 +108,7 @@
             sortArray($sortedArray);
             $sortedArray = array_reverse($sortedArray);
 
-            if (!sizeof($sortedArray) == 0) {
+            if (sizeof($sortedArray) != 0) {
                 $mostRecommended = $sortedArray[0];
                 $venueIDforPic = $mostRecommended['VenueID'];
                 $venueUserIDforPic = venueIDtoVenueUserID($venueIDforPic,$pdo);
