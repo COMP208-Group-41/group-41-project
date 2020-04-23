@@ -64,7 +64,7 @@
           if (sizeof($sortedArray) != 0) {
               //echo print_r($sortedArray);
               foreach($sortedArray as $row) {
-                  echo '<div class="seperator" style="margin-top: 4px">';
+                  echo '<div class="seperator" style="margin-top: 4px"></div>';
                   $currentTagIDs = getEventTagID($row['EventID'],$pdo);
                   echo "This event matches ".$row['Count']." of your preferred tags";
                   echo "<div class='table'>";
@@ -72,7 +72,7 @@
                   $eventImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$row['VenueUserID']."/".$row['VenueID']."/".$row['EventID']."/event.jpg";
                   echo "<div class='table-item image' style='background-image: url(".$eventImage.")'><div class='table-item-wrapper'>".$row['EventName']."</div></div>";
                   echo '<div class="table-item">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
-                  echo '<div class="table-buttons"><a href="venue.php?venueID='.$row['EventID'].'" class="table-button" style="margin-left: -1px">Event</a>';
+                  echo '<div class="table-buttons"><a href="venue.php?venueID='.$row['EventID'].'" class="table-button" style="margin-left: -1px">Event</a></div>';
                   echo "</div></div>";
               }
           } else {
