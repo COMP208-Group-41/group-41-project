@@ -39,7 +39,7 @@ body {
     min-width: 400px;
     width: 80vw;
     max-width: 1000px;
-    display: inline-flex;
+    display: inline-block;
 }
 
 .flex-wrap {
