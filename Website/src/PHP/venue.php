@@ -50,6 +50,7 @@ if ($priceScore === false || $safetyScore === false || $atmosphereScore === fals
     $queueScore = "No Scores";
 } else {
     $totalScore = ($queueScore + $atmosphereScore + $safetyScore + $priceScore) / 4;
+    $totalScore = number_format($totalScore,1);
 }
 
 // Fetchs type of user and checks if venue user is owner

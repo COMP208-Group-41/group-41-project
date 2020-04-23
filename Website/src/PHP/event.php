@@ -52,6 +52,7 @@
         $queueScore = "No Scores";
     } else {
         $totalScore = ($queueScore + $atmosphereScore + $safetyScore + $priceScore) / 4;
+        $totalScore = number_format($totalScore,1);
     }
 
     if (isset($_SESSION['UserID'])) {
