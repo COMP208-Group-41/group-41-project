@@ -69,13 +69,13 @@
 <body>
     <?php include "navbar.php" ?>
     <div style="display: flex; height: 100%; justify-content: center; align-items: center; flex-direction: column"">
+    <?php
+    if (isset($_SESSION['message'])) {
+        echo "<div class='message-wrapper'><div class='success'>".$_SESSION['message']."</div></div>";
+        unset($_SESSION['message']);
+    }
+    ?>
         <div class="wrapper">
-            <?php
-                if (isset($_SESSION['message'])) {
-                    echo "<div class='message-wrapper'><div class='success'>".$_SESSION['message']."</div></div>";
-                    unset($_SESSION['message']);
-                }
-            ?>
             <div class="form">
                 <div style="padding-bottom: 8px; text-align: center">
                     <b style="color: #e9e9e9; font-size: 24px">Login</b>
