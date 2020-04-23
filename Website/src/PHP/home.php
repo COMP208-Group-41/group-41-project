@@ -82,9 +82,9 @@ if (isset($_SESSION['message'])) {
                     $path = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/" . $venueUserIDforPic . "/" . $venueIDforPic . "/venue.jpg";
                     // $mostRecommended['VenueName'] - This gives the venue name
                     echo "<div class='slideshow-container'><a href='venue?venueID=" . $row['VenueID'] . "' style='position: relative'>";
-                    echo "<img src='$path' class='title-img' style='max-height: 300px'></a></div>";
+                    echo "<img src='$path' class='title-img' style='max-height: 300px'></a>";
+                    echo '<div class="text-wrapper"><div class="text">'.$mostRecommended['VenueName'].'</div></div></div>';
                     echo '<a class="button" href="recommended-venues.php">View more recommended venues</a>';
-                    echo '<div class="text-wrapper"><div class="text">'.$mostRecommended['VenueName'].'</div></div>';
                 } else {
                     echo "<h2 class='title'>No venue recommendations found!</h2>";
                 }
@@ -121,8 +121,8 @@ if (isset($_SESSION['message'])) {
                     $eventIDforPic = $mostRecommended['EventID'];
                     $path = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/" . $venueUserIDforPic . "/" . $venueIDforPic . "/" . $eventIDforPic . "/event.jpg";
                     echo "<div class='slideshow-container'><a href='event?eventID=" . $row['EventID'] . "'>";
-                    echo "<img src='$path' class='title-img' style='max-height: 300px'></a></div>";
-                    echo '<div class="text-wrapper"><div class="text">'.$mostRecommended['EventName'].'</div></div>';
+                    echo "<img src='$path' class='title-img' style='max-height: 300px'></a>";
+                    echo '<div class="text-wrapper"><div class="text">'.$mostRecommended['EventName'].'</div></div></div>';
                     echo '<a class="button" href="recommended-events.php">View more recommended events</a>';
                 } else {
                     echo "<h2 class='title'>No event recommendations found!</h2>";
