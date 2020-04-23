@@ -215,6 +215,7 @@
                       echo '<h2 class="title">All Reviews</h2>';
                       if ($reviews !== false){
                           echo '<div class="reviewlist">';
+                          $reviews = array_reverse($reviews);
                           $counter = 0;
                           foreach ($reviews as $row) {
                               if($counter<5){
