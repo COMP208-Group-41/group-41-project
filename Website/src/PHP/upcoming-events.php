@@ -41,7 +41,7 @@
     ?>
     <div class="wrapper">
         <div class="container">
-            <h1 class='title'>Upcoming Events for <?php '<a href="venue.php?venueID='.$venueID.'">'.$venueName.'</a>'; ?></h1>
+            <h1 class='title'>Upcoming Events for <?php echo '<a href="venue.php?venueID='.$venueID.'">'.$venueName.'</a>'; ?></h1>
             <div class="seperator"></div>
             <?php
               if ($events !== false){
