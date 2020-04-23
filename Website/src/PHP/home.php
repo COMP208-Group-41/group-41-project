@@ -21,7 +21,7 @@ if (isset($_SESSION['VenueUserID'])) {
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
-    <title>OutOut - Edit Venue User Account</title>
+    <title>OutOut</title>
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/home.css">
