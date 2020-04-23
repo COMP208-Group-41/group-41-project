@@ -101,7 +101,7 @@
               }
               if ($count > 0){
                 $event['Count'] = $count;
-                $event['VenueID'] = $row['VenueID']
+                $event['VenueID'] = $row['VenueID'];
                 $event['EventID'] = $row['EventID'];
                 $event['EventName'] = $row['EventName'];
                 array_push($sortedArray,$event);
