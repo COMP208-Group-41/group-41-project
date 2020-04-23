@@ -54,6 +54,7 @@
     }
 
 
+
 ?>
 <!DOCTYPE html>
 <html lang='en-GB'>
@@ -75,10 +76,11 @@
               foreach($sortedArray as $row) {
                   echo '<div class="seperator" style="margin-top: 4px"></div>';
                   $currentTagIDs = getEventTagID($row['EventID'],$pdo);
+                  $venueUser = eventToVenueUser($row['EventID'],$pdo);
                   echo "This event matches ".$row['Count']." of your preferred tags";
                   echo "<div class='table'>";
                   echo "<div class='table-row'>";
-                  $eventImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".eventToVenueUser($row['EventID'],$pdo)."/".eventIDtoVenueID($row['EventID'],$pdo)."/".$row['EventID']."/event.jpg";
+                  $eventImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$venueUser['VenueUserID']."/".eventIDtoVenueID($row['EventID'],$pdo)."/".$row['EventID']."/event.jpg";
                   echo "<div class='table-item image' style='background-image: url(".$eventImage.")'><div class='table-item-wrapper'>".$row['EventName']."</div></div>";
                   echo '<div class="table-item">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
                   echo '<div class="table-buttons"><a href="venue.php?venueID='.$row['EventID'].'" class="table-button" style="margin-left: -1px">Event</a></div>';
