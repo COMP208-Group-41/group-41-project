@@ -52,6 +52,7 @@
     <title>OutOut - Recommended Events</title>
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/all-venues.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -65,14 +66,14 @@
               foreach($sortedArray as $row) {
                   echo '<div class="seperator" style="margin-top: 4px">';
                   $currentTagIDs = getEventTagID($row['EventID'],$pdo);
-                  echo "This venue matches ".$row['Count']." of your preferred tags";
-                  echo "<table>";
-                  echo "<tr>";
-                  echo "<td>".$row['EventName']."</td>";
-                  echo '<td><div class="venue-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="button" style="margin-left: -1px">View Event</a></div></td>';
-                  echo '<td><div class="tag-container" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div></td>';
-                  echo "</tr>";
-                  echo "</table>";
+                  echo "This event matches ".$row['Count']." of your preferred tags";
+                  echo "<div class='table'>";
+                  echo "<div class='table-row'>";
+                  $eventImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$row['VenueUserID']."/".$row['VenueID']."/venue.jpg";
+                  echo "<div class='table-item image' style='background-image: url(".$eventImage.")'><div class='table-item-wrapper'>".$row['EventName']."</div></div>";
+                  echo '<div class="table-item">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
+                  echo '<div class="table-buttons"><a href="venue.php?venueID='.$row['EventID'].'" class="table-button" style="margin-left: -1px">Event</a>';
+                  echo "</div></div>";
               }
           } else {
             echo "<table>";

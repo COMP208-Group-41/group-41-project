@@ -53,6 +53,7 @@
     <title>OutOut - Recommended Venues</title>
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/all-venues.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
@@ -68,7 +69,7 @@
                   echo "This venue matches ".$row['Count']." of your preferred tags";
                   echo "<div class='table'>";
                   echo "<div class='table-row'>";
-                  $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$row['VenueUserID']."/".$row['VenueID']."/venue.jpg";
+                  $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".venueIDtoVenueUserID($row['VenueID'],$pdo)."/".$row['VenueID']."/venue.jpg";
                   echo "<div class='table-item image' style='background-image: url(".$venueImage.")'><div class='table-item-wrapper'>".$row['VenueName']."</div></div>";
                   echo '<div class="table-item">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
                   echo '<div class="table-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button" style="margin-left: -1px">Venue</a>';
