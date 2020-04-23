@@ -49,26 +49,32 @@
                 foreach($events as $row){
                     if (new DateTime("now") > new DateTime($row['EventEndTime'])) {
                         $count++;
-                        echo '<div class="seperator" style="margin-top: 4px">';
                         $currentTagIDs = getEventTagID($row['EventID'],$pdo);
-                        echo "<table>";
-                        echo "<tr>";
-                        echo "<td>".$row['EventName']."</td>";
-                        echo '<td><div class="venue-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="venue-button" style="margin-right: -1px">View Event</a></td>';
-                        echo '<td><div class="tag-container" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div></td>';
-                        echo "</tr><tr>";
-                        echo "<td>Event Date: ".$row['EventStartTime']."</td>";
-                        echo "</tr>";
-                        echo "</table>";
+                        echo '<div class="seperator" style="margin-top: 4px"></div>';
+                        echo "<div class='table'>";
+                        echo "<div class='table-row'>";
+                        $venueUserID = venueIDtoVenueUserID($row['VenueID'],$pdo);
+                        $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$venueUserID."/".$row['VenueID']."/".$row['EventID']."/event.jpg";
+                        echo "<div class='table-item image' style='background-image: url($venueImage); width: 40%'>";
+                        echo "</div>";
+                        echo "<div style='display: flex; width: 40%' id='row'>";
+                        echo "<div style='display: flex; flex-direction: column; width: 50%;'>";
+                        echo "<div class='table-item' style='height: 100%; width: 100%'>".getTagsNoEcho($currentTagIDs,$pdo)."</div>";
+                        echo "</div>";
+                        echo "<div style='display: flex; flex-direction: column; width: 50%;' >";
+                        echo "<div class='table-item' style='height: 35%; width: 100%'>".$row['EventName']."</div>";
+                        echo "<div class='table-item' style='height: 35%; width: 100%'>".$row['EventStartTime']."</div>";
+                        echo "<div class='table-item' style='height: 30%;  width: 100%'>".venueIDtoName($row['VenueID'], $pdo)."</div></div>";
+                        echo "</div>";
+                        echo "</div></div>";
+                        echo "<div class='display: flex' style='margin-bottom: 16px'>";
+                        echo '<a href="event.php?eventID='.$row['EventID'].'" class="button" style="width: 50%; margin-right:3px">View Event</a>';
+                        echo '<a href="venue?venueID='.$row['VenueID'].'" class="button" style="width: 50%">View Venue</a></div>';
                     }
                 }
               }
               if ($count == 0) {
-                echo "<table>";
-                echo "<tr>";
-                echo "<td>No Past events for this Venue listed</td>";
-                echo "</tr>";
-                echo "</table>";
+                echo "<h2 class='title'>No past events found!</h2>";
               }
               if (sizeof($events) > 5){
                 echo '<div class="venue-buttons"><a href="venue.php?venueID='.$venueID.'" class="venue-button" style="margin-right: -1px">View Venue</a></div>';
