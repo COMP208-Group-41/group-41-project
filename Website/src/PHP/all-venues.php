@@ -35,6 +35,7 @@
         <div class="container">
             <div class="section">
                 <h1 class='title'>All Venues</h1>
+                <div class="seperator" style="margin-top: 4px"></div>
                 <?php
                 if (sizeof($allVenues) != 0) {
 
