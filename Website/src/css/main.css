@@ -328,7 +328,7 @@ h1 {
         min-width: 0;
         max-width: 85%;
         width: 100%;
-        padding: 8px;
+        padding: 16px;
         margin: 16px 8px;
     }
     .message-wrapper {
