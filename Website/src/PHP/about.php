@@ -35,8 +35,7 @@
             Will Dunnion, Daniel Ambrose, Orestes Vasilikos, Desmond Anianu and
             Harrison Porter. <br> The images used for this site are being used purely
             for educational purposes and no money is being made through this service.
-            <br>All coding is our own and we would ask to please ask permission before
-            using any of this site for your own purpose. Email S.Tribe@student.liverpool.ac.uk.
+            <br>All coding is our own unless otherwise stated on the github repo<br>
             <br>We hope you enjoy the site.
             </p>
         </div>
