@@ -63,11 +63,8 @@
                         $venueCount++;
                         //print_r($row);
                         $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
-                        echo '<div class="seperator"></div>';
-                        echo "<div class='table' style='margin-bottom: -2px'>";
                         echo "<div class='table-row'>";
-                        $venueUserID = venueIDtoVenueUserID($row['VenueID'],$pdo);
-                        $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$venueUserID."/".$row['VenueID']."/".$row['EventID']."/event.jpg";
+                        echo "<div class='table-item'>".$row['VenueName'];
                         unset($priceScore);
                         unset($safetyScore);
                         unset($atmosphereScore);
@@ -83,20 +80,12 @@
                         } else {
                             echo "<div class='rating-wrapper'>No Ratings</div>";
                         }
-                        echo "<div class='table-item image' style='background-image: url($venueImage);'>";
-                        echo "<div class='table-item-wrapper' style='font-size: 20px; justify-content: center; align-items: center'>".venueIDtoName($row['VenueID'], $pdo)."</div>";
                         echo "</div>";
-                        echo "<div class='table-items' id='row'>";
-                        echo "<div class='table-items column'>";
-                        echo "<div class='table-item max' style='height: 100%; width: 100%'>".getTagsNoEcho($currentTagIDs,$pdo)."</div>";
+                        echo '<div class="venue-tags" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
+                        echo '<div class="table-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button" style="margin-bottom: -2px">Venue</a>';
+                        echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="table-button">Events</a></div>';
                         echo "</div>";
-                        echo "<div class='table-items column' ' >";
-                        echo "<div class='table-item column'>".$row['EventName']."</div>";
-                        echo "<div class='table-item column'>".$row['EventStartTime']."</div>";
-                        echo "</div></div></div></div>";
-                        echo "<div class='button-wrapper'>";
-                        echo '<a href="event.php?eventID='.$row['EventID'].'" class="button left" style="width: 50%">View Event</a>';
-                        echo '<a href="venue?venueID='.$row['VenueID'].'" class="button right" style="width: 50%">View Venue</a></div>';
+
                     }
               }
               if ($venueCount == 0) {
