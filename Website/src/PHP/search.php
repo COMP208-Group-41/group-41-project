@@ -64,8 +64,6 @@
                         $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
                         echo "<div class='table-row'>";
                         echo "<div class='table-item'>".$row['VenueName'];
-                        $venueUserID = venueIDtoVenueUserID($row['VenueID'],$pdo);
-                        $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$venueUserID."/".$row['VenueID']."/".$row['EventID']."/event.jpg";
                         unset($priceScore);
                         unset($safetyScore);
                         unset($atmosphereScore);
