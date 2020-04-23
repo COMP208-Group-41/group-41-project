@@ -347,12 +347,7 @@ h1 {
     }
 
     .table {
-        max-width: 300px;
         min-width: 0;
-    }
-
-    .button {
-        max-width: 300px;
     }
 
     .table-item {
