@@ -199,6 +199,7 @@ $image = checkVenueImageOnServer($owner, $venueID);
                 if ($reviews !== false) {
                     $counter = 0;
                     echo '<div class="reviews">';
+                    $reviews = array_reverse($reviews);
                     foreach ($reviews as $row) {
                         if ($counter < 5) {
                             echo "<div class='review'>";
