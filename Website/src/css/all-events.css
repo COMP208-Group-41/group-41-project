@@ -33,26 +33,33 @@
     .table {
         width: 100%;
     }
+
     .container {
         padding: 16px;
     }
+
     .section {
         margin: 8px 8px 0;
     }
+
     .table-row {
         flex-direction: column;
     }
+
     .table-item.image {
         width: 100%;
         min-height: 200px;
     }
+
     .table-item {
         padding: 6px;
         flex-direction: column;
     }
+
     .table-items {
         width: 100%;
     }
+
     .table-button .table-buttons.column{
         width: 100%;
     }

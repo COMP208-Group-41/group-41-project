@@ -2,20 +2,6 @@ body {
     overflow-x: hidden;
 }
 
-.container {
-    background: var(--light-body);
-    padding: 20px;
-    margin: 20px;
-    border-radius: 10px;
-    min-width: 400px;
-    width: 80vw;
-    max-width: 1000px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
 .rating-square {
     color: var(--gold);
     border-radius: 4px;
@@ -76,22 +62,5 @@ body {
 
     .table-button .table-buttons.column{
         width: 100%;
-    }
-}
-
-@media only screen and (max-width: 440px) {
-    .container {
-        min-width: 0;
-        max-width: 350px;
-        width: 100%;
-        padding: 16px;
-    }
-}
-
-@media only screen and (max-width: 380px) {
-    .container {
-        width: 100%;
-        max-width: 310px;
-        padding: 16px;
     }
 }

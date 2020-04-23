@@ -144,7 +144,7 @@
 <div class="wrapper">
     <div class="container">
         <div style="display: flex; flex-direction: column">
-            <h1 class="title" style="margin-bottom: 8px"><?php echo $name; ?></h1>
+            <h1 class="title" style="margin-bottom: 0"><?php echo $name; ?></h1>
             <h2 class="title" style="text-decoration: none">@ <?php echo '<a href="venue.php?venueID='.$venueID.'">'.$venueName.'</a>'; ?></h2>
                 <?php
                     if (isset($following)) {

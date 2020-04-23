@@ -33,7 +33,7 @@
     }
     ?>
     <div class="wrapper">
-        <div class="container">
+        <div class="container" style="display: inline-flex; justify-content: center; align-items: center">
             <h1 class='title'>All Events</h1>
             <?php
               if (sizeof($allEvents) != 0) {
