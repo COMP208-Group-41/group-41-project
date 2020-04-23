@@ -132,7 +132,7 @@
             }
             if ($venueCount == 0) {
                 echo "<h2 class='title'>No matching venues found!</h2>";
-
+            }
             ?>
         </div>
     </div>
