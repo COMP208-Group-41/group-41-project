@@ -110,7 +110,7 @@ input:focus {
     background-color: var(--body-background);
     padding: 6px;
     color: var(--light-body);
-    width: 30%;
+    width: 100%;
     text-align: center;
     text-decoration: none;
 }

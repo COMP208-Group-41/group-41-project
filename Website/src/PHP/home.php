@@ -49,7 +49,11 @@
         if (isset($userID)) {
 
             echo '<a class="button" href="user-dashboard.php">Your Dashboard</a>';
+            echo '<div class="seperator"></div>';
+            //content here
             echo '<a class="button" href="recommended-venues.php">Recommended Venues for you</a>';
+            echo '<div class="seperator"></div>';
+            //content here
             echo '<a class="button" href="recommended-events.php">Recommended Events for you</a>';
         }
 
