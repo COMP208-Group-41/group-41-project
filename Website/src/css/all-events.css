@@ -8,6 +8,22 @@
     width: 40%;
 }
 
+.table-items.column
+{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.table-item.column {
+    width: 100%;
+}
+
+.table-item.max {
+    height: 100%;
+    width: 100%;
+}
+
 @media only screen and (max-width: 600px) {
     .table {
         width: 100%;
@@ -32,7 +48,6 @@
     .table-items {
         width: 100%;
     }
-
     .table-button .table-buttons.column{
         width: 100%;
     }
