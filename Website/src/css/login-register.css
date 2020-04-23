@@ -47,7 +47,7 @@ body {
 }
 
 label {
-    color: var(--text);
+    color: var(--light-body);
 }
 
 input  {
