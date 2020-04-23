@@ -327,7 +327,7 @@ h1 {
 @media only screen and (max-width: 440px) {
     .container{
         min-width: 0;
-        max-width: 370px;
+        max-width: 350px;
         width: 100%;
         padding: 8px;
     }
@@ -365,7 +365,7 @@ h1 {
 @media only screen and (max-width: 380px) {
     .container {
         width: 100%;
-        max-width: 320px;
+        max-width: 310px;
         padding: 16px;
     }
 }
