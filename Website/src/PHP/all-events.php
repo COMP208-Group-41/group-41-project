@@ -44,8 +44,8 @@
                           echo "<div class='table-row'>";
                           $venueUserID = venueIDtoVenueUserID($row['VenueID'],$pdo);
                           $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$venueUserID."/".$row['VenueID']."/".$row['EventID']."/event.jpg";
-                          echo "<div class='table-item image' style='background-image: url($venueImage); width: 40%; justify-content: center; align-items: center'>";
-                          echo "<div class='table-item-wrapper' style='font-size: 20px'>".venueIDtoName($row['VenueID'], $pdo)."</div>";
+                          echo "<div class='table-item image' style='background-image: url($venueImage); width: 40%;'>";
+                          echo "<div class='table-item-wrapper' style='font-size: 20px; justify-content: center; align-items: center'>".venueIDtoName($row['VenueID'], $pdo)."</div>";
                           echo "</div>";
                           echo "<div style='display: flex; width: 40%' id='row'>";
                           echo "<div style='display: flex; flex-direction: column; width: 50%;'>";
