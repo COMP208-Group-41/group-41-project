@@ -75,7 +75,7 @@
                   echo "<h2 class='title'>No upcoming events found!</h2>";
               }
               if (sizeof($events) > 5){
-                echo '<div class="venue-buttons"><a href="venue.php?venueID='.$venueID.'" class="venue-button" style="margin-right: -1px">View Venue</a></div>';
+                  echo '<a href="venue.php?venueID='.$venueID.'" class="button">View Venue</a>';
               }
             ?>
         </div>
