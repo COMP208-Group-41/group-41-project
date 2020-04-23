@@ -181,7 +181,6 @@ hr {
 
 .tag-container {
     text-align: center;
-    margin-bottom: 16px;
     width: 50%;
     border: var(--button-border) solid 2px;
     border-radius: 4px;
@@ -321,7 +320,7 @@ hr {
 }
 
 h1 {
-    margin: 0;
+    margin-bottom: 8px;
 }
 
 @media only screen and (max-width: 600px) {

@@ -9,6 +9,7 @@
     }
     .container {
         padding: 4px;
+        max-width: 85%;
     }
     .section {
         margin: 8px 8px;

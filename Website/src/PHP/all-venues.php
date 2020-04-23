@@ -32,7 +32,7 @@
     }
     ?>
     <div class="wrapper">
-        <div class="container" style="display: inline-flex; justify-content: center; align-items: center" >
+        <div class="container" style="display: inline-flex; justify-content: center; align-items: center; flex-direction: column" >
                 <h1 class='title'>All Venues</h1>
                 <div class="seperator" style="margin-top: 4px"></div>
                 <?php
