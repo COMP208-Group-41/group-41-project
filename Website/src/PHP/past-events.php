@@ -44,10 +44,12 @@
             <h1 class='title'>Past Events for <?php echo "$venueName"; ?></h1>
             <div class="seperator"></div>
             <?php
+              $count = 0;
               echo '<div class="venue-buttons"><a href="venue.php?venueID='.$venueID.'" class="venue-button" style="margin-right: -1px">View Venue</a></div>';
               if ($events !== false){
                 foreach($events as $row){
                     if (new DateTime("now") > new DateTime($row['EventEndTime'])) {
+                        $count++;
                         echo '<div class="seperator" style="margin-top: 4px">';
                         $currentTagIDs = getEventTagID($row['EventID'],$pdo);
                         echo "<table>";
@@ -61,7 +63,8 @@
                         echo "</table>";
                     }
                 }
-              } else {
+              }
+              if ($count == 0) {
                 echo "<table>";
                 echo "<tr>";
                 echo "<td>No Past events for this Venue listed</td>";
