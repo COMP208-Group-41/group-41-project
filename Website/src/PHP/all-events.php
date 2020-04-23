@@ -59,7 +59,7 @@
                           echo "<div class='table'>";
                           echo "<div class='table-row'>";
                           $venueUserID = venueIDtoVenueUserID($row['VenueID'],$pdo);
-                          $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$venueUserID."/".$row['VenueID']"/".$row['EventID']."/event.jpg";
+                          $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$venueUserID."/".$row['VenueID']."/".$row['EventID']."/event.jpg";
                           echo "<div class='table-item image' style='background-image: url($venueImage); width: 40%'>";
                           echo "</div>";
                           echo "<div style='display: flex; width: 40%' id='row'>";
