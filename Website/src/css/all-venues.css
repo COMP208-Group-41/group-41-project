@@ -63,7 +63,7 @@ body {
         min-width: 305px;
     }
     .container {
-        padding: 4px;
+        padding: 16px;
     }
     .section {
         margin: 8px 8px 0;
@@ -84,7 +84,7 @@ body {
         min-width: 0;
         max-width: 350px;
         width: 100%;
-        padding: 8px;
+        padding: 16px;
     }
 }
 
