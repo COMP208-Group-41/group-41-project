@@ -39,7 +39,7 @@
                   foreach($allEvents as $row) {
                       if (new DateTime("now") < new DateTime($row['EventEndTime'])) {
                           $currentTagIDs = getEventTagID($row['EventID'],$pdo);
-                          echo '<div class="seperator" style="margin-top: 4px"></div>';
+                          echo '<div class="seperator"></div>';
                           echo "<div class='table' style='margin-bottom: 0'>";
                           echo "<div class='table-row'>";
                           $venueUserID = venueIDtoVenueUserID($row['VenueID'],$pdo);
