@@ -38,7 +38,8 @@ body {
     background: rgba(32, 32, 32, 0.95);
     padding: 16px;
     border-radius: 10px;
-    width: 20%;
+    width: 30%;
+    min-width: 400px;
 }
 
 .outout-wrapper {
@@ -154,28 +155,14 @@ input  {
     width: 400px;
 }
 
-@media only screen and (max-width: 420px) {
-    .wrapper{
-        min-width: 0px;
-        max-width: 350px;
-        width: 100%;
-    }
-}
-
 @media only screen and (max-width: 600px) {
     .wrapper {
         width: 100%;
         margin: 0 0 200px;
+        max-width: 85%;
     }
     label {
         display: block;
     }
 }
 
-
-@media only screen and (max-width: 380px) {
-    .wrapper {
-        width: 100%;
-        max-width: 310px;
-    }
-}
