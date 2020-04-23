@@ -64,7 +64,7 @@
                         echo "<div class='table'>";
                         echo "<div class='table-row'>";
                         $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$row['VenueUserID']."/".$row['VenueID']."/venue.jpg";
-                        echo "<div class='table-item image' style='background-image: url(".$venueImage."); width: 35%'><div class='table-item-wrapper'>".$row['VenueName'];
+                        echo "<div class='table-item image' style='background-image: url(".$venueImage."); width: 40%;'><div class='table-item-wrapper'>".$row['VenueName'];
 
                         unset($priceScore);
                         unset($safetyScore);
@@ -77,13 +77,18 @@
                         $queueScore = getQueueScore($row['VenueID'], 1, $pdo);
                         if (!($priceScore === false || $safetyScore === false || $atmosphereScore === false || $queueScore === false)) {
                             $totalScore = ($queueScore + $atmosphereScore + $safetyScore + $priceScore) / 4;
+                            $totalScore = number_format($totalScore,1);
+                            $priceScore = number_format($priceScore,1);
+                            $safetyScore = number_format($safetyScore,1);
+                            $atmosphereScore = number_format($atmosphereScore,1);
+                            $queueScore = number_format($queueScore,1);
                             echo "<div class='rating-wrapper'>Rating:<div class='rating-square'>$totalScore</div></div>";
                         } else {
                             echo "<div class='rating-wrapper'>No Ratings</div>";
                         }
                         echo "</div></div>";
-                        echo '<div class="table-item" style="text-align: center; width: 35%">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
-                        echo '<div class="table-buttons column"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button">Venue</a>';
+                        echo '<div class="table-item" style="text-align: center; width: 40%">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
+                        echo '<div class="table-buttons column" style="width: 20%;"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button">Venue</a>';
                         echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="table-button">Events</a></div>';
                         echo "</div></div>";
 
@@ -106,11 +111,11 @@
                           echo "<div class='table-row'>";
                           $venueUserID = venueIDtoVenueUserID($row['VenueID'],$pdo);
                           $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$venueUserID."/".$row['VenueID']."/".$row['EventID']."/event.jpg";
-                          echo "<div class='table-item image' style='background-image: url($venueImage);'>";
+                          echo "<div class='table-item image' style='background-image: url($venueImage); width: 40%;'>";
                           echo "<div class='table-item-wrapper' style='justify-content: center; align-items: center'>".$row['EventName'];
-                          echo "<div class='rating-wrapper'><div class='rating-square'>".$row['EventStartTime']."</div></div></div></div>";
-                          echo '<div class="table-item" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
-                          echo '<div class="table-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="table-button">Event</a>';
+                          echo "<div class='rating-wrapper'><div class='rating-square' style='font-size: 16px'>Start: ".$row['EventStartTime']."</div></div></div></div>";
+                          echo '<div class="table-item" style="text-align: center; width: 40%">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
+                          echo '<div class="table-buttons column" style="width: 20%"><a href="event.php?eventID='.$row['EventID'].'" class="table-button">Event</a>';
                           echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="table-button">View Venue</a></div>';
                           echo "</div></div>";
                       }
