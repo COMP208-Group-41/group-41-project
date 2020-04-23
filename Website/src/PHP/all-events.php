@@ -55,8 +55,8 @@
                           echo "<div class='table-item' style='height: 35%; width: 100%'>".$row['EventName']."</div>";
                           echo "<div class='table-item' style='height: 35%; width: 100%'>".$row['EventStartTime']."</div>";
                           echo "</div></div></div></div>";
-                          echo "<div class='display: flex' style='margin-bottom: 16px'>";
-                          echo '<a href="event.php?eventID='.$row['EventID'].'" class="button" style="width: 50%; margin-right:3px">View Event</a>';
+                          echo "<div style='display: flex;'>";
+                          echo '<a href="event.php?eventID='.$row['EventID'].'" class="button" style="width: 50%; margin-right: -4px">View Event</a>';
                           echo '<a href="venue?venueID='.$row['VenueID'].'" class="button" style="width: 50%">View Venue</a></div>';
                       }
                   }
