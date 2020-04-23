@@ -66,21 +66,16 @@
                   echo '<div class="seperator" style="margin-top: 4px"></div>';
                   $currentTagIDs = getVenueTagID($row['VenueID'],$pdo);
                   echo "This venue matches ".$row['Count']." of your preferred tags";
-                  echo "<table>";
-                  echo "<tr>";
-                  echo "<td>".$row['VenueName']."</td>";
-                  echo '<td><div class="venue-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="button" style="margin-left: -1px">View Venue</a>';
-                  echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="button" style="margin-right: -1px">View Upcoming Events</a></div></td>';
-                  echo '<td><div class="tag-container" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div></td>';
-                  echo "</tr>";
-                  echo "</table>";
+                  echo "<div class='table'>";
+                  echo "<div class='table-row'>";
+                  echo "<div class='table-item'>".$row['VenueName']."</div>";
+                  echo '<div class="table-item">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
+                  echo '<div class="table-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button" style="margin-left: -1px">Venue</a>';
+                  echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="table-button" style="margin-right: -1px">Events</a></div>';
+                  echo "</div></div>";
               }
           } else {
-            echo "<table>";
-            echo "<tr>";
-            echo "<td>There are no venues that match any of your Tags!</td>";
-            echo "</tr>";
-            echo "</table>";
+            echo "<h1 class='title'>There are no venues that match any of your Tags!</h1>";
           }
         ?>
     </div>
