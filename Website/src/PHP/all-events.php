@@ -64,7 +64,7 @@
                           echo "</div>";
                           echo "</div></div>";
                           echo "<div class='display: flex' style='margin-bottom: 16px'>";
-                          echo '<a href="event.php?eventID='.$row['EventID'].'" class="button" style="width: 50%">View Event</a>';
+                          echo '<a href="event.php?eventID='.$row['EventID'].'" class="button" style="width: 50%; margin-right:3px">View Event</a>';
                           echo '<a href="venue?venueID='.$row['VenueID'].'" class="button" style="width: 50%">View Venue</a></div>';
                       }
                   }
