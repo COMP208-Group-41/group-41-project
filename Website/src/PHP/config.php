@@ -652,4 +652,18 @@ function validate255($name) {
       $result = $getStmt->fetch();
       return $result['VenueName'];
     }
+
+    function sortArray (&$array) {
+      $temp=array();
+      $ret=array();
+      reset($array);
+      foreach ($array as $index=> $value) {
+          $temp[$index]=$value["Count"];
+      }
+      asort($temp);
+      foreach ($temp as $index => $value) {
+          $ret[$index]=$array[$index];
+      }
+      $array=$ret;
+    }
 ?>

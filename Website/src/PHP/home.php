@@ -47,6 +47,28 @@
         echo '<div class="seperator"></div>';
 
         if (isset($userID)) {
+            $allVenues = getAllVenues($pdo);
+            $userPrefs = getUserTags($userID,$pdo);
+            $sortedArray = (array) null;
+            foreach($allVenues as $row){
+              $venue = $emptyArray = (array) null;
+              $venueTags = getVenueTagID($row['VenueID'],$pdo);
+              $count = 0;
+              foreach($userPrefs as $pref){
+                if(in_array($pref, $venueTags)){
+                  $count++;
+                }
+              }
+              if ($count > 0){
+                $event['Count'] = $count;
+                $event['VenueID'] = $row['VenueID'];
+                $event['VenueName'] = $row['VenueName'];
+                array_push($sortedArray,$event);
+              }
+            }
+            sortArray($sortedArray);
+            $sortedArray = array_reverse($sortedArray);
+
 
             echo '<a class="button" href="user-dashboard.php">Your Dashboard</a>';
             echo '<div class="seperator"></div>';
