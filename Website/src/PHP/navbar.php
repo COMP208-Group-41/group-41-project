@@ -68,7 +68,7 @@
                 echo '<a href="register.php">Register</a>';
                 echo '<div class="nav-seperator"></div>';
                 echo '<a href="venue-user-login.php">Venue Login</a>';
-                echo '<a href="venue-user-register.php">Register Venue</a><div class="nav-seperator"></div>';
+                echo '<a href="venue-user-register.php">Register Venue User</a><div class="nav-seperator"></div>';
             } else {
                 echo '<a href="logout.php">Log Out</a><div class="nav-seperator"></div>';
             }
