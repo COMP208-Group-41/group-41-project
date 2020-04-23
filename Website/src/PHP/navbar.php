@@ -50,6 +50,14 @@
         <div class="drawer__content">
             <a href="<?php echo $dashboardLink; ?>">My Account</a>
             <a href="<?php echo $accountLink; ?>">Edit Account</a>
+            <div class="nav-seperator"></div>
+            <?php
+            if (isset($_SESSION['UserID'])) {
+                echo '<a href="recommended-venues.php">Recommended Venues</a>';
+                echo '<a href="recommended-events.php">Recommended Events</a>';
+                echo '<div class="nav-seperator"></div>';
+            }
+            ?>
             <a href="<?php echo $venueLink; ?>">All Venues</a>
             <a href="<?php echo $eventLink; ?>">Upcoming Events</a>
             <div class="nav-seperator"></div>
