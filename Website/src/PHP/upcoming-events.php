@@ -42,12 +42,11 @@
     <div class="wrapper">
         <div class="container">
             <h1 class='title'>Upcoming Events for <?php echo '<a href="venue.php?venueID='.$venueID.'">'.$venueName.'</a>'; ?></h1>
-            <div class="seperator"></div>
             <?php
               if ($events !== false){
                 foreach($events as $row){
                     if (new DateTime("now") < new DateTime($row['EventEndTime'])) {
-                        echo '<div class="seperator" style="margin-top: 4px">';
+                        echo '<div class="seperator" style="margin-top: 4px"></div>';
                         $currentTagIDs = getEventTagID($row['EventID'],$pdo);
                         echo "<table>";
                         echo "<tr>";
