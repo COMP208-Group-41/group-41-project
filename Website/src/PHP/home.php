@@ -134,7 +134,6 @@ if (isset($_SESSION['message'])) {
                 echo '<a class="button" href="venue-user-dashboard.php">Your Dashboard</a>';
             }
 
-
             echo '<div style="display: flex; width: 100%"><a class="button left" href="all-venues.php" style="width: 50%">All Venues</a>';
             echo '<a class="button right" href="all-events.php" style="width: 50%;">All Upcoming Events</a></div>';
             ?>
