@@ -109,6 +109,9 @@ if (isset($_SESSION['message'])) {
             <div class="tag-container" style="text-align: center">
                 <?php getTags($userPrefs, $pdo); ?>
             </div>
+                <button onclick="location.href='user-edit.php';" class="button" style="margin-top: 20px;width: 100%">
+                    Edit Tags
+                </button>
             </div>
         </div>
         <div class="section">
