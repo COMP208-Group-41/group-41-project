@@ -7,7 +7,7 @@ body {
     background: var(--body-background);
     border-radius: 4px;
     padding: 2px 8px;
-    margin-bottom: -4px;
+    margin-bottom: -2px;
     margin-left: 4px;
 }
 

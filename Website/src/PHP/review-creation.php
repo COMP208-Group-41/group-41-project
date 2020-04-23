@@ -253,7 +253,7 @@
             </div>
             <div class="seperator" style="margin-top: 20px"></div>
             <div style= "display: flex">
-                <input type='submit' name='submit' value='submit' class="button" style="width: 100%;">
+                <input type='submit' name='submit' value='Submit' class="button" style="width: 100%;">
             </div>
     </form>
 </div>
