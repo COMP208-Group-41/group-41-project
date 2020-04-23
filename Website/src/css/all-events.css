@@ -34,16 +34,13 @@
         width: 100%;
     }
     .container {
-        padding: 4px;
+        padding: 8px;
     }
     .section {
         margin: 8px 8px 0;
     }
     .table-row {
         flex-direction: column;
-    }
-    .button-wrapper {
-        width: 77%;
     }
     .table-item.image {
         width: 100%;
