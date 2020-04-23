@@ -33,13 +33,16 @@ body {
 
 .container {
     background: var(--light-body);
-    display: inline-block;
     padding: 20px;
     margin: 20px;
     border-radius: 10px;
     min-width: 400px;
     width: 80vw;
     max-width: 1000px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .flex-wrap {
@@ -114,6 +117,16 @@ input:focus {
     text-align: center;
     text-decoration: none;
     display: block;
+}
+
+.button.left {
+    border-radius: 4px 0 0 4px;
+    border-right-width: 1px;
+}
+
+.button.right {
+    border-radius: 0 4px 4px 0;
+    border-left-width: 1px;
 }
 
 .button:focus {
@@ -316,8 +329,7 @@ h1 {
 
 @media only screen and (max-width: 440px) {
     .container{
-        min-width: 0px;
-        margin: 0 0 16px;
+        min-width: 0;
         max-width: 350px;
         width: 100%;
         padding: 8px;
@@ -337,6 +349,10 @@ h1 {
         min-width: 0;
     }
 
+    .button {
+        max-width: 300px;
+    }
+
     .table-item {
     }
 
@@ -350,5 +366,11 @@ h1 {
         width: 100%;
         max-width: 310px;
         padding: 16px;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .section {
+        width: 95%;
     }
 }
