@@ -60,7 +60,7 @@
             }
             ?>
             <a href="<?php echo $venueLink; ?>">All Venues</a>
-            <a href="<?php echo $eventLink; ?>">Upcoming Events</a>
+            <a href="<?php echo $eventLink; ?>" style="line-height: 28px">Upcoming Events</a>
             <div class="nav-seperator"></div>
             <?php
             if (!isset($_SESSION['UserID']) && !isset($_SESSION['VenueUserID'])) {
@@ -68,7 +68,7 @@
                 echo '<a href="register.php">Register</a>';
                 echo '<div class="nav-seperator"></div>';
                 echo '<a href="venue-user-login.php">Venue Login</a>';
-                echo '<a href="venue-user-register.php">Register Venue User</a><div class="nav-seperator"></div>';
+                echo '<a href="venue-user-register.php" style="line-height: 28px">Register Venue User</a><div class="nav-seperator"></div>';
             } else {
                 echo '<a href="logout.php">Log Out</a><div class="nav-seperator"></div>';
             }
