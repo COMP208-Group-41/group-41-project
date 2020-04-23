@@ -38,7 +38,8 @@
 ?>
 <div class="wrapper">
 <div class="container">
-
+    <div style="display: flex;width: 100%; justify-content: center;align-items: center">
+    <img src="../Assets/outout.svg" width="120" alt="OutOut"></div>
     <div class="seperator"></div>
     <h2 class="title">Our Picks</h1>
     <?php
