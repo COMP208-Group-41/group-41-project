@@ -16,6 +16,10 @@
     $venueLink = "all-venues.php";
     $aboutLink = "about.php";
 
+    if (isset($_POST['search'])) {
+      header("location: search.php?search=".$_POST['searchText']."");
+      exit;
+    }
 ?>
 
 <head>
@@ -66,4 +70,3 @@
 </section>
 <script src="navbar.js"></script>
 </body>
-
