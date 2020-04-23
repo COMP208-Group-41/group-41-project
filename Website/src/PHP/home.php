@@ -85,7 +85,39 @@
             echo '<a class="button" href="recommended-venues.php">View more recommended venues</a>';
             echo '<div class="seperator"></div>';
             echo '<h2 class="title">Recommended events for you</h2>';
-            //content here
+            $sortedArray = (array) null;
+            $allEvents = getAllEvents($pdo);
+            reset($userPrefs);
+            foreach($allEvents as $row){
+              $event = $emptyArray = (array) null;
+              $eventTags = getEventTagID($row['EventID'],$pdo);
+              $count = 0;
+              foreach($userPrefs as $pref){
+                if(in_array($pref, $eventTags)){
+                  $count++;
+                }
+              }
+              if ($count > 0){
+                $event['Count'] = $count;
+                $event['EventID'] = $row['EventID'];
+                $event['EventName'] = $row['EventName'];
+                array_push($sortedArray,$event);
+              }
+            }
+            sortArray($sortedArray);
+            $sortedArray = array_reverse($sortedArray);
+
+            if (!sizeof($sortedArray) == 0) {
+                $mostRecommended = $sortedArray[0];
+                $venueIDforPic = $mostRecommended['VenueID'];
+                $venueUserIDforPic = venueIDtoVenueUserID($venueIDforPic,$pdo);
+                $eventIDforPic = $mostRecommended['EventID'];
+                $path = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$venueUserIDforPic."/".$venueIDforPic."/".$eventIDforPic."/event.jpg";
+                /* INCLUDE IMAGE ECHO HERE */
+            } else {
+                /* NO RECOMMENDATIONS FOUND */
+            }
+
             echo '<a class="button" href="recommended-events.php">View more recommended events</a>';
             echo '<div class="seperator"></div>';
 
