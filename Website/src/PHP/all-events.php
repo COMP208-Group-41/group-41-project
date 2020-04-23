@@ -52,11 +52,11 @@
                           echo "<div class='table-items column'>";
                           echo "<div class='table-item max' style='height: 100%; width: 100%'>".getTagsNoEcho($currentTagIDs,$pdo)."</div>";
                           echo "</div>";
-                          echo "<div style='display: flex; flex-direction: column;' >";
+                          echo "<div class='table-items column' ' >";
                           echo "<div class='table-item column'>".$row['EventName']."</div>";
                           echo "<div class='table-item column'>".$row['EventStartTime']."</div>";
                           echo "</div></div></div></div>";
-                          echo "<div style='display: flex; width: 100%'>";
+                          echo "<div style='display: flex; width: 100.5%'>";
                           echo '<a href="event.php?eventID='.$row['EventID'].'" class="button left" style="width: 50%">View Event</a>';
                           echo '<a href="venue?venueID='.$row['VenueID'].'" class="button right" style="width: 50%">View Venue</a></div>';
                       }
