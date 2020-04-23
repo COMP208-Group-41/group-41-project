@@ -18,15 +18,3 @@
         flex-direction: column;
     }
 }
-
-@media only screen and (max-width: 380px) {
-    .container {
-        max-width: 330px;
-    }
-}
-
-@media only screen and (max-width: 440px) {
-    .container {
-        max-width: 370px;
-    }
-}
