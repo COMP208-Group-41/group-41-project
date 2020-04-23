@@ -55,7 +55,7 @@
                 //print_r($allVenues);
                 // echo "<h2 class='title'>No matching events found!</h2>";
                 echo "<h2 class='title'>Venues</h2>";
-                echo "<div class='table'>";
+                echo "<div class='seperator'></div>";
                 foreach($allVenues as $row) {
                     //echo $search;
                     //echo $row['VenueName'];
@@ -94,22 +94,17 @@
               if ($venueCount == 0) {
                   echo "<h2 class='title'>No matching venues found!</h2>";
               }
-              echo "</div>";
-
 
               // Matching Events
               echo "<h2 class='title'>Events</h2>";
-              echo "<div class='table'>";
+              echo "<div class='seperator'></div>";
               foreach($allEvents as $row) {
                   if (strpos(strtolower($row['EventName']),$search) !== false) {
                       $eventCount++;
                       //print_r($row);
                       $currentTagIDs = getEventTagID($row['EventID'],$pdo);
-                      echo "<div class='table'>";
                       echo "<div class='table-row'>";
-                      $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$row['VenueUserID']."/".$row['VenueID']."/venue.jpg";
-                      echo "<div class='table-item image' style='background-image: url(".$venueImage."); width: 35%'><div class='table-item-wrapper'>".$row['VenueName'];
-
+                      echo "<div class='table-item'>".$row['EventName'];
                       if (new DateTime("now") > new DateTime($row['EventEndTime'])) {
                           unset($priceScore);
                           unset($safetyScore);
@@ -127,18 +122,16 @@
                               echo "<div class='rating-wrapper'>No Ratings</div>";
                           }
                       }
-
-                      echo "</div></div>";
-                      echo '<div class="table-item" style="text-align: center; width: 35%">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
-                      echo '<div class="table-buttons column"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button">Venue</a>';
-                      echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="table-button">Events</a></div>';
-                      echo "</div></div>";
+                      echo "</div>";
+                      echo 'Event Start: '.$row['EventStartTime'];
+                      echo '<div class="venue-tags" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
+                      echo '<div class="table-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="table-button" style="margin-bottom: -2px">Event</a>';
+                      echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="table-button">View Venue</a></div>';
+                      echo "</div>";
                   }
             }
             if ($venueCount == 0) {
                 echo "<h2 class='title'>No matching venues found!</h2>";
-            }
-            echo "</div>";
 
             ?>
         </div>
