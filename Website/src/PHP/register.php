@@ -175,7 +175,7 @@
         }
     ?>
     <div class="form">
-        <div style="padding-bottom: 8px; text-align: center">
+        <div style="padding-bottom: 8px; text-align: center; flex-direction: column"">
             <b style="color: #e9e9e9; font-size: 24px">Registration</b>
         </div>
         <form name='RegisterForm' method='post'>

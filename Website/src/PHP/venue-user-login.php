@@ -95,7 +95,7 @@
 </head>
 <body>
     <?php include "navbar.php" ?>
-<div style="display: flex; height: 100%; justify-content: center; align-items: center">
+<div style="display: flex; height: 100%; justify-content: center; align-items: center; flex-direction: column">
 <div class="wrapper">
     <?php
         if (isset($_SESSION['message'])) {
