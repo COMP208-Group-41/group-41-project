@@ -83,7 +83,7 @@ if (isset($_SESSION['message'])) {
                     // $mostRecommended['VenueName'] - This gives the venue name
                     echo "<a href='venue?venueID=" . $row['VenueID'] . "'><img src='$path' class='title-img' style='max-height: 300px'></a>";
                     echo '<a class="button" href="recommended-venues.php">View more recommended venues</a>';
-                    echo '<div class="text">'.$mostRecommended['VenueName'].'</div>';
+                    echo '<div class="text-wrapper"><div class="text">'.$mostRecommended['VenueName'].'</div></div>';
                 } else {
                     echo "<h2 class='title'>No venue recommendations found!</h2>";
                 }
@@ -120,7 +120,7 @@ if (isset($_SESSION['message'])) {
                     $eventIDforPic = $mostRecommended['EventID'];
                     $path = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/" . $venueUserIDforPic . "/" . $venueIDforPic . "/" . $eventIDforPic . "/event.jpg";
                     echo "<a href='event?eventID=" . $row['EventID'] . "'><img src='$path' class='title-img' style='max-height: 300px'></a>";
-                    echo '<div class="text">'.$mostRecommended['VenueName'].'</div>';
+                    echo '<div class="text-wrapper"><div class="text">'.$mostRecommended['EventName'].'</div></div>';
                     echo '<a class="button" href="recommended-events.php">View more recommended events</a>';
                 } else {
                     echo "<h2 class='title'>No event recommendations found!</h2>";
