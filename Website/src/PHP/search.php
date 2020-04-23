@@ -49,7 +49,7 @@
     ?>
     <div class="wrapper">
         <div class="container">
-            <h1 class='title'>Matching Results for <?php echo "$search"; ?></h1>
+            <h1 class='title'>Matching Results for '<?php echo "$search"; ?>'</h1>
             <?php
                 $venueCount = $eventCount = 0;
                 echo "<div class='seperator'></div>";
