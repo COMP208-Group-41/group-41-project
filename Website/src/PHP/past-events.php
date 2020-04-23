@@ -42,7 +42,6 @@
     <div class="wrapper">
         <div class="container">
             <h1 class='title'>Past Events for <?php echo '<a href="venue.php?venueID='.$venueID.'">'.$venueName.'</a>'; ?></h1>
-            <div class="seperator"></div>
             <?php
               $count = 0;
             if ($events !== false){
