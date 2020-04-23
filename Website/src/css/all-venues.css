@@ -2,6 +2,20 @@ body {
     overflow-x: hidden;
 }
 
+.container {
+    background: var(--light-body);
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    min-width: 400px;
+    width: 80vw;
+    max-width: 1000px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .rating-square {
     color: var(--gold);
     border-radius: 4px;

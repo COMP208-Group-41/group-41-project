@@ -40,9 +40,6 @@ body {
     width: 80vw;
     max-width: 1000px;
     display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
 
 .flex-wrap {
@@ -366,11 +363,5 @@ h1 {
         width: 100%;
         max-width: 310px;
         padding: 16px;
-    }
-}
-
-@media only screen and (min-width: 600px) {
-    .section {
-        width: 95%;
     }
 }
