@@ -19,7 +19,6 @@
       header("location: 404.php");
       exit;
     }
-
 ?>
 <!DOCTYPE html>
 <html lang='en-GB'>
