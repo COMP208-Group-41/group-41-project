@@ -49,16 +49,16 @@
                           echo "<div class='table-item-wrapper' style='font-size: 20px; justify-content: center; align-items: center'>".venueIDtoName($row['VenueID'], $pdo)."</div>";
                           echo "</div>";
                           echo "<div class='table-items' id='row'>";
-                          echo "<div style='display: flex; flex-direction: column; width: 50%;'>";
+                          echo "<div style='display: flex; flex-direction: column;'>";
                           echo "<div class='table-item' style='height: 100%; width: 100%'>".getTagsNoEcho($currentTagIDs,$pdo)."</div>";
                           echo "</div>";
-                          echo "<div style='display: flex; flex-direction: column; width: 50%;' >";
+                          echo "<div style='display: flex; flex-direction: column;' >";
                           echo "<div class='table-item' style='height: 35%; width: 100%'>".$row['EventName']."</div>";
                           echo "<div class='table-item' style='height: 35%; width: 100%'>".$row['EventStartTime']."</div>";
                           echo "</div></div></div></div>";
                           echo "<div style='display: flex; width: 100%'>";
-                          echo '<a href="event.php?eventID='.$row['EventID'].'" class="button" style="width: 50%; margin-right: -4px">View Event</a>';
-                          echo '<a href="venue?venueID='.$row['VenueID'].'" class="button" style="width: 50%">View Venue</a></div>';
+                          echo '<a href="event.php?eventID='.$row['EventID'].'" class="button left" style="width: 50%">View Event</a>';
+                          echo '<a href="venue?venueID='.$row['VenueID'].'" class="button right" style="width: 50%">View Venue</a></div>';
                       }
                   }
               } else {
