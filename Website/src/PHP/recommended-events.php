@@ -69,7 +69,7 @@
                   echo "This event matches ".$row['Count']." of your preferred tags";
                   echo "<div class='table'>";
                   echo "<div class='table-row'>";
-                  $eventImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$row['VenueUserID']."/".$row['VenueID']."/venue.jpg";
+                  $eventImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$row['VenueUserID']."/".$row['VenueID']."/".$row['EventID']."/event.jpg";
                   echo "<div class='table-item image' style='background-image: url(".$eventImage.")'><div class='table-item-wrapper'>".$row['EventName']."</div></div>";
                   echo '<div class="table-item">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
                   echo '<div class="table-buttons"><a href="venue.php?venueID='.$row['EventID'].'" class="table-button" style="margin-left: -1px">Event</a>';
