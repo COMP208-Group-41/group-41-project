@@ -82,10 +82,12 @@
                 $path = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$venueUserIDforPic."/".$venueIDforPic."/venue.jpg";
                 // $mostRecommended['VenueName'] - This gives the venue name
                 /* INCLUDE IMAGE ECHO HERE */
+                echo "<img src='.$path.' class='title-img'>";
+                echo '<a class="button" href="recommended-venues.php">View more recommended venues</a>';
             } else {
-                /* NO RECOMMENDATIONS FOUND */
+                echo "<h2 class='title'>No venue recommendations found!</h2>";
             }
-            echo '<a class="button" href="recommended-venues.php">View more recommended venues</a>';
+
             echo '<div class="seperator"></div>';
             echo '<h2 class="title">Recommended events for you</h2>';
             $sortedArray = (array) null;
@@ -117,12 +119,13 @@
                 $venueUserIDforPic = venueIDtoVenueUserID($venueIDforPic,$pdo);
                 $eventIDforPic = $mostRecommended['EventID'];
                 $path = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$venueUserIDforPic."/".$venueIDforPic."/".$eventIDforPic."/event.jpg";
-                /* INCLUDE IMAGE ECHO HERE */
+                echo "<img src='.$path.' class='title-img'>";
+                echo '<a class="button" href="recommended-events.php">View more recommended events</a>';
             } else {
-                /* NO RECOMMENDATIONS FOUND */
+                echo "<h2 class='title'>No event recommendations found!</h2>";
             }
 
-            echo '<a class="button" href="recommended-events.php">View more recommended events</a>';
+
             echo '<div class="seperator"></div>';
 
         }
@@ -132,8 +135,8 @@
         }
 
 
-        echo '<div style="display: flex; width: 100%"><a class="button" href="all-venues.php" style="width: 50%">All Venues</a>';
-        echo '<a class="button" href="all-events.php" style="width: 50%;">All Upcoming Events</a></div>';
+        echo '<div style="display: flex; width: 100%"><a class="button left" href="all-venues.php" style="width: 50%">All Venues</a>';
+        echo '<a class="button right" href="all-events.php" style="width: 50%;">All Upcoming Events</a></div>';
     ?>
 
 </div>
