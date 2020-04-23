@@ -636,4 +636,12 @@ function validate255($name) {
             rmdir($dir);
         }
     }
+
+    function venueIDtoVenueUserID($venueID,$pdo) {
+        $getStmt = $pdo->prepare("SELECT VenueUserID FROM Venue WHERE VenueID=:VenueID");
+        $getStmt->bindValue(":VenueID",$venueID);
+        $getStmt->execute();
+        $result = $getStmt->fetch();
+        return $result['VenueUserID'];
+    }
 ?>

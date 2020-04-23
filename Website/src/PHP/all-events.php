@@ -20,14 +20,6 @@
       return $result['VenueName'];
     }
 
-    function venueIDtoVenueUserID($venueID,$pdo) {
-        $getStmt = $pdo->prepare("SELECT VenueUserID FROM Venue WHERE VenueID=:VenueID");
-        $getStmt->bindValue(":VenueID",$venueID);
-        $getStmt->execute();
-        $result = $getStmt->fetch();
-        return $result['VenueUserID'];
-    }
-
 ?>
 <!DOCTYPE html>
 <html lang='en-GB'>
