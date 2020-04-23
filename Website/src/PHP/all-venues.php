@@ -57,6 +57,10 @@
                         if (!($priceScore === false || $safetyScore === false || $atmosphereScore === false || $queueScore === false)) {
                             $totalScore = ($queueScore + $atmosphereScore + $safetyScore + $priceScore) / 4;
                             $totalScore = number_format($totalScore,1);
+                            $priceScore = number_format($priceScore,1);
+                            $safetyScore = number_format($safetyScore,1);
+                            $atmosphereScore = number_format($atmosphereScore,1);
+                            $queueScore = number_format($queueScore,1);
                             echo "<div class='rating-wrapper'>Rating:<div class='rating-square'>$totalScore</div></div>";
                         } else {
                             echo "<div class='rating-wrapper'>No Ratings</div>";
