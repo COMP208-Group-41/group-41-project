@@ -157,8 +157,8 @@ $image = checkVenueImageOnServer($owner, $venueID);
                         echo '<div class="table-item">No events currently listed</div></div></div>';
                     }
                     echo '<div style="display: flex">';
-                    echo '<a href="upcoming-events.php?venueID=' . $venueID . ' "class="button" style="width: 50%;  margin-right: -4px">View All Events</a>';
-                    echo '<a href="past-events.php?venueID=' . $venueID . '" class="button" style="width: 50%;">View Past Events</a></div>';
+                    echo '<a href="upcoming-events.php?venueID=' . $venueID . ' "class="button left" style="width: 50%">View All Events</a>';
+                    echo '<a href="past-events.php?venueID=' . $venueID . '" class="button right" style="width: 50%;">View Past Events</a></div>';
                     ?>
                 </div>
             </div>
