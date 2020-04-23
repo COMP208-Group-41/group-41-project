@@ -84,6 +84,7 @@
                         echo '<div class="table-buttons"><a href="venue.php?venueID='.$row['VenueID'].'" class="table-button" style="margin-bottom: -2px">Venue</a>';
                         echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="table-button">Events</a></div>';
                         echo "</div>";
+
                     }
               }
               if ($venueCount == 0) {
@@ -138,3 +139,4 @@
 
 </body>
 </html>
+
