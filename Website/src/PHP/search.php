@@ -102,29 +102,14 @@
                       //print_r($row);
                       $currentTagIDs = getEventTagID($row['EventID'],$pdo);
                       if (new DateTime("now") < new DateTime($row['EventEndTime'])) {
-                          unset($priceScore);
-                          unset($safetyScore);
-                          unset($atmosphereScore);
-                          unset($queueScore);
-                          unset($totalScore);
-                          $priceScore = getPriceScore($row['VenueID'], $row['EventID'], $pdo);
-                          $safetyScore = getSafetyScore($row['VenueID'], $row['EventID'], $pdo);
-                          $atmosphereScore = getAtmosphereScore($row['VenueID'], $row['EventID'], $pdo);
-                          $queueScore = getQueueScore($row['VenueID'], $row['EventID'], $pdo);
-                          if (!($priceScore === false || $safetyScore === false || $atmosphereScore === false || $queueScore === false)) {
-                              $totalScore = ($queueScore + $atmosphereScore + $safetyScore + $priceScore) / 4;
-                              echo "<div class='rating-wrapper'>Rating:<div class='rating-square'>$totalScore</div></div>";
-                          } else {
-                              echo "<div class='rating-wrapper'>No Ratings</div>";
-                          }
                           echo "<div class='table'>";
                           echo "<div class='table-row'>";
                           $venueUserID = venueIDtoVenueUserID($row['VenueID'],$pdo);
                           $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$venueUserID."/".$row['VenueID']."/".$row['EventID']."/event.jpg";
                           echo "<div class='table-item image' style='background-image: url($venueImage);'>";
-                          echo "<div class='table-item-wrapper' style='font-size: 20px; justify-content: center; align-items: center'>".venueIDtoName($row['VenueID'], $pdo)."</div></div>";
-                          echo '<div class="table-item">Starts '.$row['EventStartTime']."</div>";
-                          echo '<div class="table-item" style="text-align: center">'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
+                          echo "<div class='table-item-wrapper' style='font-size: 20px; justify-content: center; align-items: center'>".$row['EventName'];
+                          echo "<div class='rating-wrapper'>Rating:<div class='rating-square'>".$row['EventStartTime']."</div></div></div></div>";
+                          echo '<div class="table-item" style="text-align: center; width: 20%" >'.getTagsNoEcho($currentTagIDs,$pdo).'</div>';
                           echo '<div class="table-buttons"><a href="event.php?eventID='.$row['EventID'].'" class="table-button">Event</a>';
                           echo '<a href="upcoming-events.php?venueID='.$row['VenueID'].'" class="table-button">View Venue</a></div>';
                           echo "</div></div>";
