@@ -339,6 +339,10 @@ h1 {
         min-width: 0;
     }
 
+    .button {
+        max-width: 300px;
+    }
+
     .table-item {
     }
 
