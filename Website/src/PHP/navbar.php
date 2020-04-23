@@ -53,9 +53,9 @@
             <div class="nav-seperator"></div>
             <?php
             if (isset($_SESSION['UserID'])) {
-                echo '<a href="recommended-venues.php">Recommended Venues</a>';
+                echo '<a href="recommended-venues.php" style="line-height: 28px">Recommended Venues</a>';
                 echo '<div class="nav-seperator"></div>';
-                echo '<a href="recommended-events.php">Recommended Events</a>';
+                echo '<a href="recommended-events.php" style="line-height: 28px">Recommended Events</a>';
                 echo '<div class="nav-seperator"></div>';
             }
             ?>
