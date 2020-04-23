@@ -44,7 +44,7 @@
                           echo "<div class='table-row'>";
                           $venueUserID = venueIDtoVenueUserID($row['VenueID'],$pdo);
                           $venueImage = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$venueUserID."/".$row['VenueID']."/".$row['EventID']."/event.jpg";
-                          echo "<div class='table-item image' style='background-image: url($venueImage); width: 40%'>";
+                          echo "<div class='table-item image' style='background-image: url($venueImage); width: 40%; justify-content: center; align-items: center'>";
                           echo "<div class='table-item-wrapper' style='font-size: 20px'>".venueIDtoName($row['VenueID'], $pdo)."</div>";
                           echo "</div>";
                           echo "<div style='display: flex; width: 40%' id='row'>";
@@ -55,10 +55,9 @@
                           echo "<div class='table-item' style='height: 35%; width: 100%'>".$row['EventName']."</div>";
                           echo "<div class='table-item' style='height: 35%; width: 100%'>".$row['EventStartTime']."</div>";
                           echo "</div></div></div></div>";
-                          echo "<div class='display: flex' style='margin-bottom: 16px'>";
-                          echo '<div class="button" style="width: 50%" onclick="location.href="event.php?eventID='.$row['EventID'].'"">View Event</div>';
-                          echo '<div class="button" style="width: 50%" onclick="location.href="venue.php?venueID='.$row['VenueID'].'"">View Event</div></div>';
-
+                          echo "<div style='display: flex;'>";
+                          echo '<a href="event.php?eventID='.$row['EventID'].'" class="button" style="width: 50%; margin-right: -4px">View Event</a>';
+                          echo '<a href="venue?venueID='.$row['VenueID'].'" class="button" style="width: 50%">View Venue</a></div>';
                       }
                   }
               } else {
