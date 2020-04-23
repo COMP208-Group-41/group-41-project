@@ -47,6 +47,7 @@ body {
 }
 
 label {
+    display: none;
     color: var(--light-body);
 }
 
@@ -165,6 +166,9 @@ input  {
     .wrapper {
         width: 100%;
         margin: 0 0 200px;
+    }
+    label {
+        display: block;
     }
 }
 
