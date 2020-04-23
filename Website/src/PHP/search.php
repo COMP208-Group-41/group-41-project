@@ -101,7 +101,7 @@
                       $eventCount++;
                       //print_r($row);
                       $currentTagIDs = getEventTagID($row['EventID'],$pdo);
-                      if (new DateTime("now") > new DateTime($row['EventEndTime'])) {
+                      if (new DateTime("now") < new DateTime($row['EventEndTime'])) {
                           unset($priceScore);
                           unset($safetyScore);
                           unset($atmosphereScore);
