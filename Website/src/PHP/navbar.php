@@ -54,6 +54,7 @@
             <?php
             if (isset($_SESSION['UserID'])) {
                 echo '<a href="recommended-venues.php">Recommended Venues</a>';
+                echo '<div class="nav-seperator"></div>';
                 echo '<a href="recommended-events.php">Recommended Events</a>';
                 echo '<div class="nav-seperator"></div>';
             }
