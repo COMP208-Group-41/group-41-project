@@ -151,6 +151,7 @@ input:focus {
     font-family: "K2D", sans-serif;
     text-align: left;
     margin-top: 0;
+    text-decoration: none;
 }
 
 .menu-image:hover {
