@@ -69,14 +69,22 @@
             sortArray($sortedArray);
             $sortedArray = array_reverse($sortedArray);
 
-
             echo '<a class="button" href="user-dashboard.php">Your Dashboard</a>';
             echo '<div class="seperator"></div>';
+
             echo '<h2 class="title">Recommended venues for you</h2>';
-            //content here
+            if (!sizeof($sortedArray) == 0) {
+                $mostRecommended = $sortedArray[0];
+                $venueUserIDforPic = $mostRecommended['VenueUserID'];
+                $venueIDforPic = $mostRecommended['VenueID'];
+                $path = "https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/".$venueUserIDforPic."/".$venueIDforPic."/venue.jpg";
+                /* INCLUDE IMAGE ECHO HERE */
+            } else {
+                /* NO RECOMMENDATIONS FOUND */
+            }
             echo '<a class="button" href="recommended-venues.php">View more recommended venues</a>';
             echo '<div class="seperator"></div>';
-            echo '<h2 class="title">Recommended venues for you</h2>';
+            echo '<h2 class="title">Recommended events for you</h2>';
             //content here
             echo '<a class="button" href="recommended-events.php">View more recommended events</a>';
             echo '<div class="seperator"></div>';
