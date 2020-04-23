@@ -50,19 +50,24 @@
 
             echo '<a class="button" href="user-dashboard.php">Your Dashboard</a>';
             echo '<div class="seperator"></div>';
+            echo '<h2 class="title">Recommended venues for you</h2>';
             //content here
-            echo '<a class="button" href="recommended-venues.php">Recommended Venues for you</a>';
+            echo '<a class="button" href="recommended-venues.php">View more recommended venues</a>';
             echo '<div class="seperator"></div>';
+            echo '<h2 class="title">Recommended venues for you</h2>';
             //content here
-            echo '<a class="button" href="recommended-events.php">Recommended Events for you</a>';
+            echo '<a class="button" href="recommended-events.php">View more recommended events</a>';
+            echo '<div class="seperator"></div>';
+
         }
 
         if (isset($venueUserID)) {
             echo '<a class="button" href="venue-user-dashboard.php">Your Dashboard</a>';
         }
 
-        echo '<a class="button" href="all-venues.php">All Venues</a>';
-        echo '<a class="button" href="all-events.php">All Upcoming Events</a>';
+
+        echo '<div style="display: flex; width: 100%"><a class="button" href="all-venues.php" style="width: 50%">All Venues</a>';
+        echo '<a class="button" href="all-events.php" style="width: 50%;">All Upcoming Events</a></div>';
     ?>
 
 </div>
