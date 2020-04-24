@@ -86,7 +86,7 @@
         }
 
         // Check which venue has been selected
-        if (!(isset($_POST['venue'])) && $_POST['venue'] != 'None') {
+        if (!(isset($_POST['venue'])) || $_POST['venue'] == 'None') {
             // No Venue selected!
             $errorMessage = "Please select a venue!";
             return false;
@@ -193,6 +193,7 @@
         $path = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID/$eventID";
         if (mkdir($path,0755)) {
             // Folder created successfully
+            copy('https://student.csc.liv.ac.uk/~sgstribe/Images/background2.jpg',$path."/event.jpg");
             return true;
         } else {
             // Error in folder creation!
@@ -216,9 +217,10 @@
 <html lang='en-GB'>
 <head>
     <title>OutOut - Create Event</title>
-    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
-    <link rel="stylesheet" type="text/css" href="../css/events.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/event-creation.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <?php include "navbar.php" ?>
@@ -238,7 +240,7 @@
                     <?php echoVenues($venues); ?>
                 </select>
                 <label>Name of event:</label>
-                <input type='text' name='name' placeholder="Bongos Bingo" required>
+                <input type='text' name='name' placeholder="Event Name" required>
                 <label>Description:</label>
                 <textarea id='description' name ='description' form='EventCreation' placeholder="Event Description, max 1000 characters" required></textarea><br>
                 <label for='startTime'>Start Time:</label>

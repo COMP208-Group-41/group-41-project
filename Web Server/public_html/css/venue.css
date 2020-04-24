@@ -1,0 +1,21 @@
+.container {
+    max-width: 1500px;
+}
+
+@media only screen and (max-width: 600px) {
+    .flex-wrap {
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+    .container {
+        padding: 4px;
+        max-width: 85%;
+    }
+    .section {
+        margin: 8px 8px;
+    }
+
+    .list {
+        flex-direction: column;
+    }
+}

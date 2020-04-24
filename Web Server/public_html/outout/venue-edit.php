@@ -2,14 +2,14 @@
 
     session_start();
 
-    if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-        header("location: venue-user-login.php");
-        exit;
-        /* If the user is logged in but they are not a venue user then they are
-         * redirected to home page
-         */
-    } else if (!isset($_SESSION["VenueUserID"])) {
+    if (!isset($_SESSION["VenueUserID"])) {
         header("location: home.php");
+        exit;
+    }
+
+    if (!isset($_GET['venueID'])) {
+        $_SESSION['message'] = "No venueID specified!";
+        header("location: 404.php");
         exit;
     }
 
@@ -24,6 +24,13 @@
 
     // Handle the GET variable for venueID to display the correct venue
     $venueID = $_GET['venueID'];
+
+    if (!checkVenueExists($venueID,$pdo)) {
+        $_SESSION['message'] = "This venue does not exist!";
+        header("location: 404.php");
+        exit;
+    }
+
     // Now check that the user accessing this venue is allowed to
     if (!checkVenueUserAllowed($venueID,$venueUserID,$pdo)) {
         // User is not allowed to edit!
@@ -38,6 +45,7 @@
     $description = $result['VenueDescription'];
     $address = $result['VenueAddress'];
     $times = $result['VenueTimes'];
+    $website = $result['ExternalSite'];
 
     // Current tags for this event are pulled here
     $currentTagIDs = getTagID($venueID,$pdo);
@@ -133,6 +141,15 @@
             }
         }
 
+        //Check URL for external webpage
+        if (isset($_POST['external'])){
+          $website = trim($_POST['external']);
+          if (!externalCheck($venueID,$website,$pdo,$errorMessage)) {
+              return false;
+          }
+        }
+
+
         // Need to do tags
         /* Unsetting the tags array so the values are definitely
          * up to date
@@ -153,7 +170,7 @@
 
         $pdo->beginTransaction();
 
-        if (!updateVenue($venueUserID,$venueID,$name,$description,$address,$times,$pdo,$errorMessage)) {
+        if (!updateVenue($venueUserID,$venueID,$name,$description,$address,$times,$website,$pdo)) {
             $errorMessage = "Error in inserting new venue!";
             $pdo-rollBack();
             return false;
@@ -184,6 +201,103 @@
         }
 
         // Everything completed successfully! return true
+        $pdo->commit();
+        return true;
+    }
+
+    // Delete Venue
+    if (isset($_POST['delete'])){
+      $password = $_POST['password'];
+      if(verifyVenuePassword($venueUserID,$password,$pdo) === true) {
+        $success = deleteVenue($venueID, $pdo, $errorMessage);
+        if ($success){
+            $directory = "/home/sgstribe/public_html/Images/Venue/$venueUserID/$venueID";
+            rrmdir($directory);
+            header("location: venue-user-dashboard.php" );
+            exit;
+        }
+      }
+    }
+
+    /* Check if the external link has been changed, if so then validate and
+     * update in database, if all successful then return true, otherwise return
+     * false and show error message
+     */
+    function externalCheck($venueID,$external,$pdo,&$errorMessage) {
+        if (isset($_POST['external']) && !empty(trim($_POST['external'])) && trim($_POST['external']) != $external) {
+            $newExternal = trim($_POST['external']);
+            if (!filter_var($newExternal, FILTER_VALIDATE_URL)) {
+                // The URL given is not valid!
+                $errorMessage = "The URL given is not valid!";
+                return false;
+            }
+
+            if (changeExternal($newExternal,$venueUserID,$pdo)) {
+                return true;
+            } else {
+                $errorMessage = "Error in trying to update external URL!";
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    function deleteVenue($venueID, $pdo, &$errorMessage){
+        $pdo->beginTransaction();
+        $deleteVenueStmt = $pdo->prepare("DELETE FROM Review WHERE VenueID=:VenueID");
+        $deleteVenueStmt->bindValue(':VenueID',$venueID);
+        $success = $deleteVenueStmt->execute();
+        if (!$success){
+          $errorMessage = "Error in deleteing venue reviews!";
+          $pdo->rollBack();
+          return false;
+        }
+        $deleteVenueStmt = $pdo->prepare("DELETE FROM VenueTag WHERE VenueID=:VenueID");
+        $deleteVenueStmt->bindValue(':VenueID',$venueID);
+        $success = $deleteVenueStmt->execute();
+        if (!$success){
+          $errorMessage = "Error in deleteing venue tags!";
+          $pdo->rollBack();
+          return false;
+        }
+        $events = getEvents($venueID, $pdo);
+        if ($events !== false){
+          foreach($events as $row){
+            $deleteEventStmt = $pdo->prepare("DELETE FROM EventTag WHERE EventID=:EventID");
+            $deleteEventStmt->bindValue(':EventID',$row['EventID']);
+            $success = $deleteEventStmt->execute();
+            if (!$success){
+              $errorMessage = "Error in deleteing event tags! Event=".$row['EventName']."";
+              $pdo->rollBack();
+              return false;
+            }
+            $deleteEventStmt = $pdo->prepare("DELETE FROM InterestedIn WHERE EventID=:EventID");
+            $deleteEventStmt->bindValue(':EventID',$row['EventID']);
+            $success = $deleteEventStmt->execute();
+            if (!$success){
+              $errorMessage = "Error in deleteing event InterestedIn! Event=".$row['EventName']."";
+              $pdo->rollBack();
+              return false;
+            }
+            $deleteEventStmt = $pdo->prepare("DELETE FROM Event WHERE EventID=:EventID");
+            $deleteEventStmt->bindValue(':EventID',$row['EventID']);
+            $success = $deleteEventStmt->execute();
+            if (!$success){
+              $errorMessage = "Error in deleteing event! Event=".$row['EventName']."";
+              $pdo->rollBack();
+              return false;
+            }
+          }
+        }
+        $deleteVenueStmt = $pdo->prepare("DELETE FROM Venue WHERE VenueID=:VenueID");
+        $deleteVenueStmt->bindValue(':VenueID',$venueID);
+        $success = $deleteVenueStmt->execute();
+        if (!$success){
+          $errorMessage = "Error in deleteing venue!";
+          $pdo->rollBack();
+          return false;
+        }
         $pdo->commit();
         return true;
     }
@@ -233,13 +347,14 @@
         }
     }
 
-    function updateVenue($venueUserID,$venueID,$name,$description,$address,$times,$pdo) {
-        $updateVenueStmt = $pdo->prepare("UPDATE Venue SET VenueUserID=:VenueUserID, VenueName=:VenueName, VenueDescription=:VenueDescription, VenueAddress=:VenueAddress, VenueTimes=:VenueTimes WHERE VenueID=:VenueID");
+    function updateVenue($venueUserID,$venueID,$name,$description,$address,$times,$website,$pdo) {
+        $updateVenueStmt = $pdo->prepare("UPDATE Venue SET VenueUserID=:VenueUserID, VenueName=:VenueName, VenueDescription=:VenueDescription, VenueAddress=:VenueAddress, VenueTimes=:VenueTimes, ExternalSite=:ExternalSite WHERE VenueID=:VenueID");
         $updateVenueStmt->bindValue(":VenueUserID",$venueUserID);
         $updateVenueStmt->bindValue(":VenueName",$name);
         $updateVenueStmt->bindValue(":VenueDescription",$description);
         $updateVenueStmt->bindValue(":VenueAddress",$address);
         $updateVenueStmt->bindValue(":VenueTimes",$times);
+        $updateVenueStmt->bindValue(":ExternalSite",$website);
         $updateVenueStmt->bindValue(":VenueID",$venueID);
         if (!$updateVenueStmt->execute()) {
             // Error in update
@@ -290,15 +405,17 @@
         }
     }
 
+    $image = checkVenueImageOnServer($venueUserID,$venueID);
+
 ?>
 
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/events.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 <?php include "navbar.php" ?>
@@ -311,6 +428,13 @@
     ?>
     <div class="container">
         <h1 class="title"><?php echo $name; ?></h1>
+        <?php
+            if ($image) {
+                echo '<div class="seperator"></div>';
+                echo '<img src="https://student.csc.liv.ac.uk/~sgstribe/Images/Venue/'.$venueUserID.'/'.$venueID.'/venue.jpg" alt="Venue Image" class="title-img">';
+            }
+        ?>
+
         <form id='CreateVenue' name='CreateVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
             <div class="edit-fields">
                 <label for='venueName'>Venue Name:</label>
@@ -326,6 +450,9 @@
                 <label for='description'>Venue Description:</label>
                 <textarea id='description' name='description' form='CreateVenue'
                           placeholder="Venue Description"><?php echo $description; ?></textarea>
+                <label for='external'>External Site</label>
+                <textarea id='external' name='external' form='CreateVenue'
+                          placeholder="https://website.com"><?php echo $website; ?></textarea>
                 <div class="seperator">
                     <h2 class="title">Additional Information</h2>
                 </div>
@@ -363,12 +490,19 @@
                     <option value='Optional'>No Tag</option>
                     <?php echoTags($pdo); ?>
                 </select>
-                <div class="seperator">
-                    <label>Enter current password to allow changes:</label>
-                    <input type='password' name='password' required>
-                </div>
-                <input type='submit' name='submit' value='Save changes' class="button" style="width: 100%">
+                <div class="seperator"></div>
+                <label>Enter current password to allow changes:</label>
+                <input type='password' name='password' required>
+                <input type='submit' name='submit' value='Save changes' class="button" style="width: 100%"><br>
+                <div class="seperator" style="margin-top: 4px"></div>
             </div>
+        </form>
+        <form id='DeleteVenue' name='DeleteVenue' method='post' style="margin-top: 10px" enctype="multipart/form-data">
+          <div class="edit-fields">
+            <label>Enter current password to delete venue:</label>
+            <input type='password' name='password' required>
+            <input type='submit' name='delete' value='Delete Venue' class="button" style="width: 100%">
+          </div>
         </form>
     </div>
 <?php

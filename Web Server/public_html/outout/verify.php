@@ -71,6 +71,7 @@
 <html lang='en-GB'>
     <head>
         <title>OutOut - Verify Account</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
         <h1>OutOut - Verify Account</h1>

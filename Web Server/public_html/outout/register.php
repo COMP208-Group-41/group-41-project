@@ -161,22 +161,21 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/login-register.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>OutOut - Register</title>
 </head>
 <body>
     <?php include "navbar.php" ?>
-<div class="wrapper">
-    <?php
+    <div style="display: flex; height: 100%; justify-content: center; align-items: center; flex-direction: column">
+        <?php
         if (isset($_SESSION['message'])) {
             echo "<div class='message-wrapper'><div class='success'>".$_SESSION['message']."</div></div>";
             unset($_SESSION['message']);
         }
-    ?>
-    <div class="outout-wrapper">
-        <img src="../Assets/outout.svg" alt="OutOut">
-    </div>
+        ?>
+<div class="wrapper">
     <div class="form">
-        <div style="padding-bottom: 8px; text-align: center">
+        <div style="padding-bottom: 8px; text-align: center; flex-direction: column"">
             <b style="color: #e9e9e9; font-size: 24px">Registration</b>
         </div>
         <form name='RegisterForm' method='post'>
@@ -185,10 +184,11 @@
                 <input type='text' name='email' placeholder="Email">
                 <input type='password' name='password' placeholder="Password">
                 <input type='password' name='confirmPassword' placeholder="Confirm Password">
+                <label>Date of Birth:</label>
                 <input type='date' name='DOB' placeholder="Select Date of Birth">
             </div>
             <div style="display: flex">
-                <a href="login.php" class="login-button">Log In</a>
+                <a href="login.php" class="login-button">Go to login</a>
                 <input type='submit' value='Register' class="register-button">
             </div>
         </form>
@@ -199,5 +199,6 @@
             echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
         }
         ?>
+    </div>
     </body>
 </html>

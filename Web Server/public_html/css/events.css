@@ -1,68 +1,13 @@
-:root {
-    --gold: #BE9100;
-    --dark-gold: #AF8200;
-    --button-border: #3B3B3B;
-}
-
-.input-file {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-}
-
-.input-file + label{
-    font-weight: 500;
-    display: inline-block;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    height: 35px;
+.text {
+    font-family: "K2D", sans-serif;
+    margin: 0px 0px 16px;
     box-sizing: border-box;
     border: 2px solid var(--button-border);
     border-radius: 4px;
     font-size: 16px;
-    background-color: var(--body-background);
-    padding: 6px;
-    color: #D6D6D6;
-    width: 100%;
-    text-align: center;
-    text-decoration: none;
-}
-
-.input-file:focus,
-.input-file + label:hover {
-    background-color: var(--gold);
-    color: #FFF;
-}
-
-.input-file + label:active {
-    background-color: var(--dark-gold);
-    color: #FFF;
-}
-
-.input-file + label {
-    cursor: pointer; /* "hand" cursor */
-}
-
-.image-preview {
-    width: 300px;
-    min-height: 100px;
-    border: 2px solid var(--button-border);
-    margin-top: 16px;
-
-    /* Default text */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: var(--gold);
-    margin-bottom: 16px;
-}
-
-.image-preview__image {
-    display: none;
-    width: 100%;
+    background-color: var(--dark-body);
+    padding: 12px 20px 12px 10px;
+    color: var(--text);
+    width: 50%;
 }
 

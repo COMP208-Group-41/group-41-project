@@ -125,20 +125,19 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/login-register.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>OutOut - Venue Registration</title>
 </head>
 <body>
     <?php include "navbar.php" ?>
-<div class="wrapper">
+<div style="display: flex; height: 100%; justify-content: center; align-items: center; flex-direction: column">
     <?php
-        if (isset($_SESSION['message'])) {
-            echo "<div class='message-wrapper'><div class='success'>".$_SESSION['message']."</div></div>";
-            unset($_SESSION['message']);
-        }
+    if (isset($_SESSION['message'])) {
+        echo "<div class='message-wrapper'><div class='success'>".$_SESSION['message']."</div></div>";
+        unset($_SESSION['message']);
+    }
     ?>
-    <div class="outout-wrapper">
-        <img src="../Assets/outout.svg" alt="OutOut">
-    </div>
+<div class="wrapper">
     <div class="form">
         <div style="padding-bottom: 8px; text-align: center">
             <b style="color: #e9e9e9; font-size: 24px">Venue Registration</b>
@@ -151,7 +150,7 @@
                 <input type="text" name='nameOfCompany' placeholder="Name of Company" required>
             </div>
             <div style="display: flex">
-                <a href="venue-user-login.php" class="login-button">Log In</a>
+                <a href="venue-user-login.php" class="login-button">Go to login</a>
                 <input type='submit' value='Register' class="register-button">
             </div>
         </form>
@@ -190,6 +189,6 @@ if ($createError != '') {
 }
 
 ?>
-
+</div>
 </body>
 </html>
