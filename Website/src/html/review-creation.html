@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+  <head>
+    <title>OutOut - Submit Review</title>
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/review.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+  <div class="container" style="width: 20vw">
+      <h2 class="title">Write a review</h2>
+    <form name='ReviewVenue' method='post'>
+      <div style="display: flex; justify-content: center; flex-direction: column">
+          <textarea name='review-textarea' id='review-textarea' placeholder="Leave a note..." rows="4" cols="50" required></textarea>
+          <div class="seperator"></div>
+          <label style="">Price</label>
+          <select class="rating-price" data-options='{"clearable":false, "showText":false, "maxStars":5}'>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+          </select>
+          <label>Atmosphere</label>
+          <select class="rating-atmosphere" data-options='{"clearable":false, "showText":false, "maxStars":5}'>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+          </select>
+          <label>Safety</label>
+          <select class="rating-safety" data-options='{"clearable":false, "showText":false, "maxStars":5}'>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+          </select>
+          <label>Queue Times</label>
+          <select class="rating-queue" data-options='{"clearable":false, "showText":false, "maxStars":5}'>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+          </select>
+      </div>
+      <div class="seperator" style="margin-top: 20px"></div>
+      <div style= "display: flex">
+          <input type='submit' value='Submit' class="button" style="width: 50%; margin-right: -4px">
+          <input type="button" onclick="location.href='BACK TO VENUUE PAGE';" value="Cancel" class="button" style="width: 50%;"/>
+      </div>
+    </form>
+  </div>
+  </body>
+</html>

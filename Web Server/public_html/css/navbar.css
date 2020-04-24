@@ -1,0 +1,72 @@
+:root {
+    --header-background: linear-gradient(90deg, #272727 0%, #202020 100%);
+    --dark-body: #F7F7F7;
+    --light-body: #D6D6D6;
+    --button-border: #3B3B3B;
+    --button-highlight: #ccc;
+    --text: #2E2E2E;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+}
+
+.banner {
+    background: var(--header-background);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.sidenav {
+    font-family: "K2D", sans-serif;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background: var(--header-background);
+    overflow-x: hidden;
+    transition: 0.2s;
+    padding-top: 16px;
+    box-shadow: 0px 4px 10px rgba(6, 27, 41, 0.25);
+}
+
+.sidenav .closebtn {
+    font-size: 36px;
+    margin-right: 32px;
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.sidenav a {
+    text-decoration: none;
+    font-size: 24px;
+    color: var(--light-body);
+    display: block;
+    transition: 0.3s;
+    font-family: "K2D", sans-serif;
+    padding-bottom: 8px;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav-content {
+    display: flex;
+    flex-direction: column;
+}
+
+img:hover {
+    cursor: pointer;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}

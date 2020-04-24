@@ -14,10 +14,12 @@
         </div>
         <form name='RegisterForm' method='post'>
             <div class="login-field">
+                <input type='text' name='venueName' placeholder="Venue Name">
                 <input type='text' name='email' placeholder="Email">
                 <input type='password' name='password' placeholder="Password">
                 <input type='password' name='confirmPassword' placeholder="Confirm Password">
                 <input type="text" name='address' placeholder="Address">
+                <input type='text' name='venueLocation' placeholder="New Venue Name">
                 <input type="text" id="openingTime" name='openingTimes' placeholder="Opening times">
                 <script>
                     var dtt = document.getElementById('openingTime')
@@ -25,6 +27,10 @@
                         this.type = 'datetime-local';
                         this.focus();
                     }
+                    dtt.onblur = function (event) {
+                        this.type = 'text';
+                        this.blur();
+                    };
                 </script>
                 <input type="text" name="tags" placeholder="Tags: e.g. Pop, Indie">
             </div>

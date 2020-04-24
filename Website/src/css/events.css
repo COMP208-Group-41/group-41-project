@@ -1,0 +1,13 @@
+.text {
+    font-family: "K2D", sans-serif;
+    margin: 0px 0px 16px;
+    box-sizing: border-box;
+    border: 2px solid var(--button-border);
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: var(--dark-body);
+    padding: 12px 20px 12px 10px;
+    color: var(--text);
+    width: 50%;
+}
+

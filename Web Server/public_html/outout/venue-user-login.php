@@ -2,9 +2,13 @@
     // Starting session
     session_start();
     // If the venue user is already logged in then they are redirected to the homepage
-    if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) {
-        header("location: venueuser-dashboard.php");
+    if(isset($_SESSION["VenueUserID"])) {
+        header("location: venue-user-dashboard.php");
         exit;
+    }
+
+    if (isset($_SESSION['UserID'])) {
+        header("location: home.php");
     }
 
     /* If the venue user has just registered then they will be redirected to this
@@ -12,8 +16,12 @@
      * successfully
      */
 
+     error_reporting( E_ALL );
+     ini_set('display_errors', 1);
+     ini_set('display_startup_errors', 1);
+
      $registeredMsg = '';
-     $loginError = '';
+     $errorMessage = '';
 
     // Config file for connecting to the database is grabbed here
     require_once "config.php";
@@ -26,8 +34,8 @@
              * to a variable to check if it was a valid user
              */
             $VenueUserID = findVenueUser($email,$pdo);
-            if ($result != 0) {
-                if (verifyPassword($VenueUserID,$password,$pdo)) {
+            if ($VenueUserID != 0) {
+                if (verifyVenuePassword($VenueUserID,$password,$pdo)) {
                     /* The venue user is now logged in, the session variable
                      * logged in is set to true, and the session variable
                      * VenueUserID is assigned the value of the venue user's ID, the
@@ -35,21 +43,21 @@
                      */
                     $_SESSION["loggedin"] = true;
                     $_SESSION['VenueUserID'] = $VenueUserID;
-                    header("location: home.php");
+                    header("location: venue-user-dashboard.php");
                     exit;
                 } else {
                     // Password doesn't match!
-                    $loginError = 'Email or Password incorrect!';
+                    $errorMessage = 'Email or Password incorrect!';
                 }
-
             } else {
                 /* If the user's details are not in the system or their account
                  * is not verified then their login attempt is unsuccessful
                  * and the message is shown to them
                  */
-                $loginError = 'Email or Password incorrect, or account is not verified!';
+                $errorMessage = 'Email or Password incorrect!';
             }
         }
+
     } catch (PDOException $e) {
         /* If a PDO Execption is thrown then it is caught here and an
          * error page is shown, this needs to be made more user friendly
@@ -76,31 +84,23 @@
             return 0;
         }
     }
-
-    /* The verifyPassword function returns true if the venue user's password is correct
-     * using the password_verify function
-     */
-    function verifyPassword($VenueUserID,$password,$pdo) {
-        $checkPasswordStmt = $pdo->prepare("SELECT VenueUserPass FROM VenueUser WHERE VenueUserID=:VenueUserID");
-        $checkPasswordStmt->bindValue(':VenueUserID',$VenueUserID);
-        $checkPasswordStmt->execute();
-        $row = $checkPasswordStmt->fetch();
-        /* If the password is verified then return true */
-        if (password_verify($password,$row['VenueUserPass'])) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 ?>
 <!DOCTYPE html>
 <html lang='en-GB'>
 <head>
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     <link rel="stylesheet" type="text/css" href="../css/login-register.css">
     <title>OutOut - Venue User Login</title>
 </head>
 <body>
+    <?php include "navbar.php" ?>
 <div class="wrapper">
+    <?php
+        if (isset($_SESSION['message'])) {
+            echo "<div class='message-wrapper'><div class='success'>".$_SESSION['message']."</div></div>";
+            unset($_SESSION['message']);
+        }
+    ?>
     <div class="outout-wrapper" style="padding-bottom: 10px">
         <img src="../Assets/outout.svg" alt="OutOut">
     </div>
@@ -115,15 +115,15 @@
             </div>
             <div style="display: flex">
                 <input type='submit' value='Login' class="login-button">
-                <a class="register-button" href="venue-register.php">Register</a>
+                <a class="register-button" href="venue-user-register.php">Register</a>
             </div>
         </form>
     </div>
 </div>
 <?php
     // If the details are incorrect then error message is shown
-    if ($loginError != '') {
-        echo "$loginError<br>";
+    if ($errorMessage != '') {
+        echo "<div class='message-wrapper'><div class='error'>$errorMessage</div></div>";
     }
 ?>
 </body>

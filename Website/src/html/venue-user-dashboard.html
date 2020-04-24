@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang='en-GB'>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OutOut - Venue User Dashboard</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
+
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+</head>
+<body>
+<?php include "navbar.php" ?>
+    <div class="container">
+        <h1 class="title"><?php echo "$name"; ?> - Dashboard</h1>
+        <div class="seperator">
+            <h2 class="title">Account details</h2>
+        </div>
+        <table align="center" border="1px" style="width:600px">
+            <tr>
+                <th>Name</th>
+                <td><?php echo "$name"; ?></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><?php echo "$email"; ?></td>
+            </tr>
+            <tr>
+                <th>External Site</th>
+                <td><?php echo "$external"; ?></td>
+            </tr>
+        </table>
+        <button onclick="location.href='venue-user-edit.php';" class="button" style="width: 100%; margin-bottom: 16px">Edit Account Details</button>
+        <div class="seperator" style="margin-top: 4px">
+        </div>
+        <h2 class="title">Registered Venues</h2>
+        <div class="list">
+            <div class="venue">
+                <div class="venue-image">
+                </div>
+                <div class="venue-name">
+                    Turkey Club
+                </div>
+                <div class="venue-buttons">
+                    <a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button">View Venue</a>
+                </div>
+            </div>
+            <div class="venue">
+                <div class="venue-image">
+                </div>
+                <div class="venue-name">
+                    Chicken Ranch
+                </div>
+                <div class="venue-buttons">
+                    <a href="venue.php?venueID='.$row['VenueID'].'" class="venue-button" style="margin-right: -5px">View Venue</a>
+                    <a href="venue-edit.php?venueID='.$row['VenueID'].'" class="venue-button">Edit Venue</a></div>
+            </div>
+            </div>
+        <button onclick="location.href='venue-creation.php';" class="button" style="width: 100%; margin-bottom: 14px">Add a new Venue</button>
+    <div class="seperator">
+        <h2 class="title">Registered Events</h2>
+        <div class="list">
+            <div class="venue">
+            <div class="venue-name" style="width: 35%">Venue</div>
+            <div class="venue-name" style="width: 35%">Event Name</div>
+            <div class="venue-name" style="width: 30%;">Edit Event</div></div>
+            <div class="event">
+                <div class="event-name">
+                    Venue name
+                </div>
+                <div class="event-name">
+                    Event name
+                </div>
+                <div class="event-buttons">
+                    <a href="venue.php?venueID='.$row['VenueID'].'" class="event-button">View Event</a>
+                </div>
+            </div>
+            <div class="event">
+                <div class="event-name">
+                    Venue name
+                </div>
+                <div class="event-name">
+                    Event name 2
+                </div>
+                <div class="event-buttons">
+                    <a href="venue.php?venueID='.$row['VenueID'].'" class="event-button">View Event</a>
+                    <a href="venue.php?venueID='.$row['VenueID'].'" class="event-button">Edit Event</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+</body>
+</html>

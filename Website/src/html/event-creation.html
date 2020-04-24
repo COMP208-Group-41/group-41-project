@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang='en-GB'>
+<head>
+    <title>OutOut - Edit Venue User Account</title>
+    <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/events.css">
+</head>
+<body>
+<div class="banner">
+    <img src="../Assets/menu-icon.svg" alt="Menu" width="25" onclick="openNav()" class="menu-image">
+    <img src="../Assets/outout.svg" alt="OutOut" width="120">
+    <img src="../Assets/profile.svg" alt="Profile" width="40">
+</div>
+<div id="mySidenav" class="sidenav">
+    <div class="sidebar-content">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">Dashboard</a>
+        <a href="#">Venues</a>
+        <a href="#">Account</a>
+        <a href="#">Contact</a>
+    </div>
+</div>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "200px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+<div class="wrapper">
+    <div class="container">
+        <h1 class="title">Create an event</h1>
+        <form id='EventCreation' name='EventCreation' method='post'>
+            <div class="edit-fields">
+                <select name='venue' id='venue' style="margin-bottom: 16px">
+                    <option value='None'>Select Venue</option>
+                    <?php echoVenues($venues); ?>
+                </select>
+                <label>Name of event:</label>
+                <input type='text' name='name' placeholder="Bongos Bingo" required>
+                <label>Description:</label>
+                <textarea id='description' name ='description' form='EventCreation' placeholder="Event Description, max 1000 characters" required></textarea><br>
+                <label for='startTime'>Start Time:</label>
+                <input type='datetime-local' id="startTime" name='startTime' placeholder="Start time" required><br>
+                <label for='endTime'>End Time:</label>
+                <input type='datetime-local' id="endTime" name='endTime' placeholder="End time" required><br>
+            </div>
+            <div style= "display: flex;">
+                <input type='submit' value='Create' class="button" style="width: 100%">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
